@@ -116,7 +116,7 @@ class H4P_Signaller: public H4Service {
             void 			flashMorse(const char *pattern, uint32_t timebase,h4pOutput& p){ flashMorse(pattern,timebase,p._p,p._s,p._c); }
             
 #ifdef H4FC_MORSE_SUPPORT
-            static std::unordered_map<char,string> _morse; // tidy
+            static std::unordered_map<char,std::string> _morse; // tidy
             void 	        flashMorseText(const char * pattern,uint32_t timebase,uint8_t pin,H4PM_SENSE active=H4P_ASSUMED_SENSE,uint8_t col=H4P_ASSUMED_COLOR);
             void 	        flashMorseText(const char * pattern,uint32_t timebase,h4pOutput* p){ flashMorseText(pattern,timebase,*p); }
             void 	        flashMorseText(const char * pattern,uint32_t timebase,h4pOutput& p){ flashMorseText(pattern,timebase,p._p,p._s,p._c); }
