@@ -284,7 +284,8 @@ void H4Flasher::flashPattern(){
 
 void H4Flasher::stop(){
 	h4.cancel({_timer,_off});
-    _HAL_analogWrite(_opp->_p,0);
+    if (_opp->isAnalogOutput())
+        _HAL_analogWrite(_opp->_p,0);
 	_opp->turn(OFF);
 }
 
