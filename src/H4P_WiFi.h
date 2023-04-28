@@ -38,15 +38,16 @@ SOFTWARE.
     #include<ESPAsyncUDP.h>
 #else
     #include<WiFi.h>
-    #include<AsyncTCP.h>
+    // #include<AsyncTCP.h>
     #include<AsyncUDP.h>
+    #include<H4AsyncTCP.h>
     #include<ESPmDNS.h>
     #include<map> // WHY???
 #endif
 #include<DNSServer.h>
 #include<ArduinoOTA.h>
 #include<H4P_SerialCmd.h>
-#include<ESPAsyncWebServer.h>
+#include<H4AsyncWebServer.h>
 //
 #if H4P_USE_WIFI_AP
 constexpr const char* GoTag(){ return "Go"; }
@@ -60,14 +61,18 @@ struct H4P_UI_ITEM { // add title and/or props?
 };
 
 using H4P_UI_LIST       = std::map<std::string,H4P_UI_ITEM>;
-class H4P_WiFi: public H4Service, public AsyncWebServer {
+class H4P_WiFi: public H4Service, public H4AsyncWebServer {
 #if H4P_USE_WIFI_AP
             DNSServer*          _dns53=nullptr;
 #endif
 //
             bool                _discoDone;
             uint32_t            _evtID=0;
-            AsyncEventSource*   _evts;
+            H4AW_HTTPHandlerSSE*   _evts;
+            size_t              _nClients=0;
+            H4AT_NVP_MAP        _lookup = {
+                {"device", h4p[deviceTag()]}};
+
             std::vector<std::string>      _lines={};
 //
                 VSCMD(_change);
@@ -78,7 +83,7 @@ class H4P_WiFi: public H4Service, public AsyncWebServer {
 //
                 void            __uiAdd(const std::string& msg);
 
-        static  String          _aswsReplace(const String& var);
+        // static  String          _aswsReplace(const String& var);
                 void            _clearUI();
                 bool            _cannotConnectSTA(){ return WiFi.SSID()==h4Tag() || WiFi.psk()==h4Tag() || WiFi.SSID()=="" || WiFi.psk()==""; }
                 void            _commonStartup();
@@ -86,7 +91,7 @@ class H4P_WiFi: public H4Service, public AsyncWebServer {
                 void            _defaultSync(const std::string& svc,const std::string& msg);
                 void            _gotIP();
                 void            _lostIP();
-                void            _rest(AsyncWebServerRequest *request);
+                void            _rest(H4AW_HTTPHandler *handler);
                 void            _restart();
                 void            _signalBad();
                 void            _startWebserver();
@@ -107,11 +112,11 @@ class H4P_WiFi: public H4Service, public AsyncWebServer {
                 h4p[pskTag()]=h4Tag();
                 h4p.gvSetstring(deviceTag(),"",true);
 #else
-        explicit H4P_WiFi(): H4Service(wifiTag()),AsyncWebServer(H4P_WEBSERVER_PORT){}
+        explicit H4P_WiFi(): H4Service(wifiTag()),H4AsyncWebServer(H4P_WEBSERVER_PORT){}
 
         H4P_WiFi(std::string ssid,std::string psk,std::string device=""):
             H4Service(wifiTag(),H4PE_FACTORY | H4PE_GPIO | H4PE_GVCHANGE | H4PE_UIADD | H4PE_UISYNC | H4PE_UIMSG),
-            AsyncWebServer(H4P_WEBSERVER_PORT){
+            H4AsyncWebServer(H4P_WEBSERVER_PORT){
                 h4p.gvSetstring(ssidTag(),ssid,true);
                 h4p.gvSetstring(pskTag(),psk,true);
                 h4p.gvSetstring(deviceTag(),device,true);

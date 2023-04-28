@@ -135,10 +135,10 @@ void H4P_WiFi::__uiAdd(const std::string& msg) {
     _uiAdd(m[0],static_cast<H4P_UI_TYPE>(STOI(m[1])),m[3],m[2],STOI(m[4]));    
 }
 
-String H4P_WiFi::_aswsReplace(const String& var){
+/* String H4P_WiFi::_aswsReplace(const String& var){
     std::string v=CSTR(var);
     return h4p.gvExists(v) ? String(CSTR(h4p[v])):"?";
-}
+} */
 
 uint32_t H4P_WiFi::_change(std::vector<std::string> vs){ return _guardString2(vs,[this](std::string a,std::string b){ change(a,b); return H4_CMD_OK; }); }
 
@@ -257,10 +257,10 @@ uint32_t H4P_WiFi::_msg(std::vector<std::string> vs){
     });
 }
 
-void H4P_WiFi::_rest(AsyncWebServerRequest *request){
+void H4P_WiFi::_rest(H4AW_HTTPHandler* handler){
 	h4.queueFunction([=](){
-        XLOG("_rest %s",request->client()->remoteIP().toString().c_str());
-		std::string chop=replaceAll(CSTR(request->url()),"/rest/","");
+        XLOG("_rest %s",handler->client()->remoteIP().toString().c_str());
+		std::string chop=replaceAll(CSTR(handler->url()),"/rest/","");
         std::string msg="";
         uint32_t res=h4puncheckedcall<H4P_SerialCmd>(cmdTag())->_simulatePayload(CSTR(chop),wifiTag());
         msg=h4pGetErrorMessage(res);
@@ -274,9 +274,11 @@ void H4P_WiFi::_rest(AsyncWebServerRequest *request){
             if(fl.size()) fl.pop_back();
         }
         j+=fl+"]}";
-        AsyncWebServerResponse *response = request->beginResponse(200, "application/json",CSTR(j));
-        response->addHeader("Access-Control-Allow-Origin","*");
-        request->send(response);
+        handler->addHeader("Access-Control-Allow-Origin","*");
+        handler->send(200, "application/json",j.length(), CSTR(j));
+        // AsyncWebServerResponse *response = request->beginResponse(200, "application/json",CSTR(j));
+        // response->addHeader("Access-Control-Allow-Origin","*");
+        // request->send(response);
         _lines.clear();
 	},nullptr,H4P_TRID_REST);
 }
@@ -289,20 +291,20 @@ void H4P_WiFi::_restart(){
 void H4P_WiFi::_sendSSE(const std::string& name,const std::string& msg){
     static bool bakov=false;
 
-    if(_evts && _evts->count()) {
+    if(_nClients) {
         auto fh=_HAL_freeHeap();
         if(fh > H4P_THROTTLE_LO){
             if(bakov && (fh > H4P_THROTTLE_HI)){
-                SYSINFO("SSE BACKOFF RECOVERY H=%lu nQ=%d",fh,_evts->avgPacketsWaiting());
+                // SYSINFO("SSE BACKOFF RECOVERY H=%lu nQ=%d",fh,_evts->avgPacketsWaiting());
                 bakov=false;
-                for(auto const& ui:h4pUserItems) _evts->send(CSTR(ui.second.f()),CSTR(ui.first),_evtID++); // hook to sse event q size
+                for(auto const& ui:h4pUserItems) _evts->send(CSTR(ui.second.f()),CSTR(ui.first)/* ,_evtID++ */); // hook to sse event q size
             }
 //            Serial.printf("%s %s id=%d\n",name.data(),msg.data(),_evtID);
-            _evts->send(CSTR(msg),CSTR(name),_evtID++); // hook to sse event q size
+            _evts->send(CSTR(msg),CSTR(name)/* ,_evtID++ */); // hook to sse event q size
         } 
         else {
             bakov=true;
-            SYSWARN("SSE BACKOFF H=%lu nQ=%d",fh,_evts->avgPacketsWaiting());
+            // SYSWARN("SSE BACKOFF H=%lu nQ=%d",fh,_evts->avgPacketsWaiting());
         }
     }
 }
@@ -314,12 +316,12 @@ void H4P_WiFi::_signalBad(){
 
 void H4P_WiFi::_startWebserver(){
 	reset();
-    _evts=new AsyncEventSource("/evt");
-    _evts->onConnect([this](AsyncEventSourceClient *client){
-        if(client->lastId() > _evtID) client->close();
-        else {
-            h4.queueFunction([this,client](){
-                if(_evts->count()==1) {
+
+    _evts=new H4AW_HTTPHandlerSSE("/evt");
+    _evts->onChange([this](size_t nClients){
+            h4.queueFunction([this,nClients](){
+                _nClients = nClients;
+                if(nClients) {
                 #if H4P_USE_WIFI_AP
                     if(WiFi.getMode()==WIFI_AP) {
                         _uiAdd(chipTag(),H4P_UI_TEXT,"s"); // clumsy, don't like
@@ -350,25 +352,26 @@ void H4P_WiFi::_startWebserver(){
                     auto i=h4pUserItems[ui];
                     _sendSSE("ui",CSTR(std::string(ui+","+stringFromInt(i.type)+","+i.h+",0,"+stringFromInt(i.color)+","+i.f())));
                 }
-                h4.repeatWhile([this]{ return _evts->count(); },
+                h4.repeatWhile([this]{ return _nClients; },
                     ((H4WF_EVT_TIMEOUT*3)/4),
                     []{},
                     []{ h4psysevent("viewers",H4PE_VIEWERS,"%d",0); },
                     H4P_TRID_SSET,true
                 );
             });
-        }
     });
     addHandler(_evts);
 
-    on("/",HTTP_GET, [this](AsyncWebServerRequest *request){
-        XLOG("FH=%u --> Root %s",_HAL_freeHeap(),request->client()->remoteIP().toString().c_str());
-        request->send(HAL_FS,"/sta.htm",String(),false,_aswsReplace);
+    
+    on("/",HTTP_GET, [this](H4AW_HTTPHandler* handler){
+        XLOG("FH=%u --> Root %s",_HAL_freeHeap(),handler->client()->remoteIP().toString().c_str());
+        handler->sendFileParams("/sta.htm",_lookup);
     });
 
-	on("/rest",HTTP_GET,[this](AsyncWebServerRequest *request){ _rest(request); });
+	on("/rest",HTTP_GET,[this](H4AW_HTTPHandler* handler){ _rest(handler); });
 
-    serveStatic("/", HAL_FS, "/").setCacheControl("max-age=31536000");
+
+    // serveStatic("/", HAL_FS, "/").setCacheControl("max-age=31536000");
     begin();
 }
 
@@ -377,7 +380,8 @@ void H4P_WiFi::_stopWebserver(){
     ArduinoOTA.end(); // WHYYYYYYYYYY???? FFS
     MDNS.end();
 #endif
-    end();
+    // end();
+
     _discoDone=true;
     _clearUI();
     svcDown();

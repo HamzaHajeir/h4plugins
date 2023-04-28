@@ -30,7 +30,7 @@ SOFTWARE.
 #pragma once
 
 #include<H4Service.h>
-#include<ArmadilloHTTP.h>
+/* #include<ArmadilloHTTP.h>
 
 class H4P_AsyncHTTP: public H4Service, public ArmadilloHTTP {
     protected:
@@ -45,4 +45,4 @@ class H4P_AsyncHTTP: public H4Service, public ArmadilloHTTP {
         virtual void    PUT(const std::string& url,const VARK_NVP_MAP& fields,ARMA_FN_HTTP rx,const uint8_t* fingerprint=nullptr,uint32_t phase=ARMA_PHASE_EXECUTE) override;
 
                 void    globalsFromSimpleJson(ARMA_HTTP_REPLY r);
-};
+}; */

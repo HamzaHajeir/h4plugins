@@ -32,7 +32,7 @@ SOFTWARE.
 #include <H4Service.h>
 #include <H4P_AsyncHTTP.h>
 
-class H4P_RemoteLogger: public H4P_AsyncHTTP {
+/* class H4P_RemoteLogger: public H4P_AsyncHTTP {
         std::string          _url;
 
         VARK_NVP_MAP    _eventdata = {
@@ -45,4 +45,4 @@ class H4P_RemoteLogger: public H4P_AsyncHTTP {
         virtual void        _handleEvent(const std::string& svc,H4PE_TYPE t,const std::string& msg) override;
     public:
         H4P_RemoteLogger(const std::string& url,uint32_t filter=H4PE_ALL); // amount of free SPIFFS space to use
-};
+}; */
