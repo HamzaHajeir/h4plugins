@@ -35,8 +35,8 @@ SOFTWARE.
 #include<PangolinMQTT.h>
 
 struct H4P_LWT {
-    const char*     topic;
-    const char*     payload;
+    std::string     topic;
+    std::string     payload;
     int             QOS;
     bool            retain;
 };

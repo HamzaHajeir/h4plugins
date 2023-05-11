@@ -85,11 +85,11 @@ void H4P_AsyncMQTT::_init() {
 
     std::string device=h4p[deviceTag()];
     if(_lwt.topic=="") {
-        _lwt.topic=CSTR(std::string(prefix+device+"/offline"));
-        _lwt.payload=CSTR(h4p[chipTag()]);
+        _lwt.topic=std::string(prefix+device+"/offline");
+        _lwt.payload=h4p[chipTag()];
     }
 
-    setWill(_lwt.topic,_lwt.QOS,_lwt.retain,_lwt.payload);
+    setWill(_lwt.topic.c_str(),_lwt.QOS,_lwt.retain,_lwt.payload.c_str());
     prefix+=device+"/";
 
     onMqttMessage([=](const char* topic, const uint8_t* payload, size_t length, uint8_t qos, bool retain,bool dup){
