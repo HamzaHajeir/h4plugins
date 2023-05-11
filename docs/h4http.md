@@ -10,11 +10,16 @@ Retrieves data asynchronously from remote http server - a thin wrapper around th
 
 ## Contents
 
-* [Usage](#usage)
-* [Dependencies](#dependencies)
-* [Commands Added](#commands-added)
-* [Service Commands](#service-commands)
-* [API](#api)
+- [H4P\_AsyncHTTP](#h4p_asynchttp)
+  - [Service shortname http](#service-shortname-http)
+  - [Contents](#contents)
+- [Usage](#usage)
+  - [Dependencies](#dependencies)
+  - [Commands Added](#commands-added)
+- [Service Commands](#service-commands)
+- [Callbacks](#callbacks)
+- [API](#api)
+  - [Example sketch](#example-sketch)
 
 ---
 # Usage
@@ -46,13 +51,13 @@ ARMA_FN_HTTP rx(ARMA_HTTP_REPLY r); // RX function called when data is received 
 // ARMA_HTTP_REPLY is a structure holding:
 struct ArmadilloHTTPresponse {
     uint32_t        httpResponseCode;
-    VARK_NVP_MAP    responseHeaders;
+    H4AT_NVP_MAP    responseHeaders;
     ARMA_METHODS    allowedMethods;
     const uint8_t*  data;
     size_t          length;
 
     std::string     asJsonstring(){ return (responseHeaders[contentTypeTag()].find("json")!=std::string::npos) ? string((const char*) data, length):""; }
-    VARK_NVP_MAP    asSimpleJson(){ return json2nvp(asJsonstring()); }
+    H4AT_NVP_MAP    asSimpleJson(){ return json2nvp(asJsonstring()); }
     std::string     asStdstring(){ return string((const char*) data, length); }
 };
 ```
@@ -75,9 +80,9 @@ H4P_AsyncHTTP();
 //
 void    DELETE(const std::string& url,ARMA_FN_HTTP rx,const uint8_t* fingerprint=nullptr,uint32_t phase=ARMA_PHASE_EXECUTE) override;
 void    GET(const std::string& url,ARMA_FN_HTTP rx,const uint8_t* fingerprint=nullptr,uint32_t phase=ARMA_PHASE_EXECUTE) override;
-void    PATCH(const std::string& url,const VARK_NVP_MAP& fields,ARMA_FN_HTTP rx,const uint8_t* fingerprint=nullptr,uint32_t phase=ARMA_PHASE_EXECUTE) override;
-void    POST(const std::string& url,const VARK_NVP_MAP& fields,ARMA_FN_HTTP rx,const uint8_t* fingerprint=nullptr,uint32_t phase=ARMA_PHASE_EXECUTE) override;
-void    PUT(const std::string& url,const VARK_NVP_MAP& fields,ARMA_FN_HTTP rx,const uint8_t* fingerprint=nullptr,uint32_t phase=ARMA_PHASE_EXECUTE) override;
+void    PATCH(const std::string& url,const H4AT_NVP_MAP& fields,ARMA_FN_HTTP rx,const uint8_t* fingerprint=nullptr,uint32_t phase=ARMA_PHASE_EXECUTE) override;
+void    POST(const std::string& url,const H4AT_NVP_MAP& fields,ARMA_FN_HTTP rx,const uint8_t* fingerprint=nullptr,uint32_t phase=ARMA_PHASE_EXECUTE) override;
+void    PUT(const std::string& url,const H4AT_NVP_MAP& fields,ARMA_FN_HTTP rx,const uint8_t* fingerprint=nullptr,uint32_t phase=ARMA_PHASE_EXECUTE) override;
 void    globalsFromSimpleJson(ARMA_HTTP_REPLY r); // creat h4p[] globals from simple json string. each is prefixed by "usr_" see webUI docs
 //
 ```

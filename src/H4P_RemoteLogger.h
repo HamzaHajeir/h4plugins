@@ -35,7 +35,7 @@ SOFTWARE.
 class H4P_RemoteLogger: public H4P_AsyncHTTP {
         std::string          _url;
 
-        VARK_NVP_MAP    _eventdata = {
+        H4AT_NVP_MAP    _eventdata = {
             {deviceTag(),""},
             {"type","0"},
             {"source",""},

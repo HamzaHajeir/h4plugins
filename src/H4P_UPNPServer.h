@@ -57,7 +57,7 @@ class H4P_UPNPServer: public H4Service {
                 void            _handlePacket(std::string p,IPAddress ip,uint16_t port);
                 void            _listenUDP();
                 void            _notify(const std::string& s);
-                void            _upnp(AsyncWebServerRequest *request);
+                void            _upnp(H4AW_HTTPHandler *handler);
 
         static  std::string     replaceParamsFile(const std::string &f){ return h4preplaceparams(CSTR(H4P_SerialCmd::read(f))); }
     public:                

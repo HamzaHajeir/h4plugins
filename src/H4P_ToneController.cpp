@@ -29,7 +29,7 @@ SOFTWARE.
 */
 #include<H4.h>
 #include<H4P_ToneController.h>
-#include<pmbtools.h>
+#include<H4Tools.h>
 
 std::unordered_map<std::string,uint32_t> H4P_ToneController::notes={
             {"R  ",0}, // REST

@@ -81,7 +81,7 @@ void H4P_AsyncMQTT::_handleEvent(const std::string& svc,H4PE_TYPE t,const std::s
 
 void H4P_AsyncMQTT::_init() {
     h4p.gvSetInt(_me,0,false);
-    onMqttError([=](int e,int info){ XEVENT(H4PE_SYSWARN,"%d,%d",e,info); });
+    onError([=](int e,int info){ XEVENT(H4PE_SYSWARN,"%d,%d",e,info); });
 
     std::string device=h4p[deviceTag()];
     if(_lwt.topic=="") {
@@ -92,17 +92,17 @@ void H4P_AsyncMQTT::_init() {
     setWill(_lwt.topic.c_str(),_lwt.QOS,_lwt.retain,_lwt.payload.c_str());
     prefix+=device+"/";
 
-    onMqttMessage([=](const char* topic, const uint8_t* payload, size_t length, uint8_t qos, bool retain,bool dup){
+    onMessage([=](const char* topic, const uint8_t* payload, size_t length, uint8_t qos, bool retain,bool dup){
         std::string top(topic);
         std::string pload((const char*) payload,length);
         h4.queueFunction([top,pload](){ h4p._executeCmd(CSTR(std::string(mqttTag()).append("/").append(top)),pload); },nullptr,H4P_TRID_MQMS);
     });
 
-    onMqttConnect([=](bool b){
+    onConnect([=](){
         h4.queueFunction([=](){
             _signalOff();
             h4.cancelSingleton(H4P_TRID_MQRC);
-            _discoDone=false;
+            _connected =true;
             subscribe(CSTR(std::string(allTag()).append(cmdhash())),0);
             subscribe(CSTR(std::string(device+cmdhash())),0);
             subscribe(CSTR(std::string(h4p[chipTag()]+cmdhash())),0);
@@ -114,25 +114,23 @@ void H4P_AsyncMQTT::_init() {
         },nullptr,H4P_TRID_MQRC);
     });
 
-    onMqttDisconnect([this](int8_t reason){
-        if(!_discoDone){
-            h4.queueFunction([this,reason](){
-                _discoDone=true;
-                h4p[_me]=stringFromInt(_running=false);
-                h4p.gvInc(nDCXTag());
-                SYSINFO("DCX %d",reason);
-                H4Service::svcDown();
-                if(autorestart && WiFi.status()==WL_CONNECTED) { h4.every(H4MQ_RETRY,[this](){
-                    _signalBad(); // have to repeat to override hb if present: easiest to NIKE
-                    connect(h4p[deviceTag()]); },nullptr,H4P_TRID_MQRC,true); 
-                }// MUST be > 18sec due to shit lib ESpAsynTCP
-            });
-        }
+    onDisconnect([this](){
+        h4.queueFunction([this](){
+            _connected = false;
+            h4p[_me]=stringFromInt(_running=false);
+            h4p.gvInc(nDCXTag());
+            // SYSINFO("DCX %d",reason);
+            H4Service::svcDown();
+            if(autorestart && WiFi.status()==WL_CONNECTED) { h4.every(H4MQ_RETRY,[this](){
+                _signalBad(); // have to repeat to override hb if present: easiest to NIKE
+                /* connect(h4p[deviceTag()]); */ },nullptr,H4P_TRID_MQRC,true); 
+            }// MUST be > 18sec due to shit lib ESpAsynTCP
+        });
     });
 }
 
 void H4P_AsyncMQTT::_setup(){ // allow for TLS
-    if(h4p[brokerTag()]!="") setServer(CSTR(h4p[brokerTag()]),CSTR(h4p[mQuserTag()]),CSTR(h4p[mQpassTag()])); // optimise tag()
+    // if(h4p[brokerTag()]!="") setServer(CSTR(h4p[brokerTag()]),CSTR(h4p[mQuserTag()]),CSTR(h4p[mQpassTag()])); // optimise tag()
 //    else SYSWARN("NO MQTT DETAILS","");
 }
 
@@ -146,7 +144,7 @@ void H4P_AsyncMQTT::change(const std::string& broker,const std::string& user,con
 #if H4P_LOG_MESSAGES
 void H4P_AsyncMQTT::info(){
     H4Service::info();
-    reply(" Server: %s, %s",CSTR(h4p[brokerTag()]),connected() ? "CNX":"DCX");
+    reply(" Server: %s, %s",CSTR(h4p[brokerTag()]),_connected ? "CNX":"DCX");
     std::string reporting;
     for(auto const r:_reportList) reporting+=r+",";
     reporting.pop_back();
@@ -185,12 +183,13 @@ void H4P_AsyncMQTT::svcUp(){
     _signalBad();
     _setup();
     autorestart=true;
-    connect(h4p[deviceTag()]);
+    connect(CSTR(h4p[brokerTag()]), CSTR(h4p[mQuserTag()]), CSTR(h4p[mQpassTag()]), CSTR(h4p[deviceTag()]));
 }
 
 void H4P_AsyncMQTT::svcDown(){
     autorestart=false;
-    disconnect();
+    if (_connected)
+        disconnect();
 }
 
 void H4P_AsyncMQTT::unsubscribeDevice(std::string topic){

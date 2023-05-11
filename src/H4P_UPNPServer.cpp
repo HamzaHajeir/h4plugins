@@ -138,14 +138,15 @@ void H4P_UPNPServer::_notify(const std::string& phase){
 */
 }
 
-void H4P_UPNPServer::_upnp(AsyncWebServerRequest *request){ // redo
+void H4P_UPNPServer::_upnp(H4AW_HTTPHandler *handler){ // redo
     h4.queueFunction([=]() {
-        std::string soap((const char*) request->_tempObject,strlen((const char*) request->_tempObject));
+        std::string soap(handler->url());
        	h4p.gvSetstring("gs",(soap.find("Get")==std::string::npos) ? "Set":"Get"); 
         uint32_t _set=soap.find(">1<")==std::string::npos ? 0:1;
         if(h4p["gs"]=="Set") h4p.gvSetInt(stateTag(),_set); //=//XEVENT(H4PE_ONOF,"%d",_set);
 //        Serial.printf("XML RESPONSE %s\n",h4preplaceparams(_soap).data());
-        request->send(200, "text/xml", CSTR(h4preplaceparams(_soap))); // refac
+        auto body = h4preplaceparams(_soap);
+        handler->send(200, "text/xml", body.length(), CSTR(body)); // refac
         h4p.gvErase("gs");
     },nullptr, H4P_TRID_SOAP);
 }
@@ -191,15 +192,16 @@ void H4P_UPNPServer::svcUp(){
 
     h4p.gvErase({"udn",ageTag(),"updt","umfr","usvc","usid"});
 //
-    _pWiFi->on("/we",HTTP_GET, [this](AsyncWebServerRequest *request){ request->send(200,"text/xml",CSTR(_xml)); });
-    _pWiFi->on("/upnp", HTTP_POST,[this](AsyncWebServerRequest *request){ _upnp(request); },
-        NULL,
-        [](AsyncWebServerRequest * request, uint8_t *data, size_t len, size_t index, size_t total){
-            if(!index) request->_tempObject = malloc(total+1);
-            memcpy((uint8_t*) request->_tempObject+index,data,len);
-            if(index + len == total) *((uint8_t*) request->_tempObject+total)='\0';
-        }
-    );
+    _pWiFi->on("/we",HTTP_GET, [this](H4AW_HTTPHandler *request){ request->send(200,"text/xml",_xml.length(), CSTR(_xml)); });
+    _pWiFi->on("/upnp", HTTP_POST, [this](H4AW_HTTPHandler *request)
+               {
+                   _upnp(request);
+                //    request->bodyData();
+                //    request->bodySize();
+                   // if(!index) request->_tempObject = malloc(total+1);
+                   // memcpy((uint8_t*) request->_tempObject+index,data,len);
+                   // if(index + len == total) *((uint8_t*) request->_tempObject+total)='\0';
+               });
     _listenUDP();
     _notify(aliveTag()); // TAG
     h4.every(H4P_UDP_REFRESH / 2,[=](){ _notify(aliveTag()); },nullptr,H4P_TRID_NTFY,true); // TAG

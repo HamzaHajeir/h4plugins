@@ -32,7 +32,7 @@ SOFTWARE.
 #include<H4Service.h>
 #include<H4P_Signaller.h>
 #include<H4P_WiFi.h>
-#include<PangolinMQTT.h>
+#include<H4AsyncMQTT.h>
 
 struct H4P_LWT {
     std::string     topic;
@@ -43,9 +43,9 @@ struct H4P_LWT {
 
 STAG(nDCX);
 
-class H4P_AsyncMQTT: public H4Service, public PangolinMQTT{
-                bool            _discoDone;
+class H4P_AsyncMQTT: public H4Service, public H4AsyncMQTT{
                 bool            autorestart=true;
+                bool            _connected=false;
                 std::string     prefix=std::string(h4Tag()).append("/");
                 struct H4P_LWT  _lwt;
                 std::unordered_set<std::string> _reportList={binTag(),ipTag(),h4pTag()};
