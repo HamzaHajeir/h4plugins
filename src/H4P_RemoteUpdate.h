@@ -73,7 +73,7 @@ class H4P_RemoteUpdate: public H4Service, public HTTPUpdate {
 
             void        _updateFromUrl(bool fw,bool reboot){
                 SYSINFO("START REMOTE UPDATE %s FROM %s v=%s\n",fw ? "Firmware":"FileSystem",CSTR(endpoint),H4P_VERSION);
-                t_httpUpdate_return rv=fw ? update(_c,CSTR(endpoint),H4P_VERSION):updateSpiffs(_c,CSTR(endpoint),h4p.read("/h4UI").data());
+                t_httpUpdate_return rv=fw ? update(_c,CSTR(endpoint),H4P_VERSION):updateFS(_c,CSTR(endpoint),h4p.read("/h4UI").data());
                 switch(rv){
                     case HTTP_UPDATE_OK:
                         if(reboot) QEVENT(H4PE_REBOOT);
