@@ -180,7 +180,7 @@ void H4P_WiFi::_defaultSync(const std::string& svc,const std::string& msg) {
 
 void H4P_WiFi::_gotIP(){
     _signalOff();
-    _discoDone=false;
+    // _discoDone=false;
     h4p[ipTag()]=WiFi.localIP().toString().c_str();
     h4p[ssidTag()]=CSTR(WiFi.SSID());
     h4p[pskTag()]=CSTR(WiFi.psk());
@@ -244,10 +244,10 @@ void H4P_WiFi::_init(){
 
 void H4P_WiFi::_lostIP(){
     h4.cancelSingleton(H4P_TRID_HOTA);
-    if(!_discoDone) {
+    // if (!_discoDone) {
         _coreStart(); // ESP32 is well and truly fucked
         _stopWebserver();
-    }
+    // }
 }
 
 uint32_t H4P_WiFi::_msg(std::vector<std::string> vs){
@@ -276,9 +276,6 @@ void H4P_WiFi::_rest(H4AW_HTTPHandler* handler){
         j+=fl+"]}";
         handler->addHeader("Access-Control-Allow-Origin","*");
         handler->send(200, "application/json",j.length(), CSTR(j));
-        // AsyncWebServerResponse *response = request->beginResponse(200, "application/json",CSTR(j));
-        // response->addHeader("Access-Control-Allow-Origin","*");
-        // request->send(response);
         _lines.clear();
 	},nullptr,H4P_TRID_REST);
 }
@@ -292,20 +289,21 @@ void H4P_WiFi::_sendSSE(const std::string& name,const std::string& msg){
     static bool bakov=false;
 
     if(_nClients) {
-        auto fh=_HAL_freeHeap();
-        if(fh > H4P_THROTTLE_LO){
-            if(bakov && (fh > H4P_THROTTLE_HI)){
-                // SYSINFO("SSE BACKOFF RECOVERY H=%lu nQ=%d",fh,_evts->avgPacketsWaiting());
-                bakov=false;
-                for(auto const& ui:h4pUserItems) _evts->send(CSTR(ui.second.f()),CSTR(ui.first)/* ,_evtID++ */); // hook to sse event q size
-            }
-//            Serial.printf("%s %s id=%d\n",name.data(),msg.data(),_evtID);
-            _evts->send(CSTR(msg),CSTR(name)/* ,_evtID++ */); // hook to sse event q size
-        } 
-        else {
-            bakov=true;
-            // SYSWARN("SSE BACKOFF H=%lu nQ=%d",fh,_evts->avgPacketsWaiting());
-        }
+        _evts->send(CSTR(msg),CSTR(name)); // hook to sse event q size
+//         auto fh=_HAL_freeHeap();
+//         if(fh > H4P_THROTTLE_LO){
+//             if(bakov && (fh > H4P_THROTTLE_HI)){
+//                 // SYSINFO("SSE BACKOFF RECOVERY H=%lu nQ=%d",fh,_evts->avgPacketsWaiting());
+//                 bakov=false;
+//                 for(auto const& ui:h4pUserItems) _evts->send(CSTR(ui.second.f()),CSTR(ui.first)/* ,_evtID++ */); // hook to sse event q size
+//             }
+// //            Serial.printf("%s %s id=%d\n",name.data(),msg.data(),_evtID);
+//             _evts->send(CSTR(msg),CSTR(name)/* ,_evtID++ */); // hook to sse event q size
+//         } 
+//         else {
+//             bakov=true;
+//             // SYSWARN("SSE BACKOFF H=%lu nQ=%d",fh,_evts->avgPacketsWaiting());
+//         }
     }
 }
 
@@ -320,6 +318,7 @@ void H4P_WiFi::_startWebserver(){
     _evts=new H4AW_HTTPHandlerSSE("/evt");
     _evts->onChange([this](size_t nClients){
             h4.queueFunction([this,nClients](){
+                XLOG("SSE nClients=%d\n",nClients);
                 _nClients = nClients;
                 if(nClients) {
                 #if H4P_USE_WIFI_AP
@@ -382,7 +381,7 @@ void H4P_WiFi::_stopWebserver(){
 #endif
     // end();
 
-    _discoDone=true;
+    // _discoDone=true;
     _clearUI();
     svcDown();
 }

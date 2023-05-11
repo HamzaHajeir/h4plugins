@@ -31,16 +31,15 @@ SOFTWARE.
 
 #include<H4Service.h>
 
+#include<H4AsyncTCP.h>
 #ifdef ARDUINO_ARCH_ESP8266
     #include<ESP8266WiFi.h>
     #include<ESP8266mDNS.h>
-    #include<ESPAsyncTCP.h>
+    // #include<ESPAsyncTCP.h>
     #include<ESPAsyncUDP.h>
 #else
     #include<WiFi.h>
-    // #include<AsyncTCP.h>
     #include<AsyncUDP.h>
-    #include<H4AsyncTCP.h>
     #include<ESPmDNS.h>
     #include<map> // WHY???
 #endif
@@ -48,6 +47,7 @@ SOFTWARE.
 #include<ArduinoOTA.h>
 #include<H4P_SerialCmd.h>
 #include<H4AsyncWebServer.h>
+#include<H4P_Signaller.h>
 //
 #if H4P_USE_WIFI_AP
 constexpr const char* GoTag(){ return "Go"; }
@@ -66,7 +66,7 @@ class H4P_WiFi: public H4Service, public H4AsyncWebServer {
             DNSServer*          _dns53=nullptr;
 #endif
 //
-            bool                _discoDone;
+            // bool                _discoDone;
             uint32_t            _evtID=0;
             H4AW_HTTPHandlerSSE*   _evts;
             size_t              _nClients=0;
@@ -155,6 +155,6 @@ class H4P_WiFi: public H4Service, public H4AsyncWebServer {
         virtual void            _init() override;
                 void            _reply(std::string msg) override { _lines.push_back(msg); }
                 void            _sendSSE(const std::string& name,const std::string& msg);
-                void            _signalOff(){ YEVENT(H4PE_SIGNAL,""); }
+                void            _signalOff(){ H4P_Signaller::signal(H4P_SIG_STOP); }
                 void            _uiAdd(const std::string& name,H4P_UI_TYPE t,const std::string& h="u",const std::string& v="",uint8_t c=H4P_UILED_BI);
 };

@@ -34,13 +34,7 @@ SOFTWARE.
 #include<config_plugins.h>
 #include<h4proxy.h>
 
-#ifdef ARDUINO_ARCH_ESP8266
-    #include<LittleFS.h>
-    #define HAL_FS LittleFS
-#else
-    #include<FS.h>
-    #include<SPIFFS.h>
-    #define HAL_FS SPIFFS
+#ifdef ARDUINO_ARCH_ESP32
     std::string getTerminalName(const std::string& s);
 #endif
 

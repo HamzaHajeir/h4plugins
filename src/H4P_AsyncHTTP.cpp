@@ -30,15 +30,15 @@ SOFTWARE.
 #include<H4P_AsyncHTTP.h>
 #include<H4P_WiFi.h>
 
-/* H4P_AsyncHTTP::H4P_AsyncHTTP(const std::string& name,uint32_t filter): H4Service(name,filter,false){
+H4P_AsyncHTTP::H4P_AsyncHTTP(const std::string& name,uint32_t filter): H4Service(name,filter,false){
     depend<H4P_WiFi>(wifiTag());
     onHTTPerror([=](int e,int i){ _errorHandler(e,i); });
 }
 
 void H4P_AsyncHTTP::DELETE(const std::string& url,ARMA_FN_HTTP rx,const uint8_t* fingerprint,uint32_t phase){ if(_running) ArmadilloHTTP::DELETE(url,rx,fingerprint,phase); }
 void H4P_AsyncHTTP::GET(const std::string& url,ARMA_FN_HTTP rx,const uint8_t* fingerprint,uint32_t phase){ if(_running) ArmadilloHTTP::GET(url,rx,fingerprint,phase); }
-void H4P_AsyncHTTP::PATCH(const std::string& url,const VARK_NVP_MAP& fields,ARMA_FN_HTTP rx,const uint8_t* fingerprint,uint32_t phase){ if(_running) ArmadilloHTTP::PATCH(url,fields,rx,fingerprint,phase); }
-void H4P_AsyncHTTP::POST(const std::string& url,const VARK_NVP_MAP& fields,ARMA_FN_HTTP rx,const uint8_t* fingerprint,uint32_t phase){ if(_running) ArmadilloHTTP::POST(url,fields,rx,fingerprint,phase); }
-void H4P_AsyncHTTP::PUT(const std::string& url,const VARK_NVP_MAP& fields,ARMA_FN_HTTP rx,const uint8_t* fingerprint,uint32_t phase){ if(_running) ArmadilloHTTP::PUT(url,fields,rx,fingerprint,phase); }
+void H4P_AsyncHTTP::PATCH(const std::string& url,const H4AT_NVP_MAP& fields,ARMA_FN_HTTP rx,const uint8_t* fingerprint,uint32_t phase){ if(_running) ArmadilloHTTP::PATCH(url,fields,rx,fingerprint,phase); }
+void H4P_AsyncHTTP::POST(const std::string& url,const H4AT_NVP_MAP& fields,ARMA_FN_HTTP rx,const uint8_t* fingerprint,uint32_t phase){ if(_running) ArmadilloHTTP::POST(url,fields,rx,fingerprint,phase); }
+void H4P_AsyncHTTP::PUT(const std::string& url,const H4AT_NVP_MAP& fields,ARMA_FN_HTTP rx,const uint8_t* fingerprint,uint32_t phase){ if(_running) ArmadilloHTTP::PUT(url,fields,rx,fingerprint,phase); }
 
-void H4P_AsyncHTTP::globalsFromSimpleJson(ARMA_HTTP_REPLY r){ for(auto const& j:r.asSimpleJson()) h4p["usr_"+j.first]=j.second; } */
+void H4P_AsyncHTTP::globalsFromSimpleJson(ARMA_HTTP_REPLY r){ for(auto const& j:r.asSimpleJson()) h4p["usr_"+j.first]=j.second; }

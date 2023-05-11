@@ -11,7 +11,7 @@ H4_USE_PLUGINS(115200,H4_Q_CAPACITY,false) // Serial baud rate, Q size, SerialCm
 H4P_WiFi h4wifi("XXXXXXXX","XXXXXXXX","bogus");
 H4P_AsyncHTTP ah;
 
-VARK_NVP_MAP    _eventdata = {
+H4AT_NVP_MAP    _eventdata = {
     {deviceTag(),"bogus"},
     {"type","42"},
     {"source","evian"},
