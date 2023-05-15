@@ -31,8 +31,10 @@ SOFTWARE.
 
 void H4P_BinaryThing::_onChange(bool b){
     h4.queueFunction([=](){ _thing(b); });
+    static H4_TIMER timer;
     auto off=h4p.gvGetInt(autoOffTag());
-    if(off) h4.once(off,[=]{ h4p.gvSetInt(stateTag(),OFF); });
+    if(b && off) timer = h4.once(off,[=]{ h4p.gvSetInt(stateTag(),OFF); });
+    if(!b && off) h4.cancel(timer);
 }
 
 void H4P_BinaryThing::_handleEvent(const std::string& svc,H4PE_TYPE t,const std::string& msg){ 
