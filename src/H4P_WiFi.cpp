@@ -369,7 +369,9 @@ void H4P_WiFi::_startWebserver(){
 
 	on("/rest",HTTP_GET,[this](H4AW_HTTPHandler* handler){ _rest(handler); });
 
-
+    for (auto sub : _onWebserver) {
+        sub();
+    }
     // serveStatic("/", HAL_FS, "/").setCacheControl("max-age=31536000");
     begin();
 }

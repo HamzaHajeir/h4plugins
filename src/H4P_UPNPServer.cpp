@@ -192,16 +192,6 @@ void H4P_UPNPServer::svcUp(){
 
     h4p.gvErase({"udn",ageTag(),"updt","umfr","usvc","usid"});
 //
-    _pWiFi->on("/we",HTTP_GET, [this](H4AW_HTTPHandler *request){ request->send(200,"text/xml",_xml.length(), CSTR(_xml)); });
-    _pWiFi->on("/upnp", HTTP_POST, [this](H4AW_HTTPHandler *request)
-               {
-                   _upnp(request);
-                //    request->bodyData();
-                //    request->bodySize();
-                   // if(!index) request->_tempObject = malloc(total+1);
-                   // memcpy((uint8_t*) request->_tempObject+index,data,len);
-                   // if(index + len == total) *((uint8_t*) request->_tempObject+total)='\0';
-               });
     _listenUDP();
     _notify(aliveTag()); // TAG
     h4.every(H4P_UDP_REFRESH / 2,[=](){ _notify(aliveTag()); },nullptr,H4P_TRID_NTFY,true); // TAG

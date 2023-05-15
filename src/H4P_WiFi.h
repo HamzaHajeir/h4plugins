@@ -67,6 +67,7 @@ class H4P_WiFi: public H4Service, public H4AsyncWebServer {
 #endif
 //
             // bool                _discoDone;
+            std::vector<H4_FN_VOID> _onWebserver;
             uint32_t            _evtID=0;
             H4AW_HTTPHandlerSSE*   _evts;
             size_t              _nClients=0;
@@ -127,7 +128,9 @@ class H4P_WiFi: public H4Service, public H4AsyncWebServer {
 #if H4P_LOG_MESSAGES
                 void            info() override;
 #endif
-//
+
+                void            hookWebserver(H4_FN_VOID f) { if (f!=nullptr) _onWebserver.push_back(f); }
+
         virtual void            svcDown() override;
         virtual void            svcUp() override;
 //
