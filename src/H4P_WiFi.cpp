@@ -259,7 +259,7 @@ uint32_t H4P_WiFi::_msg(std::vector<std::string> vs){
 
 void H4P_WiFi::_rest(H4AW_HTTPHandler* handler){
 	h4.queueFunction([=](){
-        XLOG("_rest %s",handler->client()->remoteIP().toString().c_str());
+        XLOG("_rest %s",handler->client()->remoteIPstring().c_str());
 		std::string chop=replaceAll(CSTR(handler->url()),"/rest/","");
         std::string msg="";
         uint32_t res=h4puncheckedcall<H4P_SerialCmd>(cmdTag())->_simulatePayload(CSTR(chop),wifiTag());
