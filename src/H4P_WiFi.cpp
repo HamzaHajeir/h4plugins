@@ -314,6 +314,7 @@ void H4P_WiFi::_signalBad(){
 
 void H4P_WiFi::_startWebserver(){
 	reset();
+    _heap_alloc=10000;
 
     _evts=new H4AW_HTTPHandlerSSE("/evt");
     _evts->onChange([this](size_t nClients){
