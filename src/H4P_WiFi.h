@@ -131,6 +131,8 @@ class H4P_WiFi: public H4Service, public H4AsyncWebServer {
 
                 void            hookWebserver(H4_FN_VOID f) { if (f!=nullptr) _onWebserver.push_back(f); }
 
+                void            useSecurePort() { setPort(H4P_WEBSERVER_TLS_PORT); }
+                void            useUnsecurePort() { setPort(H4P_WEBSERVER_PORT); }
         virtual void            svcDown() override;
         virtual void            svcUp() override;
 //

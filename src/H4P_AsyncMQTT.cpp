@@ -99,7 +99,9 @@ void H4P_AsyncMQTT::_init() {
     });
 
     onConnect([=](){
+        // Serial.printf("MQTT::onConnect()\n");
         h4.queueFunction([=](){
+            // Serial.printf("MQTT::queuedonConnect()\n");
             _signalOff();
             h4.cancelSingleton(H4P_TRID_MQRC);
             _connected =true;
@@ -115,13 +117,17 @@ void H4P_AsyncMQTT::_init() {
     });
 
     onDisconnect([this](){
+        // Serial.printf("MQTT::onDisconnect()\n");
+        _connected = false;
         h4.queueFunction([this](){
-            _connected = false;
+            // Serial.printf("MQTT::queuedonDisconnect()\n");
             h4p[_me]=stringFromInt(_running=false);
             h4p.gvInc(nDCXTag());
+            _signalBad();
             // SYSINFO("DCX %d",reason);
             H4Service::svcDown();
             if(autorestart && WiFi.status()==WL_CONNECTED) { h4.every(H4MQ_RETRY,[this](){
+                QLOG("MQTT hasn't reconnected yet\n");
                 _signalBad(); // have to repeat to override hb if present: easiest to NIKE
                 /* connect(h4p[deviceTag()]); */ },nullptr,H4P_TRID_MQRC,true); 
             }// MUST be > 18sec due to shit lib ESpAsynTCP
@@ -183,6 +189,7 @@ void H4P_AsyncMQTT::svcUp(){
     _signalBad();
     _setup();
     autorestart=true;
+    informNetworkState(H4AMC_NETWORK_CONNECTED);
     connect(CSTR(h4p[brokerTag()]), CSTR(h4p[mQuserTag()]), CSTR(h4p[mQpassTag()]), CSTR(h4p[deviceTag()]));
 }
 
@@ -190,6 +197,7 @@ void H4P_AsyncMQTT::svcDown(){
     autorestart=false;
     if (_connected)
         disconnect();
+    informNetworkState(H4AMC_NETWORK_DISCONNECTED); // May introduce issues regarding conflicting H4AMC state and the network state.
 }
 
 void H4P_AsyncMQTT::unsubscribeDevice(std::string topic){

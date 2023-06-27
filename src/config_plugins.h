@@ -85,11 +85,16 @@ enum H4P_UILED_COLOR {
 
 #ifdef LED_BUILTIN
     #define H4P_ASSUMED_LED      LED_BUILTIN
+#ifdef ARDUINO_ARCH_ESP8266
     #define H4P_ASSUMED_SENSE     ACTIVE_LOW
+#else
+    #define H4P_ASSUMED_SENSE     ACTIVE_HIGH
+#endif
     #define H4P_ASSUMED_COLOR H4P_UILED_BLUE
 #endif
 
 #define H4P_WEBSERVER_PORT      80
+#define H4P_WEBSERVER_TLS_PORT  443
 /*
             TWEAKABLES
 */
