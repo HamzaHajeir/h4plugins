@@ -89,7 +89,9 @@ void h4StartPlugins(){
     Serial.printf("GPIOs defined:\n");
     for(auto const& p:h4pPinMap) {
         Serial.printf(" %02d S=%d C=%d NPL=%d\n",p.first,p.second->_s,p.second->_c,p.second->_pipeline.size()); 
+#if H4P_LOG_MESSAGES
         p.second->dump();
+#endif
     }
 #else
 void h4StartPlugins(){
@@ -176,6 +178,8 @@ void h4pInventory(){
         }
     }
     Serial.println();
+#if H4P_LOG_MESSAGES
     h4p.plugins();
+#endif
 }
 #endif

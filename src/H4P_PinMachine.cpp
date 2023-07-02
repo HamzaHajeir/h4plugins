@@ -49,9 +49,13 @@ void H4P_PinMachine::info(){
 #endif
 
 void H4P_PinMachine::svcUp(){
+#if H4P_LOG_MESSAGES
    Serial.printf("H4P_PinMachine::svcUp %d\n",h4pPinMap.size());
+#endif
    for(auto const& p:h4pPinMap) {
+#if H4P_LOG_MESSAGES
         Serial.printf("START PINS: %s\n",p.second->dump().data());
+#endif
         p.second->_announce();
     }
     h4._hookLoop([this](){ _run(); },_pid);
