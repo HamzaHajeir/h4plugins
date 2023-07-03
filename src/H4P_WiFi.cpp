@@ -365,7 +365,7 @@ void H4P_WiFi::_startWebserver(){
     
     on("/",HTTP_GET, [this](H4AW_HTTPHandler* handler){
         XLOG("FH=%u --> Root %s",_HAL_freeHeap(),handler->client()->remoteIP().toString().c_str());
-        handler->sendFileParams("/sta.htm",_lookup);
+        handler->sendFileParams("/h4/sta.htm",_lookup);
     });
 
 	on("/rest",HTTP_GET,[this](H4AW_HTTPHandler* handler){ _rest(handler); });
@@ -374,6 +374,7 @@ void H4P_WiFi::_startWebserver(){
         sub();
     }
     // serveStatic("/", HAL_FS, "/").setCacheControl("max-age=31536000");
+    setFSPath("/h4");
     begin();
 }
 
