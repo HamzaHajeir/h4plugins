@@ -108,9 +108,9 @@ class H4P_WiFi: public H4Service, public H4AsyncWebServer {
                 void            _startAP();
         H4P_WiFi(): 
             H4Service(wifiTag(),H4PE_FACTORY | H4PE_GPIO | H4PE_GVCHANGE | H4PE_UIADD | H4PE_UISYNC | H4PE_UIMSG),
-            AsyncWebServer(H4P_WEBSERVER_PORT){
-                h4p[ssidTag()]=h4Tag();
-                h4p[pskTag()]=h4Tag();
+            H4AsyncWebServer(H4P_WEBSERVER_PORT){
+                h4p.gvSetstring(ssidTag(),h4Tag(),true);
+                h4p.gvSetstring(pskTag(),h4Tag(),true);
                 h4p.gvSetstring(deviceTag(),"",true);
 #else
         explicit H4P_WiFi(): H4Service(wifiTag()),H4AsyncWebServer(H4P_WEBSERVER_PORT){}

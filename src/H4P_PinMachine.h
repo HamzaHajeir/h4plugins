@@ -82,6 +82,7 @@ class h4pGPIO {
                 uint8_t             _p;
                 npFLOW              _pipeline;
                 H4PM_SENSE          _s;
+                bool                _isAnalog=true;
 //
         h4pGPIO(uint8_t p,uint8_t m,H4PM_SENSE s=ACTIVE_LOW,npFLOW flow={});
 #if H4P_LOG_MESSAGES
@@ -89,7 +90,7 @@ class h4pGPIO {
 #endif
                 int                 getValue(){ return _prev.load; }
                 msg                 inject(uint32_t metal,bool timer=false);
-        virtual bool                isAnalogInput(){ return _HAL_isAnalogInput(_p); }
+        virtual bool                isAnalogInput(){ return _HAL_isAnalogInput(_p) && _isAnalog; }
         virtual bool                isOutput(){ return false; }
                 uint8_t             logicalRead(){ return _normalise(_r); }
                 uint8_t             pin(){ return _p; }

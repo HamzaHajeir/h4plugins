@@ -201,6 +201,7 @@ h4pMultistage::h4pMultistage(uint8_t p,uint8_t m,H4PM_SENSE s,uint32_t t,H4PM_ST
         new npSTAGEMANAGER{sm},
         d
     }){
+        _isAnalog = false;
 }
 //
 //      MFNB
