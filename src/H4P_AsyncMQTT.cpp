@@ -89,16 +89,16 @@ void H4P_AsyncMQTT::_init() {
         _lwt.payload=h4p[chipTag()];
     }
 
-    setWill(_lwt.topic.c_str(),_lwt.QOS,_lwt.retain,_lwt.payload.c_str());
+    setWill(_lwt.topic.c_str(),_lwt.QOS,_lwt.payload.c_str(),_lwt.retain);
     prefix+=device+"/";
 
-    onMessage([=](const char* topic, const uint8_t* payload, size_t length, uint8_t qos, bool retain,bool dup){
+    onMessage([=](const char* topic, const uint8_t* payload, size_t length, H4AMC_MessageOptions opts){
         std::string top(topic);
         std::string pload((const char*) payload,length);
         h4.queueFunction([top,pload](){ h4p._executeCmd(CSTR(std::string(mqttTag()).append("/").append(top)),pload); },nullptr,H4P_TRID_MQMS);
     });
 
-    onConnect([=](){
+    onConnect([=](H4AMC_ConnackParam params){
         // Serial.printf("MQTT::onConnect()\n");
         h4.queueFunction([=](){
             // Serial.printf("MQTT::queuedonConnect()\n");
