@@ -52,7 +52,6 @@ SOFTWARE.
         {H4P_TRID_IPPD,"IPPD"},
         {H4P_TRID_DALY,"DALY"},
         {H4P_TRID_SHOT,"AT_T"},
-        {H4P_TRID_SSET,"SSET"},
         {H4P_TRID_SYNC,"SYNC"},
         {H4P_TRID_TIME,uppercase(timeTag())},
         {H4P_TRID_GATE,"GATE"},

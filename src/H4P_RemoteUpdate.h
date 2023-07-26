@@ -57,8 +57,8 @@ class H4P_RemoteUpdate: public H4Service, public HTTPUpdate {
                 switch(t){
                     case H4PE_VIEWERS:
                         {
-                            uint32_t mode=STOI(msg);
-                            if(mode) {
+                            if(STOI(msg)) {
+                                auto mode = WiFi.getMode();
                             #if H4P_USE_WIFI_AP
                                 if(mode==WIFI_AP) h4puiAdd(rupdTag(),H4P_UI_INPUT,"s");
                                 else h4puiAdd(rupdTag(),H4P_UI_TEXT,"s");

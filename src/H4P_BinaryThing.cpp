@@ -41,8 +41,8 @@ void H4P_BinaryThing::_handleEvent(const std::string& svc,H4PE_TYPE t,const std:
     switch(t){
         case H4PE_VIEWERS:
             {
-                uint32_t mode=STOI(msg);
-                if(mode) {
+                if(STOI(msg)) {
+                    uint32_t mode=WiFi.getMode();
                 #if H4P_USE_WIFI_AP
                     if(mode==WIFI_AP) return;
                 #endif
@@ -69,8 +69,8 @@ void H4P_ConditionalThing::_handleEvent(const std::string& svc,H4PE_TYPE t,const
     switch(t){
         case H4PE_VIEWERS:
             {
-                uint32_t mode=STOI(msg);
-                if(mode) {
+                if(STOI(msg)) {
+                    auto mode = WiFi.getMode();
                 #if H4P_USE_WIFI_AP
                     if(mode==WIFI_AP) return;
                 #endif

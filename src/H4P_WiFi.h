@@ -86,7 +86,7 @@ class H4P_WiFi: public H4Service, public H4AsyncWebServer {
 
         // static  String          _aswsReplace(const String& var);
                 void            _clearUI();
-                bool            _cannotConnectSTA(){ return WiFi.SSID()==h4Tag() || WiFi.psk()==h4Tag() || WiFi.SSID()=="" || WiFi.psk()==""; }
+                bool            _cannotConnectSTA(){ return WiFi.SSID()==h4Tag() || WiFi.psk()==h4Tag() || h4p[ssidTag()]==""/*  || h4p[pskTag()]=="" */; }
                 void            _commonStartup();
                 void            _coreStart();
                 void            _defaultSync(const std::string& svc,const std::string& msg);

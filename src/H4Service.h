@@ -208,7 +208,6 @@ enum trustedIds {
     H4P_TRID_IPPD,
     H4P_TRID_DALY,
     H4P_TRID_SHOT,
-    H4P_TRID_SSET,
     H4P_TRID_SYNC,
     H4P_TRID_TIME,
     H4P_TRID_GATE,

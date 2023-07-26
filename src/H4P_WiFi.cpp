@@ -93,6 +93,7 @@ void H4P_WiFi::HAL_WIFI_setHost(const std::string& host){ WiFi.setHostname(CSTR(
 void H4P_WiFi::HAL_WIFI_startSTA(){
     WiFi.setSleep(false);
 	WiFi.setAutoReconnect(true);
+    WiFi.setAutoConnect(true);
     WiFi.begin(CSTR(h4p[ssidTag()]),CSTR(h4p[pskTag()]));
 }
 
@@ -121,7 +122,7 @@ void H4P_WiFi::_coreStart(){
 #if H4P_USE_WIFI_AP
     if(!_dns53){
         if(_cannotConnectSTA()) _startAP();
-        else if(WiFi.getMode()==WIFI_OFF) h4puncheckedcall<H4P_WiFi>(wifiTag())->HAL_WIFI_startSTA();
+        else h4puncheckedcall<H4P_WiFi>(wifiTag())->HAL_WIFI_startSTA();
     }
 #else
     if(_cannotConnectSTA() || WiFi.getMode()==WIFI_OFF) h4puncheckedcall<H4P_WiFi>(wifiTag())->HAL_WIFI_startSTA();
@@ -318,12 +319,12 @@ void H4P_WiFi::_startWebserver(){
 
     _evts=new H4AW_HTTPHandlerSSE("/evt");
     _evts->onChange([this](size_t nClients){
-            h4.queueFunction([this,nClients](){
-                XLOG("SSE nClients=%d\n",nClients);
-                _nClients = nClients;
+            // h4.queueFunction([this,nClients](){
+                XLOG("SSE nClients=%d",nClients);
+                _nClients=nClients;
                 if(nClients) {
                 #if H4P_USE_WIFI_AP
-                    if(WiFi.getMode()==WIFI_AP) {
+                    if(WiFi.getMode()==WIFI_AP || (WiFi.getMode()==WIFI_AP_STA && _cannotConnectSTA())) {
                         _uiAdd(chipTag(),H4P_UI_TEXT,"s"); // clumsy, don't like
                         _uiAdd(deviceTag(),H4P_UI_INPUT,"s");
                     }
@@ -345,20 +346,16 @@ void H4P_WiFi::_startWebserver(){
                     _uiAdd(NBootsTag(),H4P_UI_TEXT,"s");
                     _uiAdd(ipTag(),H4P_UI_TEXT,"s"); // cos we don't know it yet
                 #endif
-                    h4psysevent("viewers",H4PE_VIEWERS,"%d",WiFi.getMode());
                     h4pUIorder.shrink_to_fit();
+                } else {
+                    _clearUI();
                 }
+                h4psysevent("viewers",H4PE_VIEWERS,"%d",nClients);
                 for(auto const& ui:h4pUIorder){
                     auto i=h4pUserItems[ui];
                     _sendSSE("ui",CSTR(std::string(ui+","+stringFromInt(i.type)+","+i.h+",0,"+stringFromInt(i.color)+","+i.f())));
                 }
-                h4.repeatWhile([this]{ return _nClients; },
-                    ((H4WF_EVT_TIMEOUT*3)/4),
-                    []{},
-                    []{ h4psysevent("viewers",H4PE_VIEWERS,"%d",0); },
-                    H4P_TRID_SSET,true
-                );
-            });
+            // });
     });
     addHandler(_evts);
 

@@ -37,8 +37,8 @@ void H4P_ConditionalSwitch::_handleEvent(const std::string& svc,H4PE_TYPE t,cons
     switch(t){
         case H4PE_VIEWERS:
             {
-                uint32_t mode=STOI(msg);
-                if(mode) {
+                if(STOI(msg)) {
+                    uint32_t mode=WiFi.getMode();
                 #if H4P_USE_WIFI_AP
                     if(mode==WIFI_AP) return;
                 #endif
