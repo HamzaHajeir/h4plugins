@@ -215,6 +215,8 @@ void H4P_WiFi::_handleEvent(const std::string& svc,H4PE_TYPE t,const std::string
         case H4PE_FACTORY:
             WiFi.mode(WIFI_STA);
             WiFi.begin(h4Tag(),h4Tag()); // // === eraseConfig :) becos it wont allow "",""
+            h4p[ssidTag()]="";
+            h4p[pskTag()]="";
             break;
         case H4PE_UIADD:
             __uiAdd(msg);
@@ -349,6 +351,9 @@ void H4P_WiFi::_startWebserver(){
                 #endif
                     h4pUIorder.shrink_to_fit();
                 } else {
+                #if H4P_USE_WIFI_AP
+                    if (!(WiFi.getMode()==WIFI_AP||_cannotConnectSTA()))
+                #endif
                     _clearUI();
                 }
                 h4psysevent("viewers",H4PE_VIEWERS,"%d",nClients);
