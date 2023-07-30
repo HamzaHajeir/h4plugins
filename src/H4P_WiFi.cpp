@@ -122,10 +122,11 @@ void H4P_WiFi::_coreStart(){
 #if H4P_USE_WIFI_AP
     if(!_dns53){
         if(_cannotConnectSTA()) _startAP();
-        else h4puncheckedcall<H4P_WiFi>(wifiTag())->HAL_WIFI_startSTA();
+        else HAL_WIFI_startSTA();
     }
 #else
-    if(_cannotConnectSTA() || WiFi.getMode()==WIFI_OFF) h4puncheckedcall<H4P_WiFi>(wifiTag())->HAL_WIFI_startSTA();
+    if(_cannotConnectSTA() || WiFi.getMode()==WIFI_OFF) HAL_WIFI_startSTA();
+    else svcUp();
 #endif
 }
 //
