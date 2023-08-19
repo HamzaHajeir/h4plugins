@@ -61,7 +61,7 @@ class H4P_AsyncMQTT: public H4Service, public H4AsyncMQTT{
                         {reportTag(),  { _pid,       0, CMD(report) }}
                     });
                 }
-                void        _setup();
+                // void        _setup();
                 void        _signalBad(){ H4P_Signaller::signal(H4P_SIG_MORSE,"..   ,150"); }
                 void        _signalOff(){ H4P_Signaller::signal(H4P_SIG_STOP); }
     protected:
@@ -85,8 +85,8 @@ class H4P_AsyncMQTT: public H4Service, public H4AsyncMQTT{
 #endif
                 void        addReportingItem(const std::string& ri){ _reportList.insert(ri); }
                 void        change(const std::string& broker,const std::string& user,const std::string& passwd);
-                void        publishDevice(const std::string& topic,const std::string& payload,uint8_t qos=0, bool retain=false){ xPublish(CSTR(std::string(prefix+topic)),payload,qos,retain); }
-                void        publishDevice(const std::string& topic,uint32_t payload,uint8_t qos=0, bool retain=false){ publishDevice(topic,stringFromInt(payload),qos,retain); }
+                void        publishDevice(const std::string& topic,const std::string& payload,uint8_t qos=0, H4AMC_PublishOptions opts_retain={}){ xPublish(CSTR(std::string(prefix+topic)),payload,qos,opts_retain); }
+                void        publishDevice(const std::string& topic,uint32_t payload,uint8_t qos=0, H4AMC_PublishOptions opts_retain={}){ publishDevice(topic,stringFromInt(payload),qos,opts_retain); }
                 void        report();
                 void        restart() { autorestart=true; svcDown(); svcUp(); }
 #if H4P_LOG_MESSAGES

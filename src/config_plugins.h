@@ -32,7 +32,9 @@ SOFTWARE.
 
 // Make sure you read the documentation and have arrangements in place for using AP mode :)
 // If you don't have the H4P_WiFiAP.cpp file, the linker will fail.
+#ifndef H4P_USE_WIFI_AP
 #define H4P_USE_WIFI_AP         0
+#endif
 /*
         DIAGNOSTICS
         comment out H4P_LOG_MESSAGES to prevent any Serial output of  H4PE_MSG EVENTs
@@ -92,6 +94,8 @@ enum H4P_UILED_COLOR {
 #endif
     #define H4P_ASSUMED_COLOR H4P_UILED_BLUE
 #endif
+
+#define H4P_AP_SCAN_RATE         5000
 
 #define H4P_WEBSERVER_PORT      80
 #define H4P_WEBSERVER_TLS_PORT  443

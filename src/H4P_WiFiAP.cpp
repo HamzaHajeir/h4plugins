@@ -78,7 +78,7 @@ void H4P_WiFi::_startAP(){
         }
     };
     scan();
-    h4.every(20000, scan);
+    h4.every(H4P_AP_SCAN_RATE, scan);
     _uiAdd(pskTag(),H4P_UI_INPUT,"s");
     _uiAdd(deviceTag(),H4P_UI_INPUT,"s");
     _uiAdd(GoTag(),H4P_UI_IMGBTN,"o");

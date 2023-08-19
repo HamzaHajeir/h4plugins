@@ -242,6 +242,11 @@ void H4P_WiFi::_handleEvent(const std::string& svc,H4PE_TYPE t,const std::string
 }
 
 void H4P_WiFi::_init(){
+    if (!h4p.gvExists(ssidTag()))
+        h4p.gvSetstring(ssidTag(),h4Tag(),true);
+    if (!h4p.gvExists(pskTag()))
+        h4p.gvSetstring(pskTag(),h4Tag(),true);
+    HAL_WIFI_setHost(h4p[deviceTag()]);
     WiFi.persistent(true);
     WiFi.onEvent(_wifiEvent);
 }
@@ -363,8 +368,8 @@ void H4P_WiFi::_startWebserver(){
                 }
             // });
     });
-    addHandler(_evts);
 
+    addHandler(_evts);
     
     on("/",HTTP_GET, [this](H4AW_HTTPHandler* handler){
         XLOG("FH=%u --> Root %s",_HAL_freeHeap(),handler->client()->remoteIP().toString().c_str());
@@ -438,6 +443,14 @@ void H4P_WiFi::info() {
     #endif
 }
 #endif
+
+void H4P_WiFi::authenticate(const std::string &username, const std::string &password)
+{
+    if (!_authenticator)
+        setAuthenticator(_authenticator = new H4AW_BasicAuthenticator(username,password));
+    else
+        _authenticator->changeAuth(username,password);
+}
 
 void H4P_WiFi::svcDown(){
     _signalBad();

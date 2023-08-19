@@ -68,6 +68,7 @@ class H4P_WiFi: public H4Service, public H4AsyncWebServer {
 //
             // bool                _discoDone;
             std::vector<H4_FN_VOID> _onWebserver;
+            H4AW_Authenticator*     _authenticator;
             uint32_t            _evtID=0;
             H4AW_HTTPHandlerSSE*   _evts;
             size_t              _nClients=0;
@@ -86,7 +87,7 @@ class H4P_WiFi: public H4Service, public H4AsyncWebServer {
 
         // static  String          _aswsReplace(const String& var);
                 void            _clearUI();
-                bool            _cannotConnectSTA(){ return WiFi.SSID()==h4Tag() || WiFi.psk()==h4Tag() || h4p[ssidTag()]==""/*  || h4p[pskTag()]=="" */; }
+                bool            _cannotConnectSTA(){ return (WiFi.SSID()==h4Tag() || WiFi.psk()==h4Tag())/*  || std::stoi(h4p[GoTag()]) == 0 */; }
                 void            _commonStartup();
                 void            _coreStart();
                 void            _defaultSync(const std::string& svc,const std::string& msg);
@@ -106,12 +107,10 @@ class H4P_WiFi: public H4Service, public H4AsyncWebServer {
 
 #if H4P_USE_WIFI_AP
                 void            _startAP();
-        H4P_WiFi(): 
+        H4P_WiFi(const std::string& device=""): 
             H4Service(wifiTag(),H4PE_FACTORY | H4PE_GPIO | H4PE_GVCHANGE | H4PE_UIADD | H4PE_UISYNC | H4PE_UIMSG),
             H4AsyncWebServer(H4P_WEBSERVER_PORT){
-                h4p.gvSetstring(ssidTag(),h4Tag(),true);
-                h4p.gvSetstring(pskTag(),h4Tag(),true);
-                h4p.gvSetstring(deviceTag(),"",true);
+            h4p.gvSetstring(deviceTag(),device,true);
 #else
         explicit H4P_WiFi(): H4Service(wifiTag()),H4AsyncWebServer(H4P_WEBSERVER_PORT){}
 
@@ -133,6 +132,7 @@ class H4P_WiFi: public H4Service, public H4AsyncWebServer {
 
                 void            useSecurePort() { setPort(H4P_WEBSERVER_TLS_PORT); }
                 void            useUnsecurePort() { setPort(H4P_WEBSERVER_PORT); }
+                void            authenticate(const std::string& username, const std::string& password);
         virtual void            svcDown() override;
         virtual void            svcUp() override;
 //

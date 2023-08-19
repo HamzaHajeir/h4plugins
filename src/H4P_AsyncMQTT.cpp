@@ -95,6 +95,10 @@ void H4P_AsyncMQTT::_init() {
     onMessage([=](const char* topic, const uint8_t* payload, size_t length, H4AMC_MessageOptions opts){
         std::string top(topic);
         std::string pload((const char*) payload,length);
+#if MQTT5
+        auto props = opts.getProperties();
+        // props.xxx
+#endif
         h4.queueFunction([top,pload](){ h4p._executeCmd(CSTR(std::string(mqttTag()).append("/").append(top)),pload); },nullptr,H4P_TRID_MQMS);
     });
 
@@ -105,10 +109,12 @@ void H4P_AsyncMQTT::_init() {
             _signalOff();
             h4.cancelSingleton(H4P_TRID_MQRC);
             _connected =true;
-            subscribe(CSTR(std::string(allTag()).append(cmdhash())),0);
-            subscribe(CSTR(std::string(device+cmdhash())),0);
-            subscribe(CSTR(std::string(h4p[chipTag()]+cmdhash())),0);
-            subscribe(CSTR(std::string(h4p[boardTag()]+cmdhash())),0);
+            if (!params.session) {
+                subscribe(CSTR(std::string(allTag()).append(cmdhash())),0);
+                subscribe(CSTR(std::string(device+cmdhash())),0);
+                subscribe(CSTR(std::string(h4p[chipTag()]+cmdhash())),0);
+                subscribe(CSTR(std::string(h4p[boardTag()]+cmdhash())),0);
+            }
             report();
             h4p[_me]=stringFromInt(_running=true);
             SYSINFO("CNX %s",CSTR(h4p[brokerTag()]));
@@ -129,16 +135,16 @@ void H4P_AsyncMQTT::_init() {
             if(autorestart && WiFi.status()==WL_CONNECTED) { h4.every(H4MQ_RETRY,[this](){
                 QLOG("MQTT hasn't reconnected yet\n");
                 _signalBad(); // have to repeat to override hb if present: easiest to NIKE
-                /* connect(h4p[deviceTag()]); */ },nullptr,H4P_TRID_MQRC,true); 
-            }// MUST be > 18sec due to shit lib ESpAsynTCP
+                },nullptr,H4P_TRID_MQRC,true); 
+            }
         });
     });
 }
 
-void H4P_AsyncMQTT::_setup(){ // allow for TLS
+/* void H4P_AsyncMQTT::_setup(){ // allow for TLS
     // if(h4p[brokerTag()]!="") setServer(CSTR(h4p[brokerTag()]),CSTR(h4p[mQuserTag()]),CSTR(h4p[mQpassTag()])); // optimise tag()
 //    else SYSWARN("NO MQTT DETAILS","");
-}
+} */
 
 void H4P_AsyncMQTT::change(const std::string& broker,const std::string& user,const std::string& passwd){ // add creds
     XLOG("MQTT change to %s user=%s",CSTR(broker),CSTR(user));
@@ -187,7 +193,7 @@ void H4P_AsyncMQTT::svcUp(){
     if(WiFi.getMode()==WIFI_AP) return;
 #endif    
     _signalBad();
-    _setup();
+    // _setup();
     autorestart=true;
     informNetworkState(H4AMC_NETWORK_CONNECTED);
     connect(CSTR(h4p[brokerTag()]), CSTR(h4p[mQuserTag()]), CSTR(h4p[mQpassTag()]), CSTR(h4p[deviceTag()]));
