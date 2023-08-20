@@ -70,8 +70,7 @@ class H4P_WiFi: public H4Service, public H4AsyncWebServer {
             std::vector<H4_FN_VOID> _onWebserver;
             H4AW_Authenticator*     _authenticator;
             uint32_t            _evtID=0;
-            H4AW_HTTPHandlerSSE*   _evts;
-            size_t              _nClients=0;
+            H4AW_HTTPHandlerWS*      _ws;
             H4AT_NVP_MAP        _lookup = {
                 {"device", h4p[deviceTag()]}};
 
@@ -94,11 +93,15 @@ class H4P_WiFi: public H4Service, public H4AsyncWebServer {
                 void            _gotIP();
                 void            _lostIP();
                 void            _rest(H4AW_HTTPHandler *handler);
+                std::string     _execute(const std::string& msg);
                 void            _restart();
                 void            _signalBad();
                 void            _startWebserver();
                 void            _stopWebserver();
         static  void            _wifiEvent(WiFiEvent_t event);
+#if H4P_USE_WIFI_AP
+                void            _apViewers();
+#endif
 //      service essentials
     protected:
         virtual void            _handleEvent(const std::string& s,H4PE_TYPE t,const std::string& msg) override;
@@ -108,7 +111,7 @@ class H4P_WiFi: public H4Service, public H4AsyncWebServer {
 #if H4P_USE_WIFI_AP
                 void            _startAP();
         H4P_WiFi(const std::string& device=""): 
-            H4Service(wifiTag(),H4PE_FACTORY | H4PE_GPIO | H4PE_GVCHANGE | H4PE_UIADD | H4PE_UISYNC | H4PE_UIMSG),
+            H4Service(wifiTag(),H4PE_FACTORY | H4PE_VIEWERS | H4PE_GPIO | H4PE_GVCHANGE | H4PE_UIADD | H4PE_UISYNC | H4PE_UIMSG),
             H4AsyncWebServer(H4P_WEBSERVER_PORT){
             h4p.gvSetstring(deviceTag(),device,true);
 #else
@@ -146,20 +149,22 @@ class H4P_WiFi: public H4Service, public H4AsyncWebServer {
                 void            uiAddText(const std::string& name,int v,const std::string& section="u"){ _uiAdd(name,H4P_UI_TEXT,section,stringFromInt(v)); }
                 void            uiAddAllUsrFields(const std::string& section="u");
 
-                void            uiSetValue(const std::string& ui,const int f){ _sendSSE(ui,CSTR(stringFromInt(f))); }
-                void            uiSetValue(const std::string& ui,const std::string& value){ _sendSSE(ui,CSTR(value)); }
+                void            uiSetValue(const std::string& ui,const int f){ _sendWS(ui,CSTR(stringFromInt(f))); }
+                void            uiSetValue(const std::string& ui,const std::string& value){ _sendWS(ui,CSTR(value)); }
 //
                 template<typename... Args>
                 void            uiMessage(const std::string& msg, Args... args){ // variadic T<>
                     char* buff=static_cast<char*>(malloc(H4P_REPLY_BUFFER+1));
                     snprintf(buff,H4P_REPLY_BUFFER,CSTR(msg),args...);
-                    _sendSSE("",buff);
+                    _sendWS("",buff);
                     free(buff);
                 }
 //          syscall only        
         virtual void            _init() override;
                 void            _reply(std::string msg) override { _lines.push_back(msg); }
-                void            _sendSSE(const std::string& name,const std::string& msg);
+                std::string     _concatMsg(const std::string& type, const std::string& msg) { return std::string(type).append(",").append(msg); }
+                void            _sendWS(const std::string& type,const std::string& msg);
+                void            _sendSocket(H4AW_WebsocketClient* skt, const std::string& type, const std::string& msg);
                 void            _signalOff(){ H4P_Signaller::signal(H4P_SIG_STOP); }
                 void            _uiAdd(const std::string& name,H4P_UI_TYPE t,const std::string& h="u",const std::string& v="",uint8_t c=H4P_UILED_BI);
 };

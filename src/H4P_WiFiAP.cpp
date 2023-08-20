@@ -30,6 +30,23 @@ SOFTWARE.
 #include<H4P_WiFi.h>
 
 #if H4P_USE_WIFI_AP
+constexpr const char* opts_base = " Select SSID..." UNIT_SEPARATOR "dummy" RECORD_SEPARATOR;
+std::vector<std::string> wf_ssids;
+void appendSSIDs(std::string& base) {
+    for (auto& ssid : wf_ssids){
+        std::string ss=CSTR(ssid);
+        base.append(ss).append(UNIT_SEPARATOR).append(ss).append(RECORD_SEPARATOR);
+    }
+    base.pop_back();
+}
+void H4P_WiFi::_apViewers() {
+    std::string msg {opts_base};
+    appendSSIDs(msg);
+    _uiAdd(ssidTag(),H4P_UI_DROPDOWN,"s",msg);
+    _uiAdd(pskTag(),H4P_UI_INPUT,"s");
+    _uiAdd(deviceTag(),H4P_UI_INPUT,"s");
+    _uiAdd(GoTag(),H4P_UI_IMGBTN,"o");
+}
 void H4P_WiFi::_startAP(){
     h4p.gvSetInt(GoTag(),0,false);
 
@@ -43,7 +60,7 @@ void H4P_WiFi::_startAP(){
             // _wf_ssids.clear();
             return;
         }
-        std::vector<std::string> wf_ssids;
+        
         auto result = WiFi.scanComplete();
         XLOG("Scan result=%d", result);
         switch (result){
@@ -61,28 +78,12 @@ void H4P_WiFi::_startAP(){
             WiFi.scanNetworks(true, true);
             break;
         }
-
-        static bool added = false;
-        std::string opts=std::string(" Select SSID...").append(UNIT_SEPARATOR).append("dummy").append(RECORD_SEPARATOR);
-        for (auto& ssid : wf_ssids){
-            std::string ss=CSTR(ssid);
-            opts+=ss+UNIT_SEPARATOR+ss+RECORD_SEPARATOR;
-        }
-        opts.pop_back();
-
-        if (added) {
-            h4puiSync(ssidTag(), opts);
-        } else {
-            _uiAdd(ssidTag(),H4P_UI_DROPDOWN,"s",opts);
-            added=true;
-        }
+        std::string msg{opts_base};
+        appendSSIDs(msg);
+        h4puiSync(ssidTag(), msg);
     };
     scan();
     h4.every(H4P_AP_SCAN_RATE, scan);
-    _uiAdd(pskTag(),H4P_UI_INPUT,"s");
-    _uiAdd(deviceTag(),H4P_UI_INPUT,"s");
-    _uiAdd(GoTag(),H4P_UI_IMGBTN,"o");
-
     WiFi.mode(WIFI_AP);
     SYSINFO("ENTER AP MODE %s MAC=%s",CSTR(h4p[deviceTag()]),CSTR(WiFi.softAPmacAddress()));
 

@@ -176,7 +176,7 @@ void H4P_WiFi::_defaultSync(const std::string& svc,const std::string& msg) {
             default:
                 sync=msg;
         }
-        _sendSSE(svc,sync);
+        _sendWS(svc,sync);
     }
 }
 
@@ -223,7 +223,7 @@ void H4P_WiFi::_handleEvent(const std::string& svc,H4PE_TYPE t,const std::string
             break;
         case H4PE_GPIO:
         case H4PE_UISYNC:
-            if(h4pUserItems.count(svc)) _sendSSE(svc,msg);
+            if(h4pUserItems.count(svc)) _sendWS(svc,msg);
             break;
         case H4PE_GVCHANGE:
 #if H4P_USE_WIFI_AP
@@ -270,23 +270,29 @@ void H4P_WiFi::_rest(H4AW_HTTPHandler* handler){
 	h4.queueFunction([=](){
         XLOG("_rest %s",handler->client()->remoteIPstring().c_str());
 		std::string chop=replaceAll(CSTR(handler->url()),"/rest/","");
-        std::string msg="";
-        uint32_t res=h4puncheckedcall<H4P_SerialCmd>(cmdTag())->_simulatePayload(CSTR(chop),wifiTag());
-        msg=h4pGetErrorMessage(res);
-        std::string j="{\"res\":"+stringFromInt(res)+",\"msg\":\""+msg+"\",\"lines\":[";
-        std::string fl;
-        if(!res){
-            for(auto &l:_lines){
-                if(l.back()=='\n') l.pop_back();
-                fl+="\""+l+"\",";
-            }
-            if(fl.size()) fl.pop_back();
-        }
-        j+=fl+"]}";
+        std::string reply = _execute(chop);
         handler->addHeader("Access-Control-Allow-Origin","*");
-        handler->send(200, "application/json",j.length(), CSTR(j));
+        handler->send(200, "application/json",reply.length(), CSTR(reply));
         _lines.clear();
 	},nullptr,H4P_TRID_REST);
+}
+
+std::string H4P_WiFi::_execute(const std::string &msg)
+{
+    std::string err="";
+    uint32_t res=h4puncheckedcall<H4P_SerialCmd>(cmdTag())->_simulatePayload(CSTR(msg),wifiTag());
+    err=h4pGetErrorMessage(res);
+    std::string j="{\"res\":"+stringFromInt(res)+",\"msg\":\""+err+"\",\"lines\":[";
+    std::string fl;
+    if(!res){
+        for(auto &l:_lines){
+            if(l.back()=='\n') l.pop_back();
+            fl+="\""+l+"\",";
+        }
+        if(fl.size()) fl.pop_back();
+    }
+    j+=fl+"]}";
+	return j;
 }
 
 void H4P_WiFi::_restart(){
@@ -294,11 +300,14 @@ void H4P_WiFi::_restart(){
     HAL_WIFI_startSTA();
 }
 
-void H4P_WiFi::_sendSSE(const std::string& name,const std::string& msg){
+void H4P_WiFi::_sendWS(const std::string& type,const std::string& msg){
     static bool bakov=false;
-
-    if(_nClients) {
-        _evts->send(CSTR(msg),CSTR(name)); // hook to sse event q size
+    // Serial.printf("_sendWS(%s,%s)\n", type.c_str(), msg.c_str());
+    if(_ws && _ws->size()) {
+        auto m = _concatMsg(type,msg);
+        _ws->broadcastText(m);
+        // _evts->send(CSTR(msg),CSTR(name)); // hook to sse event q size
+        // _ws->
 //         auto fh=_HAL_freeHeap();
 //         if(fh > H4P_THROTTLE_LO){
 //             if(bakov && (fh > H4P_THROTTLE_HI)){
@@ -316,6 +325,14 @@ void H4P_WiFi::_sendSSE(const std::string& name,const std::string& msg){
     }
 }
 
+void H4P_WiFi::_sendSocket(H4AW_WebsocketClient *skt, const std::string &name, const std::string &msg)
+{
+    // Serial.printf("_sendSocket(%p, %s, %s)\n", skt, name.c_str(), msg.c_str());
+    auto data = _concatMsg(name,msg);
+    skt->sendText(data);
+}
+
+
 void H4P_WiFi::_signalBad(){ 
     h4p[ipTag()]="";
     H4P_Signaller::signal(H4P_SIG_MORSE,"...   ---   ...   ,150");
@@ -325,51 +342,63 @@ void H4P_WiFi::_startWebserver(){
 	reset();
     _heap_alloc=10000;
 
-    _evts=new H4AW_HTTPHandlerSSE("/evt");
-    _evts->onChange([this](size_t nClients){
-            // h4.queueFunction([this,nClients](){
-                XLOG("SSE nClients=%d",nClients);
-                _nClients=nClients;
-                if(nClients) {
-                #if H4P_USE_WIFI_AP
-                    if(WiFi.getMode()==WIFI_AP || (WiFi.getMode()==WIFI_AP_STA && _cannotConnectSTA())) {
-                        _uiAdd(chipTag(),H4P_UI_TEXT,"s"); // clumsy, don't like
-                        _uiAdd(deviceTag(),H4P_UI_INPUT,"s");
-                    }
-                    else {
-                        _clearUI();
-                        _uiAdd(h4pTag(),H4P_UI_TEXT,"s",H4P_VERSION);
-                        _uiAdd(chipTag(),H4P_UI_TEXT,"s");
-                        _uiAdd(deviceTag(),H4P_UI_TEXT,"s");
-                        _uiAdd(boardTag(),H4P_UI_TEXT,"s");
-                        _uiAdd(NBootsTag(),H4P_UI_TEXT,"s");
-                        _uiAdd(ipTag(),H4P_UI_TEXT,"s"); // cos we don't know it yet
-                    }
-                #else
-                    _clearUI();
-                    _uiAdd(h4pTag(),H4P_UI_TEXT,"s",H4P_VERSION);
-                    _uiAdd(chipTag(),H4P_UI_TEXT,"s");
-                    _uiAdd(deviceTag(),H4P_UI_TEXT,"s");
-                    _uiAdd(boardTag(),H4P_UI_TEXT,"s");
-                    _uiAdd(NBootsTag(),H4P_UI_TEXT,"s");
-                    _uiAdd(ipTag(),H4P_UI_TEXT,"s"); // cos we don't know it yet
-                #endif
-                    h4pUIorder.shrink_to_fit();
-                } else {
-                #if H4P_USE_WIFI_AP
-                    if (!(WiFi.getMode()==WIFI_AP||_cannotConnectSTA()))
-                #endif
-                    _clearUI();
-                }
-                h4psysevent("viewers",H4PE_VIEWERS,"%d",nClients);
-                for(auto const& ui:h4pUIorder){
-                    auto i=h4pUserItems[ui];
-                    _sendSSE("ui",CSTR(std::string(ui+","+stringFromInt(i.type)+","+i.h+",0,"+stringFromInt(i.color)+","+i.f())));
-                }
-            // });
+    _ws=new H4AW_HTTPHandlerWS("/ws");
+    _ws->onOpen([this](H4AW_WebsocketClient* skt){
+        h4.queueFunction([skt, this]{ 
+
+        // skt->sendText("default,You are No. %d",_ws->size());
+        if (_ws->size() == 1) { // The first client
+            XLOG("WebSocket connect %d", _ws->size());
+            _clearUI();
+        #if H4P_USE_WIFI_AP
+            if(WiFi.getMode()==WIFI_AP || (WiFi.getMode()==WIFI_AP_STA && _cannotConnectSTA())) {
+                _uiAdd(chipTag(),H4P_UI_TEXT,"s"); // clumsy, don't like
+                _uiAdd(deviceTag(),H4P_UI_INPUT,"s");
+            _apViewers();
+            }
+            else {
+                _uiAdd(h4pTag(),H4P_UI_TEXT,"s",H4P_VERSION);
+                _uiAdd(chipTag(),H4P_UI_TEXT,"s");
+                _uiAdd(deviceTag(),H4P_UI_TEXT,"s");
+                _uiAdd(boardTag(),H4P_UI_TEXT,"s");
+                _uiAdd(NBootsTag(),H4P_UI_TEXT,"s");
+                _uiAdd(ipTag(),H4P_UI_TEXT,"s"); // cos we don't know it yet
+            }
+        #else
+            _uiAdd(h4pTag(),H4P_UI_TEXT,"s",H4P_VERSION);
+            _uiAdd(chipTag(),H4P_UI_TEXT,"s");
+            _uiAdd(deviceTag(),H4P_UI_TEXT,"s");
+            _uiAdd(boardTag(),H4P_UI_TEXT,"s");
+            _uiAdd(NBootsTag(),H4P_UI_TEXT,"s");
+            _uiAdd(ipTag(),H4P_UI_TEXT,"s"); // cos we don't know it yet
+        #endif
+            h4psysevent("viewers",H4PE_VIEWERS,"%d",_ws->size());
+            h4pUIorder.shrink_to_fit();
+        }
+            for(auto const& ui:h4pUIorder){
+                auto i=h4pUserItems[ui];
+                _sendSocket(skt,"ui",CSTR(std::string(ui+","+stringFromInt(i.type)+","+i.h+",0,"+stringFromInt(i.color)+","+i.f())));
+            }
+        });
+    });
+    _ws->onClose([this](H4AW_WebsocketClient *skt)
+                 { 
+                    h4.queueFunction([=]{
+                        XLOG("WebSocket closed %d", _ws->size());
+                        if(!_ws->size()) {
+                            h4psysevent("viewers",H4PE_VIEWERS,"%d",0);
+                            _clearUI(); 
+                        }
+                    });
+                });
+    _ws->onTextMessage([this](H4AW_WebsocketClient* skt,const std::string& msg)
+    {
+        XLOG("onTextMessage %s", msg.c_str());
+        auto reply = _execute(msg);
+        _sendSocket(skt, "reply", reply);
     });
 
-    addHandler(_evts);
+    addHandler(_ws);
     
     on("/",HTTP_GET, [this](H4AW_HTTPHandler* handler){
         XLOG("FH=%u --> Root %s",_HAL_freeHeap(),handler->client()->remoteIP().toString().c_str());
