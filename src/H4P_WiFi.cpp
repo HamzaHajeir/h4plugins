@@ -54,6 +54,7 @@ void H4P_WiFi::HAL_WIFI_startSTA(){
 void H4P_WiFi::svcUp(){
     _signalBad();
     _coreStart();
+    _shouldStart = true;
 }
 /*#typedef enum WiFiEvent 
 {
@@ -99,7 +100,9 @@ void H4P_WiFi::HAL_WIFI_startSTA(){
 
 void H4P_WiFi::svcUp(){ 
     _signalBad();
-    WiFi.begin();
+    if (WiFi.SSID().isEmpty() || WiFi.SSID().equals(h4Tag()))
+        WiFi.begin(CSTR(h4p[ssidTag()]), CSTR(h4p[pskTag()]));
+    else WiFi.begin();
 };
 //WIFI_EVENT_STA_DISCONNECTED
 void H4P_WiFi::_wifiEvent(WiFiEvent_t event) {
@@ -126,7 +129,12 @@ void H4P_WiFi::_coreStart(){
     }
 #else
     if(_cannotConnectSTA() || WiFi.getMode()==WIFI_OFF) HAL_WIFI_startSTA();
-    else svcUp();
+#ifdef ARDUINO_ARCH_ESP8266
+    else if (!_shouldStart)
+#else
+    else
+#endif
+        svcUp();
 #endif
 }
 //
@@ -354,7 +362,7 @@ void H4P_WiFi::_startWebserver(){
             if(WiFi.getMode()==WIFI_AP || (WiFi.getMode()==WIFI_AP_STA && _cannotConnectSTA())) {
                 _uiAdd(chipTag(),H4P_UI_TEXT,"s"); // clumsy, don't like
                 _uiAdd(deviceTag(),H4P_UI_INPUT,"s");
-            _apViewers();
+                _apViewers();
             }
             else {
                 _uiAdd(h4pTag(),H4P_UI_TEXT,"s",H4P_VERSION);
@@ -484,6 +492,9 @@ void H4P_WiFi::authenticate(const std::string &username, const std::string &pass
 void H4P_WiFi::svcDown(){
     _signalBad();
     h4.cancelSingleton(H4P_TRID_HOTA);
+#ifdef ARDUINO_ARCH_ESP8266
+    _shouldStart = false;
+#endif
     H4Service::svcDown();
 }
 

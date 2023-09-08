@@ -63,19 +63,16 @@ class H4P_UPNPServer: public H4Service {
     public:                
         H4P_UPNPServer(const std::string& name=""): H4Service(upnpTag(),H4PE_GVCHANGE|H4PE_VIEWERS){
             _pWiFi=depend<H4P_WiFi>(wifiTag());
-            _pWiFi->hookWebserver([this](){
-                    _pWiFi->on("/we",HTTP_GET, [this](H4AW_HTTPHandler *request){ request->send(200,"text/xml",_xml.length(), CSTR(_xml)); });
-					_pWiFi->on("/upnp", HTTP_POST, [this](H4AW_HTTPHandler *request)
-							{
-									_upnp(request);
-									//    request->bodyData();
-									//    request->bodySize();
-									// if(!index) request->_tempObject = malloc(total+1);
-									// memcpy((uint8_t*) request->_tempObject+index,data,len);
-									// if(index + len == total) *((uint8_t*) request->_tempObject+total)='\0';
-							});
-            });
-            if(!h4p.gvExists(nameTag())) h4p.gvSetstring(nameTag(),(name=="") ? (uppercase(h4Tag())+" "+deviceTag()+" "+std::string(h4p[chipTag()])):name,true);
+                _pWiFi->on("/we",HTTP_GET, [this](H4AW_HTTPHandler *request){ request->send(200,"text/xml",_xml.length(), CSTR(_xml)); }, false);
+                _pWiFi->on("/upnp", HTTP_POST, [this](H4AW_HTTPHandler *request)
+                                {
+                                                _upnp(request);
+                                                //    request->bodyData();
+                                                //    request->bodySize();
+                                                // if(!index) request->_tempObject = malloc(total+1);
+                                                // memcpy((uint8_t*) request->_tempObject+index,data,len);
+                                                // if(index + len == total) *((uint8_t*) request->_tempObject+total)='\0';
+                                }, false);
             XLOG("UPNP name %s",CSTR(h4p[nameTag()]));
         }
                 void            friendlyName(const std::string& name){ h4p[nameTag()]=name; }

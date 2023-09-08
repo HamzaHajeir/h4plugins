@@ -132,12 +132,14 @@ void H4P_AsyncMQTT::_init() {
             _signalBad();
             // SYSINFO("DCX %d",reason);
             H4Service::svcDown();
-            if(autorestart && WiFi.status()==WL_CONNECTED) { h4.every(H4MQ_RETRY,[this](){
-                QLOG("MQTT hasn't reconnected yet\n");
-                _signalBad(); // have to repeat to override hb if present: easiest to NIKE
-                },nullptr,H4P_TRID_MQRC,true); 
-            }
-        });
+            if(autorestart) { 
+                h4.every(H4MQ_RETRY,[this](){
+                    XLOG("MQTT hasn't reconnected yet WiFi.status()=%d", WiFi.status());
+                    if (WiFi.status()==WL_CONNECTED)
+                        _signalBad(); // have to repeat to override hb if present: easiest to NIKE
+                    }
+                    ,nullptr,H4P_TRID_MQRC,true); 
+        }});
     });
 }
 
