@@ -107,6 +107,17 @@ void H4P_WiFi::svcUp(){
 //WIFI_EVENT_STA_DISCONNECTED
 void H4P_WiFi::_wifiEvent(WiFiEvent_t event) {
     switch(event) {
+#if ESP_ARDUINO_VERSION_MAJOR >= 3
+        case ARDUINO_EVENT_WIFI_READY:
+			h4.queueFunction([](){ h4puncheckedcall<H4P_WiFi>(wifiTag())->_coreStart(); });
+            break;
+        case ARDUINO_EVENT_WIFI_STA_DISCONNECTED:
+			h4.queueFunction([](){ h4puncheckedcall<H4P_WiFi>(wifiTag())->_lostIP(); });
+            break;
+		case ARDUINO_EVENT_WIFI_STA_GOT_IP:
+			h4.queueFunction([](){ h4puncheckedcall<H4P_WiFi>(wifiTag())->_gotIP(); });
+			break;
+#else
         case SYSTEM_EVENT_WIFI_READY:
 			h4.queueFunction([](){ h4puncheckedcall<H4P_WiFi>(wifiTag())->_coreStart(); });
             break;
@@ -116,6 +127,7 @@ void H4P_WiFi::_wifiEvent(WiFiEvent_t event) {
 		case SYSTEM_EVENT_STA_GOT_IP:
 			h4.queueFunction([](){ h4puncheckedcall<H4P_WiFi>(wifiTag())->_gotIP(); });
 			break;
+#endif
 	}
 }
 
@@ -196,7 +208,7 @@ void H4P_WiFi::_gotIP(){
     h4p[pskTag()]=CSTR(WiFi.psk());
 
     std::string host=h4p[deviceTag()];
-    h4.every(H4WF_OTA_RATE,[](){ ArduinoOTA.handle(); },nullptr,H4P_TRID_HOTA,true);
+    h4.every(H4WF_OTA_RATE,[this](){ QLOG("ArduinoOTA.handle()"); ArduinoOTA.handle(); },nullptr,H4P_TRID_HOTA,true);
     HAL_WIFI_setHost(host);
 
     if(MDNS.begin(CSTR(host))) { // confirm if still needed 2) esp32 _ version

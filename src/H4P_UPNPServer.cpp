@@ -75,6 +75,7 @@ void H4P_UPNPServer::_handleEvent(const std::string& svc,H4PE_TYPE t,const std::
 }
 
 void H4P_UPNPServer::_handlePacket(std::string p,IPAddress ip,uint16_t port){
+    XLOG("_handlePacket \"%s\"\t from %s:%d", p.c_str(), ip.toString().c_str(), port);
     H4P_NVP_MAP uhdrs;
     std::vector<std::string> hdrs = split(p, "\r\n");
     while (hdrs.back() == "") hdrs.pop_back();
@@ -113,9 +114,11 @@ void H4P_UPNPServer::_init(){
 void H4P_UPNPServer::_listenTag(const std::string& tag,const std::string& value){ h4pUPNPMap[tag].insert(value); }
 
 void H4P_UPNPServer::_listenUDP(){ 
+    QLOG("_listenUDP");
     if(!_udp.listenMulticast(_ubIP, 1900)) return; // some kinda error?
     _udp.onPacket([this](AsyncUDPPacket packet){
         std::string pkt((const char*)packet.data(),packet.length());
+        XLOG("_udp.onPacket %s", pkt.c_str());
         IPAddress ip=packet.remoteIP();
         uint16_t port=packet.remotePort();
         h4.queueFunction([=](){ _handlePacket(pkt,ip,port); },nullptr,H4P_TRID_UPKT); // shud be named etc
@@ -123,10 +126,11 @@ void H4P_UPNPServer::_listenUDP(){
 }
 
 void H4P_UPNPServer::_notify(const std::string& phase){
-
+    XLOG("_notify(%s)", phase.c_str());
     h4Chunker<std::vector<std::string>>(_pups,[=](std::vector<std::string>::iterator i){ 
         std::string NT=(*i).size() ? (*i):__makeUSN("");
         std::string nfy="NOTIFY * HTTP/1.1\r\nHOST:"+std::string(_ubIP.toString().c_str())+":1900\r\nNTS:ssdp:"+phase+"\r\nNT:"+NT+"\r\n"+__upnpCommon((*i));
+        XLOG("_broadcast %s", nfy.c_str());
         _broadcast(H4P_UDP_JITTER,CSTR(nfy));
     },H4_JITTER_LO,H4_JITTER_HI,[=]{ h4p.gvErase("usn"); });
 /*
@@ -169,7 +173,8 @@ void H4P_UPNPServer::info(){
 
 void H4P_UPNPServer::svcDown(){
     h4.cancelSingleton(H4P_TRID_NTFY);
-    _notify("byebye");
+    if (_running)
+        _notify("byebye");
     _udp.close(); // delay this RW?
     H4Service::svcDown();
 }

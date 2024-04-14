@@ -104,11 +104,11 @@ void H4P_AsyncMQTT::_init() {
 
     onConnect([=](H4AMC_ConnackParam params){
         // Serial.printf("MQTT::onConnect()\n");
+        _connected =true;
         h4.queueFunction([=](){
             // Serial.printf("MQTT::queuedonConnect()\n");
             _signalOff();
             h4.cancelSingleton(H4P_TRID_MQRC);
-            _connected =true;
             if (!params.session) {
                 subscribe(CSTR(std::string(allTag()).append(cmdhash())),0);
                 subscribe(CSTR(std::string(device+cmdhash())),0);
@@ -130,7 +130,7 @@ void H4P_AsyncMQTT::_init() {
             h4p[_me]=stringFromInt(_running=false);
             h4p.gvInc(nDCXTag());
             _signalBad();
-            // SYSINFO("DCX %d",reason);
+            SYSINFO("DCX");
             H4Service::svcDown();
             if(autorestart) { 
                 h4.every(H4MQ_RETRY,[this](){

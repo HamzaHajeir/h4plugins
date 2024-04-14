@@ -27,8 +27,6 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 */
-#pragma once
-
 #include<H4P_PinMachine.h>
 
 void H4P_PinMachine::_run(){ 

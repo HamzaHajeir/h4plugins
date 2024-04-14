@@ -297,7 +297,7 @@ void H4P_SerialCmd::_createProxy(const std::string& name,bool save){ if(!h4pGlob
 
 void H4P_SerialCmd::_adjust(const std::string& name,int value){ 
     _createProxy(name);
-    if(stringIsNumeric(h4p[name])){
+    if(stringIsNumeric(h4p[name].c_str())){
         auto cv=atoi(CSTR(h4pGlobal[name]));
         h4pGlobal[name]=stringFromInt(cv+value);
     }
