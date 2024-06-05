@@ -235,7 +235,7 @@ h4pMultifunctionButton::h4pMultifunctionButton(uint8_t p,uint8_t m,H4PM_SENSE s,
 //
 void h4pOutput::turn(bool b){ digitalWrite(_p,_normalise(b)); }
 
-h4pOutput::h4pOutput(uint8_t p,H4PM_SENSE s,uint8_t i,uint8_t c,npNODE* d): h4pGPIO(p,OUTPUT,s,{d}){ _c=c; turn(i); }
+h4pOutput::h4pOutput(uint8_t p,H4PM_SENSE s,uint8_t i,uint8_t c,npNODE* d): h4pGPIO(p,OUTPUT,s,{d}){ _c=c; h4.queueFunction([this,i](){ turn(i);}); }
 //
 //      POLLED
 //

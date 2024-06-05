@@ -94,7 +94,9 @@ void H4P_WiFi::HAL_WIFI_setHost(const std::string& host){ WiFi.setHostname(CSTR(
 void H4P_WiFi::HAL_WIFI_startSTA(){
     WiFi.setSleep(false);
 	WiFi.setAutoReconnect(true);
+#if ESP_ARDUINO_VERSION_MAJOR < 3
     WiFi.setAutoConnect(true);
+#endif
     WiFi.begin(CSTR(h4p[ssidTag()]),CSTR(h4p[pskTag()]));
 }
 
