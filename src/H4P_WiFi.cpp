@@ -289,7 +289,7 @@ uint32_t H4P_WiFi::_msg(std::vector<std::string> vs){
 }
 
 void H4P_WiFi::_rest(H4AW_HTTPHandler* handler){
-	h4.queueFunction([=](){
+	h4.queueFunction([this, handler](){
         XLOG("_rest %s",handler->client()->remoteIPstring().c_str());
 		std::string chop=replaceAll(CSTR(handler->url()),"/rest/","");
         std::string reply = _execute(chop);
@@ -405,7 +405,7 @@ void H4P_WiFi::_startWebserver(){
     });
     _ws->onClose([this](H4AW_WebsocketClient *skt)
                  { 
-                    h4.queueFunction([=]{
+                    h4.queueFunction([this]{
                         XLOG("WebSocket closed %d", _ws->size());
                         if(!_ws->size()) {
                             h4psysevent("viewers",H4PE_VIEWERS,"%d",0);

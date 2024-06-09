@@ -260,7 +260,7 @@ H4Flasher::H4Flasher(h4pOutput* opp,const char* pattern,uint32_t timebase): _pat
 
 void H4Flasher::_pulse(uint32_t width) {
 	_opp->turnOn();
-	_off=h4.once(width,[=](){ _opp->turnOff(); },nullptr,H4P_TRID_PP1x);
+	_off=h4.once(width,[this](){ _opp->turnOff(); },nullptr,H4P_TRID_PP1x);
 }
 
 void H4Flasher::PWM(){
@@ -293,7 +293,7 @@ H4Flasher::H4Flasher(h4pOutput* opp,uint32_t period): _period(period),_opp(opp){
 
 void H4Flasher::throb(){
     _HAL_analogFrequency(_opp->_p,4400);//2*sinwav[_cycle%sinwav.size()]);
-    _timer=h4.every(_period/sinwav.size(),[=]{
+    _timer=h4.every(_period/sinwav.size(),[this]{
 //        _HAL_analogFrequency(_opp->_p,2*sinwav[_cycle%sinwav.size()]);
         _HAL_analogWrite(_opp->_p,sinwav[_cycle%sinwav.size()]);
         _cycle++;

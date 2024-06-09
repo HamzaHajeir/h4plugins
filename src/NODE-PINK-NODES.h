@@ -251,10 +251,10 @@ class npSTAGEMANAGER: public npNODE {
 };
 
 class npTHRESHOLD: public npNODE { // can we tidy / coalesce?
-        int             _lim=0;
+        uint32_t        _lim=0;
         H4PM_COMPARE    _cmp;
     public:
-        npTHRESHOLD(int lim,H4PM_COMPARE cmp): _cmp(cmp),_lim(lim){}
+        npTHRESHOLD(uint32_t lim,H4PM_COMPARE cmp): _cmp(cmp),_lim(lim){}
 
         msg operator()(msg m) override {
             m.halt=!_cmp(m.load,_lim);
@@ -263,11 +263,11 @@ class npTHRESHOLD: public npNODE { // can we tidy / coalesce?
 };
 class npLOPASS: public npTHRESHOLD {
     public:
-        npLOPASS(int lim): npTHRESHOLD(lim,H4PM_LESS){}
+        npLOPASS(uint32_t lim): npTHRESHOLD(lim,H4PM_LESS){}
 };
 class npHIPASS: public npTHRESHOLD {
     public:
-        npHIPASS(int lim): npTHRESHOLD(lim,H4PM_GREATER){}
+        npHIPASS(uint32_t lim): npTHRESHOLD(lim,H4PM_GREATER){}
 };
 class npNOTCH: public npNODE {
             int         _lo;

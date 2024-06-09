@@ -46,7 +46,7 @@ class H4P_BinarySwitch: public H4P_BinaryThing{
             _sense(sense),
             _initial(initial),
             _color(color),
-            H4P_BinaryThing([=](bool b){ _pp->logicalWrite(b); },initial,timer){ require<H4P_PinMachine>(gpioTag()); }
+            H4P_BinaryThing([this](bool b){ _pp->logicalWrite(b); },initial,timer){ require<H4P_PinMachine>(gpioTag()); }
 //
         virtual void        _init() override;
 };

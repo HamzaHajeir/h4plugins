@@ -62,9 +62,9 @@ void h4pOnEvent(H4PE_TYPE t,H4P_FN_USEREVENT e){ h4pregisterhandler(userTag(),st
 //
 //      Lifecycle callbacks
 //
-[[noreturn]] void h4pFactoryReset(){ h4psysevent(userTag(),H4PE_FACTORY,""); }// QEVENT(H4PE_FACTORY); }
+[[noreturn]] void h4pFactoryReset(){ h4psysevent(userTag(),H4PE_FACTORY,""); while(true){} }// QEVENT(H4PE_FACTORY); }
 
-[[noreturn]] void h4pReboot(){ h4psysevent(userTag(),H4PE_REBOOT,""); }
+[[noreturn]] void h4pReboot(){ h4psysevent(userTag(),H4PE_REBOOT,""); while(true){} }
 
 #ifdef ARDUINO_ARCH_ESP32
 std::string getTerminalName(const std::string& s) {

@@ -45,7 +45,7 @@ std::string H4P_UPNPServer::__upnpCommon(const std::string& usn){
 }
 
 void H4P_UPNPServer::__upnpSend(uint32_t mx,const std::string s,IPAddress ip,uint16_t port){
-	h4.nTimesRandom(H4P_UDP_REPEAT,0,mx,[=]() {
+	h4.nTimesRandom(H4P_UDP_REPEAT,0,mx,[=, this]() {
 		_udp.writeTo((uint8_t *)CSTR(s), s.size(), ip, port);
 	},nullptr,H4P_TRID_UDPS); // name this!!
 }
@@ -121,13 +121,13 @@ void H4P_UPNPServer::_listenUDP(){
         XLOG("_udp.onPacket %s", pkt.c_str());
         IPAddress ip=packet.remoteIP();
         uint16_t port=packet.remotePort();
-        h4.queueFunction([=](){ _handlePacket(pkt,ip,port); },nullptr,H4P_TRID_UPKT); // shud be named etc
+        h4.queueFunction([=, this](){ _handlePacket(pkt,ip,port); },nullptr,H4P_TRID_UPKT); // shud be named etc
     }); 
 }
 
 void H4P_UPNPServer::_notify(const std::string& phase){
     XLOG("_notify(%s)", phase.c_str());
-    h4Chunker<std::vector<std::string>>(_pups,[=](std::vector<std::string>::iterator i){ 
+    h4Chunker<std::vector<std::string>>(_pups,[this, phase](std::vector<std::string>::iterator i){ 
         std::string NT=(*i).size() ? (*i):__makeUSN("");
         std::string nfy="NOTIFY * HTTP/1.1\r\nHOST:"+std::string(_ubIP.toString().c_str())+":1900\r\nNTS:ssdp:"+phase+"\r\nNT:"+NT+"\r\n"+__upnpCommon((*i));
         XLOG("_broadcast %s", nfy.c_str());
@@ -143,7 +143,7 @@ void H4P_UPNPServer::_notify(const std::string& phase){
 }
 
 void H4P_UPNPServer::_upnp(H4AW_HTTPHandler *handler){ // redo
-    h4.queueFunction([=]() {
+    h4.queueFunction([this, handler]() {
         std::string soap(handler->url());
        	h4p.gvSetstring("gs",(soap.find("Get")==std::string::npos) ? "Set":"Get"); 
         uint32_t _set=soap.find(">1<")==std::string::npos ? 0:1;
@@ -199,6 +199,6 @@ void H4P_UPNPServer::svcUp(){
 //
     _listenUDP();
     _notify(aliveTag()); // TAG
-    h4.every(H4P_UDP_REFRESH / 2,[=](){ _notify(aliveTag()); },nullptr,H4P_TRID_NTFY,true); // TAG
+    h4.every(H4P_UDP_REFRESH / 2,[this](){ _notify(aliveTag()); },nullptr,H4P_TRID_NTFY,true); // TAG
     H4Service::svcUp();
 }

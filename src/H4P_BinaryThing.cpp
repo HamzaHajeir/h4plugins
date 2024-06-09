@@ -30,7 +30,7 @@ SOFTWARE.
 #include<H4P_BinaryThing.h>
 
 void H4P_BinaryThing::_onChange(bool b){
-    h4.queueFunction([=](){ _thing(b); });
+    h4.queueFunction([this, b](){ _thing(b); });
     static H4_TIMER timer;
     auto off=h4p.gvGetInt(autoOffTag());
     if(b && off) timer = h4.once(off,[=]{ h4p.gvSetInt(stateTag(),OFF); });

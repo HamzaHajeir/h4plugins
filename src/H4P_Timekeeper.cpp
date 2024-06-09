@@ -100,7 +100,7 @@ uint32_t H4P_Timekeeper::__alarmCore (std::vector<std::string> vs,bool daily){
         int msDue=T-msSinceMidnight();
         if(msDue < 0) msDue+=msInDay();
         uint32_t u=daily ? H4P_TRID_DALY:H4P_TRID_SHOT;
-        h4.add([=]{ if(_mss00) XEVENT(H4PE_ALARM,"%d",onoff); },msDue,daily ? msDue:0,H4Countdown(1),nullptr,TAG(daily ? 7:3));
+        h4.add([=, this]{ if(_mss00) XEVENT(H4PE_ALARM,"%d",onoff); },msDue,daily ? msDue:0,H4Countdown(1),nullptr,TAG(daily ? 7:3));
         return H4_CMD_OK;
     }
     return H4_CMD_NOT_NOW; 
@@ -108,7 +108,7 @@ uint32_t H4P_Timekeeper::__alarmCore (std::vector<std::string> vs,bool daily){
 
 uint32_t H4P_Timekeeper::_at(std::vector<std::string> vs){ return __alarmCore(vs,false); }
 
-uint32_t H4P_Timekeeper::_change(std::vector<std::string> vs){ return _guardString2(vs,[=](std::string a,std::string b){ change(a,b); return H4_CMD_OK; }); }
+uint32_t H4P_Timekeeper::_change(std::vector<std::string> vs){ return _guardString2(vs,[this](std::string a,std::string b){ change(a,b); return H4_CMD_OK; }); }
 
 uint32_t H4P_Timekeeper::_daily(std::vector<std::string> vs){ return __alarmCore(vs,true); }
 
@@ -218,7 +218,7 @@ std::string H4P_Timekeeper::strfDate(uint32_t t) { // This one uses seconds :)
 	return std::string(buf);
 }
 
-std::string H4P_Timekeeper::strfDateTime(char fmt[], uint32_t t) { // This one uses seconds :)
+std::string H4P_Timekeeper::strfDateTime(const char* fmt, uint32_t t) { // This one uses seconds :)
 	char buf[40];
 	struct tm ts;
 	time_t rt = t;

@@ -94,7 +94,7 @@ h4pGPIO::h4pGPIO(uint8_t p,uint8_t m,H4PM_SENSE s,npFLOW flow): _p(p),_s(s),_pip
 
 void h4pGPIO::_announce(){
     _prev=(*npPublishValue)(_prev);
-    h4pregisterhandler(stringFromInt(_p,"%02d"),H4PE_VIEWERS,[=](const std::string& s,H4PE_TYPE t,const std::string& m){ _handleEvent(s,t,m); });
+    h4pregisterhandler(stringFromInt(_p,"%02d"),H4PE_VIEWERS,[this](const std::string& s,H4PE_TYPE t,const std::string& m){ _handleEvent(s,t,m); });
 }
 
 void h4pGPIO::_handleEvent(const std::string& s,H4PE_TYPE t,const std::string& msg){

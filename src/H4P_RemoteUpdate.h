@@ -99,8 +99,8 @@ class H4P_RemoteUpdate: public H4Service, public HTTPUpdate {
 #if H4P_LOG_MESSAGES
                 void        info() override { H4Service::info(); reply(" endpoint: %s",CSTR(endpoint)); }
 #endif
-                void        fs(){ _entropise([=]{ _updateFromUrl(false,true); }); }
-                void        fw(){ _entropise([=]{ _updateFromUrl(true,true); }); }
+                void        fs(){ _entropise([this]{ _updateFromUrl(false,true); }); }
+                void        fw(){ _entropise([this]{ _updateFromUrl(true,true); }); }
 //
                 void        svcUp() override{ 
                     endpoint=std::string(h4p[rupdTag()]).append("/").append(h4p[deviceTag()]);

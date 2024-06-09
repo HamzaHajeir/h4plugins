@@ -179,9 +179,10 @@ void H4P_SerialCmd::_run(){
 	static int	c;
     if((c=Serial.read()) != -1){
         if (c == '\n') {
-            h4.queueFunction([=](){
-                uint32_t rv=_simulatePayload(cmd);
-                cmd="";
+            std::string cpy = cmd;
+            cmd.clear();
+            h4.queueFunction([this, cpy](){
+                uint32_t rv=_simulatePayload(cpy);
             },nullptr,H4P_TRID_SCMD);
         } else cmd+=c;
     }
@@ -189,16 +190,16 @@ void H4P_SerialCmd::_run(){
 
 uint32_t H4P_SerialCmd::_simulatePayload(std::string flat,const char* src){ // refac
     // a bit of hoop-jumping to allow / characters in simulated payloads
-    std::vector<std::string> bt=split(flat,"\`");
+    std::vector<std::string> bt=split(flat,"`");
     std::string f2;
     if(bt.size() > 1){
-		std::string esc=replaceAll(bt.back(),"/","\`");
+		std::string esc=replaceAll(bt.back(),"/","`");
         bt.pop_back();
         f2=join(bt,"/")+esc;
     } else f2=flat;
     std::vector<std::string> vs=split(f2,"/");
     if(vs.size()){
-		std::string pload=replaceAll(vs.back(),"\`","/");
+		std::string pload=replaceAll(vs.back(),"`","/");
 		vs.pop_back();
 		std::string topic=join(vs,"/");
 		return invokeCmd(topic,pload,src); // _invoke

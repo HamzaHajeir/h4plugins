@@ -32,7 +32,7 @@ SOFTWARE.
 
 H4P_AsyncHTTP::H4P_AsyncHTTP(const std::string& name,uint32_t filter): H4Service(name,filter,false){
     depend<H4P_WiFi>(wifiTag());
-    onHTTPerror([=](int e,int i){ if(e || i) _errorHandler(e,i); });
+    onHTTPerror([this](int e,int i){ if(e || i) _errorHandler(e,i); });
 }
 
 void H4P_AsyncHTTP::DELETE(const std::string& url,ARMA_FN_HTTP rx,const uint8_t* fingerprint,uint32_t phase){ if(_running) ArmadilloHTTP::DELETE(url,rx,fingerprint,phase); }

@@ -42,7 +42,7 @@ struct msg {
     uint8_t         p;
     unsigned long   time;
     uint32_t        delta;
-    int             load;
+    long long       load;
     uint32_t        phy;
     bool            halt;
     bool            timer;
@@ -53,7 +53,7 @@ using H4P_MSG_FLOW      = std::function<msg(msg)>;
 
 class npNODE {
     public:
-        virtual msg operator()(msg m){};
+        virtual msg operator()(msg m){ return msg{}; };
         static  msg publish(msg m,int v,H4PE_TYPE t=H4PE_GPIO);
 };
 

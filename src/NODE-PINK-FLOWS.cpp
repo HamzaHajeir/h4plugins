@@ -228,7 +228,7 @@ void h4pMultifunctionButton::_handleEvent(const std::string& s,H4PE_TYPE t,const
 
 h4pMultifunctionButton::h4pMultifunctionButton(uint8_t p,uint8_t m,H4PM_SENSE s,uint32_t t): 
     h4pMultistage(p,m,s,t,{H4MF_REBOOT,H4MF_FACTORY}){
-        h4pregisterhandler(_me,H4PE_GPIO,[=](const std::string& s,H4PE_TYPE t,const std::string& m){ _handleEvent(s,t,m); });
+        h4pregisterhandler(_me,H4PE_GPIO,[this](const std::string& s,H4PE_TYPE t,const std::string& m){ _handleEvent(s,t,m); });
 }
 //
 //      OUTPUT

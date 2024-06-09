@@ -341,7 +341,7 @@ class H4Service {
         template<typename T>
         T* depend(const std::string& svc){
             _filter |= H4PE_SERVICE;
-            h4pregisterhandler(_me,H4PE_SERVICE,[=](const std::string& s,H4PE_TYPE t,const std::string& m){ _sysHandleEvent(s,t,m); });
+            h4pregisterhandler(_me,H4PE_SERVICE,[this](const std::string& s,H4PE_TYPE t,const std::string& m){ _sysHandleEvent(s,t,m); });
             _parent=svc;
             return require<T>(svc);
         }

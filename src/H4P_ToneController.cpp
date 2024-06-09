@@ -222,7 +222,7 @@ void H4P_Voice::_tone(uint32_t f,uint8_t effect,uint32_t d,H4_FN_VOID chain){
     _HAL_analogFrequency(_pin,f);
     _analogWrite(0x3ff >> (effect < 0x30 ? 1:10-(effect-0x30))); // pwmrange 1023 on '8266
     if(d){
-        h4.once(d,[=](){
+        h4.once(d,[this, chain](){
             _analogWrite(0);
             h4.queueFunction(chain); // recurse on main loop!
         });

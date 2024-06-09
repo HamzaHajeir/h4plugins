@@ -55,7 +55,7 @@ msg npDELTAREPEAT::operator()(msg m) {
     else {
         _kravitz=m.phy;
         T=m.time;
-        _rpt=h4.every(_f,[=](){ H4P_PinMachine::inject(m.p,_kravitz,true); },nullptr,H4P_TRID_RPTP);
+        _rpt=h4.every(_f,[this, m](){ H4P_PinMachine::inject(m.p,_kravitz,true); },nullptr,H4P_TRID_RPTP);
         m.halt=true;
     }
     return m;
@@ -124,7 +124,7 @@ msg npROTARYDECODE::operator()(msg m){
 void npSMOOTH::_restartTimer(uint8_t p){ h4.cancel(T); T=_startTimer(p); }
 
 H4_TIMER npSMOOTH::_startTimer(uint8_t p){ 
-    return h4.once(_ms,[=](){
+    return h4.once(_ms,[this, p](){
         _stopTimer();
         H4P_PinMachine::inject(p,digitalRead(p),true);
     },nullptr,H4P_TRID_DBNC); 

@@ -81,7 +81,7 @@ void H4P_AsyncMQTT::_handleEvent(const std::string& svc,H4PE_TYPE t,const std::s
 
 void H4P_AsyncMQTT::_init() {
     h4p.gvSetInt(_me,0,false);
-    onError([=](int e,int info){ XEVENT(H4PE_SYSWARN,"%d,%d",e,info); });
+    onError([this](int e,int info){ XEVENT(H4PE_SYSWARN,"%d,%d",e,info); });
 
     std::string device=h4p[deviceTag()];
     if(_lwt.topic=="") {
@@ -102,10 +102,10 @@ void H4P_AsyncMQTT::_init() {
         h4.queueFunction([top,pload](){ h4p._executeCmd(CSTR(std::string(mqttTag()).append("/").append(top)),pload); },nullptr,H4P_TRID_MQMS);
     });
 
-    onConnect([=](H4AMC_ConnackParam params){
+    onConnect([=, this](H4AMC_ConnackParam params){
         // Serial.printf("MQTT::onConnect()\n");
         _connected =true;
-        h4.queueFunction([=](){
+        h4.queueFunction([=, this](){
             // Serial.printf("MQTT::queuedonConnect()\n");
             _signalOff();
             h4.cancelSingleton(H4P_TRID_MQRC);
