@@ -373,8 +373,8 @@ class H4Service {
 #endif
 //      syscall only
         virtual void                _init(){}
-        virtual void                svcDown(){ YEVENT(H4PE_SERVICE,CSTR(stringFromInt(_running=false))); }
-        virtual void                svcUp(){ YEVENT(H4PE_SERVICE,CSTR(stringFromInt(_running=true))); }
+        virtual void                svcDown(){ YEVENT(H4PE_SERVICE,stringFromInt(_running=false)); }
+        virtual void                svcUp(){ YEVENT(H4PE_SERVICE,stringFromInt(_running=true)); }
 };
 
 #define H4P_DEFAULT_SYSTEM_HANDLER case H4PE_SYSFATAL: \

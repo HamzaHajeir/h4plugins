@@ -130,7 +130,7 @@ void H4P_AsyncMQTT::_init() {
             h4p[_me]=stringFromInt(_running=false);
             h4p.gvInc(nDCXTag());
             _signalBad();
-            SYSINFO("DCX");
+            SYSINFO("%s", "DCX");
             H4Service::svcDown();
             if(autorestart) { 
                 h4.every(H4MQ_RETRY,[this](){

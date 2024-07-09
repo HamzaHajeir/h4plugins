@@ -42,7 +42,7 @@ struct msg {
     uint8_t         p;
     unsigned long   time;
     uint32_t        delta;
-    long long       load;
+    long            load;
     uint32_t        phy;
     bool            halt;
     bool            timer;
@@ -70,7 +70,7 @@ class h4pGPIO {
                 uint32_t            _r; // to cope with analog values
 //
         virtual void                _announce();
-                uint32_t inline     _normalise(uint32_t x){ return isAnalogInput() ? x:!(x^_s); }
+                long inline     _normalise(long long x){ return isAnalogInput() ? x:!(x^_s); }
         virtual void                _syncValue(){ 
                     _r=digitalRead(_p);
                     _prev={_p,0,0,_normalise(_r),_r,false,false,0};

@@ -36,7 +36,7 @@ npSHOW*          npShow = new npSHOW;                    // debug dump of all fi
 
 msg npNODE::publish(msg m,int v,H4PE_TYPE t){
     m.sigE++;
-    h4psysevent(stringFromInt(m.p,"%02d"),t,"%d",m.load=v);
+    h4psysevent(stringFromInt(m.p,"%02d"),t,"%ld",m.load=v);
     return m;
 }
 //==============================================================================================================================================

@@ -66,7 +66,7 @@ void H4P_PinMachine::svcDown(){
 }
 
 uint8_t     H4P_PinMachine::logicalRead  (uint8_t p)                     { return delegate<uint8_t> (p,&h4pGPIO::logicalRead); }
-int         H4P_PinMachine::getValue     (uint8_t p)                     { return delegate<uint32_t>(p,&h4pGPIO::getValue); }
+int         H4P_PinMachine::getValue     (uint8_t p)                     { return delegate<int>(p,&h4pGPIO::getValue); }
 msg         H4P_PinMachine::inject       (uint8_t p,uint32_t r,bool t)   { return delegate<msg>     (p,&h4pGPIO::inject,r,t); }
 bool        H4P_PinMachine::isAnalogInput(uint8_t p)                     { return delegate<bool>    (p,&h4pGPIO::isAnalogInput); }
 bool        H4P_PinMachine::isOutput     (uint8_t p)                     { return delegate<bool>    (p,&h4pGPIO::isOutput); }
