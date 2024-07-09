@@ -35,6 +35,12 @@ SOFTWARE.
 #ifndef H4P_USE_WIFI_AP
 #define H4P_USE_WIFI_AP         0
 #endif
+
+#ifdef ARDUINO_ARCH_ESP32
+#define H4P_BLE_AVAILABLE       1
+#else
+#define H4P_BLE_AVAILABLE       0
+#endif
 /*
         DIAGNOSTICS
         comment out H4P_LOG_MESSAGES to prevent any Serial output of  H4PE_MSG EVENTs

@@ -179,11 +179,11 @@ function ui2(d){
 document.addEventListener("DOMContentLoaded", function() {
     if (!!window.WebSocket) { 
         ws = new WebSocketEventManager();
-        protocol = "ws://";
-        if (location.protocol === 'https:') {
-            protocol = "wss://";
+        proto = "ws"
+        if (document.location.protocol === 'https:') {
+            proto="wss"
         }
-        w = new WebSocket(protocol+document.location.host+"/ws");
+        w = new WebSocket(proto+"://"+document.location.host+"/ws");
         w.onerror = function(e) {
             console.warn(e);
             document.querySelectorAll('div.hanger').forEach((d) => d.style.background="#ff0000")
