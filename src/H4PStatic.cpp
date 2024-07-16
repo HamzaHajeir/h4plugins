@@ -163,8 +163,11 @@ std::string h4preplaceparams(const std::string& s){ // oh for a working regex!
 }
 
 void h4puiAdd(const std::string& n,H4P_UI_TYPE t,std::string h,const std::string& v,uint8_t c){ h4psysevent(h,H4PE_UIADD,"%s,%d,%s,%s,%d",CSTR(n),t,CSTR(v),CSTR(h),c); }
-
 void h4puiSync(const std::string& n,const std::string& v){ h4psysevent(n,H4PE_UISYNC,"%s",CSTR(v)); }
+
+void h4pbleAdd(const std::string& n,H4P_UI_TYPE t,std::string h,const std::string& v,uint8_t c){ h4psysevent(h,H4PE_BLEADD,"%s,%d,%s,%s,%d",CSTR(n),t,CSTR(v),CSTR(h),c); }
+void h4pbleSync(const std::string& n,const std::string& v){ h4psysevent(n,H4PE_BLESYNC,"%s",CSTR(v)); }
+
 /*
 TESTERS / DIAG
 */

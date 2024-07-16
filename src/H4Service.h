@@ -113,6 +113,11 @@ enum H4PE_TYPE:uint32_t {
     H4PE_GRID      = 1 << 22,
     H4PE_UPNP      = 1 << 23,
     H4PE_UIMSG     = 1 << 24,
+    H4PE_BLESINIT  = 1 << 25, // For the user to initialize his own services and characteristics and to add to advertising, and for adding static inputs
+    H4PE_BLESUP    = 1 << 26, // For the user to start his service(s)
+    H4PE_BLESDOWN  = 1 << 27, // For the user to stop his service(s)
+    H4PE_BLEADD    = 1 << 28,
+    H4PE_BLESYNC   = 1 << 29,
     H4PE_HEARTBEAT = 0x80000000,
     H4PE_ALL       = 0xffffffff,
     H4PE_ALMOST_ALL= H4PE_ALL &~ H4PE_HEARTBEAT
@@ -140,6 +145,15 @@ using H4P_FN_USEREVENT      = std::function<void(const std::string &msg)>;
 using H4P_FN_VB             = std::function<void(bool)>;
 
 using H4P_FN_UIGET          = std::function<std::string(void)>;
+
+struct H4P_UI_ITEM { // add title and/or props?
+    H4P_UI_TYPE     type;
+    H4P_FN_UIGET    f;
+    uint8_t         color;
+    std::string          h; // section: s-system m-mqtt b-ble u-user o-onoff h-heartbeat g-gpio t-timekeeper 
+};
+
+using H4P_UI_LIST       = std::map<std::string,H4P_UI_ITEM>;
 
 void h4pregisterhandler(const std::string& svc,uint32_t t,H4P_FN_EVENTHANDLER f);
 void h4punregisterhandler(const std::string& svc,uint32_t t);
@@ -258,6 +272,9 @@ void h4psysevent(const std::string& svc,H4PE_TYPE t,const std::string& fmt, Args
 
 void h4puiAdd(const std::string& n,H4P_UI_TYPE t,std::string h="u",const std::string& v="",uint8_t c=0);
 void h4puiSync(const std::string& n,const std::string& v="");
+
+void h4pbleAdd(const std::string& n,H4P_UI_TYPE t,std::string h="u",const std::string& v="",uint8_t c=0);
+void h4pbleSync(const std::string& n,const std::string& v="");
 
 std::string h4pGetErrorMessage(uint32_t e);
 std::string h4pGetEventName   (H4PE_TYPE e);

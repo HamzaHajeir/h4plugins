@@ -29,6 +29,7 @@ SOFTWARE.
 #include<H4P_WiFi.h>
 #include<H4P_PinMachine.h>
 #include<H4P_Signaller.h>
+#include<H4P_BLEServer.h>
 
 H4P_UI_LIST                     h4pUserItems;
 std::vector<std::string>        h4pUIorder;
@@ -87,6 +88,35 @@ void H4P_WiFi::_wifiEvent(WiFiEvent_t event) {
 //
 //                                                                                                                  ESP32
 //
+
+void H4P_WiFi::_hookBLEProvisioning() {
+#if H4P_WIFI_PROV_BY_BLE
+    bleserver = h4puncheckedcall<H4P_BLEServer>(blesrvTag());
+    if (bleserver) {
+        _startScan();
+        h4pbleAdd(ssidTag(),H4P_UI_DROPDOWN,"s");
+        h4pbleAdd(pskTag(),H4P_UI_INPUT,"s");
+        h4pbleAdd(deviceTag(),H4P_UI_INPUT,"s");
+        h4pbleAdd(GoTag(),H4P_UI_IMGBTN,"o");
+    }
+#endif
+}
+void H4P_WiFi::_unhookBLEProvisioning() {
+#if H4P_WIFI_PROV_BY_BLE
+    if (bleserver){
+        _stopScan();
+        auto bleServer = h4puncheckedcall<H4P_BLEServer>(blesrvTag());
+        bleServer->elemRemove(ssidTag());
+        bleServer->elemRemove(pskTag());
+        bleServer->elemRemove(deviceTag());
+        bleServer->elemRemove(GoTag());
+
+        h4pbleAdd(deviceTag(),H4P_UI_TEXT,"s");
+        bleServer->sendElems();
+    }
+    
+#endif
+}
 void H4P_WiFi::HAL_WIFI_disconnect(){ WiFi.disconnect(false,false); }
 
 void H4P_WiFi::HAL_WIFI_setHost(const std::string& host){ WiFi.setHostname(CSTR(host)); }
@@ -205,6 +235,8 @@ void H4P_WiFi::_defaultSync(const std::string& svc,const std::string& msg) {
 void H4P_WiFi::_gotIP(){
     _signalOff();
     // _discoDone=false;
+    _connected = true;
+
     h4p[ipTag()]=WiFi.localIP().toString().c_str();
     h4p[ssidTag()]=CSTR(WiFi.SSID());
     h4p[pskTag()]=CSTR(WiFi.psk());
@@ -224,6 +256,8 @@ void H4P_WiFi::_gotIP(){
     ArduinoOTA.setRebootOnSuccess(false);	
     ArduinoOTA.begin();
 
+    _unhookBLEProvisioning();
+
     SYSINFO("IP=%s",CSTR(h4p[ipTag()]));
     _startWebserver();
     H4Service::svcUp();
@@ -231,6 +265,14 @@ void H4P_WiFi::_gotIP(){
 
 void H4P_WiFi::_handleEvent(const std::string& svc,H4PE_TYPE t,const std::string& msg) {
     switch(t){
+        case H4PE_BLESINIT:
+            _hookBLEProvisioning();
+            h4pbleAdd(boardTag(),H4P_UI_TEXT,"s");
+            h4pbleAdd(NBootsTag(),H4P_UI_TEXT,"s");
+            h4pbleAdd(ipTag(),H4P_UI_TEXT,"s", h4p[ipTag()]);
+            h4pbleAdd(_me,H4P_UI_BOOL,"s",h4p[_me]);
+
+            break;
         case H4PE_UIMSG:
             uiMessage("%s",CSTR(msg));
             break;
@@ -278,6 +320,10 @@ void H4P_WiFi::_lostIP(){
     // if (!_discoDone) {
         _coreStart(); // ESP32 is well and truly fucked
         _stopWebserver();
+    if (_connected) {
+        _connected = false;
+        _hookBLEProvisioning();
+    }
     // }
 }
 
@@ -506,6 +552,7 @@ void H4P_WiFi::authenticate(const std::string &username, const std::string &pass
 void H4P_WiFi::svcDown(){
     _signalBad();
     h4.cancelSingleton(H4P_TRID_HOTA);
+    if (_running) HAL_WIFI_disconnect();
 #ifdef ARDUINO_ARCH_ESP8266
     _shouldStart = false;
 #endif

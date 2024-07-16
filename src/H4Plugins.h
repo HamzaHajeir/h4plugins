@@ -89,7 +89,11 @@ H4P_PINMAP          h4pPinMap;
         {H4PE_GRID,"GRID"},
         {H4PE_UPNP,"UPNP"},
         {H4PE_UIMSG,"UIMSG"},
-        {H4PE_HEARTBEAT,"PING"}
+        {H4PE_HEARTBEAT,"PING"},
+        {H4PE_BLEADD,"BLEADD"},
+        {H4PE_BLESINIT,"BLESINIT"},
+        {H4PE_BLESUP,"H4PE_BLESUP"},
+        {H4PE_BLESYNC,"H4PE_BLESYNC"}
     };
 
     H4_INT_MAP ledColors={

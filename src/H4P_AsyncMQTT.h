@@ -68,7 +68,7 @@ class H4P_AsyncMQTT: public H4Service, public H4AsyncMQTT{
         virtual void        _handleEvent(const std::string& svc,H4PE_TYPE t,const std::string& msg) override;
     public:
 #if H4P_USE_WIFI_AP
-        H4P_AsyncMQTT(H4P_LWT lwt={"","",0,false}): _lwt(lwt), H4Service(mqttTag(),H4PE_GVCHANGE|H4PE_VIEWERS){
+        H4P_AsyncMQTT(H4P_LWT lwt={"","",0,false}): _lwt(lwt), H4Service(mqttTag(),H4PE_GVCHANGE|H4PE_VIEWERS|H4PE_BLESINIT){
             h4p.gvSetstring(brokerTag(),"",true);
             h4p.gvSetstring(mQuserTag(),"",true);
             h4p.gvSetstring(mQpassTag(),"",true);
@@ -76,7 +76,7 @@ class H4P_AsyncMQTT: public H4Service, public H4AsyncMQTT{
         }
 #else
         explicit H4P_AsyncMQTT(): H4Service(mqttTag(),H4PE_NOOP){}
-        H4P_AsyncMQTT(std::string url, std::string user="",std::string pass="",H4P_LWT lwt={"","",0,false}): _lwt(lwt), H4Service(mqttTag(),H4PE_GVCHANGE|H4PE_VIEWERS){
+        H4P_AsyncMQTT(std::string url, std::string user="",std::string pass="",H4P_LWT lwt={"","",0,false}): _lwt(lwt), H4Service(mqttTag(),H4PE_GVCHANGE|H4PE_VIEWERS|H4PE_BLESINIT){
             h4p.gvSetstring(brokerTag(),url,true);
             h4p.gvSetstring(mQuserTag(),user,true);
             h4p.gvSetstring(mQpassTag(),pass,true);

@@ -39,6 +39,12 @@ void H4P_BinaryThing::_onChange(bool b){
 
 void H4P_BinaryThing::_handleEvent(const std::string& svc,H4PE_TYPE t,const std::string& msg){ 
     switch(t){
+        case H4PE_BLESINIT:
+            {
+                h4pbleAdd(autoOffTag(),H4P_UI_INPUT,"o");
+                h4pbleAdd(stateTag(),H4P_UI_IMGBTN,"o");
+                break;
+            }
         case H4PE_VIEWERS:
             {
                 if(STOI(msg)) {
@@ -67,6 +73,11 @@ void H4P_BinaryThing::svcDown() {
 //
 void H4P_ConditionalThing::_handleEvent(const std::string& svc,H4PE_TYPE t,const std::string& msg){
     switch(t){
+        case H4PE_BLESINIT:
+            {
+                h4pbleAdd(conditionTag(), H4P_UI_BOOL, "o", stringFromInt(_predicate()), H4P_UILED_BI);
+                break;
+            }
         case H4PE_VIEWERS:
             {
                 if(STOI(msg)) {

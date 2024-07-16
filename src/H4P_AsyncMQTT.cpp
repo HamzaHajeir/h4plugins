@@ -28,6 +28,7 @@ SOFTWARE.
 */
 #include<H4P_SerialCmd.h>
 #include<H4P_AsyncMQTT.h>
+#include<H4P_BLEServer.h>
 
 // payload: scheme,broker,uname,pws,port e.g. https,192.168.1.4,,,1883
 uint32_t H4P_AsyncMQTT::_change(std::vector<std::string> vs){  // broker,uname,pword,port
@@ -42,6 +43,20 @@ uint32_t H4P_AsyncMQTT::_change(std::vector<std::string> vs){  // broker,uname,p
 
 void H4P_AsyncMQTT::_handleEvent(const std::string& svc,H4PE_TYPE t,const std::string& msg){ 
     switch(t){
+        case H4PE_BLESINIT:
+            {
+                if (h4p[brokerTag()].get().empty()){
+                    h4pbleAdd(brokerTag(), H4P_UI_INPUT,"m");
+                    h4pbleAdd(mQuserTag(), H4P_UI_INPUT,"m");
+                    h4pbleAdd(mQpassTag(), H4P_UI_INPUT,"m");
+                } else {
+                    h4pbleAdd(brokerTag(),H4P_UI_TEXT,"m",h4p[brokerTag()]);
+                }
+                
+                h4pbleAdd(_me,H4P_UI_BOOL,"m","",H4P_UILED_BI);
+                h4pbleAdd(nDCXTag(),H4P_UI_TEXT,"m"); // cos we don't know it yet
+            }
+        break;
         case H4PE_VIEWERS:
             {
                 uint32_t mode=STOI(msg);
@@ -119,6 +134,18 @@ void H4P_AsyncMQTT::_init() {
             h4p[_me]=stringFromInt(_running=true);
             SYSINFO("CNX %s",CSTR(h4p[brokerTag()]));
             H4Service::svcUp();
+
+#if H4P_BLE_AVAILABLE
+            auto blesrv = h4puncheckedcall<H4P_BLEServer>(blesrvTag());
+            if (blesrv) {
+                blesrv->elemRemove(brokerTag());
+                blesrv->elemRemove(mQuserTag());
+                blesrv->elemRemove(mQpassTag());
+                h4pbleAdd(brokerTag(),H4P_UI_TEXT,"m",h4p[brokerTag()]);
+
+                blesrv->sendElems();
+            }
+#endif
         },nullptr,H4P_TRID_MQRC);
     });
 

@@ -29,7 +29,8 @@ SOFTWARE.
 #include<H4Service.h>
 #include<H4P_WiFi.h>
 
-#if H4P_USE_WIFI_AP
+#if H4P_USE_WIFI_AP | H4P_WIFI_PROV_BY_BLE
+H4_TIMER scanner;
 constexpr const char* opts_base = " Select SSID..." UNIT_SEPARATOR "dummy" RECORD_SEPARATOR;
 std::vector<std::string> wf_ssids;
 void appendSSIDs(std::string& base) {
@@ -39,22 +40,16 @@ void appendSSIDs(std::string& base) {
     }
     base.pop_back();
 }
-void H4P_WiFi::_apViewers() {
-    std::string msg {opts_base};
-    appendSSIDs(msg);
-    _uiAdd(ssidTag(),H4P_UI_DROPDOWN,"s",msg);
-    _uiAdd(pskTag(),H4P_UI_INPUT,"s");
-    _uiAdd(deviceTag(),H4P_UI_INPUT,"s");
-    _uiAdd(GoTag(),H4P_UI_IMGBTN,"o");
+void H4P_WiFi::_stopScan() {
+    if (scanner) 
+        h4.cancel(scanner);
+    scanner = nullptr;
 }
-void H4P_WiFi::_startAP(){
-    h4p.gvSetInt(GoTag(),0,false);
-
-    H4P_Signaller::signal(H4P_SIG_MORSE,"-    ,250");
-    _dns53=new DNSServer;
-
-    HAL_WIFI_disconnect();
-    
+void H4P_WiFi::_startScan() {
+    if (scanner) {
+        Serial.printf("Already scanning is activated\n");
+        return;
+    }
     auto scan = [this](){
         if (WiFi.getMode() == WIFI_OFF){
             // _wf_ssids.clear();
@@ -83,7 +78,31 @@ void H4P_WiFi::_startAP(){
         h4puiSync(ssidTag(), msg);
     };
     scan();
-    h4.every(H4P_AP_SCAN_RATE, scan);
+    scanner = h4.every(H4P_AP_SCAN_RATE, scan);
+}
+
+#endif
+
+#if H4P_USE_WIFI_AP
+
+void H4P_WiFi::_apViewers() {
+    std::string msg {opts_base};
+    appendSSIDs(msg);
+    _uiAdd(ssidTag(),H4P_UI_DROPDOWN,"s",msg);
+    _uiAdd(pskTag(),H4P_UI_INPUT,"s");
+    _uiAdd(deviceTag(),H4P_UI_INPUT,"s");
+    _uiAdd(GoTag(),H4P_UI_IMGBTN,"o");
+}
+void H4P_WiFi::_startAP(){
+    h4p.gvSetInt(GoTag(),0,false);
+
+    H4P_Signaller::signal(H4P_SIG_MORSE,"-    ,250");
+    _dns53=new DNSServer;
+
+    HAL_WIFI_disconnect();
+    
+    _startScan();
+
     WiFi.mode(WIFI_AP);
     SYSINFO("ENTER AP MODE %s MAC=%s",CSTR(h4p[deviceTag()]),CSTR(WiFi.softAPmacAddress()));
 

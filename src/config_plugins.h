@@ -36,10 +36,16 @@ SOFTWARE.
 #define H4P_USE_WIFI_AP         0
 #endif
 
+#define H4P_WIFI_PROV_BY_BLE    1 
+
 #ifdef ARDUINO_ARCH_ESP32
 #define H4P_BLE_AVAILABLE       1
 #else
 #define H4P_BLE_AVAILABLE       0
+#if H4P_WIFI_PROV_BY_BLE
+// #pragma message ("H4P_BLE provisioning is not supported for this MCU")
+#define H4P_WIFI_PROV_BY_BLE    0
+#endif
 #endif
 /*
         DIAGNOSTICS
@@ -64,6 +70,7 @@ SOFTWARE.
 #define H4P_LOG_MESSAGES        0
 #define H4P_SYS_LEVEL           0
 #define H4P_UI_HEALTH           0
+
 /*
         HARDWARE ASSUMPTIONS
 
@@ -77,6 +84,7 @@ SOFTWARE.
 
         These affect the way wifi, mqtt and multifunction buttons do their signalling
 */
+
 enum H4PM_SENSE:uint8_t {
     ACTIVE_LOW,
     ACTIVE_HIGH
@@ -121,6 +129,12 @@ enum H4P_UILED_COLOR {
 #define H4P_UDP_JITTER         250
 #define H4P_UDP_REFRESH     300000
 #define H4P_UDP_REPEAT           2
+
+#define H4BC_SCAN_INTERVAL     1349
+#define H4BC_SCAN_WINDOW        449
+#define H4BC_ACTIVE_SCAN       true
+#define H4BC_SCAN_DURATION        5
+#define H4BC_SCAN_CONTINUOUS   true
 
 #define H4MF_SLOW              250
 #define H4MF_MEDIUM            125

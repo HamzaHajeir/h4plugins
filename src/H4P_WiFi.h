@@ -49,18 +49,10 @@ SOFTWARE.
 #include<H4AsyncWebServer.h>
 #include<H4P_Signaller.h>
 //
-#if H4P_USE_WIFI_AP
-constexpr const char* GoTag(){ return "Go"; }
+#if H4P_USE_WIFI_AP || H4P_WIFI_PROV_BY_BLE
+STAG(Go);
 #endif
 
-struct H4P_UI_ITEM { // add title and/or props?
-    H4P_UI_TYPE     type;
-    H4P_FN_UIGET    f;
-    uint8_t         color;
-    std::string          h;
-};
-
-using H4P_UI_LIST       = std::map<std::string,H4P_UI_ITEM>;
 class H4P_WiFi: public H4Service, public H4AsyncWebServer {
 #if H4P_USE_WIFI_AP
             DNSServer*          _dns53=nullptr;
@@ -70,6 +62,7 @@ class H4P_WiFi: public H4Service, public H4AsyncWebServer {
 #endif
 //
             // bool                _discoDone;
+            bool                    _connected;
             std::vector<H4_FN_VOID> _onWebserver;
             H4AW_Authenticator*     _authenticator;
             uint32_t            _evtID=0;
@@ -82,6 +75,13 @@ class H4P_WiFi: public H4Service, public H4AsyncWebServer {
                 VSCMD(_change);
                 VSCMD(_msg);
 
+                void            _hookBLEProvisioning();
+                void            _unhookBLEProvisioning();
+#if H4P_USE_WIFI_AP | H4P_WIFI_PROV_BY_BLE
+                bool            bleserver;
+                void            _startScan();
+                void            _stopScan();
+#endif
                 void            HAL_WIFI_disconnect();
                 void            HAL_WIFI_setHost(const std::string& host);
 //
@@ -111,17 +111,18 @@ class H4P_WiFi: public H4Service, public H4AsyncWebServer {
     public:
                 void            HAL_WIFI_startSTA(); // Has to be static for bizarre start sequence on ESP32 FFS
 
+
 #if H4P_USE_WIFI_AP
                 void            _startAP();
         H4P_WiFi(const std::string& device=""): 
-            H4Service(wifiTag(),H4PE_FACTORY | H4PE_VIEWERS | H4PE_GPIO | H4PE_GVCHANGE | H4PE_UIADD | H4PE_UISYNC | H4PE_UIMSG),
+            H4Service(wifiTag(),H4PE_FACTORY | H4PE_VIEWERS | H4PE_GPIO | H4PE_GVCHANGE | H4PE_UIADD | H4PE_UISYNC | H4PE_UIMSG | H4PE_BLESINIT),
             H4AsyncWebServer(H4P_WEBSERVER_PORT){
             h4p.gvSetstring(deviceTag(),device,true);
 #else
         explicit H4P_WiFi(): H4Service(wifiTag()),H4AsyncWebServer(H4P_WEBSERVER_PORT){}
 
         H4P_WiFi(std::string ssid,std::string psk,std::string device=""):
-            H4Service(wifiTag(),H4PE_FACTORY | H4PE_GPIO | H4PE_GVCHANGE | H4PE_UIADD | H4PE_UISYNC | H4PE_UIMSG),
+            H4Service(wifiTag(),H4PE_FACTORY | H4PE_GPIO | H4PE_GVCHANGE | H4PE_UIADD | H4PE_UISYNC | H4PE_UIMSG | H4PE_BLESINIT),
             H4AsyncWebServer(H4P_WEBSERVER_PORT){
                 h4p.gvSetstring(ssidTag(),ssid,true);
                 h4p.gvSetstring(pskTag(),psk,true);
