@@ -11,6 +11,7 @@
 #include<H4P_BinarySwitch.h>
 #include<H4P_BinaryThing.h>
 #include<H4P_BLEServer.h>
+#include<H4P_BLEClient.h>
 #include<H4P_EmitHeap.h>
 #include<H4P_EmitLoopCount.h>
 #include<H4P_EmitQ.h>

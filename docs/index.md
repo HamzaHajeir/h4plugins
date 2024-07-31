@@ -43,6 +43,8 @@
   * [H4P_AsyncMQTT](h4mqtt.md) :heavy_check_mark:
   * [H4P_BinarySwitch](swings.md) :heavy_check_mark:
   * [H4P_BinaryThing](swings.md) :heavy_check_mark:
+  * [H4P_BLEServer](h4ble.md)
+  * [H4P_BLEClient](h4bleclt.md)
   * [H4P_ConditionalSwitch](swings.md) :heavy_check_mark:
   * [H4P_ConditionalThing](swings.md) :heavy_check_mark:
   * [H4P_EmitHeap](heap.md) :heavy_check_mark:

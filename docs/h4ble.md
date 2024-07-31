@@ -1,15 +1,10 @@
-![H4P Flyer](../assets/MQTTLogo.jpg) 
-
 # H4P_BLEServer
 
 ## Service shortname blesrv
 
-<!-- [ ] Add messaging document -->
 Opens BLE Server which serves H4 Commanding and Data/Events emitted from the device. Allows the user to host custom Services alongwith corresponding managed characteristics.
 
 Works currently for ESP32's only.
-
-<!-- Connects to an MQTT server and manages automatic reconnection after failure. Provides utility functions to simplify message handling / parsing. User will find essential pre-reading [Handling MQTT topics / commands](mqcmds.md) -->
 
 ---
 
@@ -19,8 +14,11 @@ Works currently for ESP32's only.
 - [Contents](#contents)
 - [Dependencies](#dependencies)
 - [Commands Added](#commands-added)
+- [Callbacks and Usage](#callbacks-and-usage)
+- [API](#api)
+- [H4BLE Services and Characteristics](#services-and-characteristics-uuids)
+- [H4-style interaction](#h4-style-interaction)
 - [Example sketches](#example-sketches)
-- [H4-style interaction:](#h4-style-interaction)
 
 ---
 # Usage
@@ -45,7 +43,7 @@ It may be instantiated as any name the user chooses, prefix all API calls below 
 `stop` will stop advertising the BLE server and disconnect from any connected client.
 `start` will start advertising the service.
 
-# Callbacks
+# Callbacks and Usage
 
 To receive onConnect/onDisconnect events, one can add the the globalListener the following adapter:
 
