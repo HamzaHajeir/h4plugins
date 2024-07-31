@@ -5,6 +5,7 @@
 #if H4P_BLE_AVAILABLE
 
 #include <BLEDevice.h>
+#define H4_BLE_MTU 			512
 
 namespace H4P_BLE {
 

@@ -22,7 +22,6 @@ STAG(blesrv)
 #define H4UIDATA_CHAR_UUID		"53922702-8a3a-41c2-9e5e-d8c90609855e"
 #define H4MSG_CHAR_UUID		 	"7edd30f1-d7a5-4dbe-8b83-123e30bbce7f"
 
-#define H4_BLE_MTU 			512
 
 enum class H4P_H4BLECharacteristic : std::uint8_t {
 	DEVICE_NAME,
@@ -121,8 +120,8 @@ class H4P_BLEServer : public H4Service {
 
 				bool 			addServiceToAdvertise(BLEUUID uuid);
 				bool 			removeAdvertisingService(BLEUUID uuid);
-	BLEAdvertising* getAdvertising() { return h4Advertising; }
-	BLEService* getH4Service() { return h4Service; }
+				BLEAdvertising* getAdvertising() { return h4Advertising; }
+				BLEService* 	getH4Service() { return h4Service; }
 };
 
 #endif

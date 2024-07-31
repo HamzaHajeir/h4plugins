@@ -366,16 +366,16 @@ void H4P_BLEServer::__elemAdd(const std::string &msg)
 }
 void H4P_BLEServer::_sendElems()
 {
-	Serial.printf("_sendElems() connected=%d elems=%d\n", connected, h4pBLEUIorder.size());
+	static bool sending = false;
+	Serial.printf("_sendElems() connected=%d elems=%d sending=%d\n", connected, h4pBLEUIorder.size(), sending);
 	if (connected) {
-		static bool sending = false;
 		if (sending){
 			return;
 		}
 		sending = true;
 		h4Chunker(h4pBLEUIorder, [this](std::vector<std::string>::iterator it){
 			if (!connected){
-				h4.cancel();
+				h4.finishEarly();
 				sending = false;
 				return;
 			}
