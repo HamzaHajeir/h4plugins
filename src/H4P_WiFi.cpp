@@ -337,7 +337,7 @@ uint32_t H4P_WiFi::_msg(std::vector<std::string> vs){
 void H4P_WiFi::_rest(H4AW_HTTPHandler* handler){
 	h4.queueFunction([this, handler](){
         XLOG("_rest %s",handler->client()->remoteIPstring().c_str());
-		std::string chop=replaceAll(CSTR(handler->url()),"/rest/","");
+		std::string chop=replaceAll(handler->url(),"/rest/","");
         std::string reply = _execute(chop);
         handler->addHeader("Access-Control-Allow-Origin","*");
         handler->send(200, "application/json",reply.length(), CSTR(reply));
@@ -348,7 +348,7 @@ void H4P_WiFi::_rest(H4AW_HTTPHandler* handler){
 std::string H4P_WiFi::_execute(const std::string &msg)
 {
     std::string err="";
-    uint32_t res=h4puncheckedcall<H4P_SerialCmd>(cmdTag())->_simulatePayload(CSTR(msg),wifiTag());
+    uint32_t res=h4puncheckedcall<H4P_SerialCmd>(cmdTag())->_simulatePayload(msg,wifiTag());
     err=h4pGetErrorMessage(res);
     std::string j="{\"res\":"+stringFromInt(res)+",\"msg\":\""+err+"\",\"lines\":[";
     std::string fl;
@@ -445,7 +445,7 @@ void H4P_WiFi::_startWebserver(){
         }
             for(auto const& ui:h4pUIorder){
                 auto i=h4pUserItems[ui];
-                _sendSocket(skt,"ui",CSTR(std::string(ui+","+stringFromInt(i.type)+","+i.h+",0,"+stringFromInt(i.color)+","+i.f())));
+                _sendSocket(skt,"ui",std::string(ui+","+stringFromInt(i.type)+","+i.h+",0,"+stringFromInt(i.color)+","+i.f()));
             }
         });
     });

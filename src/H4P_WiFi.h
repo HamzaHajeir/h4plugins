@@ -153,8 +153,8 @@ class H4P_WiFi: public H4Service, public H4AsyncWebServer {
                 void            uiAddText(const std::string& name,int v,const std::string& section="u"){ _uiAdd(name,H4P_UI_TEXT,section,stringFromInt(v)); }
                 void            uiAddAllUsrFields(const std::string& section="u");
 
-                void            uiSetValue(const std::string& ui,const int f){ _sendWS(ui,CSTR(stringFromInt(f))); }
-                void            uiSetValue(const std::string& ui,const std::string& value){ _sendWS(ui,CSTR(value)); }
+                void            uiSetValue(const std::string& ui,const int f){ _sendWS(ui,stringFromInt(f)); }
+                void            uiSetValue(const std::string& ui,const std::string& value){ _sendWS(ui,value); }
 //
                 template<typename... Args>
                 void            uiMessage(const std::string& msg, Args... args){ // variadic T<>

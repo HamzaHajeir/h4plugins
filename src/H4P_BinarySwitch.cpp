@@ -49,4 +49,4 @@ void H4P_ConditionalSwitch::_handleEvent(const std::string& svc,H4PE_TYPE t,cons
     H4P_BinarySwitch::_handleEvent(svc,t,msg);
 }
 
-void H4P_ConditionalSwitch::syncCondition(){ h4puiSync(conditionTag(),CSTR(stringFromInt(h4punlocked=_predicate()))); }
+void H4P_ConditionalSwitch::syncCondition(){ h4puiSync(conditionTag(),stringFromInt(h4punlocked=_predicate())); }

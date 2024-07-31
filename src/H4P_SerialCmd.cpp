@@ -126,9 +126,10 @@ uint32_t H4P_SerialCmd::_dispatch(std::vector<std::string> vs,uint32_t owner=0){
 }
 
 uint32_t H4P_SerialCmd::_executeCmd(std::string topic, std::string pload){
-	std::vector<std::string> vs=split(CSTR(topic),"/");
+	std::vector<std::string> vs=split(topic,"/");
     h4pSrc=vs[0];
-	vs.push_back(pload);
+    if(pload.length())
+        vs.push_back(pload);
     std::vector<std::string> cmd(vs.begin()+2,vs.end());
     XLOG("%s %s",CSTR(vs[0]),CSTR(join(cmd,"/")));
     uint32_t rv=_dispatch(std::vector<std::string>(cmd)); // optimise?
@@ -257,7 +258,7 @@ void H4P_SerialCmd::help(){
     for(auto const& s:unsorted) { reply(CSTR(s)); }
 }
 
-uint32_t H4P_SerialCmd::invokeCmd(std::string topic,std::string payload,const char* src){ return _executeCmd(std::string(src)+"/h4/"+CSTR(topic),std::string(CSTR(payload))); }
+uint32_t H4P_SerialCmd::invokeCmd(std::string topic,std::string payload,const char* src){ return _executeCmd(std::string(src)+"/h4/"+topic,payload); }
 
 uint32_t H4P_SerialCmd::invokeCmd(std::string topic,uint32_t payload,const char* src){ return invokeCmd(topic,stringFromInt(payload),src); }
 
@@ -425,7 +426,7 @@ h4proxy& h4proxy::_set(const std::string& s){
     if(_v!=s){
         _v=s;
         if(_save) H4P_SerialCmd::_persist();
-        h4psysevent(CSTR(_id),H4PE_GVCHANGE,"%s",CSTR(_v));
+        h4psysevent(_id,H4PE_GVCHANGE,"%s",CSTR(_v));
     }
     return *this;
 }

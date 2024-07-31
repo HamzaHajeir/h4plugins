@@ -59,7 +59,7 @@ class H4P_UPNPServer: public H4Service {
                 void            _notify(const std::string& s);
                 void            _upnp(H4AW_HTTPHandler *handler);
 
-        static  std::string     replaceParamsFile(const std::string &f){ return h4preplaceparams(CSTR(H4P_SerialCmd::read(f))); }
+        static  std::string     replaceParamsFile(const std::string &f){ return h4preplaceparams(H4P_SerialCmd::read(f)); }
     public:                
         H4P_UPNPServer(const std::string& name=""): H4Service(upnpTag(),H4PE_GVCHANGE|H4PE_VIEWERS){
             _pWiFi=depend<H4P_WiFi>(wifiTag());

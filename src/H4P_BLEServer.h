@@ -116,7 +116,7 @@ class H4P_BLEServer : public H4Service {
 
 				void 			elemSetValue(const std::string &name, std::vector<std::uint8_t> &raw);
 				void 			elemSetValue(const std::string& name, const std::string& value);
-				void            elemSetValue(const std::string& ui,const int f){ elemSetValue(ui,CSTR(stringFromInt(f))); }
+				void            elemSetValue(const std::string& ui,const int f){ elemSetValue(ui,stringFromInt(f)); }
 
 				bool 			addServiceToAdvertise(BLEUUID uuid);
 				bool 			removeAdvertisingService(BLEUUID uuid);

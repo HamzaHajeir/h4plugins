@@ -92,4 +92,4 @@ void H4P_ConditionalThing::_handleEvent(const std::string& svc,H4PE_TYPE t,const
     H4P_BinaryThing::_handleEvent(svc,t,msg);
 }
 
-void H4P_ConditionalThing::syncCondition(){ h4puiSync(conditionTag(),CSTR(stringFromInt(h4punlocked=_predicate()))); }
+void H4P_ConditionalThing::syncCondition(){ h4puiSync(conditionTag(),stringFromInt(h4punlocked=_predicate())); }

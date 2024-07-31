@@ -35,7 +35,7 @@ constexpr const char* opts_base = " Select SSID..." UNIT_SEPARATOR "dummy" RECOR
 std::vector<std::string> wf_ssids;
 void appendSSIDs(std::string& base) {
     for (auto& ssid : wf_ssids){
-        std::string ss=CSTR(ssid);
+        std::string ss=ssid;
         base.append(ss).append(UNIT_SEPARATOR).append(ss).append(RECORD_SEPARATOR);
     }
     base.pop_back();
