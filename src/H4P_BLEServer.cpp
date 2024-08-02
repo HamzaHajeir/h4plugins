@@ -13,6 +13,7 @@ std::vector<std::string>        h4pBLEUIorder;
 #include <BLEUtils.h>
 #include <H4P_PinMachine.h>
 #include <H4P_BLECommon.h>
+#include <H4P_WiFi.h>
 
 void H4P_BLE::init() {
 	if (!initialized) {
@@ -29,13 +30,13 @@ void H4P_BLEServer::H4BLEServerCallbacks::onDisconnect(BLEServer *pServer, esp_b
 	h4puncheckedcall<H4P_BLEServer>(blesrvTag())->onDisconnect(param);
 }
 void H4P_BLEServer::H4BLEServerCallbacks::onMtuChanged(BLEServer *pServer, esp_ble_gatts_cb_param_t *param) {
-	Serial.printf("H4BLEServerCallbacks", "Device: %s MTU: %d", BLEDevice::toString().c_str(), param->mtu.mtu);
+	H4PBS_PRINTF("H4BLEServerCallbacks", "Device: %s MTU: %d", BLEDevice::toString().c_str(), param->mtu.mtu);
 }
 
 void H4P_BLEServer::H4CmdCharacteristicCallbacks::onWrite(BLECharacteristic *pCharacteristic, esp_ble_gatts_cb_param_t *param) {
 	// Redirect the command to execCmd();
 	std::string cmd{pCharacteristic->getValue().c_str()};
-	Serial.printf("BLESRV onWrite [%s]\n", cmd.c_str());
+	H4PBS_PRINTF("BLESRV onWrite [%s]\n", cmd.c_str());
 	auto srv = h4puncheckedcall<H4P_BLEServer>(blesrvTag());
 	srv->h4Characteristics[H4P_H4BLECharacteristic::CMD].characteristic->setValue("");
 	h4.queueFunction([srv, cmd = std::move(cmd)]
@@ -44,7 +45,7 @@ void H4P_BLEServer::H4CmdCharacteristicCallbacks::onWrite(BLECharacteristic *pCh
 					  });
 }
 void H4P_BLEServer::H4ReplyCharacteristicCallbacks::onRead(BLECharacteristic *pCharacteristic, esp_ble_gatts_cb_param_t *param) {
-	Serial.printf("H4ReplyDesc...::onRead()\n");
+	H4PBS_PRINTF("H4ReplyDesc...::onRead()\n");
 }
 
 void H4P_BLEServer::onConnect(esp_ble_gatts_cb_param_t *param) {
@@ -58,19 +59,20 @@ void H4P_BLEServer::onConnect(esp_ble_gatts_cb_param_t *param) {
 	esp_gatt_conn_params_t conn_params = connect.conn_params;
 	esp_ble_addr_type_t ble_addr_type = connect.ble_addr_type;
 	uint16_t conn_handle = connect.conn_handle;
-	Serial.printf("BLESRV onConnect() cid [%d] lr [%s] rmt [%s] cp->intvl [%u] cp->ltnc [%u] cp->TO [%u] addr_type [%s] cnhndl [%u]\n", conn_id, 
-																														link_role ? "SLAVE" : "MASTER", 
-																														BLEAddress(remote_bda).toString().c_str(), 
-																														conn_params.interval,
-																														conn_params.latency,
-																														conn_params.timeout,
-																														BLEUtils::addressTypeToString(ble_addr_type),
-																														conn_handle
-																														);
+	H4PBS_PRINTF("BLESRV onConnect() cid [%d] lr [%s] rmt [%s] cp->intvl [%u] " 
+					"cp->ltnc [%u] cp->TO [%u] addr_type [%s] cnhndl [%u]\n",
+						conn_id,
+						link_role ? "SLAVE" : "MASTER",
+						BLEAddress(remote_bda).toString().c_str(),
+						conn_params.interval,
+						conn_params.latency,
+						conn_params.timeout,
+						BLEUtils::addressTypeToString(ble_addr_type),
+						conn_handle);
 	uint16_t bleID = h4Server->getConnId();
     h4Server->updatePeerMTU(bleID, H4_BLE_MTU);
 	SYSINFO("CNX by %s",CSTR(BLEAddress(remote_bda).toString()));
-    Serial.printf("updateMTU to: %i\n", h4Server->getPeerMTU(bleID));
+    H4PBS_PRINTF("updateMTU to: %i\n", h4Server->getPeerMTU(bleID));
 
 	_sendElems();
 
@@ -94,7 +96,7 @@ void H4P_BLEServer::onDisconnect(esp_ble_gatts_cb_param_t *param) {
 	uint16_t conn_id = disconnect.conn_id;
 	auto remote_bda = disconnect.remote_bda;
 	auto reason = disconnect.reason;
-	Serial.printf("BLESRV onDisconnect() cid [%d] rmt [%s] rsn [%s]\n", conn_id, BLEAddress(remote_bda).toString().c_str(), BLEUtils::gattCloseReasonToString(reason).c_str());
+	H4PBS_PRINTF("BLESRV onDisconnect() cid [%d] rmt [%s] rsn [%s]\n", conn_id, BLEAddress(remote_bda).toString().c_str(), BLEUtils::gattCloseReasonToString(reason).c_str());
 	SYSINFO("DCX by %s",CSTR(BLEAddress(remote_bda).toString()));
 
 	if (H4P_BLEServer::conn_id == conn_id) H4P_BLEServer::conn_id = 0;
@@ -125,13 +127,17 @@ void H4P_BLEServer::_handleEvent(const std::string& svc,H4PE_TYPE t,const std::s
 			if (svc == nameTag())
 				h4Characteristics[H4P_H4BLECharacteristic::DEVICE_NAME].characteristic->setValue(msg.c_str());
 			else if (svc == deviceTag() && _running) restart();
-// #if H4P_USE_WIFI_AP // [ ] The WiFi/MQTT provisioning.
-//             if(svc == GoTag() && STOI(msg)) {
-//                 HAL_WIFI_startSTA();
-//                 h4.once(1000,[]{ h4pevent(h4pSrc,H4PE_REBOOT,GoTag()); }); // P for holdoff value?
-//                 return;
-//             }
-// #endif
+#if H4P_WIFI_PROV_BY_BLE
+            if(svc == GoTag() && STOI(msg)) {
+				if (auto h4wifi = h4puncheckedcall<H4P_WiFi>(wifiTag())) {
+#if H4P_USE_WIFI_AP
+					if (h4wifi->_apconfig) return; // The H4P_WiFiAP handles it.
+#endif
+					h4wifi->change(h4p[ssidTag()], h4p[pskTag()]);
+				}
+                return;
+            }
+#endif
             _defaultSync(svc,msg);
 			break;
 
@@ -156,7 +162,7 @@ void H4P_BLEServer::_handleEvent(const std::string& svc,H4PE_TYPE t,const std::s
 }
 
 void H4P_BLEServer::_reply(std::string msg) {
-	Serial.printf("H4P_BLEServer::_reply(%s)\n", msg.data());
+	H4PBS_PRINTF("H4P_BLEServer::_reply(%s)\n", msg.data());
 	h4Characteristics[H4P_H4BLECharacteristic::REPLY].characteristic->setValue(String(msg.data()));
 	h4Characteristics[H4P_H4BLECharacteristic::REPLY].characteristic->notify();
 }
@@ -172,7 +178,7 @@ void H4P_BLEServer::_addCharacteristic(H4P_H4BLECharacteristic charId, BLEUUID u
 	auto& desc2901 = charItem.descriptor_2901;
 	auto& desc2902 = charItem.descriptor_2902;
 	h4char = h4Service->createCharacteristic(uuid, properties);
-	Serial.printf("_addCharacteristic(%d, %s, %lu, %s) - > %p\n", charId, uuid.toString().c_str(), properties, description.c_str(), h4char);
+	H4PBS_PRINTF("_addCharacteristic(%d, %s, %lu, %s) - > %p\n", charId, uuid.toString().c_str(), properties, description.c_str(), h4char);
 
 	// Creates BLE Descriptor 0x2902: Client Characteristic Configuration Descriptor (CCCD)
 	if (desc2902Opts != H4P_Descriptor2902::DONT_ADD) {
@@ -237,7 +243,7 @@ void H4P_BLEServer::_addCharacteristic(H4P_H4BLECharacteristic charId, BLEUUID u
 void H4P_BLEServer::_init() {
 	H4P_BLE::init();
 	auto b = BLEDevice::setMTU(H4_BLE_MTU);
-	Serial.printf("setMTU(%u) -> %d MTU=%u\n", H4_BLE_MTU, b, BLEDevice::getMTU());
+	H4PBS_PRINTF("setMTU(%u) -> %d MTU=%u\n", H4_BLE_MTU, b, BLEDevice::getMTU());
 
 	//
 	// BLEServer
@@ -328,12 +334,16 @@ void H4P_BLEServer::_init() {
 	//
 	QEVENT(H4PE_BLESINIT);
 	svcUp();
+
+#if H4P_WIFI_PROV_BY_BLE
+    h4p.gvSetInt(GoTag(),0,false);
+#endif
 	
 }
 
 void H4P_BLEServer::_elemAdd(const std::string &name, H4P_UI_TYPE t, const std::string &h, const std::string &value, uint8_t color)
 {
-	Serial.printf("_elemAdd(%s)\n", name.c_str());
+	H4PBS_PRINTF("_elemAdd(%s)\n", name.c_str());
     std::function<std::string(void)>  f;
     std::string v=value;
     switch(t){
@@ -353,13 +363,13 @@ void H4P_BLEServer::_elemAdd(const std::string &name, H4P_UI_TYPE t, const std::
     }
     h4pBLEUIorder.push_back(name); // [ ] Priority management.
     h4pBLEUserItems[name]={t,f,color,h};
-	Serial.printf("Items size %d\torder size %d\n", h4pBLEUserItems.size(), h4pBLEUIorder.size());
+	H4PBS_PRINTF("Items size %d\torder size %d\n", h4pBLEUserItems.size(), h4pBLEUIorder.size());
 
 }
 
 void H4P_BLEServer::__elemAdd(const std::string &msg)
 {
-	Serial.printf("__elemAdd(%s)\n", msg.c_str());
+	H4PBS_PRINTF("__elemAdd(%s)\n", msg.c_str());
 
     std::vector<std::string> m=split(msg,",");
     _elemAdd(m[0],static_cast<H4P_UI_TYPE>(STOI(m[1])),m[3],m[2],STOI(m[4]));    
@@ -367,7 +377,7 @@ void H4P_BLEServer::__elemAdd(const std::string &msg)
 void H4P_BLEServer::_sendElems()
 {
 	static bool sending = false;
-	Serial.printf("_sendElems() connected=%d elems=%d sending=%d\n", connected, h4pBLEUIorder.size(), sending);
+	H4PBS_PRINTF("_sendElems() connected=%d elems=%d sending=%d\n", connected, h4pBLEUIorder.size(), sending);
 	if (connected) {
 		if (sending){
 			return;
@@ -388,7 +398,7 @@ void H4P_BLEServer::_sendElems()
 				.append(",0,")
 				.append(stringFromInt(i.color))
 				.append(",").append(i.f());
-			// Serial.printf("uiElem->setValue(%s) char %p\n", msg.c_str(), h4Characteristics[H4P_H4BLECharacteristic::UIELEMENTS].characteristic);
+			// H4PBS_PRINTF("uiElem->setValue(%s) char %p\n", msg.c_str(), h4Characteristics[H4P_H4BLECharacteristic::UIELEMENTS].characteristic);
 			h4Characteristics[H4P_H4BLECharacteristic::UIELEMENTS].characteristic->setValue(msg.c_str());
 			h4Characteristics[H4P_H4BLECharacteristic::UIELEMENTS].characteristic->notify();
 		}, 15, 20, []{ sending = false; });
@@ -396,7 +406,7 @@ void H4P_BLEServer::_sendElems()
 }
 void H4P_BLEServer::_elemSetValue(const std::string &name, const std::string &value)
 {
-	Serial.printf("_elemSetValue(%s,%s)\n", name.c_str(), value.c_str());
+	H4PBS_PRINTF("_elemSetValue(%s,%s)\n", name.c_str(), value.c_str());
 	if (connected) {
 		std::string concat = name+","+value;
 		h4Characteristics[H4P_H4BLECharacteristic::UIDATA].characteristic->setValue(concat.c_str());
@@ -405,7 +415,7 @@ void H4P_BLEServer::_elemSetValue(const std::string &name, const std::string &va
 }
 void H4P_BLEServer::_elemSetValue(const std::string &name, std::vector<std::uint8_t> &value)
 {
-	// Serial.printf("_elemSetValue(%s, <BINARY>)\n", name.c_str());
+	// H4PBS_PRINTF("_elemSetValue(%s, <BINARY>)\n", name.c_str());
 	if (connected)
 	{
 		std::vector<std::uint8_t> data{name.begin(), name.end()};
@@ -417,7 +427,7 @@ void H4P_BLEServer::_elemSetValue(const std::string &name, std::vector<std::uint
 }
 void H4P_BLEServer::_defaultSync(const std::string &svc, const std::string &msg)
 {
-	// Serial.printf("_defaultSync(%s, %s) connected %d .count() %d\n", svc.c_str(), msg.c_str(), connected, h4pBLEUserItems.count(svc));
+	// H4PBS_PRINTF("_defaultSync(%s, %s) connected %d .count() %d\n", svc.c_str(), msg.c_str(), connected, h4pBLEUserItems.count(svc));
 	if(connected && h4pBLEUserItems.count(svc)) {
         std::string sync;
         switch(h4pBLEUserItems[svc].type){
@@ -441,11 +451,11 @@ void H4P_BLEServer::elemAdd(const std::string &name, H4P_UI_TYPE t, const std::s
 
 void H4P_BLEServer::elemRemove(const std::string &name)
 {
-	// Serial.printf("elemRemove(%s)\n", name.c_str());
+	// H4PBS_PRINTF("elemRemove(%s)\n", name.c_str());
 	h4pBLEUIorder.erase(std::remove(h4pBLEUIorder.begin(), h4pBLEUIorder.end(), name), h4pBLEUIorder.end());
 	h4pBLEUserItems.erase(name);
-	// Serial.printf("Items size %d\torder size %d\n", h4pBLEUserItems.size(), h4pBLEUIorder.size());
-	// [ ] could update the elems if connected.
+	// H4PBS_PRINTF("Items size %d\torder size %d\n", h4pBLEUserItems.size(), h4pBLEUIorder.size());
+	// [ ] could update the elems if connected. == Up to the calling side..
 }
 
 void H4P_BLEServer::clearElems(){ 
@@ -467,7 +477,7 @@ void H4P_BLEServer::elemSetValue(const std::string &name, const std::string &val
 }
 
 void H4P_BLEServer::svcDown() {
-	Serial.printf("BLESRV svcDown connected %d conn_id %d\n", connected, conn_id);
+	H4PBS_PRINTF("BLESRV svcDown connected %d conn_id %d\n", connected, conn_id);
 	// Stop advertizsing
 	BLEDevice::stopAdvertising();
 	// stop/disconnect
@@ -479,7 +489,7 @@ void H4P_BLEServer::svcDown() {
 	H4Service::svcDown();
 };
 void H4P_BLEServer::svcUp() {
-	Serial.printf("BLESRV svcUp\n", connected, conn_id);
+	H4PBS_PRINTF("BLESRV svcUp\n", connected, conn_id);
 	// Start advertizsing
 	h4Service->start();
 	QEVENT(H4PE_BLESUP);

@@ -24,11 +24,11 @@ class H4AdvertisedDeviceCallbacks : public BLEAdvertisedDeviceCallbacks {
 class H4ClientCallbacks : public BLEClientCallbacks {
 	H4P_BLEClient* client;
 	void onConnect(BLEClient* pclient) {
-		Serial.printf("H4ClientCallbacks::onConnect(%p)\n", pclient);
+		H4PBC_PRINTF("H4ClientCallbacks::onConnect(%p)\n", pclient);
 	}
 
 	void onDisconnect(BLEClient *pclient) {
-		Serial.printf("H4ClientCallbacks::onDisconnect()\n");
+		H4PBC_PRINTF("H4ClientCallbacks::onDisconnect()\n");
 		client->onDisconnect(pclient);
 	}
 
@@ -44,11 +44,11 @@ std::set<H4P_BLEClient*> H4AdvertisedDeviceCallbacks::clients;
 void H4AdvertisedDeviceCallbacks::onResult(BLEAdvertisedDevice advertised)
 {
 	// [ ] check if advertized
-	Serial.printf("H4AdvertisedDeviceCallbacks::onResult(%s)\n", advertised.getServiceUUID().toString().c_str());
+	H4PBC_PRINTF("H4AdvertisedDeviceCallbacks::onResult(%s)\n", advertised.getServiceUUID().toString().c_str());
 	for (auto& client:H4AdvertisedDeviceCallbacks::getClients()) {
 
 		if (client->_servicesMap.empty()) {
-			Serial.printf("client %p does not specified any service to connect to, it will not connect\n");
+			H4PBC_PRINTF("client %p does not specified any service to connect to, it will not connect\n");
 			continue;
 		}
 		bool continueToNext = false;
@@ -56,14 +56,14 @@ void H4AdvertisedDeviceCallbacks::onResult(BLEAdvertisedDevice advertised)
 			const auto& service = s.first;
 			auto foundService = advertised.haveServiceUUID() && advertised.isAdvertisingService(service.uuid);
 			if (service.mandatory && !foundService)					{
-				Serial.printf("Service %s is mandatory, it's not found\n", const_cast<H4P_BLEService&>(service).uuid.toString().c_str());
+				H4PBC_PRINTF("Service %s is mandatory, it's not found\n", const_cast<H4P_BLEService&>(service).uuid.toString().c_str());
 				continueToNext = true;
 				break;
 			}
 		}
 		if (continueToNext) continue;
 
-		Serial.printf("All services are found, connecting...\n");
+		H4PBC_PRINTF("All services are found, connecting...\n");
 
 		BLEDevice::getScan()->stop();
 		
@@ -78,7 +78,7 @@ void H4AdvertisedDeviceCallbacks::onResult(BLEAdvertisedDevice advertised)
 }
 void H4P_BLEClient::_init()
 {
-	Serial.printf("H4P_BLEClient::_init() this=%p\n", this);
+	H4PBC_PRINTF("H4P_BLEClient::_init() this=%p\n", this);
 	H4P_BLE::init();
 	h4Client = BLEDevice::createClient();
 	BLEDevice::setMTU(H4_BLE_MTU);
@@ -91,7 +91,7 @@ void H4P_BLEClient::_init()
 }
 void H4P_BLEClient::svcUp()
 {
-	Serial.printf("H4P_BLEClient::svcUp() _shouldStart %d\n", _shoudStart);
+	H4PBC_PRINTF("H4P_BLEClient::svcUp() _shouldStart %d\n", _shoudStart);
 	if (_shoudStart){
 		static bool started = false;
 		if (!started) {
@@ -102,13 +102,13 @@ void H4P_BLEClient::svcUp()
 		}
 		
 		auto res = h4Client->setMTU(H4_BLE_MTU);
-		Serial.printf("setMTU->%d\n", res);
+		H4PBC_PRINTF("setMTU->%d\n", res);
 	}
-	Serial.printf("svcUp() END\n");
+	H4PBC_PRINTF("svcUp() END\n");
 }
 void H4P_BLEClient::svcDown()
 {
-	Serial.printf("H4P_BLEClient::svcDown()\n");
+	H4PBC_PRINTF("H4P_BLEClient::svcDown()\n");
 	H4Service::svcDown();
 	if (_connected) {
 		h4Client->disconnect();
@@ -122,7 +122,7 @@ void H4P_BLEClient::_handleEvent(const std::string &svc, H4PE_TYPE t, const std:
 }
 bool H4P_BLEClient::_connectToServer()
 {
-	Serial.printf("Forming a connection to %s\n", _advertised->getAddress().toString().c_str());
+	H4PBC_PRINTF("Forming a connection to %s\n", _advertised->getAddress().toString().c_str());
 
 	Serial.println(" - Created client");
 
@@ -147,7 +147,7 @@ bool H4P_BLEClient::_connectToServer()
 			for (auto& c:svcTree.second) {
 				c.remote = remoteService->getCharacteristic(c.uuid);
 				if (c.mandatory && _findCharacteristic(remoteService, c.remote) == false) {
-					Serial.printf("Missing characteristic %s\n", c.uuid.toString().c_str());
+					H4PBC_PRINTF("Missing characteristic %s\n", c.uuid.toString().c_str());
 					h4Client->disconnect();
 					_resetRemoteChars();
 					return false;
@@ -158,7 +158,7 @@ bool H4P_BLEClient::_connectToServer()
 			return true;
 		}
 		else if (svcTree.first.mandatory){
-			Serial.printf("Missing service %s !", uuidStr.c_str());
+			H4PBC_PRINTF("Missing service %s !", uuidStr.c_str());
 			h4Client->disconnect();
 			return false;
 		}
@@ -201,7 +201,7 @@ void H4P_BLEClient::add(std::pair<BLEUUID,bool> service, std::initializer_list<s
 	std::vector<H4P_BLECharacteristic> chars;
 	for (const auto& c:characteristics) chars.push_back({c.first,c.second});
 	_servicesMap.insert_or_assign({service.first,service.second}, std::move(chars));
-	Serial.printf("add().. _servicesMap.size() %d this=%p\n", _servicesMap.size(), this);
+	H4PBC_PRINTF("add().. _servicesMap.size() %d this=%p\n", _servicesMap.size(), this);
 
 	if (onNotify) _servicesNotify.insert_or_assign({service.first,service.second}, onNotify);
 }

@@ -76,6 +76,7 @@ void H4P_WiFi::_startScan() {
         std::string msg{opts_base};
         appendSSIDs(msg);
         h4puiSync(ssidTag(), msg);
+        h4pbleSync(ssidTag(), msg);
     };
     scan();
     scanner = h4.every(H4P_AP_SCAN_RATE, scan);
@@ -95,6 +96,7 @@ void H4P_WiFi::_apViewers() {
 }
 void H4P_WiFi::_startAP(){
     h4p.gvSetInt(GoTag(),0,false);
+    _apconfig = true;
 
     H4P_Signaller::signal(H4P_SIG_MORSE,"-    ,250");
     _dns53=new DNSServer;

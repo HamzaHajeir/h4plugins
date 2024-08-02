@@ -114,6 +114,7 @@ class H4P_WiFi: public H4Service, public H4AsyncWebServer {
 
 #if H4P_USE_WIFI_AP
                 void            _startAP();
+                bool            _apconfig=false;
         H4P_WiFi(const std::string& device=""): 
             H4Service(wifiTag(),H4PE_FACTORY | H4PE_VIEWERS | H4PE_GPIO | H4PE_GVCHANGE | H4PE_UIADD | H4PE_UISYNC | H4PE_UIMSG | H4PE_BLESINIT),
             H4AsyncWebServer(H4P_WEBSERVER_PORT){

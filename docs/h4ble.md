@@ -18,6 +18,7 @@ Works currently for ESP32's only.
 - [API](#api)
 - [H4BLE Services and Characteristics](#services-and-characteristics-uuids)
 - [H4-style interaction](#h4-style-interaction)
+- [Extra feature](#extra-feature-wifi-mqtt-provisioning)
 - [Example sketches](#example-sketches)
 
 ---
@@ -169,10 +170,7 @@ BLEAdvertising* getAdvertising(); // Gets the advertising object (work on your o
 BLEService* 	getH4Service(); // Gets the H4 BLEService object (work on your own)
 ```
 
-## Example sketches
-
-* [MinimalServer](../examples/08_BLE/H4P_BLESrvMinimal/H4P_BLESrvMinimal.ino)
-  
+---
 
 ## H4-style interaction:
 
@@ -203,6 +201,29 @@ And the data/events are of comma-seperated key:value:
 Example: Pretending the device name got changed to "MyH4Plugins_System" `device:MyH4Plugins_System`.
 
 ---
+## Extra Feature: WiFi-MQTT Provisioning 
+
+When `H4P_WIFI_PROV_BY_BLE` option is activated, the server activates sending custom UI widgets to allow for ssid/psk setting, and explicitly allowing for receiving the submit command (`Go=1`). 
+
+However, the client should map these commands into h4-style config commands `h4/config/ssid={newssid}` and `h4/config/psk={newpsk}`.
+
+The MQTT can be provisioned also, which can be done by setting `h4/config/broker={newbroker}`, `h4/config/mQuser={user}`, `h4/config/mQpass={pass}`. Note that broker should contain the prefix `http`/`https` and the port number, such as "http://some.broker:1883".
+
+To submit all changes, you'll need to submit by commanding `h4/config/Go=1`.
+
+Note that these commands are technically receivable even if there's no related UI widgets are sent, except that the submission command can not be received because it's not recognized, except if the AP mode is active (Hence the AP code handles the submission). One can also use the direct `h4/wifi/change` command instead.  
+
+And regarding MQTT config, any setting would take an effect in the next trial of connection to the MQTT server, so not sending the `Go=1` command would not cancel the change, as these are directly mapped h4 commands to change the globals.
+
+= Why WiFi may be not affected by such? someone asks..
+
+- This is because after booting, H4P waits to an event of either Disconnect (cant connect) or Connect. On disconnect H4P tries with credentials on globals, and on connect the H4P overrides the existing WiFi credentials at globals by ones of the succeeded connection. Therefore the `Go=1` submission is mandatory for enforcing WiFi to change.
+
+---
+
+## Example sketches
+
+* [MinimalServer](../examples/08_BLE/H4P_BLESrvMinimal/H4P_BLESrvMinimal.ino)
 
 (c) 2024 Hamzah Hajeir 
 

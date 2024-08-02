@@ -66,12 +66,12 @@ class H4P_BLEClient : public H4Service {
 		
 		friend class H4ClientCallbacks;
 
-				void			onConnect(BLEClient* pclient) { Serial.printf("H4P_BLEClient onConnect\n"); if (_cbConnect) _cbConnect(); h4.cancel(_connector); }
+				void			onConnect(BLEClient* pclient) { SYSINFO("CNX"); if (_cbConnect) _cbConnect(); /* h4.cancel(_connector); */ }
 				void 			onDisconnect(BLEClient* pclient) {
 					_connected = false;
-					Serial.println("H4P_BLEClient onDisconnect");
+					SYSINFO("DCX");
 					// _connector = h4.every(5000, [this]{ Serial.printf("_connector cb _connected %d _shoudStart %d\n", _connected, _shoudStart); if (!_connected && _shoudStart) svcUp(); });
-					Serial.printf("_connector %p\n", _connector);
+					// Serial.printf("_connector %p\n", _connector);
 					if(_cbDisconnect) _cbDisconnect();
 					svcUp();
 				}
