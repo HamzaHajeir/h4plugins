@@ -78,7 +78,7 @@ void H4P_UPNPServer::_handlePacket(std::string p,IPAddress ip,uint16_t port){
     XLOG("_handlePacket \"%s\"\t from %s:%d", p.c_str(), ip.toString().c_str(), port);
     H4P_NVP_MAP uhdrs;
     std::vector<std::string> hdrs = split(p, "\r\n");
-    while (hdrs.back() == "") hdrs.pop_back();
+    while (hdrs.back().empty()) hdrs.pop_back();
     if(hdrs.size() > 4){
         for (auto const &h: std::vector<std::string>(++hdrs.begin(), hdrs.end())) {
             std::vector<std::string> parts=split(h,":");

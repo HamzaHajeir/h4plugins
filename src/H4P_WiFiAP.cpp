@@ -65,9 +65,9 @@ void H4P_WiFi::_startScan() {
         case 0:
             QLOG("no networks found");
         default:
+            wf_ssids.clear();
             for (int i = 0; i < result; ++i)
                 wf_ssids.emplace_back(WiFi.SSID(i).c_str());
-            removeDuplicates(wf_ssids);
             WiFi.scanDelete();
         case -2:
             WiFi.scanNetworks(true, true);
@@ -108,7 +108,7 @@ void H4P_WiFi::_startAP(){
 
     WiFi.softAP(CSTR(h4p[deviceTag()]));
     _dns53->start(53, "*", WiFi.softAPIP());
-    h4.every(H4WF_AP_RATE,[=](){ _dns53->processNextRequest(); });
+    h4.every(H4WF_AP_RATE,[this](){ _dns53->processNextRequest(); });
 
     _startWebserver();
 }
