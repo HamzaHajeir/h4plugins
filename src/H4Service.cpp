@@ -69,8 +69,6 @@ SOFTWARE.
     };
 #endif
 
-H4P_EVENT_HANDLERS h4pevt;
-
 void H4Service::_addLocals(H4P_CMDMAP local){
     h4pCmdMap.insert(local.begin(),local.end());
     local.clear();

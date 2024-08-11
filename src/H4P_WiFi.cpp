@@ -84,9 +84,9 @@ void H4P_WiFi::_wifiEvent(WiFiEvent_t event) {
 			break;
 	}
 }
-#else
+#elif defined(ARDUINO_ARCH_ESP32)
 //
-//                                                                                                                  ESP32
+//                                                                                                  ESP32
 //
 
 void H4P_WiFi::_hookBLEProvisioning() {
@@ -162,6 +162,37 @@ void H4P_WiFi::_wifiEvent(WiFiEvent_t event) {
 #endif
 	}
 }
+
+#elif defined(ARDUINO_ARCH_RP2040)
+//
+//                                                                                                  RP2040
+//
+void H4P_WiFi::HAL_WIFI_disconnect(){ WiFi.disconnect(false); }
+
+void H4P_WiFi::HAL_WIFI_setHost(const std::string& host){ WiFi.setHostname(CSTR(host)); }
+
+void H4P_WiFi::HAL_WIFI_startSTA(){
+    // WiFi.setSleep(false);
+	// WiFi.setAutoReconnect(true);
+    // WiFi.setAutoConnect(true);
+    Serial.printf("HAL_WIFI_startSTA()\n");
+    WiFi.begin(CSTR(h4p[ssidTag()]),CSTR(h4p[pskTag()]));
+    submitpass = h4p[pskTag()];
+    if (!WiFi.connected() && h4p[ssidTag()]._v.length()) {
+        auto status = WiFi.begin(CSTR(h4p[ssidTag()]), CSTR(h4p[pskTag()]));
+        Serial.printf("WiFi.begin(%s,%s)-> %d\n",CSTR(h4p[ssidTag()]), CSTR(h4p[pskTag()]), status);
+        if (status != WL_CONNECTED) {
+            h4.once(10000, [this]{ if (!WiFi.connected()) HAL_WIFI_startSTA(); /*  Keep trying to connect/reconnect */});
+        }
+        submitpass = h4p[pskTag()];
+    }
+}
+
+void H4P_WiFi::svcUp(){ 
+    Serial.printf("svcUp()\n");
+    _signalBad();
+    _coreStart();
+};
 
 #endif
 
@@ -239,8 +270,11 @@ void H4P_WiFi::_gotIP(){
 
     h4p[ipTag()]=WiFi.localIP().toString().c_str();
     h4p[ssidTag()]=CSTR(WiFi.SSID());
-    h4p[pskTag()]=CSTR(WiFi.psk());
-
+#ifdef ARDUINO_ARCH_RP2040
+    h4p[pskTag()]=submitpass;
+#else
+    h4p[pskTag()]=CSTR(WiFi.psk()); // because it can connect without we call begin(x,y); ((By calling blank begin()))
+#endif
     std::string host=h4p[deviceTag()];
     h4.every(H4WF_OTA_RATE,[this](){ QLOG("ArduinoOTA.handle()"); ArduinoOTA.handle(); },nullptr,H4P_TRID_HOTA,true);
     HAL_WIFI_setHost(host);
@@ -278,7 +312,9 @@ void H4P_WiFi::_handleEvent(const std::string& svc,H4PE_TYPE t,const std::string
             break;
         case H4PE_FACTORY:
             WiFi.mode(WIFI_STA);
+#ifndef ARDUINO_ARCH_RP2040
             WiFi.begin(h4Tag(),h4Tag()); // // === eraseConfig :) becos it wont allow "",""
+#endif
             h4p[ssidTag()]="";
             h4p[pskTag()]="";
             break;
@@ -312,7 +348,34 @@ void H4P_WiFi::_init(){
         h4p.gvSetstring(pskTag(),h4Tag(),true);
     HAL_WIFI_setHost(h4p[deviceTag()]);
     WiFi.persistent(true);
+#if WIFI_EVENT_SYSTEM
     WiFi.onEvent(_wifiEvent);
+#else // Build the event system ourselves.
+    h4.every(250, [this]() {
+        static bool WiFiConnected = false;
+        auto mode = WiFi.getMode();
+        auto checklost = [this]() {
+            if (WiFiConnected) {
+                WiFiConnected = false;
+                _lostIP();
+            }
+        };
+
+        if (mode == WIFI_STA || mode == WIFI_AP_STA) {
+            auto status = WiFi.status();
+            if (status == WL_CONNECTED) {
+                if (WiFiConnected == false) {
+                    WiFiConnected = true;
+                    _gotIP();
+                }
+            } else checklost();
+        } else checklost();
+    });
+#endif
+#ifdef ARDUINO_ARCH_RP2040 && defined(H4P_ASSUMED_LED)
+    WiFi.setTimeout(100);// Might reduce to 1, however the only issue if some application would call WiFi.ping(...).
+    require<H4P_Signaller>(winkTag());
+#endif
 }
 
 void H4P_WiFi::_lostIP(){
@@ -534,7 +597,11 @@ void H4P_WiFi::change(std::string ssid,std::string psk){ // add device / name?
 void H4P_WiFi::info() { 
     H4Service::info();
     reply("Radio is %s Device %s Mode=%d Status: %d IP=%s",WiFi.getMode()==WIFI_OFF ? "OFF":"ON",CSTR(h4p[deviceTag()]),WiFi.getMode(),WiFi.status(),WiFi.localIP().toString().c_str());
+#ifdef ARDUINO_ARCH_RP2040
+    reply(" SSID %s PSK=%s",CSTR(WiFi.SSID()),CSTR(submitpass));
+#else
     reply(" SSID %s PSK=%s",CSTR(WiFi.SSID()),CSTR(WiFi.psk()));
+#endif    
     #ifndef H4P_ASSUMED_LED
         reply(" ** NO Signal Pin! **");
     #endif

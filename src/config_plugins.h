@@ -106,7 +106,12 @@ enum H4P_UILED_COLOR {
 #else
     #define H4P_ASSUMED_SENSE     ACTIVE_HIGH
 #endif
+
+#ifdef ARDUINO_ARCH_RP2040
+    #define H4P_ASSUMED_COLOR H4P_UILED_YELLOW
+#else
     #define H4P_ASSUMED_COLOR H4P_UILED_BLUE
+#endif
 #endif
 
 #define H4P_AP_SCAN_RATE         5000

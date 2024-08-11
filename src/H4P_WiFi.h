@@ -37,11 +37,18 @@ SOFTWARE.
     #include<ESP8266mDNS.h>
     // #include<ESPAsyncTCP.h>
     #include<ESPAsyncUDP.h>
-#else
+#define WIFI_EVENT_SYSTEM   1
+#elif defined(ARDUINO_ARCH_ESP32)
     #include<WiFi.h>
     #include<AsyncUDP.h>
     #include<ESPmDNS.h>
     #include<map> // WHY???
+#define WIFI_EVENT_SYSTEM   1
+#elif defined(ARDUINO_ARCH_RP2040)
+    #include <WiFi.h>
+    #include <WiFiUdp.h>
+    #include <ESP8266mDNS.h>
+#define WIFI_EVENT_SYSTEM   0
 #endif
 #include<DNSServer.h>
 #include<ArduinoOTA.h>
@@ -89,7 +96,12 @@ class H4P_WiFi: public H4Service, public H4AsyncWebServer {
 
         // static  String          _aswsReplace(const String& var);
                 void            _clearUI();
+#ifdef ARDUINO_ARCH_RP2040
+                std::string     submitpass;
+                bool            _cannotConnectSTA(){ return h4p[ssidTag()] == h4Tag() /*  || std::stoi(h4p[GoTag()]) == 0 */; }
+#else
                 bool            _cannotConnectSTA(){ return (WiFi.SSID()==h4Tag() || WiFi.psk()==h4Tag())/*  || std::stoi(h4p[GoTag()]) == 0 */; }
+#endif
                 void            _commonStartup();
                 void            _coreStart();
                 void            _defaultSync(const std::string& svc,const std::string& msg);
@@ -101,7 +113,9 @@ class H4P_WiFi: public H4Service, public H4AsyncWebServer {
                 void            _signalBad();
                 void            _startWebserver();
                 void            _stopWebserver();
+#if WIFI_EVENT_SYSTEM
         static  void            _wifiEvent(WiFiEvent_t event);
+#endif
 #if H4P_USE_WIFI_AP
                 void            _apViewers();
 #endif
