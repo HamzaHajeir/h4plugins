@@ -45,8 +45,18 @@ std::string H4P_UPNPServer::__upnpCommon(const std::string& usn){
 }
 
 void H4P_UPNPServer::__upnpSend(uint32_t mx,const std::string s,IPAddress ip,uint16_t port){
-	h4.nTimesRandom(H4P_UDP_REPEAT,0,mx,[=, this]() {
+	h4.nTimesRandom(H4P_UDP_REPEAT,0,mx,[s,ip,port,this]() {
+#ifdef ARDUINO_ARCH_RP2040
+		Serial.println("__upnpSend");
+		if (_udp.beginPacket(ip, port)) {
+			Serial.printf("BEGIN PACKET\n");
+			_udp.print(s.c_str());
+			auto end = _udp.endPacket();
+			Serial.printf("END PACKET %d\n", end);
+		}
+#else
 		_udp.writeTo((uint8_t *)CSTR(s), s.size(), ip, port);
+#endif
 	},nullptr,H4P_TRID_UDPS); // name this!!
 }
 
@@ -115,6 +125,34 @@ void H4P_UPNPServer::_listenTag(const std::string& tag,const std::string& value)
 
 void H4P_UPNPServer::_listenUDP(){ 
     QLOG("_listenUDP");
+#ifdef ARDUINO_ARCH_RP2040
+    static H4_TIMER UDPListen = nullptr;
+    if (!_udp.beginMulticast(_ubIP, 1900)){
+        if (UDPListen){
+            h4.cancel(UDPListen);
+            UDPListen = nullptr;
+        }
+        return;
+    }
+    if (!UDPListen)
+        UDPListen = h4.every(250, [this](){
+            std::string pkt;
+            auto avail = _udp.available();
+            if (avail) {
+                char p[avail];
+                _udp.read(p,avail);
+                // pkt.append(reinterpret_cast<char>(_udp.read()))
+                pkt = std::string(p,avail);
+                XLOG("_udp.onPacket %s", pkt.c_str());
+            }
+            if (pkt.length()) {
+                auto ip = _udp.remoteIP();
+                auto port = _udp.remotePort();
+                h4.queueFunction([=](){ _handlePacket(pkt,ip,port); },nullptr,H4P_TRID_UPKT); // shud be named etc
+
+            }
+        });
+#else
     if(!_udp.listenMulticast(_ubIP, 1900)) return; // some kinda error?
     _udp.onPacket([this](AsyncUDPPacket packet){
         std::string pkt((const char*)packet.data(),packet.length());
@@ -123,6 +161,7 @@ void H4P_UPNPServer::_listenUDP(){
         uint16_t port=packet.remotePort();
         h4.queueFunction([=, this](){ _handlePacket(pkt,ip,port); },nullptr,H4P_TRID_UPKT); // shud be named etc
     }); 
+#endif
 }
 
 void H4P_UPNPServer::_notify(const std::string& phase){
@@ -175,7 +214,11 @@ void H4P_UPNPServer::svcDown(){
     h4.cancelSingleton(H4P_TRID_NTFY);
     if (_running)
         _notify("byebye");
+#ifdef ARDUINO_ARCH_RP2040
+    _udp.stop();
+#else
     _udp.close(); // delay this RW?
+#endif
     H4Service::svcDown();
 }
 

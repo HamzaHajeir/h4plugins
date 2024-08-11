@@ -40,7 +40,11 @@ extern bool h4punlocked;
 const char* __attribute__((weak)) giveTaskName(uint32_t id){ return "ANON"; }
 
 H4P_SerialCmd::H4P_SerialCmd(bool autoStop): H4Service(cmdTag(),H4PE_FACTORY | H4PE_REBOOT){
+#ifdef ARDUINO_ARCH_RP2040
+    h4.queueFunction([]{h4p.gvSetstring(chipTag(),_HAL_uniqueName("")); });
+#else
     h4p.gvSetstring(chipTag(),_HAL_uniqueName(""));
+#endif
     h4p.gvSetstring(boardTag(),replaceAll(H4_BOARD,"ESP8266_",""));
     h4p.gvSetstring(h4pTag(),H4P_VERSION);
 
@@ -390,10 +394,20 @@ void H4P_SerialCmd::showFS(){
     uint32_t sigma=0;
     uint32_t n=0;
 
-    reply(" totalBytes %d",HAL_FS.totalBytes());
-    reply(" usedBytes %d",HAL_FS.usedBytes());
+    size_t totalBytes, usedBytes;
+#ifdef ARDUINO_ARCH_RP2040
+	FSInfo info;
+	HAL_FS.info(info);
+	totalBytes = info.totalBytes;
+	usedBytes = info.usedBytes;
+#else
+    totalBytes = HAL_FS.totalBytes();
+    usedBytes = HAL_FS.usedBytes();
+#endif
+    reply(" totalBytes %d", totalBytes);
+    reply(" usedBytes %d", usedBytes);
 
-    File root = HAL_FS.open("/");
+    File root = HAL_FS.open("/","r");
  
     File file = root.openNextFile();
  

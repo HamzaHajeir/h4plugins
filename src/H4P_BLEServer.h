@@ -97,6 +97,9 @@ class H4P_BLEServer : public H4Service {
 			// AddLocals .. 
 			//
 
+			// [ ] command to sendElems. (h4/blesrv/refresh) / uisend
+			// [ ] Funcionality to post ble msg (h4/blesrv/msg)
+
 		}
 
 				void 			elemAdd(const std::string& name,H4P_UI_TYPE t,const std::string& h,H4P_FN_UIGET f,uint8_t color);

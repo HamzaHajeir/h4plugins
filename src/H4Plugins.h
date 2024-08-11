@@ -41,6 +41,7 @@ class H4Service;
 #define H4_USE_PLUGINS(s,q,b) \
     H4 h4(s,q); \
     H4P_PROXY_MAP h4pGlobal={ {binTag(),{binTag(),__FILE__,false}} }; \
+    H4P_EVENT_HANDLERS h4pevt; \
     H4P_SerialCmd h4p(b);
 
 std::unordered_map<std::string,H4Service*> h4pmap;

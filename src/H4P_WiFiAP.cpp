@@ -66,11 +66,20 @@ void H4P_WiFi::_startScan() {
             QLOG("no networks found");
         default:
             wf_ssids.clear();
+#ifdef ARDUINO_ARCH_RP2040
+            for (int i = 0; i < result; ++i)
+                wf_ssids.emplace_back(WiFi.SSID(i));
+#else
             for (int i = 0; i < result; ++i)
                 wf_ssids.emplace_back(WiFi.SSID(i).c_str());
+#endif
             WiFi.scanDelete();
         case -2:
+#ifdef ARDUINO_ARCH_RP2040
+            WiFi.scanNetworks(true);
+#else
             WiFi.scanNetworks(true, true);
+#endif
             break;
         }
         std::string msg{opts_base};

@@ -36,7 +36,11 @@ STAG(alive);
 
 class H4P_UPNPServer: public H4Service {
             H4P_WiFi*           _pWiFi;
+#ifdef ARDUINO_ARCH_RP2040
+            WiFiUDP             _udp;
+#else
             AsyncUDP 	        _udp;
+#endif
             IPAddress		    _ubIP=IPAddress(239,255,255,250);;
 
                 std::string          _uuid="uuid:";
