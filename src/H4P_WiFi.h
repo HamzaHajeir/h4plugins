@@ -82,8 +82,11 @@ class H4P_WiFi: public H4Service, public H4AsyncWebServer {
                 VSCMD(_change);
                 VSCMD(_msg);
 
+#if H4P_BLE_AVAILABLE
                 void            _hookBLEProvisioning();
                 void            _unhookBLEProvisioning();
+#endif
+
 #if H4P_USE_WIFI_AP | H4P_WIFI_PROV_BY_BLE
                 bool            bleserver;
                 void            _startScan();

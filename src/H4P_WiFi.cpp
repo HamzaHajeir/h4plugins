@@ -89,34 +89,6 @@ void H4P_WiFi::_wifiEvent(WiFiEvent_t event) {
 //                                                                                                  ESP32
 //
 
-void H4P_WiFi::_hookBLEProvisioning() {
-#if H4P_WIFI_PROV_BY_BLE
-    bleserver = h4puncheckedcall<H4P_BLEServer>(blesrvTag());
-    if (bleserver) {
-        _startScan();
-        h4pbleAdd(ssidTag(),H4P_UI_DROPDOWN,"s");
-        h4pbleAdd(pskTag(),H4P_UI_INPUT,"s");
-        h4pbleAdd(deviceTag(),H4P_UI_INPUT,"s");
-        h4pbleAdd(GoTag(),H4P_UI_IMGBTN,"o");
-    }
-#endif
-}
-void H4P_WiFi::_unhookBLEProvisioning() {
-#if H4P_WIFI_PROV_BY_BLE
-    if (bleserver){
-        _stopScan();
-        auto bleServer = h4puncheckedcall<H4P_BLEServer>(blesrvTag());
-        bleServer->elemRemove(ssidTag());
-        bleServer->elemRemove(pskTag());
-        bleServer->elemRemove(deviceTag());
-        bleServer->elemRemove(GoTag());
-
-        h4pbleAdd(deviceTag(),H4P_UI_TEXT,"s");
-        bleServer->sendElems();
-    }
-    
-#endif
-}
 void H4P_WiFi::HAL_WIFI_disconnect(){ WiFi.disconnect(false,false); }
 
 void H4P_WiFi::HAL_WIFI_setHost(const std::string& host){ WiFi.setHostname(CSTR(host)); }
@@ -196,6 +168,35 @@ void H4P_WiFi::svcUp(){
 
 #endif
 
+#if H4P_BLE_AVAILABLE
+void H4P_WiFi::_hookBLEProvisioning() {
+#if H4P_WIFI_PROV_BY_BLE
+    bleserver = h4puncheckedcall<H4P_BLEServer>(blesrvTag());
+    if (bleserver) {
+        _startScan();
+        h4pbleAdd(ssidTag(),H4P_UI_DROPDOWN,"s");
+        h4pbleAdd(pskTag(),H4P_UI_INPUT,"s");
+        h4pbleAdd(deviceTag(),H4P_UI_INPUT,"s");
+        h4pbleAdd(GoTag(),H4P_UI_IMGBTN,"o");
+    }
+#endif
+}
+void H4P_WiFi::_unhookBLEProvisioning() {
+#if H4P_WIFI_PROV_BY_BLE
+    if (bleserver){
+        _stopScan();
+        auto bleServer = h4puncheckedcall<H4P_BLEServer>(blesrvTag());
+        bleServer->elemRemove(ssidTag());
+        bleServer->elemRemove(pskTag());
+        bleServer->elemRemove(deviceTag());
+        bleServer->elemRemove(GoTag());
+
+        h4pbleAdd(deviceTag(),H4P_UI_TEXT,"s");
+        bleServer->sendElems();
+    }
+#endif
+}
+#endif
 void H4P_WiFi::_coreStart(){
 #if H4P_USE_WIFI_AP
     if(!_dns53){
@@ -290,7 +291,9 @@ void H4P_WiFi::_gotIP(){
     ArduinoOTA.setRebootOnSuccess(false);	
     ArduinoOTA.begin();
 
+#if H4P_BLE_AVAILABLE
     _unhookBLEProvisioning();
+#endif
 
     SYSINFO("IP=%s",CSTR(h4p[ipTag()]));
     _startWebserver();
@@ -300,7 +303,9 @@ void H4P_WiFi::_gotIP(){
 void H4P_WiFi::_handleEvent(const std::string& svc,H4PE_TYPE t,const std::string& msg) {
     switch(t){
         case H4PE_BLESINIT:
+#if H4P_BLE_AVAILABLE
             _hookBLEProvisioning();
+#endif
             h4pbleAdd(boardTag(),H4P_UI_TEXT,"s");
             h4pbleAdd(NBootsTag(),H4P_UI_TEXT,"s");
             h4pbleAdd(ipTag(),H4P_UI_TEXT,"s", h4p[ipTag()]);
@@ -385,7 +390,9 @@ void H4P_WiFi::_lostIP(){
         _stopWebserver();
     if (_connected) {
         _connected = false;
+#if H4P_BLE_AVAILABLE
         _hookBLEProvisioning();
+#endif
     }
     // }
 }

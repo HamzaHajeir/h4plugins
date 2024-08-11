@@ -93,6 +93,7 @@ void H4P_BLEClient::svcUp()
 {
 	H4PBC_PRINTF("H4P_BLEClient::svcUp() _shouldStart %d\n", _shoudStart);
 	if (_shoudStart){
+#ifdef SOC_BLE_50_SUPPORTED
 		static bool started = false;
 		if (!started) {
 			_scan->start(H4BC_SCAN_DURATION, H4BC_SCAN_CONTINUOUS);
@@ -100,6 +101,9 @@ void H4P_BLEClient::svcUp()
 			_scan->startExtScan(H4BC_SCAN_DURATION, H4BC_SCAN_INTERVAL);
 			started = true;
 		}
+#else
+		_scan->start(H4BC_SCAN_DURATION, H4BC_SCAN_CONTINUOUS);
+#endif
 		
 		auto res = h4Client->setMTU(H4_BLE_MTU);
 		H4PBC_PRINTF("setMTU->%d\n", res);
@@ -115,7 +119,9 @@ void H4P_BLEClient::svcDown()
 		_connected = false;
 		// [ ] The library should callback onDisconnect()
 	}
+#ifdef SOC_BLE_50_SUPPORTED
 	if (_scan) _scan->stopExtScan();
+#endif
 }
 void H4P_BLEClient::_handleEvent(const std::string &svc, H4PE_TYPE t, const std::string &msg)
 {
