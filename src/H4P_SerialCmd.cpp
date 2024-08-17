@@ -185,6 +185,7 @@ void H4P_SerialCmd::_run(){
     if((c=Serial.read()) != -1){
         if (c == '\n') {
             std::string cpy = cmd;
+            if (cpy.back() == '\r') cpy.pop_back(); // Support for CRLF
             cmd.clear();
             h4.queueFunction([this, cpy](){
                 uint32_t rv=_simulatePayload(cpy);
@@ -303,7 +304,7 @@ void H4P_SerialCmd::_createProxy(const std::string& name,bool save){ if(!h4pGlob
 
 void H4P_SerialCmd::_adjust(const std::string& name,int value){ 
     _createProxy(name);
-    if(stringIsNumeric(h4p[name].c_str())){
+    if(stringIsNumeric(h4p[name].c_str()) || h4p[name]._v.empty()){
         auto cv=atoi(CSTR(h4pGlobal[name]));
         h4pGlobal[name]=stringFromInt(cv+value);
     }
