@@ -90,6 +90,13 @@ STAG(upTime);
 STAG(user);
 STAG(wifi);
 STAG(wink);
+STAG(emtq);
+STAG(beat)
+
+#if H4_COUNT_LOOPS
+STAG(loop)
+STAG(loops)
+#endif
 
 constexpr const char* cmdhash(){ return "/h4/#"; }
 

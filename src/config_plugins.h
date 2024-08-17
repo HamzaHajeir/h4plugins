@@ -44,6 +44,7 @@ SOFTWARE.
 #define H4P_BLE_AVAILABLE       0
 #if H4P_WIFI_PROV_BY_BLE
 // #pragma message ("H4P_BLE provisioning is not supported for this MCU")
+#undef H4P_WIFI_PROV_BY_BLE
 #define H4P_WIFI_PROV_BY_BLE    0
 #endif
 #endif

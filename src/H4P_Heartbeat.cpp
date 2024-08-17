@@ -28,16 +28,20 @@ SOFTWARE.
 */
 #include<H4P_Heartbeat.h>
 
+STAG(Q)
+
 void H4P_Heartbeat::_handleEvent(const std::string& svc,H4PE_TYPE t,const std::string& msg) {
     switch(t){
         case H4PE_VIEWERS:
             if(STOI(msg)){
                 h4puiAdd(upTimeTag(),H4P_UI_TEXT,"s");
-            #if H4P_UI_HEALTH
-                h4puiAdd("Q",H4P_UI_TEXT,"h");
+#if H4P_UI_HEALTH
+                h4puiAdd(QTag(),H4P_UI_TEXT,"h");
                 h4puiAdd(heapTag(),H4P_UI_TEXT,"h");
-                h4puiAdd("LPS",H4P_UI_TEXT,"h");
-            #endif
+    #if H4_COUNT_LOOPS
+                h4puiAdd(loopsTag(),H4P_UI_TEXT,"h");
+    #endif
+#endif
             }
             break;
         case H4PE_HEARTBEAT:
@@ -48,11 +52,13 @@ void H4P_Heartbeat::_handleEvent(const std::string& svc,H4PE_TYPE t,const std::s
         case H4PE_HEAP:
             h4puiSync(heapTag(),msg);
             break;
+    #if H4_COUNT_LOOPS
         case H4PE_LOOPS:
-            h4puiSync("LPS",msg);
+            h4puiSync(loopsTag(),msg);
             break;
+    #endif
         case H4PE_Q:
-            h4puiSync("Q",msg);
+            h4puiSync(QTag(),msg);
             break;
 #endif
     }

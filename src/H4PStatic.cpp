@@ -55,7 +55,10 @@ void h4punregisterhandler(const std::string& svc,uint32_t t){
 
 void h4pevent(const std::string& svc,H4PE_TYPE t,const std::string& msg){
     h4pGlobalEventHandler(svc,t,msg);
-    if(h4pevt.count(t)) for(auto const& e:h4pevt[t]) e.second(svc,t,msg);
+    if(h4pevt.count(t)) {
+        auto copy = h4pevt[t];
+        for(auto const& e:copy) e.second(svc,t,msg);
+    }
 }
 
 void h4pOnEvent(H4PE_TYPE t,H4P_FN_USEREVENT e){ h4pregisterhandler(userTag(),static_cast<uint32_t>(t),[e](const std::string& i,H4PE_TYPE t,const std::string& m){ e(m); }); }

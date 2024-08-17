@@ -34,26 +34,27 @@ SOFTWARE.
     #include<H4P_EmitHeap.h>
     #include<H4P_EmitQ.h>
     #include<H4P_EmitLoopCount.h>
-#else
-    #include<H4P_EmitTick.h>
 #endif
+#include<H4P_EmitTick.h>
 #include<H4P_Signaller.h>
 #include<H4P_WiFi.h>
+
 class H4P_Heartbeat: public H4Service {
 #ifdef H4P_ASSUMED_LED
                 H4_TIMER    _hbLED;
                 size_t      _period=0;
 #endif
                 void        _handleEvent(const std::string& svc,H4PE_TYPE t,const std::string& msg) override;
-                void        _run();
     public: 
 #if H4P_UI_HEALTH
-        explicit H4P_Heartbeat(): H4Service("beat",H4PE_VIEWERS | H4PE_HEARTBEAT | H4PE_HEAP | H4PE_LOOPS | H4PE_Q){
+        explicit H4P_Heartbeat(): H4Service(beatTag(),H4PE_VIEWERS | H4PE_HEARTBEAT | H4PE_HEAP | H4PE_LOOPS | H4PE_Q){
             require<H4P_EmitHeap>(heapTag());
-            require<H4P_EmitQ>("Q");
-            require<H4P_EmitLoopCount>("LPS");
+            require<H4P_EmitQ>(emtqTag());
+#if H4_COUNT_LOOPS
+            require<H4P_EmitLoopCount>(loopTag());
+#endif
 #else
-        explicit H4P_Heartbeat(): H4Service("beat",H4PE_VIEWERS | H4PE_HEARTBEAT){
+        explicit H4P_Heartbeat(): H4Service(beatTag(),H4PE_VIEWERS | H4PE_HEARTBEAT){
 #endif
             require<H4P_EmitTick>(tickTag());
             depend<H4P_WiFi>(wifiTag());
@@ -61,7 +62,7 @@ class H4P_Heartbeat: public H4Service {
 #ifdef H4P_ASSUMED_LED
         H4P_Heartbeat(size_t period): // ASSUMED ONLY
             _period(period),
-            H4Service("beat",H4PE_VIEWERS | H4PE_HEARTBEAT){
+            H4Service(beatTag(),H4PE_VIEWERS | H4PE_HEARTBEAT){
             require<H4P_EmitTick>(tickTag());
             depend<H4P_WiFi>(wifiTag());
         }

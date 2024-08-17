@@ -53,7 +53,7 @@ class H4P_EmitLoopCount: public H4Service {
             };
 
     public:
-        H4P_EmitLoopCount(): H4Service("loop",H4PE_HEARTBEAT){ 
+        H4P_EmitLoopCount(): H4Service(loopTag(),H4PE_HEARTBEAT){ 
             h4Nloops=0;
             depend<H4P_EmitTick>(tickTag());
         }

@@ -36,7 +36,7 @@ class H4P_EmitQ: public H4Service {
         uint32_t _scale;
 
     public:
-        H4P_EmitQ(uint32_t f=1000,uint32_t scale=1): _f(f),_scale(scale), H4Service("emtq"){}
+        H4P_EmitQ(uint32_t f=1000,uint32_t scale=1): _f(f),_scale(scale), H4Service(emtqTag()){}
 
         virtual void svcUp() override { 
             h4.every(_f,[this](){ XEVENT(H4PE_Q,"%u",_scale * h4.size()); },nullptr,H4P_TRID_QLOG,true);
