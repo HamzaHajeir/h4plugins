@@ -60,7 +60,7 @@ Key
 
 # Introduction
 
-It is a simple (and unavoidable) fact of life that *successful* IOT Apps that are more than just a "blinky" require special programming techniques to do many things at once. It is also true that those techniques are complex and take a long time to learn, even for experienced programmers. H4Plugins is a method of getting you started in sophisticated IOT apps on ESP8266 / ESP32 without that steep learning curve. All the hard work has been done for you and you are left with a very simple event-driven framework into which you just drop the simple few lines of code that you want your app to do when "x" happens.
+It is a simple (and unavoidable) fact of life that *successful* IOT Apps that are more than just a "blinky" require special programming techniques to do many things at once. It is also true that those techniques are complex and take a long time to learn, even for experienced programmers. H4Plugins is a method of getting you started in sophisticated IOT apps on ESP8266 / ESP32 / RP2040 without that steep learning curve. All the hard work has been done for you and you are left with a very simple event-driven framework into which you just drop the simple few lines of code that you want your app to do when "x" happens.
 
 More information on *why* this is the case and why event-driven programming is the solution can be found in the pre-requisite [H4](https://github.com/philbowles/H4) library.
 
@@ -154,6 +154,7 @@ Also please prefer the [Facebook H4  Support / Discussion](https://www.facebook.
 * ESP8266 - any board e.g. nodeMCU, Wemos D1 Mini etc
 * ESP8285 - any board e.g. Wemos D1 mini Lite
 * ESP32 - any board e.g. DevKit, Lolin D32
+* RP2040 - Any board e.g Raspberry Pi Pico W
 * SONOFF Basic, S20, SV and RF. Others may work too if ESP8266 based
 
 ---
@@ -184,9 +185,10 @@ SEE [Installation](#installation)
 
 H4Plugins is tested using
 
-* ArduinoIDE 1.8.13 (and beta 2.0)
-* ESP8266 core 2.7.4
-* ESP32 core 1.0.4
+* [ESP8266 core 3.1.2](https://github.com/esp8266/Arduino)
+* [ESP32 core 3.0.4](https://github.com/espressif/arduino-esp32)
+* [RP2040 core 3.9.5](https://github.com/earlephilhower/arduino-pico)
+* [Arduino IDE 2.3.2](https://www.arduino.cc/en/software)
 
 ---
 ## Tools / Build Guidelines
@@ -255,8 +257,16 @@ After you have finished reading this file, the recommended path you should follo
 ---
 
 # Installation
+## PlatformIO
 
-Please see [H4 Installer](https://github.com/philbowles/h4installer)
+One can get a homogeneous H4 Stack versions from the [PlatformIO H4Plugins Environment](https://github.com/hamzahajeir/h4plugins_env). One can reuse the environment directly, or copy the parts of interest in the configuration file `platformio.ini` in a new project.
+
+## Arduino IDE
+
+Simply download the zip of this repository and install as an Arduino library: `Sketch/Include Library/Add .ZIP Library...`
+
+Soon* all H4 libraries will use the [H4 Installer](https://github.com/philbowles/h4installer). This ensures that all versions match and that other additional special functions are included e.g. Addition of optimised board definitions in H4Plugins...
+
 # Issues
 
 ## If you want a *quick* resolution, please follow these rules:
