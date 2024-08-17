@@ -152,6 +152,13 @@ enum H4P_UILED_COLOR {
 #define H4WF_OTA_RATE         1500
 #define H4WF_EVT_TIMEOUT     30000
 
+#define H4WF_RC_INTERVAL     10000      // WiFi interval for reconnection, only if WiFi class does not handle it.
+#define H4WF_TIMEOUT           100      // Timeout for RP2040 that blocks in ::begin().
+#define H4WF_CHECK_INTERVAL    250      // WiFi Status check interval.
+
+#define H4WD_TIMEOUT          3000      // Watchdog Timer Timoeout (for RP2040)
+#define H4WD_FEED_INTERVAL    1000      // Watchdog Timer Feed Interval
+
 #define H4P_GK_SCAVENGE      30000
 #define H4P_GK_STAGGER           1
 

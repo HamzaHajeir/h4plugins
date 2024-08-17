@@ -144,18 +144,12 @@ void H4P_WiFi::HAL_WIFI_disconnect(){ WiFi.disconnect(false); }
 void H4P_WiFi::HAL_WIFI_setHost(const std::string& host){ WiFi.setHostname(CSTR(host)); }
 
 void H4P_WiFi::HAL_WIFI_startSTA(){
-    // WiFi.setSleep(false);
-	// WiFi.setAutoReconnect(true);
-    // WiFi.setAutoConnect(true);
     H4P_PRINTF("HAL_WIFI_startSTA() WFConn %d SSIDLen %d\n", WiFi.connected(), h4p[ssidTag()]._v.length());
-    WiFi.begin(CSTR(h4p[ssidTag()]),CSTR(h4p[pskTag()]));
     submitpass = h4p[pskTag()];
     if (!WiFi.connected() && h4p[ssidTag()]._v.length()) {
         auto status = WiFi.begin(CSTR(h4p[ssidTag()]), CSTR(h4p[pskTag()]));
         H4P_PRINTF("WiFi.begin(%s,%s)-> %d connected=%d\n",CSTR(h4p[ssidTag()]), CSTR(h4p[pskTag()]), status, WiFi.connected());
-        if (status != WL_CONNECTED) {
-            h4.once(10000, [this]{ if (!WiFi.connected()) HAL_WIFI_startSTA(); /*  Keep trying to connect/reconnect */});
-        }
+        h4.once(H4WF_RC_INTERVAL, [this]{ if (!WiFi.connected()) HAL_WIFI_startSTA(); /*  Keep trying to connect/reconnect */});
         submitpass = h4p[pskTag()];
     }
 }
@@ -197,6 +191,34 @@ void H4P_WiFi::_unhookBLEProvisioning() {
 #endif
 }
 #endif
+
+#if !H4P_WIFI_EVENT_SYSTEM
+void H4P_WiFi::_checkStatus()
+{
+    // H4P_PRINTF("_checkStatus()\n");
+    static bool WiFiConnected = false;
+    auto mode = WiFi.getMode();
+    auto status = WiFi.status();
+    auto connected = WiFi.connected();
+    // H4P_PRINTF("WiFiConnected %d\tmode %d\tconnected %d\tstatus %d\n", WiFiConnected, mode, connected, status);
+    auto checklost = [this]() {
+        if (WiFiConnected) {
+            WiFiConnected = false;
+            _lostIP();
+        }
+    };
+
+    if (mode == WIFI_STA || mode == WIFI_AP_STA) {
+        if (connected) {
+            if (!WiFiConnected) {
+                WiFiConnected = true;
+                _gotIP();
+            }
+        } else checklost();
+    }
+
+}
+#endif
 void H4P_WiFi::_coreStart(){
 #if H4P_USE_WIFI_AP
     if(!_dns53){
@@ -235,7 +257,7 @@ void H4P_WiFi::_clearUI(){
 }
 
 void H4P_WiFi::_commonStartup(){
-#ifdef LED_BUILTIN
+#if !defined(ARDUINO_ARCH_RP2040) && (defined(H4P_ASSUMED_LED) && H4P_ASSUMED_LED != (255u))
     require<H4P_Signaller>(winkTag());
 #endif
     if(h4p[deviceTag()]=="") h4p[deviceTag()]=std::string("H4-").append(h4p[chipTag()]);
@@ -353,33 +375,16 @@ void H4P_WiFi::_init(){
         h4p.gvSetstring(pskTag(),h4Tag(),true);
     HAL_WIFI_setHost(h4p[deviceTag()]);
     WiFi.persistent(true);
-#if WIFI_EVENT_SYSTEM
+#if H4P_WIFI_EVENT_SYSTEM
     WiFi.onEvent(_wifiEvent);
 #else // Build the event system ourselves.
-    h4.every(250, [this]() {
-        static bool WiFiConnected = false;
-        auto mode = WiFi.getMode();
-        auto checklost = [this]() {
-            if (WiFiConnected) {
-                WiFiConnected = false;
-                _lostIP();
-            }
-        };
-
-        if (mode == WIFI_STA || mode == WIFI_AP_STA) {
-            auto status = WiFi.status();
-            if (status == WL_CONNECTED) {
-                if (WiFiConnected == false) {
-                    WiFiConnected = true;
-                    _gotIP();
-                }
-            } else checklost();
-        } else checklost();
-    });
+    h4.every(H4WF_CHECK_INTERVAL, [this]() { _checkStatus(); });
 #endif
-#ifdef ARDUINO_ARCH_RP2040 && defined(H4P_ASSUMED_LED)
-    WiFi.setTimeout(100);// Might reduce to 1, however the only issue if some application would call WiFi.ping(...).
-    require<H4P_Signaller>(winkTag());
+#if defined(ARDUINO_ARCH_RP2040)
+    WiFi.setTimeout(H4WF_TIMEOUT);// Might reduce to 1, however the only issue if some application would call WiFi.ping(...).
+#if defined(H4P_ASSUMED_LED) && H4P_ASSUMED_LED != (255u)
+    auto p = require<H4P_Signaller>(winkTag());
+#endif
 #endif
 }
 
@@ -627,6 +632,9 @@ void H4P_WiFi::svcDown(){
     _signalBad();
     h4.cancelSingleton(H4P_TRID_HOTA);
     if (_running) HAL_WIFI_disconnect();
+#if !H4P_WIFI_EVENT_SYSTEM
+    _checkStatus(); // Should go disconnected.
+#endif
 #ifdef ARDUINO_ARCH_ESP8266
     _shouldStart = false;
 #endif

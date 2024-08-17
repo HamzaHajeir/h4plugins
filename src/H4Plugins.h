@@ -42,14 +42,14 @@ class H4Service;
     H4 h4(s,q); \
     H4P_PROXY_MAP h4pGlobal={ {binTag(),{binTag(),__FILE__,false}} }; \
     H4P_EVENT_HANDLERS h4pevt; \
+    std::unordered_map<std::string,H4Service*> h4pmap; \
+    H4P_PINMAP          h4pPinMap; \
     H4P_SerialCmd h4p(b);
 
-std::unordered_map<std::string,H4Service*> h4pmap;
-bool                h4punlocked=true;
 
+bool                h4punlocked=true;
 H4P_CMDMAP          h4pCmdMap;
 H4P_FLASHMAP        h4pFlashMap;
-H4P_PINMAP          h4pPinMap;
 
 #if H4P_VERBOSE
     H4_INT_MAP cmdErrors={

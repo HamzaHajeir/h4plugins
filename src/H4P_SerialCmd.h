@@ -46,6 +46,13 @@ class H4P_SerialCmd: public H4Service {
                 VSCMD(_svcStart);
                 VSCMD(_svcStop);
 
+#ifdef ARDUINO_ARCH_RP2040
+                void            _init() override {
+                    rp2040.wdt_begin(H4WD_TIMEOUT);
+                    h4.every(H4WD_FEED_INTERVAL, []{ rp2040.wdt_reset(); });
+                }
+#endif
+
                 H4P_CMDMAP_I    __exactMatch(const std::string& cmd,uint32_t owner);
                 void            __flatten(std::function<void(std::string)> fn);
 

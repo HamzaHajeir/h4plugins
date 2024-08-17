@@ -40,7 +40,16 @@ class H4P_EventListener: public H4Service{
 };
 
 class H4P_SerialLogger: public H4P_EventListener{ 
+#ifdef ARDUINO_ARCH_RP2040
+        bool init = false;
+        virtual void _init() override { init = true; }
+#endif
     public:
         H4P_SerialLogger(uint32_t filter=H4PE_ALL): 
-            H4P_EventListener(filter,[](const std::string& s,H4PE_TYPE t,const std::string& m){ _H4P_PRINTF("SLOG: %s %s %s\n",CSTR(s),CSTR(h4pGetEventName(t)),CSTR(m)); }){}
+            H4P_EventListener(filter,[&](const std::string& s,H4PE_TYPE t,const std::string& m){ 
+#ifdef ARDUINO_ARCH_RP2040
+                                        if (!init) return; // To not use Serial before its construction time.
+#endif
+                                        _H4P_PRINTF("SLOG: %s %s %s\n",CSTR(s),CSTR(h4pGetEventName(t)),CSTR(m)); 
+                                        }){}
 };

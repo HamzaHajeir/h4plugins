@@ -37,18 +37,18 @@ SOFTWARE.
     #include<ESP8266mDNS.h>
     // #include<ESPAsyncTCP.h>
     #include<ESPAsyncUDP.h>
-#define WIFI_EVENT_SYSTEM   1
+#define H4P_WIFI_EVENT_SYSTEM   1
 #elif defined(ARDUINO_ARCH_ESP32)
     #include<WiFi.h>
     #include<AsyncUDP.h>
     #include<ESPmDNS.h>
     #include<map> // WHY???
-#define WIFI_EVENT_SYSTEM   1
+#define H4P_WIFI_EVENT_SYSTEM   1
 #elif defined(ARDUINO_ARCH_RP2040)
     #include <WiFi.h>
     #include <WiFiUdp.h>
     #include <ESP8266mDNS.h>
-#define WIFI_EVENT_SYSTEM   0
+#define H4P_WIFI_EVENT_SYSTEM   0
 #endif
 #include<DNSServer.h>
 #include<ArduinoOTA.h>
@@ -116,8 +116,10 @@ class H4P_WiFi: public H4Service, public H4AsyncWebServer {
                 void            _signalBad();
                 void            _startWebserver();
                 void            _stopWebserver();
-#if WIFI_EVENT_SYSTEM
+#if H4P_WIFI_EVENT_SYSTEM
         static  void            _wifiEvent(WiFiEvent_t event);
+#else 
+                void            _checkStatus();
 #endif
 #if H4P_USE_WIFI_AP
                 void            _apViewers();
