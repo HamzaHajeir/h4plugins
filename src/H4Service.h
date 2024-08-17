@@ -38,6 +38,13 @@ SOFTWARE.
     std::string getTerminalName(const std::string& s);
 #endif
 
+#define _H4P_PRINTF(...) _H4T_PRINTF(__VA_ARGS__)
+
+#if H4P_DEBUG
+#define H4P_PRINTF(...) _H4P_PRINTF(__VA_ARGS__)
+#else
+#define H4P_PRINTF(...)
+#endif
 //void  _HAL_analogWrite(uint8_t pin, uint32_t value);
 //void  _HAL_analogFrequency(uint8_t pin,size_t f);
 
@@ -353,7 +360,7 @@ class H4Service {
                 uint32_t            _guardString2(std::vector<std::string> vs,std::function<H4_CMD_ERROR(std::string,std::string)> f);
                 uint32_t            _guard1(std::vector<std::string> vs,H4_FN_MSG f);
         virtual void                _handleEvent(const std::string& svc,H4PE_TYPE t,const std::string& msg){}
-        virtual void                _reply(std::string msg) { Serial.println(CSTR(msg)); }
+        virtual void                _reply(std::string msg) { _H4P_PRINTF(CSTR(msg.append("\n")));}
 
         template<typename T>
         T* depend(const std::string& svc){
@@ -395,17 +402,17 @@ class H4Service {
 };
 
 #define H4P_DEFAULT_SYSTEM_HANDLER case H4PE_SYSFATAL: \
-    Serial.printf("\n************** FATAL ERROR ***********************\n*\n"); \
-    Serial.printf("*    %s %s \n",CSTR(svc),CSTR(msg)); \
-    Serial.printf("*\n**************************************************\n"); \
+    _H4P_PRINTF("\n************** FATAL ERROR ***********************\n*\n"); \
+    _H4P_PRINTF("*    %s %s \n",CSTR(svc),CSTR(msg)); \
+    _H4P_PRINTF("*\n**************************************************\n"); \
     pinMode(H4P_ASSUMED_LED,OUTPUT); while(1){ digitalWrite(H4P_ASSUMED_LED,LOW);delay(25);digitalWrite(H4P_ASSUMED_LED,HIGH);delay(25); }  \
 case H4PE_SYSWARN: \
-    Serial.printf("\n****************** WARNING ***********************\n*\n"); \
-    Serial.printf("*    %s %s \n",CSTR(svc),CSTR(msg)); \
-    Serial.printf("*\n**************************************************\n"); \
+    _H4P_PRINTF("\n****************** WARNING ***********************\n*\n"); \
+    _H4P_PRINTF("*    %s %s \n",CSTR(svc),CSTR(msg)); \
+    _H4P_PRINTF("*\n**************************************************\n"); \
     break; \
 case H4PE_SYSINFO: \
-    Serial.printf("\n*INFO: %s %s\n",CSTR(svc),CSTR(msg)); \
+    _H4P_PRINTF("\n*INFO: %s %s\n",CSTR(svc),CSTR(msg)); \
     break;
 
 #define H4PGLUE2(x,y) x##y

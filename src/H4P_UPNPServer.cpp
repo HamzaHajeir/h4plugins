@@ -47,12 +47,12 @@ std::string H4P_UPNPServer::__upnpCommon(const std::string& usn){
 void H4P_UPNPServer::__upnpSend(uint32_t mx,const std::string s,IPAddress ip,uint16_t port){
 	h4.nTimesRandom(H4P_UDP_REPEAT,0,mx,[s,ip,port,this]() {
 #ifdef ARDUINO_ARCH_RP2040
-		Serial.println("__upnpSend");
+		H4P_PRINTF("__upnpSend\n");
 		if (_udp.beginPacket(ip, port)) {
-			Serial.printf("BEGIN PACKET\n");
+			H4P_PRINTF("BEGIN PACKET\n");
 			_udp.print(s.c_str());
 			auto end = _udp.endPacket();
-			Serial.printf("END PACKET %d\n", end);
+			H4P_PRINTF("END PACKET %d\n", end);
 		}
 #else
 		_udp.writeTo((uint8_t *)CSTR(s), s.size(), ip, port);

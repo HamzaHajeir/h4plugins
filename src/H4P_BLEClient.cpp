@@ -130,14 +130,14 @@ bool H4P_BLEClient::_connectToServer()
 {
 	H4PBC_PRINTF("Forming a connection to %s\n", _advertised->getAddress().toString().c_str());
 
-	Serial.println(" - Created client");
+	H4PBC_PRINTF(" - Created client\n");
 
 	h4Client->setClientCallbacks(&clientCallbacks.set(this));
 
 	// Connect to the remove BLE Server.
 	auto b = h4Client->connect(_advertised);  // if you pass BLEAdvertisedDevice instead of address, it will be recognized type of peer device address (public or private)
 	if (!b) {
-		Serial.println(" Connecting to server Failed!");
+		H4PBC_PRINTF(" Connecting to server Failed!\n");
 		return false;
 	}
 
@@ -147,7 +147,7 @@ bool H4P_BLEClient::_connectToServer()
 		auto uuidStr = std::string(const_cast<H4P_BLEService&>(svcTree.first).uuid.toString().c_str());
 		if (services->count(uuidStr)){
 			auto remoteService = (*services)[uuidStr];
-			Serial.println(" - Found our service");
+			H4PBC_PRINTF(" - Found our service\n");
 
 			// auto chars = remoteService->getCharacteristics();
 			for (auto& c:svcTree.second) {
@@ -175,11 +175,11 @@ bool H4P_BLEClient::_findCharacteristic(BLERemoteService *pRemoteService, BLERem
 {	
 	// Obtain a reference to the characteristic in the service of the remote BLE server.
 	if (l_BLERemoteChar == nullptr) {
-		Serial.print("Failed to find one of the characteristics");
-		Serial.print(l_BLERemoteChar->getUUID().toString().c_str());
+		H4PBC_PRINTF("Failed to find one of the characteristics");
+		H4PBC_PRINTF(l_BLERemoteChar->getUUID().toString().c_str());
 		return false;
 	}
-	Serial.println(" - Found characteristic: " + String(l_BLERemoteChar->getUUID().toString().c_str()));
+	H4PBC_PRINTF(" - Found characteristic: \n" + String(l_BLERemoteChar->getUUID().toString().c_str()));
 
 	if(l_BLERemoteChar->canNotify())
 		l_BLERemoteChar->registerForNotify([this](BLERemoteCharacteristic* rc, uint8_t* d, size_t l, bool n){_notifyCallback(rc,d,l,n);});

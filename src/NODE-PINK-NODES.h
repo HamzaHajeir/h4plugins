@@ -221,7 +221,7 @@ class  npROTARYDECODE: public npNODE {
 class  npSHOW: public npNODE {
     public:
         msg operator()(msg m) override {
-            Serial.printf("  npSHOW L=%d P=%u T=%lu D=%u H=%d CLK=%d sigE=%u\n",m.load,m.phy,m.time,m.delta,m.halt,m.timer,m.sigE);
+            _H4P_PRINTF("  npSHOW L=%d P=%u T=%lu D=%u H=%d CLK=%d sigE=%u\n",m.load,m.phy,m.time,m.delta,m.halt,m.timer,m.sigE);
             return m;
         }
 };

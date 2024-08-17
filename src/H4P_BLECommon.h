@@ -11,13 +11,13 @@
 #define H4P_BLESERVER_DEBUG 0
 
 #if H4P_BLECLIENT_DEBUG
-#define H4PBC_PRINTF(x,...) Serial.printf((x),##__VA_ARGS__);
+#define H4PBC_PRINTF(x,...) _H4P_PRINTF((x),##__VA_ARGS__);
 #else
 #define H4PBC_PRINTF(x,...)
 #endif
 
-#if H4P_BLECLIENT_DEBUG
-#define H4PBS_PRINTF(x,...) Serial.printf((x),##__VA_ARGS__);
+#if H4P_BLESERVER_DEBUG
+#define H4PBS_PRINTF(x,...) _H4P_PRINTF((x),##__VA_ARGS__);
 #else
 #define H4PBS_PRINTF(x,...)
 #endif

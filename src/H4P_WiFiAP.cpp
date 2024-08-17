@@ -47,7 +47,7 @@ void H4P_WiFi::_stopScan() {
 }
 void H4P_WiFi::_startScan() {
     if (scanner) {
-        Serial.printf("Already scanning is activated\n");
+        H4P_PRINTF("Already scanning is activated\n");
         return;
     }
     auto scan = [this](){

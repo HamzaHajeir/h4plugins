@@ -77,7 +77,7 @@ void H4Service::_addLocals(H4P_CMDMAP local){
 void H4Service::_envoi(const std::string& s){
     auto pp=h4puncheckedcall<H4Service>(h4pSrc);
     if(pp) pp->_reply(s); // send reply back to originating source
-    else Serial.printf("%s\n",CSTR(s));
+    else _H4P_PRINTF("%s\n",CSTR(s));
 }
 
 std::vector<uint32_t> H4Service::_expectInt(std::string pl,const char* delim){

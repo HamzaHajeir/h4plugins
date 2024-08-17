@@ -48,11 +48,11 @@ void H4P_PinMachine::info(){
 
 void H4P_PinMachine::svcUp(){
 #if H4P_LOG_MESSAGES
-   Serial.printf("H4P_PinMachine::svcUp %d\n",h4pPinMap.size());
+   _H4P_PRINTF("H4P_PinMachine::svcUp %d\n",h4pPinMap.size());
 #endif
    for(auto const& p:h4pPinMap) {
 #if H4P_LOG_MESSAGES
-        Serial.printf("START PINS: %s\n",p.second->dump().data());
+        _H4P_PRINTF("START PINS: %s\n",p.second->dump().data());
 #endif
         p.second->_announce();
     }

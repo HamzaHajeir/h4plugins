@@ -147,12 +147,12 @@ void H4P_WiFi::HAL_WIFI_startSTA(){
     // WiFi.setSleep(false);
 	// WiFi.setAutoReconnect(true);
     // WiFi.setAutoConnect(true);
-    Serial.printf("HAL_WIFI_startSTA()\n");
+    H4P_PRINTF("HAL_WIFI_startSTA() WFConn %d SSIDLen %d\n", WiFi.connected(), h4p[ssidTag()]._v.length());
     WiFi.begin(CSTR(h4p[ssidTag()]),CSTR(h4p[pskTag()]));
     submitpass = h4p[pskTag()];
     if (!WiFi.connected() && h4p[ssidTag()]._v.length()) {
         auto status = WiFi.begin(CSTR(h4p[ssidTag()]), CSTR(h4p[pskTag()]));
-        Serial.printf("WiFi.begin(%s,%s)-> %d\n",CSTR(h4p[ssidTag()]), CSTR(h4p[pskTag()]), status);
+        H4P_PRINTF("WiFi.begin(%s,%s)-> %d connected=%d\n",CSTR(h4p[ssidTag()]), CSTR(h4p[pskTag()]), status, WiFi.connected());
         if (status != WL_CONNECTED) {
             h4.once(10000, [this]{ if (!WiFi.connected()) HAL_WIFI_startSTA(); /*  Keep trying to connect/reconnect */});
         }
@@ -166,7 +166,7 @@ void H4P_WiFi::svcUp(){
     _coreStart();
 };
 
-#endif
+#endif // defined(ARDUINO_ARCH_RP2040)
 
 #if H4P_BLE_AVAILABLE
 void H4P_WiFi::_hookBLEProvisioning() {

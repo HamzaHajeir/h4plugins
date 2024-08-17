@@ -74,7 +74,7 @@ class H4P_BLEServer : public H4Service {
 #if H4P_LOG_MESSAGES
         // void                info() override;
 #endif
-		void 				restart() { Serial.println("BLESRV _restart"); svcDown(); svcUp(); }
+		void 				restart() { H4PBS_PRINTF("BLESRV _restart\n"); svcDown(); svcUp(); }
 		void 				notify(const std::string& key, const std::string& value);
 
         void                _init() override;
