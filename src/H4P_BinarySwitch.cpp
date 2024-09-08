@@ -34,17 +34,14 @@ void H4P_BinarySwitch::_init() {
 }
 
 void H4P_ConditionalSwitch::_handleEvent(const std::string& svc,H4PE_TYPE t,const std::string& msg){
-    switch(t){
-        case H4PE_VIEWERS:
-            {
-                if(STOI(msg)) {
-                    uint32_t mode=WiFi.getMode();
-                #if H4P_USE_WIFI_AP
-                    if(mode==WIFI_AP) return;
-                #endif
-                    h4puiAdd(conditionTag(),H4P_UI_BOOL,"o",stringFromInt(_predicate()),H4P_UILED_BI);
-                }
-            }
+    if(t==H4PE_VIEWERS){
+        if(STOI(msg)) {
+        #if H4P_USE_WIFI_AP
+            uint32_t mode=WiFi.getMode();
+            if(mode==WIFI_AP) return;
+        #endif
+            h4puiAdd(conditionTag(),H4P_UI_BOOL,"o",stringFromInt(_predicate()),H4P_UILED_BI);
+        }
     }
     H4P_BinarySwitch::_handleEvent(svc,t,msg);
 }

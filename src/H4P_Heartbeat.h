@@ -61,8 +61,8 @@ class H4P_Heartbeat: public H4Service {
         }
 #ifdef H4P_ASSUMED_LED
         H4P_Heartbeat(size_t period): // ASSUMED ONLY
-            _period(period),
-            H4Service(beatTag(),H4PE_VIEWERS | H4PE_HEARTBEAT){
+            H4Service(beatTag(),H4PE_VIEWERS | H4PE_HEARTBEAT),
+            _period(period) {
             require<H4P_EmitTick>(tickTag());
             depend<H4P_WiFi>(wifiTag());
         }

@@ -52,6 +52,7 @@ void H4P_BLEServer::onConnect(esp_ble_gatts_cb_param_t *param) {
 	connected = true;
 	H4Service::svcUp();
 	h4p[_me]=stringFromInt(_running);
+#if H4P_BLESERVER_DEBUG
 	esp_ble_gatts_cb_param_t::gatts_connect_evt_param connect = param->connect;
 	conn_id = connect.conn_id;
 	uint8_t link_role = connect.link_role;
@@ -69,6 +70,7 @@ void H4P_BLEServer::onConnect(esp_ble_gatts_cb_param_t *param) {
 						conn_params.timeout,
 						BLEUtils::addressTypeToString(ble_addr_type),
 						conn_handle);
+#endif
 	uint16_t bleID = h4Server->getConnId();
     h4Server->updatePeerMTU(bleID, H4_BLE_MTU);
 	SYSINFO("CNX by %s",CSTR(BLEAddress(remote_bda).toString()));
@@ -158,6 +160,8 @@ void H4P_BLEServer::_handleEvent(const std::string& svc,H4PE_TYPE t,const std::s
 
 		// case H4PE_GPIO:
 		// 	// if (connected) Notify(factory)
+		default: 
+			break;
     }
 }
 

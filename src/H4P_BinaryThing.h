@@ -46,7 +46,7 @@ class H4P_BinaryThing: public H4Service{
                 uint32_t            _switch(std::vector<std::string> vs){ return _guardInt1(vs,[this](bool b){ turn(b); }); }
 
     public:
-        H4P_BinaryThing(H4P_FN_VB thingFunction,bool initial=OFF,uint32_t timer=0): _thing(thingFunction),H4Service(onofTag(),H4PE_GVCHANGE|H4PE_VIEWERS) {
+        H4P_BinaryThing(H4P_FN_VB thingFunction,bool initial=OFF,uint32_t timer=0): H4Service(onofTag(),H4PE_GVCHANGE|H4PE_VIEWERS), _thing(thingFunction) {
             h4p.gvSetInt(stateTag(),initial,false);
             h4p.gvSetInt(autoOffTag(),timer,true);
             _addLocals({
@@ -86,8 +86,8 @@ class H4P_ConditionalThing: public H4P_BinaryThing{
         virtual void        _handleEvent(const std::string& svc,H4PE_TYPE t,const std::string& msg) override;
     public:
         H4P_ConditionalThing(H4P_FN_VB thingFunction,H4_FN_CPRED predicate,bool initial=OFF,uint32_t timer=0): 
-            _predicate(predicate),
-            H4P_BinaryThing(thingFunction,initial,timer) { syncCondition(); }
+            H4P_BinaryThing(thingFunction,initial,timer),
+            _predicate(predicate) { syncCondition(); }
 #if H4P_LOG_MESSAGES
                 void        info() override { 
                     H4P_BinaryThing::info();

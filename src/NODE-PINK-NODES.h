@@ -109,13 +109,13 @@ class npFLIPFLOP: public npNODE {
 
 class h4pEncoderAuto;
 class npLIMITER: public npNODE {
-        bool        _wrap;
+        h4pEncoderAuto*     _owner;
         int         _value=0;
         int         _vMin,_vMax,_vInc;
+        bool        _wrap;
 
         int         _clip(int v);
         void        _set(int v);
-        h4pEncoderAuto*     _owner;
     public:
         npLIMITER(h4pEncoderAuto* owner,int vMin,int vMax,int vInc=1,int vSet=50,bool wrap=false): _owner(owner),_vMin(vMin),_vMax(vMax),_vInc(vInc),_wrap(wrap){ setPercent(vSet); }
 
@@ -251,8 +251,8 @@ class npSTAGEMANAGER: public npNODE {
 };
 
 class npTHRESHOLD: public npNODE { // can we tidy / coalesce?
-        uint32_t        _lim=0;
         H4PM_COMPARE    _cmp;
+        uint32_t        _lim=0;
     public:
         npTHRESHOLD(uint32_t lim,H4PM_COMPARE cmp): _cmp(cmp),_lim(lim){}
 

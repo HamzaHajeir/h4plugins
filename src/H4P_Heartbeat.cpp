@@ -61,6 +61,8 @@ void H4P_Heartbeat::_handleEvent(const std::string& svc,H4PE_TYPE t,const std::s
             h4puiSync(QTag(),msg);
             break;
 #endif
+        default:
+            break;
     }
 }
 

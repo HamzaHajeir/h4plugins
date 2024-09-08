@@ -31,9 +31,9 @@ SOFTWARE.
 class h4proxy {
             h4proxy&    _set(const std::string& s);
     public:
-            bool        _save;
             std::string      _id="";
             std::string      _v="";
+            bool        _save;
 
         h4proxy(){};
         h4proxy(const std::string& name,const std::string& value,bool save=false): _id(name),_v(value),_save(save){}

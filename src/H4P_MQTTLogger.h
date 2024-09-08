@@ -37,7 +37,7 @@ class H4P_MQTTLogger: public H4Service {
         std::string          _topic;
         void            _handleEvent(const std::string& svc,H4PE_TYPE t,const std::string& msg) override { _pMQTT->publishDevice(_topic,msg); }
     public:
-        H4P_MQTTLogger(const std::string& topic,uint32_t filter=H4PE_ALL): _topic(topic),H4Service("mlog",filter,false){
+        H4P_MQTTLogger(const std::string& topic,uint32_t filter=H4PE_ALL): H4Service("mlog",filter,false),_topic(topic){
             _pMQTT=depend<H4P_AsyncMQTT>(mqttTag());
         }
 #if H4P_LOG_MESSAGES

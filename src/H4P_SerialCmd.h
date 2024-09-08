@@ -33,7 +33,9 @@ SOFTWARE.
 
 enum H4P_SVC_CONTROL {
     H4PSVC_RESTART,
+#if H4P_LOG_MESSAGES
     H4PSVC_STATE,
+#endif
     H4PSVC_START,
     H4PSVC_STOP
 };
@@ -42,7 +44,10 @@ class H4P_SerialCmd: public H4Service {
                 VSCMD(_config);
                 VSCMD(_get);
                 VSCMD(_svcRestart);
+
+#if H4P_LOG_MESSAGES
                 VSCMD(_svcInfo);
+#endif
                 VSCMD(_svcStart);
                 VSCMD(_svcStop);
 

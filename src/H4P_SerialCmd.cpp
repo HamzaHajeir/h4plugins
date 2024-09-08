@@ -164,9 +164,12 @@ uint32_t H4P_SerialCmd::_get(std::vector<std::string> vs){
 void H4P_SerialCmd::_handleEvent(const std::string& svc,H4PE_TYPE t,const std::string& msg){
     switch(t){
         case H4PE_FACTORY:
-            clear(); 
+            clear();
+            [[fallthrough]];
         case H4PE_REBOOT:
             h4rebootCore();
+        default:
+            break;
     }
 }
 
@@ -227,6 +230,7 @@ uint32_t H4P_SerialCmd::_svcControl(H4P_SVC_CONTROL action,std::vector<std::stri
                     break;
                 case H4PSVC_RESTART:
                     p->svcDown();
+                    [[fallthrough]];
                 case H4PSVC_START:
                     p->svcUp();
                     break;
@@ -241,7 +245,9 @@ uint32_t H4P_SerialCmd::_svcRestart(std::vector<std::string> vs){ return _svcCon
 
 uint32_t H4P_SerialCmd::_svcStart(std::vector<std::string> vs){ return _svcControl(H4PSVC_START,vs); }
 
+#if H4P_LOG_MESSAGES
 uint32_t H4P_SerialCmd::_svcInfo(std::vector<std::string> vs){ return _svcControl(H4PSVC_STATE,vs); }
+#endif
 
 uint32_t H4P_SerialCmd::_svcStop(std::vector<std::string> vs){ return _svcControl(H4PSVC_STOP,vs); }
 //

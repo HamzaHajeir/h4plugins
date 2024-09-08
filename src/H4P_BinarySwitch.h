@@ -42,11 +42,11 @@ class H4P_BinarySwitch: public H4P_BinaryThing{
             uint8_t         _color;
 
         H4P_BinarySwitch(uint8_t pin,H4PM_SENSE sense,uint8_t color=H4P_UILED_BI,uint32_t initial=OFF,uint32_t timer=0):
+            H4P_BinaryThing([this](bool b){ _pp->logicalWrite(b); },initial,timer),
             _pin(pin),
             _sense(sense),
             _initial(initial),
-            _color(color),
-            H4P_BinaryThing([this](bool b){ _pp->logicalWrite(b); },initial,timer){ require<H4P_PinMachine>(gpioTag()); }
+            _color(color) { require<H4P_PinMachine>(gpioTag()); }
 //
         virtual void        _init() override;
 };
@@ -57,8 +57,8 @@ class H4P_ConditionalSwitch: public H4P_BinarySwitch{
         virtual void        _handleEvent(const std::string& svc,H4PE_TYPE t,const std::string& msg) override;
     public:
         H4P_ConditionalSwitch(H4_FN_CPRED predicate,uint8_t pin,H4PM_SENSE sense,uint8_t color=H4P_UILED_BI,uint32_t initial=OFF,uint32_t timer=0):
-            _predicate(predicate), 
-            H4P_BinarySwitch(pin,sense,color,initial,timer){ syncCondition(); }
+            H4P_BinarySwitch(pin,sense,color,initial,timer),
+            _predicate(predicate) { syncCondition(); }
 #if H4P_LOG_MESSAGES
         void info() override { 
             H4P_BinarySwitch::info();

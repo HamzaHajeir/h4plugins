@@ -81,6 +81,8 @@ void H4P_UPNPServer::_handleEvent(const std::string& svc,H4PE_TYPE t,const std::
                 svcDown(); // shut down old name, send bye bye etc
                 svcUp();
             }
+        default:
+            break;
     }
 }
 

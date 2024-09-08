@@ -159,6 +159,7 @@ void H4P_Signaller::_handleEvent(const std::string& svc,H4PE_TYPE t,const std::s
             if(STOI(msg)) for(auto const& f:h4pFlashMap){ h4puiAdd(stringFromInt(f.first,"%02d"),H4P_UI_GPIO,"g","",f.second->_opp->_c); }
             break;
         case H4PE_SIGNAL:
+        {
             if(!_signalPin) return;
             std::vector<std::string> parts=split(msg,",");
             size_t scheme;
@@ -187,6 +188,10 @@ void H4P_Signaller::_handleEvent(const std::string& svc,H4PE_TYPE t,const std::s
                         if(parts.size() == 2) throbPin(STOI(parts[1]),_signalPin);
                 }
             }
+        }
+            break;
+        default:
+            break;
     }
 }
 

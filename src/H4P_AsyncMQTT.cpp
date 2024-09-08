@@ -91,6 +91,8 @@ void H4P_AsyncMQTT::_handleEvent(const std::string& svc,H4PE_TYPE t,const std::s
                 publishDevice(stateTag(),msg);
                 break;
             }
+        default:
+            break;
     }
 }
 
@@ -195,12 +197,12 @@ void H4P_AsyncMQTT::info(){
 
 void H4P_AsyncMQTT::report(){
     std::string j="{";
-    for(auto const r:_reportList) {
+    for(auto const &r:_reportList) {
         j+="\""+r+"\":\"";
         j.append(h4p[r]).append("\",");
     }
     j.pop_back();
-    publishDevice(reportTag(),j+"}");
+    publishDevice(reportTag(),j+"}", 1, true);
     XLOG("Reporting %s}",CSTR(j));
 }
 

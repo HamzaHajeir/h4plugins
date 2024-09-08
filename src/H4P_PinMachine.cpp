@@ -98,9 +98,8 @@ void h4pGPIO::_announce(){
 }
 
 void h4pGPIO::_handleEvent(const std::string& s,H4PE_TYPE t,const std::string& msg){
-    switch(t){ // refactor? signaller?
-        case H4PE_VIEWERS:
-            if(STOI(msg)) h4puiAdd(stringFromInt(_p,"%02d"),H4P_UI_GPIO,"g","",_c);
+    if(t==H4PE_VIEWERS){ // refactor? signaller?
+        if(STOI(msg)) h4puiAdd(stringFromInt(_p,"%02d"),H4P_UI_GPIO,"g","",_c);
     }
 }
 

@@ -13,8 +13,8 @@ STAG(bleclt)
 
 struct H4P_BLECharacteristic {
 	bool found = false;
-	bool mandatory;
 	BLEUUID uuid;
+	bool mandatory;
 	H4P_BLECharacteristic(): mandatory(false){}
 	H4P_BLECharacteristic(BLEUUID uuid, bool mandatory = true) : uuid(uuid), mandatory(mandatory) {}
 	~H4P_BLECharacteristic() = default;
@@ -35,8 +35,8 @@ struct H4P_BLECharacteristic {
 
 struct H4P_BLEService {
 	bool found = false;
-	bool mandatory;
 	BLEUUID uuid;
+	bool mandatory;
 	H4P_BLEService() : mandatory(false) {}
 	H4P_BLEService(BLEUUID uuid, bool mandatory = true) : uuid(uuid), mandatory(mandatory) {}
 	~H4P_BLEService() = default;

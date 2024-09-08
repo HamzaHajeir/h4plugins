@@ -132,6 +132,8 @@ void H4P_WiFi::_wifiEvent(WiFiEvent_t event) {
 			h4.queueFunction([](){ h4puncheckedcall<H4P_WiFi>(wifiTag())->_gotIP(); });
 			break;
 #endif
+        default:
+            break;
 	}
 }
 
@@ -155,7 +157,7 @@ void H4P_WiFi::HAL_WIFI_startSTA(){
 }
 
 void H4P_WiFi::svcUp(){ 
-    Serial.printf("svcUp()\n");
+    H4P_PRINTF("svcUp()\n");
     _signalBad();
     _coreStart();
 };
@@ -444,7 +446,7 @@ void H4P_WiFi::_restart(){
 }
 
 void H4P_WiFi::_sendWS(const std::string& type,const std::string& msg){
-    static bool bakov=false;
+    // static bool bakov=false;
     // Serial.printf("_sendWS(%s,%s)\n", type.c_str(), msg.c_str());
     if(_ws && _ws->size()) {
         auto m = _concatMsg(type,msg);

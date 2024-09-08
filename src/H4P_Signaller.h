@@ -45,9 +45,9 @@ class H4Flasher{
             H4_TASK_PTR     _timer=nullptr;
             H4_TASK_PTR	    _off=nullptr;
 
-            uint32_t        _duty=0;
             std::string     _pattern;
             uint32_t        _period=0;
+            uint32_t        _duty=0;
             uint32_t        _timebase=0;
             uint32_t        _cycle=0;
             void      		_pulse(uint32_t width);	

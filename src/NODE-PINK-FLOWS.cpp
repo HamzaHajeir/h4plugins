@@ -220,8 +220,10 @@ void h4pMultifunctionButton::_handleEvent(const std::string& s,H4PE_TYPE t,const
                 break;
             case 1:
                 QEVENT(H4PE_REBOOT);
+                break;
             case 2:
                 QEVENT(H4PE_FACTORY);
+                break;
         }
     }
 }

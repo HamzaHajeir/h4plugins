@@ -29,7 +29,7 @@ SOFTWARE.
 #include<H4P_LocalLogger.h>
 #include<H4P_SerialCmd.h>
 
-H4P_LocalLogger::H4P_LocalLogger(uint32_t limit,uint32_t filter):  _limit(limit), H4Service("llog",filter | H4PE_FACTORY) {
+H4P_LocalLogger::H4P_LocalLogger(uint32_t limit,uint32_t filter): H4Service("llog",filter | H4PE_FACTORY), _limit(limit) {
     _running=true; // early start
     _fname="log.csv";
     _addLocals({

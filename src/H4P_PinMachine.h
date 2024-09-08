@@ -80,8 +80,8 @@ class h4pGPIO {
                 msg                 _prev;
                 uint8_t             _c=H4P_UILED_BI; // color
                 uint8_t             _p;
-                npFLOW              _pipeline;
                 H4PM_SENSE          _s;
+                npFLOW              _pipeline;
                 bool                _isAnalog=true;
 //
         h4pGPIO(uint8_t p,uint8_t m,H4PM_SENSE s=ACTIVE_LOW,npFLOW flow={});

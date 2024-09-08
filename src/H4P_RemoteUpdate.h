@@ -58,8 +58,8 @@ class H4P_RemoteUpdate: public H4Service, public HTTPUpdate {
                     case H4PE_VIEWERS:
                         {
                             if(STOI(msg)) {
-                                auto mode = WiFi.getMode();
                             #if H4P_USE_WIFI_AP
+                                auto mode = WiFi.getMode();
                                 if(mode==WIFI_AP) h4puiAdd(rupdTag(),H4P_UI_INPUT,"s");
                                 else h4puiAdd(rupdTag(),H4P_UI_TEXT,"s");
                             #else
@@ -67,6 +67,8 @@ class H4P_RemoteUpdate: public H4Service, public HTTPUpdate {
                             #endif
                             }
                         }
+                        break;
+                    default: 
                         break;
                 }
             }

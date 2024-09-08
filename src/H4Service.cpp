@@ -130,6 +130,7 @@ void H4Service::_sysHandleEvent(const std::string& svc,H4PE_TYPE t,const std::st
             break;
         case H4PE_GVCHANGE:
             if(h4pevt.count(H4PE_BOOT)) return;
+            [[fallthrough]];
         default:
             _handleEvent(svc,t,msg);
             break;

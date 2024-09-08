@@ -74,6 +74,7 @@ void H4P_WiFi::_startScan() {
                 wf_ssids.emplace_back(WiFi.SSID(i).c_str());
 #endif
             WiFi.scanDelete();
+            [[fallthrough]];
         case -2:
 #ifdef ARDUINO_ARCH_RP2040
             WiFi.scanNetworks(true);

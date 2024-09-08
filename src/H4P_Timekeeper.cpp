@@ -35,7 +35,7 @@ SOFTWARE.
 constexpr uint32_t secsInDay(){ return 86400; }
 constexpr uint32_t msInDay(){ return 1000*secsInDay(); }
 
-H4P_Timekeeper::H4P_Timekeeper(const std::string& ntp1,const std::string& ntp2,int tzo,H4_FN_DST fDST): _fDST(fDST), H4Service(timeTag(),H4PE_HEARTBEAT){
+H4P_Timekeeper::H4P_Timekeeper(const std::string& ntp1,const std::string& ntp2,int tzo,H4_FN_DST fDST): H4Service(timeTag(),H4PE_HEARTBEAT),_fDST(fDST){
     depend<H4P_EmitTick>(tickTag());
     depend<H4P_WiFi>(wifiTag());
     _addLocals({
@@ -174,6 +174,7 @@ int H4P_Timekeeper::parseTime(const std::string& ts){ // in milliseconds!
         case 3:
 	        s=atoi(CSTR(parts[2]));
             if(s>59) return -1;
+            [[fallthrough]];
         case 2:
             m=atoi(CSTR(parts[1]));
             if(m>59) return -1;

@@ -34,7 +34,7 @@ SOFTWARE.
 class H4P_EmitHeap: public H4Service {
         uint32_t _f;
     public:
-        H4P_EmitHeap(uint32_t f=1000): _f(f),H4Service(heapTag()){}
+        H4P_EmitHeap(uint32_t f=1000): H4Service(heapTag()), _f(f){}
 
         virtual void svcUp() override { 
             h4.every(_f,[this](){ XEVENT(H4PE_HEAP,"%u",_HAL_freeHeap()); },nullptr,H4P_TRID_HLOG,true);

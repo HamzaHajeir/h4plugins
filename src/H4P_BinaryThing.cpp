@@ -48,8 +48,8 @@ void H4P_BinaryThing::_handleEvent(const std::string& svc,H4PE_TYPE t,const std:
         case H4PE_VIEWERS:
             {
                 if(STOI(msg)) {
-                    uint32_t mode=WiFi.getMode();
                 #if H4P_USE_WIFI_AP
+                    uint32_t mode=WiFi.getMode();
                     if(mode==WIFI_AP) return;
                 #endif
                     h4puiAdd(autoOffTag(),H4P_UI_INPUT,"o");
@@ -59,6 +59,9 @@ void H4P_BinaryThing::_handleEvent(const std::string& svc,H4PE_TYPE t,const std:
             break;
         case H4PE_GVCHANGE:
             if(_running && svc==stateTag()) return _onChange(STOI(msg));
+            break;
+        default:
+            break;
     }
 }
 
@@ -81,13 +84,16 @@ void H4P_ConditionalThing::_handleEvent(const std::string& svc,H4PE_TYPE t,const
         case H4PE_VIEWERS:
             {
                 if(STOI(msg)) {
-                    auto mode = WiFi.getMode();
                 #if H4P_USE_WIFI_AP
+                    auto mode = WiFi.getMode();
                     if(mode==WIFI_AP) return;
                 #endif
                     h4puiAdd(conditionTag(),H4P_UI_BOOL,"o",stringFromInt(_predicate()),H4P_UILED_BI);
                 }
+                break;
             }
+        default: 
+            break;
     }
     H4P_BinaryThing::_handleEvent(svc,t,msg);
 }
