@@ -64,11 +64,7 @@ class H4P_WiFi: public H4Service, public H4AsyncWebServer {
 #if H4P_USE_WIFI_AP
             DNSServer*          _dns53=nullptr;
 #endif
-#ifdef ARDUINO_ARCH_ESP8266
-            bool                _shouldStart=false;
-#endif
 //
-            // bool                _discoDone;
             bool                    _connected;
             std::vector<H4_FN_VOID> _onWebserver;
             H4AW_Authenticator*     _authenticator;

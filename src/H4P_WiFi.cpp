@@ -54,8 +54,9 @@ void H4P_WiFi::HAL_WIFI_startSTA(){
 
 void H4P_WiFi::svcUp(){
     _signalBad();
-    _coreStart();
-    _shouldStart = true;
+    if (WiFi.SSID().isEmpty() || WiFi.SSID().equals(h4Tag()))
+        WiFi.begin(CSTR(h4p[ssidTag()]), CSTR(h4p[pskTag()]));
+    else WiFi.begin();
 }
 /*#typedef enum WiFiEvent 
 {
@@ -229,11 +230,7 @@ void H4P_WiFi::_coreStart(){
     }
 #else
     if(_cannotConnectSTA() || WiFi.getMode()==WIFI_OFF) HAL_WIFI_startSTA();
-#ifdef ARDUINO_ARCH_ESP8266
-    else if (!_shouldStart)
-#else
     else
-#endif
         svcUp();
 #endif
 }
@@ -290,7 +287,6 @@ void H4P_WiFi::_defaultSync(const std::string& svc,const std::string& msg) {
 
 void H4P_WiFi::_gotIP(){
     _signalOff();
-    // _discoDone=false;
     _connected = true;
 
     h4p[ipTag()]=WiFi.localIP().toString().c_str();
@@ -392,16 +388,14 @@ void H4P_WiFi::_init(){
 
 void H4P_WiFi::_lostIP(){
     h4.cancelSingleton(H4P_TRID_HOTA);
-    // if (!_discoDone) {
-        _coreStart(); // ESP32 is well and truly fucked
-        _stopWebserver();
+    _coreStart(); // ESP32 is well and truly fucked
+    _stopWebserver();
     if (_connected) {
         _connected = false;
 #if H4P_BLE_AVAILABLE
         _hookBLEProvisioning();
 #endif
     }
-    // }
 }
 
 uint32_t H4P_WiFi::_msg(std::vector<std::string> vs){
@@ -565,9 +559,6 @@ void H4P_WiFi::_stopWebserver(){
     ArduinoOTA.end(); // WHYYYYYYYYYY???? FFS
     MDNS.end();
 #endif
-    // end();
-
-    // _discoDone=true;
     _clearUI();
     svcDown();
 }
@@ -636,9 +627,6 @@ void H4P_WiFi::svcDown(){
     if (_running) HAL_WIFI_disconnect();
 #if !H4P_WIFI_EVENT_SYSTEM
     _checkStatus(); // Should go disconnected.
-#endif
-#ifdef ARDUINO_ARCH_ESP8266
-    _shouldStart = false;
 #endif
     H4Service::svcDown();
 }
