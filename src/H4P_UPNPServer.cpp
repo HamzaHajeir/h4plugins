@@ -150,7 +150,7 @@ void H4P_UPNPServer::_listenUDP(){
             if (pkt.length()) {
                 auto ip = _udp.remoteIP();
                 auto port = _udp.remotePort();
-                h4.queueFunction([=](){ _handlePacket(pkt,ip,port); },nullptr,H4P_TRID_UPKT); // shud be named etc
+                h4.queueFunction([=, this](){ _handlePacket(pkt,ip,port); },nullptr,H4P_TRID_UPKT); // shud be named etc
 
             }
         });
