@@ -150,8 +150,8 @@ void H4P_WiFi::HAL_WIFI_startSTA(){
     H4P_PRINTF("HAL_WIFI_startSTA() WFConn %d SSIDLen %d\n", WiFi.connected(), h4p[ssidTag()]._v.length());
     submitpass = h4p[pskTag()];
     if (!WiFi.connected() && h4p[ssidTag()]._v.length()) {
-        auto status = WiFi.begin(CSTR(h4p[ssidTag()]), CSTR(h4p[pskTag()]));
-        H4P_PRINTF("WiFi.begin(%s,%s)-> %d connected=%d\n",CSTR(h4p[ssidTag()]), CSTR(h4p[pskTag()]), status, WiFi.connected());
+        auto status = WiFi.beginNoBlock(CSTR(h4p[ssidTag()]), CSTR(h4p[pskTag()]));
+        H4P_PRINTF("WiFi.beginNoBlock(%s,%s)-> %d connected=%d\n",CSTR(h4p[ssidTag()]), CSTR(h4p[pskTag()]), status, WiFi.connected());
         h4.once(H4WF_RC_INTERVAL, [this]{ if (!WiFi.connected()) HAL_WIFI_startSTA(); /*  Keep trying to connect/reconnect */});
         submitpass = h4p[pskTag()];
     }
@@ -160,7 +160,7 @@ void H4P_WiFi::HAL_WIFI_startSTA(){
 void H4P_WiFi::svcUp(){ 
     H4P_PRINTF("svcUp()\n");
     _signalBad();
-    _coreStart();
+    HAL_WIFI_startSTA();
 };
 
 #endif // defined(ARDUINO_ARCH_RP2040)
@@ -379,7 +379,7 @@ void H4P_WiFi::_init(){
     h4.every(H4WF_CHECK_INTERVAL, [this]() { _checkStatus(); });
 #endif
 #if defined(ARDUINO_ARCH_RP2040)
-    WiFi.setTimeout(H4WF_TIMEOUT);// Might reduce to 1, however the only issue if some application would call WiFi.ping(...).
+    // WiFi.setTimeout(H4WF_TIMEOUT);// Might reduce to 1, however the only issue if some application would call WiFi.ping(...).
 #if defined(H4P_ASSUMED_LED) && H4P_ASSUMED_LED != (255u)
     auto p = require<H4P_Signaller>(winkTag());
 #endif
