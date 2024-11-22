@@ -62,7 +62,7 @@ void H4P_AsyncMQTT::_handleEvent(const std::string& svc,H4PE_TYPE t,const std::s
                 uint32_t mode=STOI(msg);
                 if(mode) {
                 #if H4P_USE_WIFI_AP
-                    if(WiFi.getMode()==WIFI_AP){
+                    if((WiFi.getMode()==WIFI_AP || WiFi.getMode()==WIFI_AP_STA) && h4p.gvExists(GoTag())){
                         h4puiAdd(brokerTag(),H4P_UI_INPUT,"m");
                         h4puiAdd(mQuserTag(),H4P_UI_INPUT,"m");
                         h4puiAdd(mQpassTag(),H4P_UI_INPUT,"m");

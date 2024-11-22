@@ -38,7 +38,8 @@ void H4P_ConditionalSwitch::_handleEvent(const std::string& svc,H4PE_TYPE t,cons
         if(STOI(msg)) {
         #if H4P_USE_WIFI_AP
             uint32_t mode=WiFi.getMode();
-            if(mode==WIFI_AP) return;
+            if((mode==WIFI_AP || mode==WIFI_AP_STA) && h4p.gvExists(GoTag()))
+                return;
         #endif
             h4puiAdd(conditionTag(),H4P_UI_BOOL,"o",stringFromInt(_predicate()),H4P_UILED_BI);
         }

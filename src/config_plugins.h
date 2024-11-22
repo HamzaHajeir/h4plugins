@@ -33,21 +33,40 @@ SOFTWARE.
 // Make sure you read the documentation and have arrangements in place for using AP mode :)
 // If you don't have the H4P_WiFiAP.cpp file, the linker will fail.
 #ifndef H4P_USE_WIFI_AP
-#define H4P_USE_WIFI_AP         0
-#endif
+#define H4P_USE_WIFI_AP         1
+#endif // H4P_USE_WIFI_AP
 
-#define H4P_WIFI_PROV_BY_BLE    1 
+#ifndef H4P_USE_BLE
+#define H4P_USE_BLE             1
+#endif // H4P_USE_BLE
 
+#if H4P_USE_BLE
 #if ARDUINO_ARCH_ESP32 && CONFIG_BT_ENABLED && CONFIG_BT_BLUEDROID_ENABLED
 #define H4P_BLE_AVAILABLE       1
-#else
+#ifndef H4P_WIFI_PROV_BY_BLE
+#define H4P_WIFI_PROV_BY_BLE    1
+#endif
+#else // (ARDUINO_ARCH_ESP32 && CONFIG_BT_ENABLED && CONFIG_BT_BLUEDROID_ENABLED)
 #define H4P_BLE_AVAILABLE       0
-#if H4P_WIFI_PROV_BY_BLE
-// #pragma message ("H4P_BLE provisioning is not supported for this MCU")
+
+#ifdef H4P_WIFI_PROV_BY_BLE
 #undef H4P_WIFI_PROV_BY_BLE
+#endif // H4P_WIFI_PROV_BY_BLE
 #define H4P_WIFI_PROV_BY_BLE    0
-#endif
-#endif
+
+#endif // (ARDUINO_ARCH_ESP32 && CONFIG_BT_ENABLED && CONFIG_BT_BLUEDROID_ENABLED)
+
+#else // H4P_USE_BLE
+
+#define H4P_BLE_AVAILABLE       0
+
+#ifdef H4P_WIFI_PROV_BY_BLE
+#undef H4P_WIFI_PROV_BY_BLE
+#endif // H4P_WIFI_PROV_BY_BLE
+#define H4P_WIFI_PROV_BY_BLE    0
+
+#endif // H4P_USE_BLE
+
 /*
         DIAGNOSTICS
         comment out H4P_LOG_MESSAGES to prevent any Serial output of  H4PE_MSG EVENTs

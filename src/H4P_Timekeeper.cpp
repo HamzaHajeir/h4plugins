@@ -31,11 +31,12 @@ SOFTWARE.
 #include<H4P_Timekeeper.h>
 #include<H4P_EmitTick.h>
 #include<H4P_WiFi.h>
+#include "lwip/tcpip.h"
 
 constexpr uint32_t secsInDay(){ return 86400; }
 constexpr uint32_t msInDay(){ return 1000*secsInDay(); }
 
-H4P_Timekeeper::H4P_Timekeeper(const std::string& ntp1,const std::string& ntp2,int tzo,H4_FN_DST fDST): H4Service(timeTag(),H4PE_HEARTBEAT),_fDST(fDST){
+H4P_Timekeeper::H4P_Timekeeper(const std::string& ntp1,const std::string& ntp2,int tzo,H4_FN_DST fDST): H4Service(timeTag(),H4PE_HEARTBEAT|H4PE_VIEWERS),_fDST(fDST), _ntp1(ntp1), _ntp2(ntp2){
     depend<H4P_EmitTick>(tickTag());
     depend<H4P_WiFi>(wifiTag());
     _addLocals({
@@ -46,8 +47,11 @@ H4P_Timekeeper::H4P_Timekeeper(const std::string& ntp1,const std::string& ntp2,i
         {"sync",   { _pid,       0, CMD(sync)}},
         {"tz",     { _pid,       0, CMDVS(_tz)}}
     });
+    // LOCK_TCPIP_CORE();
     sntp_setoperatingmode(SNTP_OPMODE_POLL);
-    _setupSNTP(ntp1,ntp2);
+    // UNLOCK_TCPIP_CORE();
+
+    _setupSNTP(_ntp1,_ntp2);
     __HALsetTimezone(0);
     _tzo = tzo;
     if(!_fDST) _fDST=[](uint32_t){ return 0; };
@@ -116,25 +120,28 @@ void H4P_Timekeeper::_handleEvent(const std::string& svc,H4PE_TYPE t,const std::
     if(t==H4PE_HEARTBEAT){
         h4p[timeTag()]=clockTime();
         h4p[upTimeTag()]=upTime();
+    } else if (t==H4PE_VIEWERS && atoi(CSTR(msg))) {
+        if(WiFi.getMode()==WIFI_STA){
+            h4puiAdd("NTP1",H4P_UI_TEXT,"t",_ntp1); // cos we don't know it yet
+            h4puiAdd("NTP2",H4P_UI_TEXT,"t",_ntp2);
+            h4puiAdd("TZ",H4P_UI_TEXT,"t",stringFromInt(_tzo));
+            h4puiAdd(timeTag(),H4P_UI_TEXT,"t"); // cos we don't know it yet
+            h4puiAdd(upTimeTag(),H4P_UI_TEXT,"t");
+        }
     }
 }
 
 void H4P_Timekeeper::_init(){
-    if(WiFi.getMode()==WIFI_STA){
-        h4puiAdd("NTP1",H4P_UI_TEXT,"t",_ntp1); // cos we don't know it yet
-        h4puiAdd("NTP2",H4P_UI_TEXT,"t",_ntp2);
-        h4puiAdd("TZ",H4P_UI_TEXT,"t",stringFromInt(_tzo));
-        h4puiAdd(timeTag(),H4P_UI_TEXT,"t"); // cos we don't know it yet
-        h4puiAdd(upTimeTag(),H4P_UI_TEXT,"t");
-    }
 }
 
 void H4P_Timekeeper::_setupSNTP(const std::string& ntp1, const std::string& ntp2){
+	// LOCK_TCPIP_CORE();
     sntp_stop();
     _ntp1=ntp1;
     _ntp2=ntp2;
     sntp_setservername(0,(char*) _ntp1.c_str());
     sntp_setservername(1,(char*) _ntp2.c_str());
+	// UNLOCK_TCPIP_CORE();
 }
 
 uint32_t H4P_Timekeeper::_tz(std::vector<std::string> vs){
@@ -229,7 +236,9 @@ std::string H4P_Timekeeper::strfDateTime(const char* fmt, uint32_t t) { // This 
 }
 
 void H4P_Timekeeper::svcUp(){
+	LOCK_TCPIP_CORE();
     sntp_init();
+	UNLOCK_TCPIP_CORE();
     if(!_mss00){
         h4.repeatWhile(
             [this]{ return !_mss00; },
@@ -253,7 +262,10 @@ void H4P_Timekeeper::svcUp(){
 
 void H4P_Timekeeper::svcDown(){ 
     h4.cancelSingleton({H4P_TRID_TIME,H4P_TRID_SYNC});
+	LOCK_TCPIP_CORE();
 	sntp_stop();
+	UNLOCK_TCPIP_CORE();
+    
     H4Service::svcDown();
 }
 
