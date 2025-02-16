@@ -288,6 +288,10 @@ void H4P_WiFi::_defaultSync(const std::string& svc,const std::string& msg) {
 void H4P_WiFi::_gotIP(){
     _signalOff();
     _connected = true;
+    if (WiFi.localIP() == IPAddress(0,0,0,0)) {
+        QLOG("Prevents fake gotIP event");
+        return;
+    }
 
     h4p[ipTag()]=WiFi.localIP().toString().c_str();
     h4p[ssidTag()]=CSTR(WiFi.SSID());
