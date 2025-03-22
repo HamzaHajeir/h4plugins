@@ -26,5 +26,6 @@ namespace H4P_BLE {
 
 extern bool initialized;
 void init();
+void end();
 };
 #endif

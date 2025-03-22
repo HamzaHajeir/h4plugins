@@ -3,6 +3,7 @@
 
 #include <H4Service.h>
 #if H4P_BLE_AVAILABLE
+#include <cstdint>
 #include <H4P_BLECommon.h>
 #include <BLEDevice.h>
 #include <BLEServer.h>
@@ -89,6 +90,7 @@ class H4P_BLEServer : public H4Service {
 		void                svcUp() override;
 
 	public:
+		void manualInit() { _init(); }
 
 
 		H4P_BLEServer() : H4Service(blesrvTag(), H4PE_GVCHANGE|H4PE_VIEWERS|H4PE_SERVICE|H4PE_REBOOT|H4PE_FACTORY|H4PE_GPIO|H4PE_BLEADD) {

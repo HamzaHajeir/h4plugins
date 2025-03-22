@@ -22,6 +22,13 @@ void H4P_BLE::init() {
 		initialized = true;
 	}
 }
+void H4P_BLE::end()
+{
+	if (initialized) {
+		BLEDevice::deinit();
+		initialized = false;
+	}
+}
 
 void H4P_BLEServer::H4BLEServerCallbacks::onConnect(BLEServer *pServer, esp_ble_gatts_cb_param_t *param) {
 	h4puncheckedcall<H4P_BLEServer>(blesrvTag())->onConnect(param);
@@ -70,10 +77,12 @@ void H4P_BLEServer::onConnect(esp_ble_gatts_cb_param_t *param) {
 						conn_params.timeout,
 						BLEUtils::addressTypeToString(ble_addr_type),
 						conn_handle);
+						SYSINFO("CNX by %s",CSTR(BLEAddress(remote_bda).toString()));
+#else
+	SYSINFO("CNX");
 #endif
 	uint16_t bleID = h4Server->getConnId();
     h4Server->updatePeerMTU(bleID, H4_BLE_MTU);
-	SYSINFO("CNX by %s",CSTR(BLEAddress(remote_bda).toString()));
     H4PBS_PRINTF("updateMTU to: %i\n", h4Server->getPeerMTU(bleID));
 
 	_sendElems();
