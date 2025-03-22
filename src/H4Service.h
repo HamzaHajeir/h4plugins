@@ -169,6 +169,7 @@ struct H4P_UI_ITEM { // add title and/or props?
 
 using H4P_UI_LIST       = std::map<std::string,H4P_UI_ITEM>;
 
+void h4RemoveBootEvents();
 void h4pregisterhandler(const std::string& svc,uint32_t t,H4P_FN_EVENTHANDLER f);
 void h4punregisterhandler(const std::string& svc,uint32_t t);
 void h4pevent(const std::string& svc,H4PE_TYPE t,const std::string& msg="");
@@ -311,15 +312,15 @@ void        h4pClearEvent     (H4PE_TYPE e);
 #define VSCMD(x) uint32_t x(std::vector<std::string>)
 
 #define QEVENT(e) h4pevent(_me,e)
-#define XEVENT(e,f,...) h4psysevent(_me,e,f,__VA_ARGS__)
+#define XEVENT(e,f,...) h4psysevent(_me,e,f,##__VA_ARGS__)
 #define YEVENT(e,f) h4pevent(_me,e,f)
 
 #if H4P_LOG_MESSAGES
     #define QLOG(f) h4pevent(_me,H4PE_MSG,f)
-    #define XLOG(f,...) h4psysevent(_me,H4PE_MSG,f,__VA_ARGS__)
-    #define SLOG(f,...) h4psysevent(h4pTag(),H4PE_MSG,f,__VA_ARGS__)
-    #define h4pUserEvent(f,...) h4psysevent(userTag(),H4PE_MSG,f,__VA_ARGS__)
-    #define h4pUIMessage(f,...) h4psysevent(userTag(),H4PE_UIMSG,f,__VA_ARGS__)
+    #define XLOG(f,...) h4psysevent(_me,H4PE_MSG,f,##__VA_ARGS__)
+    #define SLOG(f,...) h4psysevent(h4pTag(),H4PE_MSG,f,##__VA_ARGS__)
+    #define h4pUserEvent(f,...) h4psysevent(userTag(),H4PE_MSG,f,##__VA_ARGS__)
+    #define h4pUIMessage(f,...) h4psysevent(userTag(),H4PE_UIMSG,f,##__VA_ARGS__)
 #else
     #define QLOG(f)
     #define XLOG(f,...)
@@ -327,16 +328,16 @@ void        h4pClearEvent     (H4PE_TYPE e);
     #define h4pUserEvent(f,...)
 #endif
 
-#define SYSFATAL(f,...) h4psysevent(_me,H4PE_SYSFATAL,f,__VA_ARGS__)
+#define SYSFATAL(f,...) h4psysevent(_me,H4PE_SYSFATAL,f,##__VA_ARGS__)
 #if H4P_SYS_LEVEL > 1
-    #define SYSWARN(f,...) h4psysevent(_me,H4PE_SYSWARN,f,__VA_ARGS__)
-    #define SYSINFO(f,...) h4psysevent(_me,H4PE_SYSINFO,f,__VA_ARGS__)
+    #define SYSWARN(f,...) h4psysevent(_me,H4PE_SYSWARN,f,##__VA_ARGS__)
+    #define SYSINFO(f,...) h4psysevent(_me,H4PE_SYSINFO,f,##__VA_ARGS__)
 #else
-    #define SYSWARN(f,...)
+    #define SYSWARN(...)
     #if H4P_SYS_LEVEL > 0
-        #define SYSINFO(f,...) h4psysevent(_me,H4PE_SYSINFO,f,__VA_ARGS__)
+        #define SYSINFO(f,...) h4psysevent(_me,H4PE_SYSINFO,f,##__VA_ARGS__)
     #else
-        #define SYSINFO(f,...)
+        #define SYSINFO(...)
     #endif
 #endif
 

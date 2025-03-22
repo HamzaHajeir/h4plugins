@@ -86,6 +86,15 @@ std::string getTerminalName(const std::string& s) {
 #include<H4P_PinMachine.h>
 #include<H4P_GateKeeper.h>
 
+void h4RemoveBootEvents() {
+    for(auto e:std::initializer_list<H4PE_TYPE>{H4PE_BOOT,H4PE_STAGE2}){
+        h4pevt.erase(e);
+        h4pClearEvent(e);
+        for(auto s:h4pmap) s.second->_filter&=~e;
+    }
+    for(auto &e:h4pevt) e.second.shrink_to_fit();
+}
+
 void h4StartPlugins(){
     _H4P_PRINTF("Registered to start:\n");
     for(auto const& s:h4pmap) _H4P_PRINTF(" %s\n",CSTR(s.first));
@@ -134,12 +143,7 @@ void h4StartPlugins(){
 //      unfilters all services from boot/stage2 to prevent any chance of "double-dip"
 //      unlinks event handlers for boot/stage2 since nothing can/will ever use them again (see above :) )
 //
-    for(auto e:std::initializer_list<H4PE_TYPE>{H4PE_BOOT,H4PE_STAGE2}){
-        h4pevt.erase(e);
-        h4pClearEvent(e);
-        for(auto s:h4pmap) s.second->_filter&=~e;
-    }
-    for(auto &e:h4pevt) e.second.shrink_to_fit();
+    h4RemoveBootEvents();
 
     h4psysevent(h4pTag(),H4PE_SYSINFO,"Ready: Heap=%u",_HAL_freeHeap());
 }
