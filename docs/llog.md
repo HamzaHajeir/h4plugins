@@ -64,11 +64,10 @@ N/A
 uint32_t limit; // maximum amount of FS space to use
 uint32_t filter; // Name of the event (or combination of events) to be written to the log
 */
-H4P_LocalLogger(uint32_t limit=10000,uint32_t filter=H4P_LOG_ALL);
+H4P_LocalLogger(uint32_t limit=10000,uint32_t filter=H4PE_ALL);
 
 void clear(); // empties the log
 void flush(); // show then clear
-void show(); // show first chunk of log on Serial
 ```
 
 [Example Code](../examples/02_LOGGING/H4P_LocalLogger/H4P_LocalLogger.ino)
@@ -98,7 +97,8 @@ millis,type,source,message
 
 ---
 
-(c) 2021 Phil Bowles h4plugins@gmail.com
+(c) 2021 Phil Bowles
+(c) 2025 Hamza Hajeir
 
 * [Youtube channel (instructional videos)](https://www.youtube.com/channel/UCYi-Ko76_3p9hBUtleZRY6g)
 * [Facebook H4  Support / Discussion](https://www.facebook.com/groups/444344099599131/)

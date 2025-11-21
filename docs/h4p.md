@@ -95,7 +95,23 @@ H4P_SerialCmd(bool autoStop=false);
 void addCmd(const string& name,uint32_t owner, uint32_t levID,H4_FN_MSG f=nullptr);
 ```
 
-Adds a new command to the existing set: This is how plugins update the command table when they load. The user may also add his / her own commands, however this requires in-depth knowledge of the internal data structure and is described in detail in [Advance Topics](advanced.md)
+Adds a new command to the existing set: This is how plugins update the command table when they load. The user may also add his / her own commands.
+
+### Example
+
+```cpp
+uint32_t myCommand(std::vector<std::string> vs) {
+    Serial.println("My custom command executed");
+    // Your command logic here
+    return H4_CMD_OK; // Return success
+}
+
+void h4setup() {
+    h4p.addCmd("my/custom_cmd", 0, 0, myCommand);
+}
+```
+
+This adds a command `my/custom_cmd` that can be invoked from serial, MQTT, or HTTP. The function should return an appropriate error code (e.g., H4_CMD_OK for success).
 
 ---
 
@@ -260,7 +276,8 @@ A result as as described in the [LittleFS documentation](link?)
 
 ---
 
-(c) 2021 Phil Bowles h4plugins@gmail.com
+(c) 2021 Phil Bowles
+(c) 2025 Hamza Hajeir
 
 * [Youtube channel (instructional videos)](https://www.youtube.com/channel/UCYi-Ko76_3p9hBUtleZRY6g)
 * [Facebook H4  Support / Discussion](https://www.facebook.com/groups/444344099599131/)

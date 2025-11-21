@@ -15,7 +15,7 @@
 ---
 
 * :cherry_blossom: [Why the name "H4"? A little history](h4.md) :heavy_check_mark:
-* :gem: :door: [H4 and event-driven programming](https://github.com/philbowles/H4#why-do-i-need-it)  :heavy_check_mark:
+* :gem: :door: [H4 and event-driven programming](https://github.com/HamzaHajeir/H4#why-do-i-need-it)  :heavy_check_mark:
 * :gem:[Everything is an event: Listeners, Emitters and Handlers](events.md) :heavy_check_mark:
 * :gem:[Global Variables and persistent storage](globals.md) :heavy_check_mark:
 * :gem:[Common Command and Control: H4P_SerialCmd and Services](ccc.md) :heavy_check_mark:
@@ -24,8 +24,8 @@
   * [GPIO/NODE-PINK: a logical approach](logphys.md) :heavy_check_mark:
   * [GPIO/NODE-PINK: basic flows](basic.md) :heavy_check_mark:
   * [GPIO/NODE-PINK: rotary encoder flows](encoders.md) :heavy_check_mark:
-  * :building_construction: [GPIO/NODE-PINK: analog flows](analog.md)
-  * :building_construction: [GPIO/NODE-PINK: advanced techniques](nodepinkadv.md)
+   * :heavy_check_mark: [GPIO/NODE-PINK: analog flows](analog.md)
+   * :heavy_check_mark: [GPIO/NODE-PINK: advanced techniques](nodepinkadv.md)
 * ["Things" and "Switches"](things.md) :heavy_check_mark:
 * [WiFi and the web UI](webui.md) :heavy_check_mark:
 * [WiFi AP mode](apmode.md) :heavy_check_mark:
@@ -36,15 +36,15 @@
     * [Running a remote update server](rusrv.md) :heavy_check_mark:
     * :building_construction: [Additional board defintions](boards.md)
     * :building_construction: writing your own plugin
-* [Known Issues / FAQs](docs/faq.md) :heavy_check_mark:
-* [Raising an Issue](docs/issues.md) :heavy_check_mark:
+ * [Known Issues / FAQs](faq.md) :heavy_check_mark:
+ * [Raising an Issue](issues.md) :heavy_check_mark:
 * Plugins APIs
-  * [H4P_AsyncHTTP](h4phttp.md) :heavy_check_mark:
+  * [H4P_AsyncHTTP](h4http.md) :heavy_check_mark:
   * [H4P_AsyncMQTT](h4mqtt.md) :heavy_check_mark:
   * [H4P_BinarySwitch](swings.md) :heavy_check_mark:
   * [H4P_BinaryThing](swings.md) :heavy_check_mark:
-  * [H4P_BLEServer](h4ble.md)
-  * [H4P_BLEClient](h4bleclt.md)
+  * [H4P_BLEServer](h4ble.md) :heavy_check_mark:
+  * [H4P_BLEClient](h4bleclt.md) :heavy_check_mark:
   * [H4P_ConditionalSwitch](swings.md) :heavy_check_mark:
   * [H4P_ConditionalThing](swings.md) :heavy_check_mark:
   * [H4P_EmitHeap](heap.md) :heavy_check_mark:
@@ -61,18 +61,18 @@
   * [H4P_PinMachine](h4pm.md):heavy_check_mark:
   * [H4P_QueueWarn](h4qw.md) :heavy_check_mark:
   * [H4P_RemoteLogger](rlog.md) :heavy_check_mark:
-    * [MySQL event logger webserver](https://github.com/philbowles/mysqlrest) :heavy_check_mark:
-  * [H4P_RemoteUpdate](rupd.md)
+    * [MySQL event logger webserver](https://github.com/HamzaHajeir/mysqlrest) :heavy_check_mark:
+  * [H4P_RemoteUpdate](rupd.md) :heavy_check_mark:
   * [H4P_SerialCmd](h4p.md) :heavy_check_mark:
   * [H4P_SerialLogger](ears.md) :heavy_check_mark:
-  * [H4P_Signaller](h4fc.md)
+  * [H4P_Signaller](h4fc.md) :heavy_check_mark:
   * :building_construction: [H4P_Sunrise](h4pxxxx.md)
-  * :building_construction: [H4P_TaskSniffer](h4pxxxx.md)
-  * :building_construction: [H4P_Timekeeper](h4pxxxx.md)
-  * :building_construction: [H4P_ToneController](h4pxxxx.md)
+   * :heavy_check_mark: [H4P_TaskSniffer](h4ts.md)
+   * :heavy_check_mark: [H4P_Timekeeper](h4tk.md)
+   * :heavy_check_mark: [H4P_ToneController](h4tc.md)
   * [H4P_UPNPServer](upnp.md) :heavy_check_mark:
   * [H4P_WiFi](h4wifi.md) :heavy_check_mark:
-  * :building_construction: [H4P_Voice](h4pvox.md)
+   * :heavy_check_mark: [H4P_Voice](h4pvox.md)
   
  ---
 
@@ -91,7 +91,7 @@
  * [8: GPIO Rotary encoders need not be an Enigma](https://www.youtube.com/watch?v=4ySOh0ukyrc)
  * [9: GPIO Analog Inputs](https://www.youtube.com/watch?v=1oxsNVHloqA)
  * [10: Advanced Plumbing](https://youtu.be/yyyAttshSV0)
- * [11: Internet of Things ain't what they used to be](https://youtu.be/fLUKDAboAU8)
+  * [11: Internet of Things is not what it used to be](https://youtu.be/fLUKDAboAU8)
  * [12: Internet of Things can only get better](https://www.youtube.com/watch?v=sy7xHuKghrM)
  * [13: Target in Range!: Network Presence Detection](https://www.youtube.com/watch?v=tLeptP3D5fw)
  * [14: Running the installer](https://youtu.be/Q1givForuEQ) :new:
@@ -103,7 +103,7 @@
 
 ---
 
-(c) 2021 Phil Bowles h4plugins@gmail.com
+(c) 2025 Hamza Hajeir
 
 * [Youtube channel (instructional videos)](https://www.youtube.com/channel/UCYi-Ko76_3p9hBUtleZRY6g)
 * [Facebook H4  Support / Discussion](https://www.facebook.com/groups/444344099599131/)

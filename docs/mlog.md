@@ -37,7 +37,7 @@ H4P_MQTTLogger anyNameYouChoose(...  // internal ref: mlog3
 
 # Dependencies
 
-[H4P_AsyncMQTT](h4mqtt)
+[H4P_AsyncMQTT](h4mqtt.md)
 
 # Commands Added
 
@@ -56,14 +56,15 @@ N/A
 uint32_t filter; Name of the event (or combination of events) to be fowarded to the event handler function
 const string& topic; MQTT topic name the event(s) is published to 
 */
-H4P_MQTTLogger(const string& topic,uint32_t filter);
+H4P_MQTTLogger(const std::string& topic,uint32_t filter=H4PE_ALL);
 ```
 
 [Example Sketch](../examples/02_LOGGING/H4P_MQTTLogger/H4P_MQTTLogger.ino)
 
 ---
 
-(c) 2021 Phil Bowles h4plugins@gmail.com
+(c) 2021 Phil Bowles
+(c) 2025 Hamza Hajeir
 
 * [Youtube channel (instructional videos)](https://www.youtube.com/channel/UCYi-Ko76_3p9hBUtleZRY6g)
 * [Facebook H4  Support / Discussion](https://www.facebook.com/groups/444344099599131/)
