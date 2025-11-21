@@ -5,10 +5,7 @@
 ### Most of the above is achieved with only a few lines of code, with many features requiring on the inclusion of only a single line
 
 28/06/2021 [Release Notes v3.2.0](docs/rn300.md)
-
----
-
-## If you are able, please [Support me on Patreon](https://patreon.com/esparto) and/or subscribe to my [Youtube channel (instructional videos)](https://www.youtube.com/channel/UCYi-Ko76_3p9hBUtleZRY6g)
+21/11/2025 Updated documentation to attempt to reflect current v3.5.6
 
 ---
 
@@ -165,7 +162,7 @@ Also please prefer the [Facebook H4  Support / Discussion](https://www.facebook.
 
 # Installation and the "menagerie" roadmap
 
-H4Plugins sits at the top of a structure of underlying libraries with strange names, whihc we like to call "the menagerie". Each of them can be used in its own right without needing H4Plugins, but they all work best when H4Plugins pulls them all together and manages them.
+H4Plugins sits at the top of a structure of underlying libraries with strange names, which we like to call "the menagerie". Each of them can be used in its own right without needing H4Plugins, but they all work best when H4Plugins pulls them all together and manages them.
 
 SEE [Installation](#installation)
 
@@ -268,8 +265,6 @@ One can get a homogeneous H4 Stack versions from the [PlatformIO H4Plugins Envir
 ## Arduino IDE
 
 Simply download the zip of this repository and install as an Arduino library: `Sketch/Include Library/Add .ZIP Library...`
-
-Soon* all H4 libraries will use the [H4 Installer](https://github.com/philbowles/h4installer). This ensures that all versions match and that other additional special functions are included e.g. Addition of optimised board definitions in H4Plugins...
 
 # Issues
 
