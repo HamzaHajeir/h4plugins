@@ -121,6 +121,19 @@ def find_example_paths():
     # print(example_paths, sep="\n")
     return example_paths
 
+def trim_outer_directory(example_path):
+    # Split the path into components
+    parts = example_path.split(os.sep)
+
+    # Check if there are at least two components to trim
+    if len(parts) > 1:
+        # Join the parts excluding the outer directory
+        trimmed_path = os.sep.join(parts[1:])
+        return trimmed_path
+    else:
+        # Return the original path if it doesn't have the structure
+        return example_path
+
 def get_configuration_file(example_path):
     """Identify the appropriate configuration file for a given example path."""
     config_file = os.path.join(example_path, DEFAULT_CONFIG)
@@ -201,11 +214,11 @@ def switch_to_ci_branch():
     except subprocess.CalledProcessError:
         subprocess.run(f"git checkout -b {CI_BRANCH_NAME}", shell=True)
 
-def push_report():
+def push_report(run_count):
     """Push the Markdown report to the CI branch."""
     subprocess.run(f"git add {TESTS_DIR}", shell=True)
     subprocess.run(f"git add {os.path.join(BUILD_DIR, '**', '*.log')}", shell=True)
-    subprocess.run(f"git commit -m \"Add build report\"", shell=True)
+    subprocess.run(f"git commit -m \"Add build report #{run_count}\"", shell=True)
     subprocess.run(f"git push -u origin {CI_BRANCH_NAME}", shell=True)
 
 def create_pull_request(body_path, run_id):
@@ -218,7 +231,7 @@ def create_pull_request(body_path, run_id):
 def create_result_entry(example_path, env, build_result, log_file):
     """Create a result entry based on the build outcome, using environment as the column name."""
     base_entry = {
-        'Example': os.path.basename(example_path)
+        'Example': trim_outer_directory(example_path)
     }
     line = ""
     if build_result.returncode == 0:
@@ -313,7 +326,7 @@ def main():
     report_path = save_report(report_table, run_count_str)
 
     switch_to_ci_branch()
-    push_report()
+    push_report(run_count_str)
     
     if pr_on_end:
         create_pull_request(report_path, run_count_str)
