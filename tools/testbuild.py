@@ -204,17 +204,30 @@ def save_report(df, run_count):
 def switch_to_ci_branch():
     """Switch to the CI branch, creating it if it doesn't exist."""
     try:
+        # Fetch the remote branches to ensure we have the latest state
+        subprocess.run("git fetch origin", shell=True, check=True)
+        
         # Checkout the CI branch, create if it doesn't exist
         subprocess.run(f"git checkout {CI_BRANCH_NAME}", shell=True, check=True)
     except subprocess.CalledProcessError:
+        # Create and switch to the CI branch if it does not exist
         subprocess.run(f"git checkout -b {CI_BRANCH_NAME}", shell=True)
 
 def push_report(run_count):
     """Push the Markdown report to the CI branch."""
-    subprocess.run(f"git add {TESTS_DIR}", shell=True)
-    subprocess.run(f"git add {os.path.join(BUILD_DIR, '**', '*.log')}", shell=True)
-    subprocess.run(f"git commit -m \"Add build report #{run_count}\"", shell=True)
-    subprocess.run(f"git push -u origin {CI_BRANCH_NAME}", shell=True)
+    subprocess.run(f"git add {TESTS_DIR}", shell=True, check=True)
+    subprocess.run(f"git add {os.path.join(BUILD_DIR, '**', '*.log')}", shell=True, check=True)
+    
+    commit_message = f"Add build report #{run_count}"
+    subprocess.run(f"git commit -m \"{commit_message}\"", shell=True, check=True)
+    
+    try:
+        subprocess.run(f"git push -u origin {CI_BRANCH_NAME}", shell=True, check=True)
+    except subprocess.CalledProcessError:
+        # Handle the case where the push fails and the local branch is out of sync
+        print(f"Local branch {CI_BRANCH_NAME} is out of sync with remote. Pulling changes...")
+        subprocess.run(f"git pull origin {CI_BRANCH_NAME}", shell=True, check=True)
+        subprocess.run(f"git push -u origin {CI_BRANCH_NAME}", shell=True, check=True)
 
 def create_pull_request(body_path, run_id):
     """Create a pull request to merge the CI branch into master."""
