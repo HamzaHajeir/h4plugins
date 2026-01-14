@@ -269,7 +269,7 @@ def main():
     results = []
     gather_default_environments(DEFAULT_CONFIG)
     create_environment_directories()
-    run_count = os.environ['GITHUB_RUN_ID']
+    run_count = os.environ.get('GITHUB_RUN_NUMBER', '0')
     run_count_str = str(run_count).zfill(5)
 
     os.makedirs(os.path.join(BUILD_DIR, run_count_str), exist_ok=True)
