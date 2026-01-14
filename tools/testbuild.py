@@ -34,7 +34,7 @@ def convert_os_path_to_url(os_path):
 
 def gather_default_environments(config_file):
     """Populate the global array with environments from the default configuration."""
-    print(f"Gathering default environments to {config_file}:")
+    print(f"Gathering default environments from {config_file}:")
     global DEFAULT_ENVIRONMENTS
     DEFAULT_ENVIRONMENTS = get_environments(config_file)
     print(DEFAULT_ENVIRONMENTS)
@@ -64,7 +64,7 @@ def create_environment_directories():
     # Create src directory in the environment folder
     src_dir = os.path.join(assistant_build_dir, 'src')
     os.makedirs(src_dir, exist_ok=True)
-    print(f"Created environment for extra builders in {assistant_build_dir}")
+    print(f"Created PIO environment for extra builders in {assistant_build_dir}")
     
 def copy_example_to_env(example_path,env):
     # Define the src directory based on the environment
@@ -102,9 +102,6 @@ def copy_example_to_extra_build(example_path):
     config_path = os.path.join(build_dir, 'platformio.ini')
     if os.path.exists(config_path):
         os.remove(config_path)
-        print(f"Removed file: {config_path}")
-    else:
-        print(f"File does not exist: {config_path}")
     shutil.copy(os.path.join(example_path,"platformio.ini"), config_path)
 
     print(f"Copied example files to {build_dir}")
@@ -118,7 +115,6 @@ def find_example_paths():
     for root, dirs, files in os.walk(EXAMPLES_DIR):
         if any(file.endswith('.ino') for file in files):
             example_paths.append(root)
-    # print(example_paths, sep="\n")
     return example_paths
 
 def trim_outer_directory(example_path):
@@ -137,7 +133,6 @@ def trim_outer_directory(example_path):
 def get_configuration_file(example_path):
     """Identify the appropriate configuration file for a given example path."""
     config_file = os.path.join(example_path, DEFAULT_CONFIG)
-    print(f"Checking against config_file {config_file}: {os.path.isfile(config_file)}")
     if os.path.isfile(config_file):
         return config_file
     return DEFAULT_CONFIG
@@ -146,7 +141,6 @@ def get_environments(config_file):
     """Retrieve available environments from the configuration file."""
     output = subprocess.run(f'pio run --project-conf {config_file} --environment all', shell=True, capture_output=True, text=True)
     valid_names_part = output.stderr.split("Valid names are ")
-    print (valid_names_part)
     envs = valid_names_part[1].strip("\n").strip("'").strip("`").split(", ")
 
     # envs = re.findall(r"Valid names are (.*)", output.stdout)
@@ -181,6 +175,7 @@ def create_report_table(results):
     df = pd.DataFrame(results)
 
     print (df)
+
     # Combine rows based on 'Example'
     # We will use groupby and aggregate
     unified_df = df.groupby('Example').agg(lambda x: x.dropna().tolist()).reset_index()
@@ -273,7 +268,6 @@ def format_log(log):
 
 
 def main():
-    print("Running the script")
     pr_on_end = False
     if subprocess.run("git rev-parse --symbolic-full-names --abbrev-ref HEAD", shell=True, capture_output=True, text=True).stdout.strip() != 'master':
         pr_on_end = True
@@ -293,7 +287,7 @@ def main():
         config_file = get_configuration_file(example_path)
         print(f"Example ({example_path}) config [{config_file}]")
         environments = get_environments(config_file)
-        print(f"Environments: {environments}")
+        print(f"Example environments: {environments}")
         for env in environments:
             build_dir = ""
             tweaked_example_path = example_path
@@ -307,7 +301,6 @@ def main():
             out_log = format_log(build_result.stdout)
             err_log = format_log(build_result.stderr)
 
-            # print(f"build_result: {build_result.returncode}, OUT {str(build_result.stdout)}\n ERR {str(build_result.stderr)}")
             log_file_path = os.path.join(BUILD_DIR, run_count_str, f"{os.path.basename(example_path)}_{env}.log")
             
             # Save the log file
