@@ -9,6 +9,9 @@ on:
       - 'src/*'       # Trigger on changes in the src directory
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   run-gh-command:
     runs-on: ubuntu-latest
