@@ -1,0 +1,48 @@
+Processing esp32doit-devkit-v1 (board: esp32doit-devkit-v1; platform: https://github.com/pioarduino/platform-espressif32/releases/download/55.03.35/platform-espressif32.zip; framework: arduino)
+--------------------------------------------------------------------------------
+Verbose mode can be enabled via `-v, --verbose` option
+CONFIGURATION: https://docs.platformio.org/page/boards/espressif32/esp32doit-devkit-v1.html
+PLATFORM: Espressif 32 (55.3.35) > DOIT ESP32 DEVKIT V1
+HARDWARE: ESP32 240MHz, 320KB RAM, 4MB Flash
+DEBUG: Current (cmsis-dap) External (cmsis-dap, esp-bridge, esp-prog, iot-bus-jtag, jlink, minimodule, olimex-arm-usb-ocd, olimex-arm-usb-ocd-h, olimex-arm-usb-tiny-h, olimex-jtag-tiny, tumpa)
+PACKAGES: 
+ - contrib-piohome @ 3.4.4 
+ - framework-arduinoespressif32 @ 3.3.5 
+ - framework-arduinoespressif32-libs @ 5.5.0+sha.366dadf354 
+ - tool-esp-rom-elfs @ 2024.10.11 
+ - tool-esptoolpy @ 5.1.0 
+ - tool-mklittlefs @ 3.2.0 
+ - toolchain-xtensa-esp-elf @ 14.2.0+20251107
+Converting PM_03_Debounced.ino
+LDF: Library Dependency Finder -> https://bit.ly/configure-pio-ldf
+LDF Modes: Finder ~ chain, Compatibility ~ soft
+Found 50 compatible libraries
+Scanning dependencies...
+Dependency Graph
+|-- H4 @ 4.0.9+sha.6f2f510
+|-- H4Tools @ 0.0.16+sha.47ce091
+|-- H4AsyncTCP @ 0.0.25+sha.231be9d
+|-- H4AsyncMQTT @ 1.0.0-rc12+sha.9d2b784
+|-- ArmadilloHTTP @ 0.1.9+sha.ac5bf86
+|-- H4AsyncWebServer @ 0.0.12+sha.95236bc
+|-- H4Plugins @ 3.5.7+sha.0ad6c2a
+Building in release mode
+Compiling .pio/build/esp32doit-devkit-v1/lib5ac/H4AsyncWebServer/H4AT_HTTPHandlerWS.cpp.o
+Compiling .pio/build/esp32doit-devkit-v1/lib4b6/Update/Updater_Signing.cpp.o
+.pio/libdeps/esp32doit-devkit-v1/H4AsyncWebServer/src/H4AT_HTTPHandlerWS.cpp:32:9: fatal error: H4ASyncWebServer.h: No such file or directory
+**************************************************************************
+* Looking for H4ASyncWebServer.h dependency? Check our library registry!
+*
+* CLI  > platformio lib search "header:H4ASyncWebServer.h"
+* Web  > https://registry.platformio.org/search?q=header:H4ASyncWebServer.h
+*
+**************************************************************************
+   32 | #include<H4ASyncWebServer.h>
+      |         ^~~~~~~~~~~~~~~~~~~~
+compilation terminated.
+*** [.pio/build/esp32doit-devkit-v1/lib5ac/H4AsyncWebServer/H4AT_HTTPHandlerWS.cpp.o] Error 1
+========================== [FAILED] Took 6.18 seconds ==========================
+Environment          Status    Duration
+-------------------  --------  ------------
+esp32doit-devkit-v1  FAILED    00:00:06.175
+==================== 1 failed, 0 succeeded in 00:00:06.175 ====================

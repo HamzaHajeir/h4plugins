@@ -1,0 +1,172 @@
+Processing esp32s3-devkitc (board: esp32-s3-devkitc-1; platform: https://github.com/pioarduino/platform-espressif32/releases/download/55.03.35/platform-espressif32.zip; framework: arduino)
+--------------------------------------------------------------------------------
+Verbose mode can be enabled via `-v, --verbose` option
+CONFIGURATION: https://docs.platformio.org/page/boards/espressif32/esp32-s3-devkitc-1.html
+PLATFORM: Espressif 32 (55.3.35) > Espressif ESP32-S3-DevKitC-1-N8 (8 MB QD, No PSRAM)
+HARDWARE: ESP32S3 240MHz, 320KB RAM, 8MB Flash
+DEBUG: Current (esp-builtin) On-board (esp-builtin) External (cmsis-dap, esp-bridge, esp-prog, iot-bus-jtag, jlink, minimodule, olimex-arm-usb-ocd, olimex-arm-usb-ocd-h, olimex-arm-usb-tiny-h, olimex-jtag-tiny, tumpa)
+PACKAGES: 
+ - contrib-piohome @ 3.4.4 
+ - framework-arduinoespressif32 @ 3.3.5 
+ - framework-arduinoespressif32-libs @ 5.5.0+sha.366dadf354 
+ - tool-esp-rom-elfs @ 2024.10.11 
+ - tool-esptoolpy @ 5.1.0 
+ - tool-mklittlefs @ 3.2.0 
+ - toolchain-xtensa-esp-elf @ 14.2.0+20251107
+Converting H4P_TrafficLights.ino
+LDF: Library Dependency Finder -> https://bit.ly/configure-pio-ldf
+LDF Modes: Finder ~ chain, Compatibility ~ soft
+Found 50 compatible libraries
+Scanning dependencies...
+Dependency Graph
+|-- H4 @ 4.0.9+sha.6f2f510
+|-- H4Tools @ 0.0.16+sha.47ce091
+|-- H4AsyncTCP @ 0.0.25+sha.231be9d
+|-- H4AsyncMQTT @ 1.0.0-rc12+sha.9d2b784
+|-- ArmadilloHTTP @ 0.1.9+sha.ac5bf86
+|-- H4AsyncWebServer @ 0.0.12+sha.95236bc
+|-- H4Plugins @ 3.5.7+sha.0ad6c2a
+Building in release mode
+Compiling .pio/build/esp32s3-devkitc/lib0f4/H4AsyncWebServer/H4AT_HTTPHandlerWS.cpp.o
+Compiling .pio/build/esp32s3-devkitc/src/H4P_TrafficLights.ino.cpp.o
+.pio/libdeps/esp32s3-devkitc/H4AsyncWebServer/src/H4AT_HTTPHandlerWS.cpp:32:9: fatal error: H4ASyncWebServer.h: No such file or directory
+**************************************************************************
+* Looking for H4ASyncWebServer.h dependency? Check our library registry!
+*
+* CLI  > platformio lib search "header:H4ASyncWebServer.h"
+* Web  > https://registry.platformio.org/search?q=header:H4ASyncWebServer.h
+*
+**************************************************************************
+   32 | #include<H4ASyncWebServer.h>
+      |         ^~~~~~~~~~~~~~~~~~~~
+compilation terminated.
+*** [.pio/build/esp32s3-devkitc/lib0f4/H4AsyncWebServer/H4AT_HTTPHandlerWS.cpp.o] Error 1
+In file included from /home/runner/work/h4plugins/h4plugins/build/esp32s3-devkitc/src/H4P_TrafficLights.ino:1:
+.pio/libdeps/esp32s3-devkitc/H4Plugins/src/H4Plugins.h:6:76: note: '#pragma message: Using Wifi AP - Make sure you have made arrangements!'
+    6 |     #pragma message("Using Wifi AP - Make sure you have made arrangements!")
+      |                                                                            ^
+/home/runner/work/h4plugins/h4plugins/build/esp32s3-devkitc/src/H4P_TrafficLights.ino:36:5: error: conflicting declaration 'int T1'
+   36 | int T1=5000; // see the phasing.xls spreadsheet for choosing these numbers
+      |     ^~
+In file included from /home/runner/.platformio/packages/framework-arduinoespressif32/cores/esp32/Arduino.h:43,
+                 from /tmp/tmp0egmzlhm:1:
+/home/runner/.platformio/packages/framework-arduinoespressif32/variants/esp32s3/pins_arduino.h:54:22: note: previous declaration as 'const uint8_t T1'
+   54 | static const uint8_t T1 = 1;
+      |                      ^~
+/home/runner/work/h4plugins/h4plugins/build/esp32s3-devkitc/src/H4P_TrafficLights.ino:37:5: error: conflicting declaration 'int T2'
+   37 | int T2=1250;
+      |     ^~
+/home/runner/.platformio/packages/framework-arduinoespressif32/variants/esp32s3/pins_arduino.h:55:22: note: previous declaration as 'const uint8_t T2'
+   55 | static const uint8_t T2 = 2;
+      |                      ^~
+/home/runner/work/h4plugins/h4plugins/build/esp32s3-devkitc/src/H4P_TrafficLights.ino: In function 'void trafficLights(bool)':
+/home/runner/work/h4plugins/h4plugins/build/esp32s3-devkitc/src/H4P_TrafficLights.ino:30:19: error: 'D6' was not declared in this scope; did you mean 'T6'?
+   30 | #define RED_LIGHT    D6
+      |                   ^~
+/home/runner/work/h4plugins/h4plugins/build/esp32s3-devkitc/src/H4P_TrafficLights.ino:49:14: note: in expansion of macro 'RED_LIGHT'
+   49 |     switchOn(RED_LIGHT,T1+T2);
+      |              ^~~~~~~~~
+/home/runner/work/h4plugins/h4plugins/build/esp32s3-devkitc/src/H4P_TrafficLights.ino: In lambda function:
+/home/runner/work/h4plugins/h4plugins/build/esp32s3-devkitc/src/H4P_TrafficLights.ino:31:21: error: 'D7' was not declared in this scope; did you mean 'T7'?
+   31 | #define AMBER_LIGHT  D7
+      |                     ^~
+/home/runner/work/h4plugins/h4plugins/build/esp32s3-devkitc/src/H4P_TrafficLights.ino:51:16: note: in expansion of macro 'AMBER_LIGHT'
+   51 |       switchOn(AMBER_LIGHT,T2,[](){ // AMBER stays on for T2, and when it goes off...
+      |                ^~~~~~~~~~~
+/home/runner/work/h4plugins/h4plugins/build/esp32s3-devkitc/src/H4P_TrafficLights.ino: In lambda function:
+/home/runner/work/h4plugins/h4plugins/build/esp32s3-devkitc/src/H4P_TrafficLights.ino:32:21: error: 'D8' was not declared in this scope; did you mean 'T8'?
+   32 | #define GREEN_LIGHT  D8
+      |                     ^~
+/home/runner/work/h4plugins/h4plugins/build/esp32s3-devkitc/src/H4P_TrafficLights.ino:52:18: note: in expansion of macro 'GREEN_LIGHT'
+   52 |         switchOn(GREEN_LIGHT,T1,[](){ // light GREEN for T1, and when it goes off...
+      |                  ^~~~~~~~~~~
+/home/runner/work/h4plugins/h4plugins/build/esp32s3-devkitc/src/H4P_TrafficLights.ino: In lambda function:
+/home/runner/work/h4plugins/h4plugins/build/esp32s3-devkitc/src/H4P_TrafficLights.ino:31:21: error: 'D7' is not captured
+   31 | #define AMBER_LIGHT  D7
+      |                     ^~
+/home/runner/work/h4plugins/h4plugins/build/esp32s3-devkitc/src/H4P_TrafficLights.ino:53:20: note: in expansion of macro 'AMBER_LIGHT'
+   53 |           switchOn(AMBER_LIGHT,T2); }); // light AMBER for T2 when done,rinse and repeat
+      |                    ^~~~~~~~~~~
+/home/runner/work/h4plugins/h4plugins/build/esp32s3-devkitc/src/H4P_TrafficLights.ino:52:34: note: the lambda has no capture-default
+   52 |         switchOn(GREEN_LIGHT,T1,[](){ // light GREEN for T1, and when it goes off...
+      |                                  ^
+/home/runner/work/h4plugins/h4plugins/build/esp32s3-devkitc/src/H4P_TrafficLights.ino:31:21: note: '<typeprefixerror>D7' declared here
+   31 | #define AMBER_LIGHT  D7
+      |                     ^~
+/home/runner/work/h4plugins/h4plugins/build/esp32s3-devkitc/src/H4P_TrafficLights.ino:51:16: note: in expansion of macro 'AMBER_LIGHT'
+   51 |       switchOn(AMBER_LIGHT,T2,[](){ // AMBER stays on for T2, and when it goes off...
+      |                ^~~~~~~~~~~
+/home/runner/work/h4plugins/h4plugins/build/esp32s3-devkitc/src/H4P_TrafficLights.ino: In function 'void trafficLights(bool)':
+/home/runner/work/h4plugins/h4plugins/build/esp32s3-devkitc/src/H4P_TrafficLights.ino:30:19: error: 'D6' was not declared in this scope; did you mean 'T6'?
+   30 | #define RED_LIGHT    D6
+      |                   ^~
+/home/runner/work/h4plugins/h4plugins/build/esp32s3-devkitc/src/H4P_TrafficLights.ino:61:21: note: in expansion of macro 'RED_LIGHT'
+   61 |     pm.logicalWrite(RED_LIGHT,OFF);
+      |                     ^~~~~~~~~
+/home/runner/work/h4plugins/h4plugins/build/esp32s3-devkitc/src/H4P_TrafficLights.ino:31:21: error: 'D7' was not declared in this scope; did you mean 'T7'?
+   31 | #define AMBER_LIGHT  D7
+      |                     ^~
+/home/runner/work/h4plugins/h4plugins/build/esp32s3-devkitc/src/H4P_TrafficLights.ino:62:21: note: in expansion of macro 'AMBER_LIGHT'
+   62 |     pm.logicalWrite(AMBER_LIGHT,OFF);
+      |                     ^~~~~~~~~~~
+/home/runner/work/h4plugins/h4plugins/build/esp32s3-devkitc/src/H4P_TrafficLights.ino:32:21: error: 'D8' was not declared in this scope; did you mean 'T8'?
+   32 | #define GREEN_LIGHT  D8
+      |                     ^~
+/home/runner/work/h4plugins/h4plugins/build/esp32s3-devkitc/src/H4P_TrafficLights.ino:63:21: note: in expansion of macro 'GREEN_LIGHT'
+   63 |     pm.logicalWrite(GREEN_LIGHT,OFF);
+      |                     ^~~~~~~~~~~
+/home/runner/work/h4plugins/h4plugins/build/esp32s3-devkitc/src/H4P_TrafficLights.ino: At global scope:
+/home/runner/work/h4plugins/h4plugins/build/esp32s3-devkitc/src/H4P_TrafficLights.ino:72:47: error: no matching function for call to 'H4P_WiFi::H4P_WiFi(const char [9], const char [9], const char [8])'
+   72 | H4P_WiFi wiffy("XXXXXXXX","XXXXXXXX","traffic");
+      |                                               ^
+In file included from .pio/libdeps/esp32s3-devkitc/H4Plugins/src/H4P_AsyncMQTT.h:34,
+                 from .pio/libdeps/esp32s3-devkitc/H4Plugins/src/H4Plugins.h:10:
+.pio/libdeps/esp32s3-devkitc/H4Plugins/src/H4P_WiFi.h:133:9: note: candidate: 'H4P_WiFi::H4P_WiFi(const std::string&)'
+  133 |         H4P_WiFi(const std::string& device=""):
+      |         ^~~~~~~~
+.pio/libdeps/esp32s3-devkitc/H4Plugins/src/H4P_WiFi.h:133:9: note:   candidate expects 1 argument, 3 provided
+.pio/libdeps/esp32s3-devkitc/H4Plugins/src/H4P_WiFi.h:63:7: note: candidate: 'H4P_WiFi::H4P_WiFi(const H4P_WiFi&)'
+   63 | class H4P_WiFi: public H4Service, public H4AsyncWebServer {
+      |       ^~~~~~~~
+.pio/libdeps/esp32s3-devkitc/H4Plugins/src/H4P_WiFi.h:63:7: note:   candidate expects 1 argument, 3 provided
+.pio/libdeps/esp32s3-devkitc/H4Plugins/src/H4P_WiFi.h:63:7: note: candidate: 'H4P_WiFi::H4P_WiFi(H4P_WiFi&&)'
+.pio/libdeps/esp32s3-devkitc/H4Plugins/src/H4P_WiFi.h:63:7: note:   candidate expects 1 argument, 3 provided
+/home/runner/work/h4plugins/h4plugins/build/esp32s3-devkitc/src/H4P_TrafficLights.ino:73:43: error: no matching function for call to 'H4P_AsyncMQTT::H4P_AsyncMQTT(const char [24])'
+   73 | H4P_AsyncMQTT qt("http://192.168.1.4:1883");
+      |                                           ^
+.pio/libdeps/esp32s3-devkitc/H4Plugins/src/H4P_AsyncMQTT.h:71:9: note: candidate: 'H4P_AsyncMQTT::H4P_AsyncMQTT(H4P_LWT)'
+   71 |         H4P_AsyncMQTT(H4P_LWT lwt={"","",0,false}): _lwt(lwt), H4Service(mqttTag(),H4PE_GVCHANGE|H4PE_VIEWERS|H4PE_BLESINIT){
+      |         ^~~~~~~~~~~~~
+.pio/libdeps/esp32s3-devkitc/H4Plugins/src/H4P_AsyncMQTT.h:71:31: note:   no known conversion for argument 1 from 'const char [24]' to 'H4P_LWT'
+   71 |         H4P_AsyncMQTT(H4P_LWT lwt={"","",0,false}): _lwt(lwt), H4Service(mqttTag(),H4PE_GVCHANGE|H4PE_VIEWERS|H4PE_BLESINIT){
+      |                       ~~~~~~~~^~~~~~~~~~~~~~~~~~~
+.pio/libdeps/esp32s3-devkitc/H4Plugins/src/H4P_AsyncMQTT.h:46:7: note: candidate: 'H4P_AsyncMQTT::H4P_AsyncMQTT(const H4P_AsyncMQTT&)'
+   46 | class H4P_AsyncMQTT: public H4Service, public H4AsyncMQTT{
+      |       ^~~~~~~~~~~~~
+.pio/libdeps/esp32s3-devkitc/H4Plugins/src/H4P_AsyncMQTT.h:46:7: note:   no known conversion for argument 1 from 'const char [24]' to 'const H4P_AsyncMQTT&'
+.pio/libdeps/esp32s3-devkitc/H4Plugins/src/H4P_AsyncMQTT.h:46:7: note: candidate: 'H4P_AsyncMQTT::H4P_AsyncMQTT(H4P_AsyncMQTT&&)'
+.pio/libdeps/esp32s3-devkitc/H4Plugins/src/H4P_AsyncMQTT.h:46:7: note:   no known conversion for argument 1 from 'const char [24]' to 'H4P_AsyncMQTT&&'
+/home/runner/work/h4plugins/h4plugins/build/esp32s3-devkitc/src/H4P_TrafficLights.ino:30:19: error: 'D6' was not declared in this scope; did you mean 'T6'?
+   30 | #define RED_LIGHT    D6
+      |                   ^~
+/home/runner/work/h4plugins/h4plugins/build/esp32s3-devkitc/src/H4P_TrafficLights.ino:78:19: note: in expansion of macro 'RED_LIGHT'
+   78 | h4pOutput lampRED(RED_LIGHT,ACTIVE_HIGH,OFF,H4P_UILED_RED);
+      |                   ^~~~~~~~~
+/home/runner/work/h4plugins/h4plugins/build/esp32s3-devkitc/src/H4P_TrafficLights.ino:31:21: error: 'D7' was not declared in this scope; did you mean 'T7'?
+   31 | #define AMBER_LIGHT  D7
+      |                     ^~
+/home/runner/work/h4plugins/h4plugins/build/esp32s3-devkitc/src/H4P_TrafficLights.ino:79:21: note: in expansion of macro 'AMBER_LIGHT'
+   79 | h4pOutput lampAMBER(AMBER_LIGHT,ACTIVE_HIGH,OFF,H4P_UILED_ORANGE);
+      |                     ^~~~~~~~~~~
+/home/runner/work/h4plugins/h4plugins/build/esp32s3-devkitc/src/H4P_TrafficLights.ino:32:21: error: 'D8' was not declared in this scope; did you mean 'T8'?
+   32 | #define GREEN_LIGHT  D8
+      |                     ^~
+/home/runner/work/h4plugins/h4plugins/build/esp32s3-devkitc/src/H4P_TrafficLights.ino:80:21: note: in expansion of macro 'GREEN_LIGHT'
+   80 | h4pOutput lampGREEN(GREEN_LIGHT,ACTIVE_HIGH,OFF,H4P_UILED_GREEN);
+      |                     ^~~~~~~~~~~
+*** [.pio/build/esp32s3-devkitc/src/H4P_TrafficLights.ino.cpp.o] Error 1
+========================= [FAILED] Took 10.27 seconds =========================
+Environment      Status    Duration
+---------------  --------  ------------
+esp32s3-devkitc  FAILED    00:00:10.270
+==================== 1 failed, 0 succeeded in 00:00:10.270 ====================
