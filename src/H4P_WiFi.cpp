@@ -626,9 +626,11 @@ void H4P_WiFi::authenticate(const std::string &username, const std::string &pass
 }
 
 void H4P_WiFi::svcDown(){
-    _signalBad();
+    if (_running) {
+        _signalBad();   
+        HAL_WIFI_disconnect();
+    }
     h4.cancelSingleton(H4P_TRID_HOTA);
-    if (_running) HAL_WIFI_disconnect();
 #if !H4P_WIFI_EVENT_SYSTEM
     _checkStatus(); // Should go disconnected.
 #endif

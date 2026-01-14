@@ -99,7 +99,7 @@ class H4P_WiFi: public H4Service, public H4AsyncWebServer {
                 std::string     submitpass;
                 bool            _cannotConnectSTA(){ return h4p[ssidTag()] == h4Tag() /*  || std::stoi(h4p[GoTag()]) == 0 */; }
 #else
-                bool            _cannotConnectSTA(){ return (WiFi.SSID()==h4Tag() || WiFi.psk()==h4Tag())/*  || std::stoi(h4p[GoTag()]) == 0 */; }
+                bool            _cannotConnectSTA(){ return (h4p[ssidTag()]==h4Tag() || WiFi.SSID()==h4Tag() || WiFi.psk()==h4Tag())/*  || std::stoi(h4p[GoTag()]) == 0 */; }
 #endif
                 void            _commonStartup();
                 void            _coreStart();

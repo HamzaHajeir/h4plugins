@@ -33,6 +33,11 @@ SOFTWARE.
 #include<H4P_WiFi.h>
 #include "lwip/tcpip.h"
 
+#ifndef LOCK_TCPIP_CORE // As to compile for RP2040. Might need to checkout in depth.
+#define LOCK_TCPIP_CORE() 
+#define UNLOCK_TCPIP_CORE()
+#endif
+
 constexpr uint32_t secsInDay(){ return 86400; }
 constexpr uint32_t msInDay(){ return 1000*secsInDay(); }
 
