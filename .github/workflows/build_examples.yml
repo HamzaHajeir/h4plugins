@@ -24,6 +24,11 @@ jobs:
             ~/.platformio/.cache
           key: ${{ runner.os }}-pio
 
+      - name: Configure Git
+        run: |
+          git config --global user.name "Hamzah Hajeir"
+          git config --global user.email "HamzaHajeir@users.noreply.github.com"
+          
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
