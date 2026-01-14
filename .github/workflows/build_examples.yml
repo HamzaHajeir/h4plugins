@@ -35,7 +35,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.9'  # Specify the Python version you want to use
+          python-version: '3.13'  # Specify the Python version you want to use
 
       - name: Install required packages
         run: |
