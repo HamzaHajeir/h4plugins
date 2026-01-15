@@ -118,6 +118,11 @@ def find_example_paths():
     return example_paths
 
 def trim_outer_directory(example_path):
+    # Remove leading './' or '/' if present
+    if example_path.startswith("./"):
+        example_path = example_path[2:]
+    elif example_path.startswith("/"):
+        example_path = example_path[1:]
     # Split the path into components
     parts = example_path.split(os.sep)
 
@@ -295,7 +300,6 @@ def main():
     os.makedirs(os.path.join(BUILD_DIR, run_count_str), exist_ok=True)
 
     # Iterate through examples
-    count = 0
     for example_path in example_paths:
         config_file = get_configuration_file(example_path)
         print(f"Example ({example_path}) config [{config_file}]")
