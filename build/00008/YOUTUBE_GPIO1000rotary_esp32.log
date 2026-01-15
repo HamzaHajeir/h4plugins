@@ -1,0 +1,48 @@
+Processing esp32 (board: esp32doit-devkit-v1; platform: https://github.com/pioarduino/platform-espressif32/releases/download/55.03.35/platform-espressif32.zip; framework: arduino)
+--------------------------------------------------------------------------------
+Verbose mode can be enabled via `-v, --verbose` option
+CONFIGURATION: https://docs.platformio.org/page/boards/espressif32/esp32doit-devkit-v1.html
+PLATFORM: Espressif 32 (55.3.35) > DOIT ESP32 DEVKIT V1
+HARDWARE: ESP32 240MHz, 320KB RAM, 4MB Flash
+DEBUG: Current (cmsis-dap) External (cmsis-dap, esp-bridge, esp-prog, iot-bus-jtag, jlink, minimodule, olimex-arm-usb-ocd, olimex-arm-usb-ocd-h, olimex-arm-usb-tiny-h, olimex-jtag-tiny, tumpa)
+PACKAGES: 
+ - contrib-piohome @ 3.4.4 
+ - framework-arduinoespressif32 @ 3.3.5 
+ - framework-arduinoespressif32-libs @ 5.5.0+sha.366dadf354 
+ - tool-esp-rom-elfs @ 2024.10.11 
+ - tool-esptoolpy @ 5.1.0 
+ - tool-mklittlefs @ 3.2.0 
+ - toolchain-xtensa-esp-elf @ 14.2.0+20251107
+Converting YOUTUBE_GPIO1000rotary.ino
+LDF: Library Dependency Finder -> https://bit.ly/configure-pio-ldf
+LDF Modes: Finder ~ chain, Compatibility ~ soft
+Found 50 compatible libraries
+Scanning dependencies...
+Dependency Graph
+|-- H4 @ 4.0.9+sha.6f2f510
+|-- H4Tools @ 0.0.16+sha.47ce091
+|-- H4AsyncTCP @ 0.0.25+sha.231be9d
+|-- H4AsyncMQTT @ 1.0.0-rc12+sha.9d2b784
+|-- ArmadilloHTTP @ 0.1.9+sha.ac5bf86
+|-- H4AsyncWebServer @ 0.0.13+sha.fcbce26
+|-- H4Plugins @ 3.5.7+sha.0ad6c2a
+Building in release mode
+Compiling .pio/build/esp32/src/YOUTUBE_GPIO1000rotary.ino.cpp.o
+In file included from /home/runner/work/h4plugins/h4plugins/build/esp32/src/YOUTUBE_GPIO1000rotary.ino:1:
+.pio/libdeps/esp32/H4Plugins/src/H4Plugins.h:6:76: note: '#pragma message: Using Wifi AP - Make sure you have made arrangements!'
+    6 |     #pragma message("Using Wifi AP - Make sure you have made arrangements!")
+      |                                                                            ^
+/home/runner/work/h4plugins/h4plugins/build/esp32/src/YOUTUBE_GPIO1000rotary.ino:4:19: error: 'D1' was not declared in this scope; did you mean 'y1'?
+    4 | h4pEncoder rotary(D1,D2);
+      |                   ^~
+      |                   y1
+/home/runner/work/h4plugins/h4plugins/build/esp32/src/YOUTUBE_GPIO1000rotary.ino:4:22: error: 'D2' was not declared in this scope; did you mean 'T2'?
+    4 | h4pEncoder rotary(D1,D2);
+      |                      ^~
+      |                      T2
+*** [.pio/build/esp32/src/YOUTUBE_GPIO1000rotary.ino.cpp.o] Error 1
+========================== [FAILED] Took 9.66 seconds ==========================
+Environment    Status    Duration
+-------------  --------  ------------
+esp32          FAILED    00:00:09.658
+==================== 1 failed, 0 succeeded in 00:00:09.658 ====================

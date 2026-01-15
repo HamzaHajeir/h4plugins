@@ -1,0 +1,79 @@
+Processing nodemcuv2 (platform: espressif8266@4.2.0; board: nodemcuv2; framework: arduino)
+--------------------------------------------------------------------------------
+Tool Manager: Installing platformio/tool-esptoolpy @ ~1.30000.0
+Unpacking 0% 10% 20% 30% 40% 50% 60% 70% 80% 90% 100%
+Tool Manager: tool-esptoolpy@1.30000.201119 has been installed!
+Verbose mode can be enabled via `-v, --verbose` option
+CONFIGURATION: https://docs.platformio.org/page/boards/espressif8266/nodemcuv2.html
+PLATFORM: Espressif 8266 (4.2.0) > NodeMCU 1.0 (ESP-12E Module)
+HARDWARE: ESP8266 80MHz, 80KB RAM, 4MB Flash
+PACKAGES: 
+ - framework-arduinoespressif8266 @ 3.30102.0 (3.1.2) 
+ - tool-esptool @ 1.413.0 (4.13) 
+ - tool-esptoolpy @ 1.30000.201119 (3.0.0) 
+ - toolchain-xtensa @ 2.100300.220621 (10.3.0)
+Converting H4P_TakeOnMe.ino
+LDF: Library Dependency Finder -> https://bit.ly/configure-pio-ldf
+LDF Modes: Finder ~ deep+, Compatibility ~ soft
+Found 45 compatible libraries
+Scanning dependencies...
+Dependency Graph
+|-- H4 @ 4.0.9+sha.6f2f510
+|-- H4Tools @ 0.0.16+sha.47ce091
+|-- H4AsyncTCP @ 0.0.25+sha.231be9d
+|-- H4AsyncMQTT @ 1.0.0-rc12+sha.9d2b784
+|-- ArmadilloHTTP @ 0.1.9+sha.ac5bf86
+|-- H4AsyncWebServer @ 0.0.13+sha.fcbce26
+|-- H4Plugins @ 3.5.7+sha.0ad6c2a
+|-- ESPAsyncUDP @ 0.0.0-alpha+sha.697c75a025
+|-- LittleFS @ 0.1.0
+|-- ESP8266WiFi @ 1.0
+|-- ESP8266mDNS @ 1.2
+|-- DNSServer @ 1.1.1
+|-- ArduinoOTA @ 1.0
+|-- ESP8266httpUpdate @ 1.3
+|-- ESP8266HTTPClient @ 1.2
+Building in release mode
+Compiling .pio/build/nodemcuv2/src/H4P_TakeOnMe.ino.cpp.o
+Archiving .pio/build/nodemcuv2/lib623/libH4Tools.a
+Indexing .pio/build/nodemcuv2/lib623/libH4Tools.a
+Compiling .pio/build/nodemcuv2/libb8e/H4AsyncTCP/H4AsyncTCP.cpp.o
+Compiling .pio/build/nodemcuv2/libb8e/H4AsyncTCP/LwIPCoreLocker.cpp.o
+Compiling .pio/build/nodemcuv2/libb8e/H4AsyncTCP/h4async_config.cpp.o
+Compiling .pio/build/nodemcuv2/lib8f7/H4AsyncMQTT/H4AsyncMQTT.cpp.o
+Compiling .pio/build/nodemcuv2/lib8f7/H4AsyncMQTT/Packet.cpp.o
+Archiving .pio/build/nodemcuv2/libb8e/libH4AsyncTCP.a
+Indexing .pio/build/nodemcuv2/libb8e/libH4AsyncTCP.a
+Compiling .pio/build/nodemcuv2/lib8f7/H4AsyncMQTT/Properties.cpp.o
+.pio/libdeps/nodemcuv2/H4AsyncTCP/src/h4async_config.cpp:9:17: note: '#pragma message: TLS is Disabled. Ensure you're using the correct Arduino Core build that supports LwIP ALTCP TLS MBEDTLS'
+    9 | #pragma message "TLS is Disabled. Ensure you're using the correct Arduino Core build that supports LwIP ALTCP TLS MBEDTLS"
+      |                 ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+In file included from /home/runner/work/h4plugins/h4plugins/build/nodemcuv2/src/H4P_TakeOnMe.ino:2:
+.pio/libdeps/nodemcuv2/H4Plugins/src/H4Plugins.h:6:76: note: '#pragma message: Using Wifi AP - Make sure you have made arrangements!'
+    6 |     #pragma message("Using Wifi AP - Make sure you have made arrangements!")
+      |                                                                            ^
+/home/runner/work/h4plugins/h4plugins/build/nodemcuv2/src/H4P_TakeOnMe.ino:26:37: error: no matching function for call to 'H4P_WiFi::H4P_WiFi(const char [9], const char [9])'
+   26 | H4P_WiFi wiffy("XXXXXXXX","XXXXXXXX");
+      |                                     ^
+In file included from .pio/libdeps/nodemcuv2/H4Plugins/src/H4P_AsyncMQTT.h:34,
+                 from .pio/libdeps/nodemcuv2/H4Plugins/src/H4Plugins.h:10,
+                 from /home/runner/work/h4plugins/h4plugins/build/nodemcuv2/src/H4P_TakeOnMe.ino:2:
+.pio/libdeps/nodemcuv2/H4Plugins/src/H4P_WiFi.h:133:9: note: candidate: 'H4P_WiFi::H4P_WiFi(const string&)'
+  133 |         H4P_WiFi(const std::string& device=""):
+      |         ^~~~~~~~
+.pio/libdeps/nodemcuv2/H4Plugins/src/H4P_WiFi.h:133:9: note:   candidate expects 1 argument, 2 provided
+In file included from .pio/libdeps/nodemcuv2/H4Plugins/src/H4P_AsyncMQTT.h:34,
+                 from .pio/libdeps/nodemcuv2/H4Plugins/src/H4Plugins.h:10,
+                 from /home/runner/work/h4plugins/h4plugins/build/nodemcuv2/src/H4P_TakeOnMe.ino:2:
+.pio/libdeps/nodemcuv2/H4Plugins/src/H4P_WiFi.h:63:7: note: candidate: 'H4P_WiFi::H4P_WiFi(const H4P_WiFi&)'
+   63 | class H4P_WiFi: public H4Service, public H4AsyncWebServer {
+      |       ^~~~~~~~
+.pio/libdeps/nodemcuv2/H4Plugins/src/H4P_WiFi.h:63:7: note:   candidate expects 1 argument, 2 provided
+.pio/libdeps/nodemcuv2/H4Plugins/src/H4P_WiFi.h:63:7: note: candidate: 'H4P_WiFi::H4P_WiFi(H4P_WiFi&&)'
+.pio/libdeps/nodemcuv2/H4Plugins/src/H4P_WiFi.h:63:7: note:   candidate expects 1 argument, 2 provided
+*** [.pio/build/nodemcuv2/src/H4P_TakeOnMe.ino.cpp.o] Error 1
+========================== [FAILED] Took 7.51 seconds ==========================
+Environment    Status    Duration
+-------------  --------  ------------
+nodemcuv2      FAILED    00:00:07.509
+==================== 1 failed, 0 succeeded in 00:00:07.509 ====================

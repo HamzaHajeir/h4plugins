@@ -1,0 +1,89 @@
+Processing esp32s3 (board: esp32-s3-devkitc-1; platform: https://github.com/pioarduino/platform-espressif32/releases/download/55.03.35/platform-espressif32.zip; framework: arduino)
+--------------------------------------------------------------------------------
+Verbose mode can be enabled via `-v, --verbose` option
+CONFIGURATION: https://docs.platformio.org/page/boards/espressif32/esp32-s3-devkitc-1.html
+PLATFORM: Espressif 32 (55.3.35) > Espressif ESP32-S3-DevKitC-1-N8 (8 MB QD, No PSRAM)
+HARDWARE: ESP32S3 240MHz, 320KB RAM, 8MB Flash
+DEBUG: Current (esp-builtin) On-board (esp-builtin) External (cmsis-dap, esp-bridge, esp-prog, iot-bus-jtag, jlink, minimodule, olimex-arm-usb-ocd, olimex-arm-usb-ocd-h, olimex-arm-usb-tiny-h, olimex-jtag-tiny, tumpa)
+PACKAGES: 
+ - contrib-piohome @ 3.4.4 
+ - framework-arduinoespressif32 @ 3.3.5 
+ - framework-arduinoespressif32-libs @ 5.5.0+sha.366dadf354 
+ - tool-esp-rom-elfs @ 2024.10.11 
+ - tool-esptoolpy @ 5.1.0 
+ - tool-mklittlefs @ 3.2.0 
+ - toolchain-xtensa-esp-elf @ 14.2.0+20251107
+Converting H4P_SunriseSunset.ino
+LDF: Library Dependency Finder -> https://bit.ly/configure-pio-ldf
+LDF Modes: Finder ~ chain, Compatibility ~ soft
+Found 50 compatible libraries
+Scanning dependencies...
+Dependency Graph
+|-- H4 @ 4.0.9+sha.6f2f510
+|-- H4Tools @ 0.0.16+sha.47ce091
+|-- H4AsyncTCP @ 0.0.25+sha.231be9d
+|-- H4AsyncMQTT @ 1.0.0-rc12+sha.9d2b784
+|-- ArmadilloHTTP @ 0.1.9+sha.ac5bf86
+|-- H4AsyncWebServer @ 0.0.13+sha.fcbce26
+|-- H4Plugins @ 3.5.7+sha.0ad6c2a
+Building in release mode
+Compiling .pio/build/esp32s3/src/H4P_SunriseSunset.ino.cpp.o
+In file included from /home/runner/work/h4plugins/h4plugins/build/esp32s3/src/H4P_SunriseSunset.ino:1:
+.pio/libdeps/esp32s3/H4Plugins/src/H4Plugins.h:6:76: note: '#pragma message: Using Wifi AP - Make sure you have made arrangements!'
+    6 |     #pragma message("Using Wifi AP - Make sure you have made arrangements!")
+      |                                                                            ^
+/home/runner/work/h4plugins/h4plugins/build/esp32s3/src/H4P_SunriseSunset.ino: In function 'void onRTC()':
+/home/runner/work/h4plugins/h4plugins/build/esp32s3/src/H4P_SunriseSunset.ino:5:3: error: 'h4ss' was not declared in this scope
+    5 |   h4ss.at(SUNRISE,OFF,[](bool b){ Serial.printf("COCK-A-DOODLE-DOO!"); });
+      |   ^~~~
+/home/runner/work/h4plugins/h4plugins/build/esp32s3/src/H4P_SunriseSunset.ino:5:11: error: 'SUNRISE' was not declared in this scope
+    5 |   h4ss.at(SUNRISE,OFF,[](bool b){ Serial.printf("COCK-A-DOODLE-DOO!"); });
+      |           ^~~~~~~
+/home/runner/work/h4plugins/h4plugins/build/esp32s3/src/H4P_SunriseSunset.ino:6:17: error: 'SUNSET' was not declared in this scope; did you mean 'SYN_SENT'?
+    6 |   h4ss.atSource(SUNSET,ON); // BinarySwitch on @ sunset
+      |                 ^~~~~~
+      |                 SYN_SENT
+/home/runner/work/h4plugins/h4plugins/build/esp32s3/src/H4P_SunriseSunset.ino: At global scope:
+/home/runner/work/h4plugins/h4plugins/build/esp32s3/src/H4P_SunriseSunset.ino:10:38: error: no matching function for call to 'H4P_WiFi::H4P_WiFi(const char [9], const char [9])'
+   10 | H4P_WiFi h4wifi("XXXXXXXX","XXXXXXXX"); // device defaults to "H4-<chip id>"
+      |                                      ^
+In file included from .pio/libdeps/esp32s3/H4Plugins/src/H4P_AsyncMQTT.h:34,
+                 from .pio/libdeps/esp32s3/H4Plugins/src/H4Plugins.h:10:
+.pio/libdeps/esp32s3/H4Plugins/src/H4P_WiFi.h:133:9: note: candidate: 'H4P_WiFi::H4P_WiFi(const std::string&)'
+  133 |         H4P_WiFi(const std::string& device=""):
+      |         ^~~~~~~~
+.pio/libdeps/esp32s3/H4Plugins/src/H4P_WiFi.h:133:9: note:   candidate expects 1 argument, 2 provided
+.pio/libdeps/esp32s3/H4Plugins/src/H4P_WiFi.h:63:7: note: candidate: 'H4P_WiFi::H4P_WiFi(const H4P_WiFi&)'
+   63 | class H4P_WiFi: public H4Service, public H4AsyncWebServer {
+      |       ^~~~~~~~
+.pio/libdeps/esp32s3/H4Plugins/src/H4P_WiFi.h:63:7: note:   candidate expects 1 argument, 2 provided
+.pio/libdeps/esp32s3/H4Plugins/src/H4P_WiFi.h:63:7: note: candidate: 'H4P_WiFi::H4P_WiFi(H4P_WiFi&&)'
+.pio/libdeps/esp32s3/H4Plugins/src/H4P_WiFi.h:63:7: note:   candidate expects 1 argument, 2 provided
+/home/runner/work/h4plugins/h4plugins/build/esp32s3/src/H4P_SunriseSunset.ino:12:1: error: 'H4P_Sunrise' does not name a type
+   12 | H4P_Sunrise h4ss("48.4738943","-0.6029038"); // My French heaven
+      | ^~~~~~~~~~~
+/home/runner/work/h4plugins/h4plugins/build/esp32s3/src/H4P_SunriseSunset.ino:13:47: error: no matching function for call to 'H4P_AsyncMQTT::H4P_AsyncMQTT(const char [24])'
+   13 | H4P_AsyncMQTT h4mqtt("http://192.168.1.4:1883");
+      |                                               ^
+.pio/libdeps/esp32s3/H4Plugins/src/H4P_AsyncMQTT.h:71:9: note: candidate: 'H4P_AsyncMQTT::H4P_AsyncMQTT(H4P_LWT)'
+   71 |         H4P_AsyncMQTT(H4P_LWT lwt={"","",0,false}): _lwt(lwt), H4Service(mqttTag(),H4PE_GVCHANGE|H4PE_VIEWERS|H4PE_BLESINIT){
+      |         ^~~~~~~~~~~~~
+.pio/libdeps/esp32s3/H4Plugins/src/H4P_AsyncMQTT.h:71:31: note:   no known conversion for argument 1 from 'const char [24]' to 'H4P_LWT'
+   71 |         H4P_AsyncMQTT(H4P_LWT lwt={"","",0,false}): _lwt(lwt), H4Service(mqttTag(),H4PE_GVCHANGE|H4PE_VIEWERS|H4PE_BLESINIT){
+      |                       ~~~~~~~~^~~~~~~~~~~~~~~~~~~
+.pio/libdeps/esp32s3/H4Plugins/src/H4P_AsyncMQTT.h:46:7: note: candidate: 'H4P_AsyncMQTT::H4P_AsyncMQTT(const H4P_AsyncMQTT&)'
+   46 | class H4P_AsyncMQTT: public H4Service, public H4AsyncMQTT{
+      |       ^~~~~~~~~~~~~
+.pio/libdeps/esp32s3/H4Plugins/src/H4P_AsyncMQTT.h:46:7: note:   no known conversion for argument 1 from 'const char [24]' to 'const H4P_AsyncMQTT&'
+.pio/libdeps/esp32s3/H4Plugins/src/H4P_AsyncMQTT.h:46:7: note: candidate: 'H4P_AsyncMQTT::H4P_AsyncMQTT(H4P_AsyncMQTT&&)'
+.pio/libdeps/esp32s3/H4Plugins/src/H4P_AsyncMQTT.h:46:7: note:   no known conversion for argument 1 from 'const char [24]' to 'H4P_AsyncMQTT&&'
+/home/runner/work/h4plugins/h4plugins/build/esp32s3/src/H4P_SunriseSunset.ino:14:25: error: 'RELAY_BUILTIN' was not declared in this scope; did you mean 'LED_BUILTIN'?
+   14 | H4P_BinarySwitch h4onof(RELAY_BUILTIN,ACTIVE_HIGH,OFF);
+      |                         ^~~~~~~~~~~~~
+      |                         LED_BUILTIN
+*** [.pio/build/esp32s3/src/H4P_SunriseSunset.ino.cpp.o] Error 1
+========================= [FAILED] Took 10.02 seconds =========================
+Environment    Status    Duration
+-------------  --------  ------------
+esp32s3        FAILED    00:00:10.017
+==================== 1 failed, 0 succeeded in 00:00:10.017 ====================

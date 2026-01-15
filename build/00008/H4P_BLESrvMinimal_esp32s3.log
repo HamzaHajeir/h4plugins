@@ -1,0 +1,58 @@
+Processing esp32s3 (board: esp32-s3-devkitc-1; platform: https://github.com/pioarduino/platform-espressif32/releases/download/55.03.35/platform-espressif32.zip; framework: arduino)
+--------------------------------------------------------------------------------
+Verbose mode can be enabled via `-v, --verbose` option
+CONFIGURATION: https://docs.platformio.org/page/boards/espressif32/esp32-s3-devkitc-1.html
+PLATFORM: Espressif 32 (55.3.35) > Espressif ESP32-S3-DevKitC-1-N8 (8 MB QD, No PSRAM)
+HARDWARE: ESP32S3 240MHz, 320KB RAM, 8MB Flash
+DEBUG: Current (esp-builtin) On-board (esp-builtin) External (cmsis-dap, esp-bridge, esp-prog, iot-bus-jtag, jlink, minimodule, olimex-arm-usb-ocd, olimex-arm-usb-ocd-h, olimex-arm-usb-tiny-h, olimex-jtag-tiny, tumpa)
+PACKAGES: 
+ - contrib-piohome @ 3.4.4 
+ - framework-arduinoespressif32 @ 3.3.5 
+ - framework-arduinoespressif32-libs @ 5.5.0+sha.366dadf354 
+ - tool-esp-rom-elfs @ 2024.10.11 
+ - tool-esptoolpy @ 5.1.0 
+ - tool-mklittlefs @ 3.2.0 
+ - toolchain-xtensa-esp-elf @ 14.2.0+20251107
+Converting H4P_BLESrvMinimal.ino
+LDF: Library Dependency Finder -> https://bit.ly/configure-pio-ldf
+LDF Modes: Finder ~ chain, Compatibility ~ soft
+Found 50 compatible libraries
+Scanning dependencies...
+Dependency Graph
+|-- H4 @ 4.0.9+sha.6f2f510
+|-- H4Tools @ 0.0.16+sha.47ce091
+|-- H4AsyncTCP @ 0.0.25+sha.231be9d
+|-- H4AsyncMQTT @ 1.0.0-rc12+sha.9d2b784
+|-- ArmadilloHTTP @ 0.1.9+sha.ac5bf86
+|-- H4AsyncWebServer @ 0.0.13+sha.fcbce26
+|-- H4Plugins @ 3.5.7+sha.0ad6c2a
+Building in release mode
+Compiling .pio/build/esp32s3/src/H4P_BLESrvMinimal.ino.cpp.o
+In file included from /home/runner/work/h4plugins/h4plugins/build/esp32s3/src/H4P_BLESrvMinimal.ino:2:
+.pio/libdeps/esp32s3/H4Plugins/src/H4Plugins.h:6:76: note: '#pragma message: Using Wifi AP - Make sure you have made arrangements!'
+    6 |     #pragma message("Using Wifi AP - Make sure you have made arrangements!")
+      |                                                                            ^
+/home/runner/work/h4plugins/h4plugins/build/esp32s3/src/H4P_BLESrvMinimal.ino:8:1: error: 'H4P_BLEServer' does not name a type; did you mean 'H4P_UPNPServer'?
+    8 | H4P_BLEServer h4ble;
+      | ^~~~~~~~~~~~~
+      | H4P_UPNPServer
+/home/runner/work/h4plugins/h4plugins/build/esp32s3/src/H4P_BLESrvMinimal.ino: In function 'void h4pGlobalEventHandler(const std::string&, H4PE_TYPE, const std::string&)':
+/home/runner/work/h4plugins/h4plugins/build/esp32s3/src/H4P_BLESrvMinimal.ino:28:17: error: 'h4ble' was not declared in this scope
+   28 |                 h4ble.elemAddBoolean("mybool");
+      |                 ^~~~~
+/home/runner/work/h4plugins/h4plugins/build/esp32s3/src/H4P_BLESrvMinimal.ino: In lambda function:
+/home/runner/work/h4plugins/h4plugins/build/esp32s3/src/H4P_BLESrvMinimal.ino:33:33: error: 'h4ble' is not captured
+   33 |                                 h4ble.elemSetValue("mybool", val);
+      |                                 ^~~~~
+/home/runner/work/h4plugins/h4plugins/build/esp32s3/src/H4P_BLESrvMinimal.ino:29:33: note: the lambda has no capture-default
+   29 |                 h4.every(1000, []{
+      |                                 ^
+/home/runner/work/h4plugins/h4plugins/build/esp32s3/src/H4P_BLESrvMinimal.ino:28:17: note: '<typeprefixerror>h4ble' declared here
+   28 |                 h4ble.elemAddBoolean("mybool");
+      |                 ^~~~~
+*** [.pio/build/esp32s3/src/H4P_BLESrvMinimal.ino.cpp.o] Error 1
+========================= [FAILED] Took 10.19 seconds =========================
+Environment    Status    Duration
+-------------  --------  ------------
+esp32s3        FAILED    00:00:10.191
+==================== 1 failed, 0 succeeded in 00:00:10.191 ====================

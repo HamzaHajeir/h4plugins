@@ -1,0 +1,86 @@
+Processing pico (platform: https://github.com/maxgerhardt/platform-raspberrypi.git#5b72058658ebaf98045755662bc8b28479bd288b; framework: arduino; board: rpipicow)
+--------------------------------------------------------------------------------
+Verbose mode can be enabled via `-v, --verbose` option
+CONFIGURATION: https://docs.platformio.org/page/boards/raspberrypi/rpipicow.html
+PLATFORM: Raspberry Pi RP2040 (1.14.0+sha.5b72058) > Pico W
+HARDWARE: RP2040 133MHz, 256KB RAM, 2MB Flash
+DEBUG: Current (blackmagic) External (blackmagic, cmsis-dap, jlink, picoprobe, raspberrypi-swd)
+PACKAGES: 
+ - framework-arduinopico @ 1.40101.0+sha.9d17f42 
+ - tool-picotool-rp2040-earlephilhower @ 5.140200.240929 (14.2.0) 
+ - toolchain-rp2040-earlephilhower @ 5.140200.240929 (14.2.0)
+Converting GPIOhunt.ino
+Flash size: 2.00MB
+Sketch size: 1.50MB
+Filesystem size: 0.50MB
+PSRAM size: 0.00MB
+Maximium Sketch size: 1568768 EEPROM start: 0x101ff000 Filesystem start: 0x1017f000 Filesystem end: 0x101ff000
+LDF: Library Dependency Finder -> https://bit.ly/configure-pio-ldf
+LDF Modes: Finder ~ deep+, Compatibility ~ soft
+Found 72 compatible libraries
+Scanning dependencies...
+Dependency Graph
+|-- H4 @ 4.0.9+sha.6f2f510
+|-- H4Tools @ 0.0.16+sha.47ce091
+|-- H4AsyncTCP @ 0.0.25+sha.231be9d
+|-- H4AsyncMQTT @ 1.0.0-rc12+sha.9d2b784
+|-- ArmadilloHTTP @ 0.1.9+sha.ac5bf86
+|-- H4AsyncWebServer @ 0.0.13+sha.fcbce26
+|-- H4Plugins @ 3.5.7+sha.0ad6c2a
+|-- LittleFS @ 0.1.0
+|-- WiFi @ 1.0.0
+|-- lwIP_CYW43 @ 1
+|-- lwIP-Ethernet @ 1
+|-- SPI @ 1.0
+|-- Updater @ 1.0
+|-- MD5Builder @ 1.0.0
+|-- LEAmDNS @ 1.2
+|-- DNSServer @ 1.1.1
+|-- ArduinoOTA @ 1.0
+|-- HTTPUpdate @ 1.3
+|-- HTTPClient @ 1.2
+Building in release mode
+Compiling .pio/build/pico/src/GPIOhunt.ino.cpp.o
+In file included from /home/runner/work/h4plugins/h4plugins/build/pico/src/GPIOhunt.ino:1:
+.pio/libdeps/pico/H4Plugins/src/H4Plugins.h:6:76: note: '#pragma message: Using Wifi AP - Make sure you have made arrangements!'
+    6 |     #pragma message("Using Wifi AP - Make sure you have made arrangements!")
+      |                                                                            ^
+/home/runner/work/h4plugins/h4plugins/build/pico/src/GPIOhunt.ino:7:50: error: no matching function for call to 'H4P_WiFi::H4P_WiFi(const char [9], const char [9], const char [11])'
+    7 | H4P_WiFi wiffy("XXXXXXXX","XXXXXXXX","lightrider");
+      |                                                  ^
+In file included from .pio/libdeps/pico/H4Plugins/src/H4P_AsyncMQTT.h:34,
+                 from .pio/libdeps/pico/H4Plugins/src/H4Plugins.h:10:
+.pio/libdeps/pico/H4Plugins/src/H4P_WiFi.h:133:9: note: candidate: 'H4P_WiFi::H4P_WiFi(const std::string&)'
+  133 |         H4P_WiFi(const std::string& device=""):
+      |         ^~~~~~~~
+.pio/libdeps/pico/H4Plugins/src/H4P_WiFi.h:133:9: note:   candidate expects 1 argument, 3 provided
+.pio/libdeps/pico/H4Plugins/src/H4P_WiFi.h:63:7: note: candidate: 'H4P_WiFi::H4P_WiFi(const H4P_WiFi&)'
+   63 | class H4P_WiFi: public H4Service, public H4AsyncWebServer {
+      |       ^~~~~~~~
+.pio/libdeps/pico/H4Plugins/src/H4P_WiFi.h:63:7: note:   candidate expects 1 argument, 3 provided
+.pio/libdeps/pico/H4Plugins/src/H4P_WiFi.h:63:7: note: candidate: 'H4P_WiFi::H4P_WiFi(H4P_WiFi&&)'
+.pio/libdeps/pico/H4Plugins/src/H4P_WiFi.h:63:7: note:   candidate expects 1 argument, 3 provided
+In file included from .pio/libdeps/pico/H4Plugins/src/H4P_AsyncHTTP.h:32,
+                 from .pio/libdeps/pico/H4Plugins/src/H4Plugins.h:9:
+/home/runner/work/h4plugins/h4plugins/build/pico/src/GPIOhunt.ino: In function 'void h4pGlobalEventHandler(const std::string&, H4PE_TYPE, const std::string&)':
+.pio/libdeps/pico/H4Plugins/src/H4Service.h:432:38: error: 'onGPIO' was not declared in this scope
+  432 | #define H4PEVENTCALL(e,s,m) H4PGLUE2(on,e)(s,m)
+      |                                      ^~
+.pio/libdeps/pico/H4Plugins/src/H4Service.h:427:23: note: in definition of macro 'H4PGLUE2'
+  427 | #define H4PGLUE2(x,y) x##y
+      |                       ^
+.pio/libdeps/pico/H4Plugins/src/H4Service.h:474:5: note: in expansion of macro 'H4PEVENTCALL'
+  474 |     H4PEVENTCALL(e,STOI(svc),STOI(msg)); \
+      |     ^~~~~~~~~~~~
+.pio/libdeps/pico/H4Plugins/src/H4Service.h:485:35: note: in expansion of macro 'H4P_FUNCTION_ADAPTER_II'
+  485 | #define H4P_FUNCTION_ADAPTER_GPIO H4P_FUNCTION_ADAPTER_II(GPIO)
+      |                                   ^~~~~~~~~~~~~~~~~~~~~~~
+/home/runner/work/h4plugins/h4plugins/build/pico/src/GPIOhunt.ino:21:5: note: in expansion of macro 'H4P_FUNCTION_ADAPTER_GPIO'
+   21 |     H4P_FUNCTION_ADAPTER_GPIO;
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~
+*** [.pio/build/pico/src/GPIOhunt.ino.cpp.o] Error 1
+========================== [FAILED] Took 4.85 seconds ==========================
+Environment    Status    Duration
+-------------  --------  ------------
+pico           FAILED    00:00:04.855
+==================== 1 failed, 0 succeeded in 00:00:04.855 ====================

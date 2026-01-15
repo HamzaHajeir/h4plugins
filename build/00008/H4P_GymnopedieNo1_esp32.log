@@ -1,0 +1,62 @@
+Processing esp32 (board: esp32doit-devkit-v1; platform: https://github.com/pioarduino/platform-espressif32/releases/download/55.03.35/platform-espressif32.zip; framework: arduino)
+--------------------------------------------------------------------------------
+Verbose mode can be enabled via `-v, --verbose` option
+CONFIGURATION: https://docs.platformio.org/page/boards/espressif32/esp32doit-devkit-v1.html
+PLATFORM: Espressif 32 (55.3.35) > DOIT ESP32 DEVKIT V1
+HARDWARE: ESP32 240MHz, 320KB RAM, 4MB Flash
+DEBUG: Current (cmsis-dap) External (cmsis-dap, esp-bridge, esp-prog, iot-bus-jtag, jlink, minimodule, olimex-arm-usb-ocd, olimex-arm-usb-ocd-h, olimex-arm-usb-tiny-h, olimex-jtag-tiny, tumpa)
+PACKAGES: 
+ - contrib-piohome @ 3.4.4 
+ - framework-arduinoespressif32 @ 3.3.5 
+ - framework-arduinoespressif32-libs @ 5.5.0+sha.366dadf354 
+ - tool-esp-rom-elfs @ 2024.10.11 
+ - tool-esptoolpy @ 5.1.0 
+ - tool-mklittlefs @ 3.2.0 
+ - toolchain-xtensa-esp-elf @ 14.2.0+20251107
+Converting H4P_GymnopedieNo1.ino
+LDF: Library Dependency Finder -> https://bit.ly/configure-pio-ldf
+LDF Modes: Finder ~ chain, Compatibility ~ soft
+Found 50 compatible libraries
+Scanning dependencies...
+Dependency Graph
+|-- H4 @ 4.0.9+sha.6f2f510
+|-- H4Tools @ 0.0.16+sha.47ce091
+|-- H4AsyncTCP @ 0.0.25+sha.231be9d
+|-- H4AsyncMQTT @ 1.0.0-rc12+sha.9d2b784
+|-- ArmadilloHTTP @ 0.1.9+sha.ac5bf86
+|-- H4AsyncWebServer @ 0.0.13+sha.fcbce26
+|-- H4Plugins @ 3.5.7+sha.0ad6c2a
+Building in release mode
+Compiling .pio/build/esp32/src/H4P_GymnopedieNo1.ino.cpp.o
+Linking .pio/build/esp32/firmware.elf
+/home/runner/work/h4plugins/h4plugins/build/esp32/src/H4P_GymnopedieNo1.ino:6:11: warning: "TREBLE" redefined
+    6 |   #define TREBLE    27
+      |           ^~~~~~
+/home/runner/work/h4plugins/h4plugins/build/esp32/src/H4P_GymnopedieNo1.ino:3:9: note: this is the location of the previous definition
+    3 | #define TREBLE  D8
+      |         ^~~~~~
+/home/runner/work/h4plugins/h4plugins/build/esp32/src/H4P_GymnopedieNo1.ino:7:11: warning: "BASS" redefined
+    7 |   #define BASS      26
+      |           ^~~~
+/home/runner/work/h4plugins/h4plugins/build/esp32/src/H4P_GymnopedieNo1.ino:4:9: note: this is the location of the previous definition
+    4 | #define BASS    D7
+      |         ^~~~
+In file included from /home/runner/work/h4plugins/h4plugins/build/esp32/src/H4P_GymnopedieNo1.ino:1:
+.pio/libdeps/esp32/H4Plugins/src/H4Plugins.h:6:76: note: '#pragma message: Using Wifi AP - Make sure you have made arrangements!'
+    6 |     #pragma message("Using Wifi AP - Make sure you have made arrangements!")
+      |                                                                            ^
+/home/runner/.platformio/packages/toolchain-xtensa-esp-elf/bin/../lib/gcc/xtensa-esp-elf/14.2.0/../../../../xtensa-esp-elf/bin/ld: .pio/build/esp32/src/H4P_GymnopedieNo1.ino.cpp.o:(.literal.startup._GLOBAL__sub_I_h4punlocked+0xa0): undefined reference to `_ZN9H4P_VoiceC1Ehh'
+/home/runner/.platformio/packages/toolchain-xtensa-esp-elf/bin/../lib/gcc/xtensa-esp-elf/14.2.0/../../../../xtensa-esp-elf/bin/ld: .pio/build/esp32/src/H4P_GymnopedieNo1.ino.cpp.o: in function `_GLOBAL__sub_I_h4punlocked':
+/home/runner/work/h4plugins/h4plugins/build/esp32/src/H4P_GymnopedieNo1.ino:23:(.text.startup._GLOBAL__sub_I_h4punlocked+0x217): undefined reference to `_ZN9H4P_VoiceC1Ehh'
+/home/runner/.platformio/packages/toolchain-xtensa-esp-elf/bin/../lib/gcc/xtensa-esp-elf/14.2.0/../../../../xtensa-esp-elf/bin/ld: .pio/build/esp32/src/H4P_GymnopedieNo1.ino.cpp.o: in function `__static_initialization_and_destruction_0':
+/home/runner/work/h4plugins/h4plugins/build/esp32/src/H4P_GymnopedieNo1.ino:24:(.text.startup._GLOBAL__sub_I_h4punlocked+0x226): undefined reference to `_ZN9H4P_VoiceC1Ehh'
+/home/runner/.platformio/packages/toolchain-xtensa-esp-elf/bin/../lib/gcc/xtensa-esp-elf/14.2.0/../../../../xtensa-esp-elf/bin/ld: /home/runner/work/h4plugins/h4plugins/build/esp32/src/H4P_GymnopedieNo1.ino:25:(.text.startup._GLOBAL__sub_I_h4punlocked+0x233): undefined reference to `_ZN9H4P_VoiceC1Ehh'
+/home/runner/.platformio/packages/toolchain-xtensa-esp-elf/bin/../lib/gcc/xtensa-esp-elf/14.2.0/../../../../xtensa-esp-elf/bin/ld: /home/runner/work/h4plugins/h4plugins/build/esp32/src/H4P_GymnopedieNo1.ino:26:(.text.startup._GLOBAL__sub_I_h4punlocked+0x242): undefined reference to `_ZN9H4P_VoiceC1Ehh'
+/home/runner/.platformio/packages/toolchain-xtensa-esp-elf/bin/../lib/gcc/xtensa-esp-elf/14.2.0/../../../../xtensa-esp-elf/bin/ld: .pio/build/esp32/src/H4P_GymnopedieNo1.ino.cpp.o:/home/runner/work/h4plugins/h4plugins/build/esp32/src/H4P_GymnopedieNo1.ino:27: more undefined references to `_ZN9H4P_VoiceC1Ehh' follow
+collect2: error: ld returned 1 exit status
+*** [.pio/build/esp32/firmware.elf] Error 1
+========================= [FAILED] Took 16.23 seconds =========================
+Environment    Status    Duration
+-------------  --------  ------------
+esp32          FAILED    00:00:16.232
+==================== 1 failed, 0 succeeded in 00:00:16.232 ====================

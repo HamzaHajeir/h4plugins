@@ -1,0 +1,74 @@
+Processing pico (platform: https://github.com/maxgerhardt/platform-raspberrypi.git#5b72058658ebaf98045755662bc8b28479bd288b; framework: arduino; board: rpipicow)
+--------------------------------------------------------------------------------
+Verbose mode can be enabled via `-v, --verbose` option
+CONFIGURATION: https://docs.platformio.org/page/boards/raspberrypi/rpipicow.html
+PLATFORM: Raspberry Pi RP2040 (1.14.0+sha.5b72058) > Pico W
+HARDWARE: RP2040 133MHz, 256KB RAM, 2MB Flash
+DEBUG: Current (blackmagic) External (blackmagic, cmsis-dap, jlink, picoprobe, raspberrypi-swd)
+PACKAGES: 
+ - framework-arduinopico @ 1.40101.0+sha.9d17f42 
+ - tool-picotool-rp2040-earlephilhower @ 5.140200.240929 (14.2.0) 
+ - toolchain-rp2040-earlephilhower @ 5.140200.240929 (14.2.0)
+Converting H4P_GymnopedieNo1.ino
+Flash size: 2.00MB
+Sketch size: 1.50MB
+Filesystem size: 0.50MB
+PSRAM size: 0.00MB
+Maximium Sketch size: 1568768 EEPROM start: 0x101ff000 Filesystem start: 0x1017f000 Filesystem end: 0x101ff000
+LDF: Library Dependency Finder -> https://bit.ly/configure-pio-ldf
+LDF Modes: Finder ~ deep+, Compatibility ~ soft
+Found 72 compatible libraries
+Scanning dependencies...
+Dependency Graph
+|-- H4 @ 4.0.9+sha.6f2f510
+|-- H4Tools @ 0.0.16+sha.47ce091
+|-- H4AsyncTCP @ 0.0.25+sha.231be9d
+|-- H4AsyncMQTT @ 1.0.0-rc12+sha.9d2b784
+|-- ArmadilloHTTP @ 0.1.9+sha.ac5bf86
+|-- H4AsyncWebServer @ 0.0.13+sha.fcbce26
+|-- H4Plugins @ 3.5.7+sha.0ad6c2a
+|-- LittleFS @ 0.1.0
+|-- WiFi @ 1.0.0
+|-- lwIP_CYW43 @ 1
+|-- lwIP-Ethernet @ 1
+|-- SPI @ 1.0
+|-- Updater @ 1.0
+|-- MD5Builder @ 1.0.0
+|-- LEAmDNS @ 1.2
+|-- DNSServer @ 1.1.1
+|-- ArduinoOTA @ 1.0
+|-- HTTPUpdate @ 1.3
+|-- HTTPClient @ 1.2
+Building in release mode
+Compiling .pio/build/pico/src/H4P_GymnopedieNo1.ino.cpp.o
+Linking .pio/build/pico/firmware.elf
+/home/runner/work/h4plugins/h4plugins/build/pico/src/H4P_GymnopedieNo1.ino:14:11: warning: "TREBLE" redefined
+   14 |   #define TREBLE    D7
+      |           ^~~~~~
+/home/runner/work/h4plugins/h4plugins/build/pico/src/H4P_GymnopedieNo1.ino:3:9: note: this is the location of the previous definition
+    3 | #define TREBLE  D8
+      |         ^~~~~~
+/home/runner/work/h4plugins/h4plugins/build/pico/src/H4P_GymnopedieNo1.ino:15:11: warning: "BASS" redefined
+   15 |   #define BASS      D6
+      |           ^~~~
+/home/runner/work/h4plugins/h4plugins/build/pico/src/H4P_GymnopedieNo1.ino:4:9: note: this is the location of the previous definition
+    4 | #define BASS    D7
+      |         ^~~~
+In file included from /home/runner/work/h4plugins/h4plugins/build/pico/src/H4P_GymnopedieNo1.ino:1:
+.pio/libdeps/pico/H4Plugins/src/H4Plugins.h:6:76: note: '#pragma message: Using Wifi AP - Make sure you have made arrangements!'
+    6 |     #pragma message("Using Wifi AP - Make sure you have made arrangements!")
+      |                                                                            ^
+/home/runner/.platformio/packages/toolchain-rp2040-earlephilhower/bin/../lib/gcc/arm-none-eabi/14.2.0/../../../../arm-none-eabi/bin/ld: .pio/build/pico/src/H4P_GymnopedieNo1.ino.cpp.o: in function `_GLOBAL__sub_I_h4punlocked':
+H4P_GymnopedieNo1.ino.cpp:(.text.startup._GLOBAL__sub_I_h4punlocked+0x1fe): undefined reference to `_ZN9H4P_VoiceC1Ehh'
+/home/runner/.platformio/packages/toolchain-rp2040-earlephilhower/bin/../lib/gcc/arm-none-eabi/14.2.0/../../../../arm-none-eabi/bin/ld: H4P_GymnopedieNo1.ino.cpp:(.text.startup._GLOBAL__sub_I_h4punlocked+0x208): undefined reference to `_ZN9H4P_VoiceC1Ehh'
+/home/runner/.platformio/packages/toolchain-rp2040-earlephilhower/bin/../lib/gcc/arm-none-eabi/14.2.0/../../../../arm-none-eabi/bin/ld: H4P_GymnopedieNo1.ino.cpp:(.text.startup._GLOBAL__sub_I_h4punlocked+0x212): undefined reference to `_ZN9H4P_VoiceC1Ehh'
+/home/runner/.platformio/packages/toolchain-rp2040-earlephilhower/bin/../lib/gcc/arm-none-eabi/14.2.0/../../../../arm-none-eabi/bin/ld: H4P_GymnopedieNo1.ino.cpp:(.text.startup._GLOBAL__sub_I_h4punlocked+0x21c): undefined reference to `_ZN9H4P_VoiceC1Ehh'
+/home/runner/.platformio/packages/toolchain-rp2040-earlephilhower/bin/../lib/gcc/arm-none-eabi/14.2.0/../../../../arm-none-eabi/bin/ld: H4P_GymnopedieNo1.ino.cpp:(.text.startup._GLOBAL__sub_I_h4punlocked+0x226): undefined reference to `_ZN9H4P_VoiceC1Ehh'
+/home/runner/.platformio/packages/toolchain-rp2040-earlephilhower/bin/../lib/gcc/arm-none-eabi/14.2.0/../../../../arm-none-eabi/bin/ld: .pio/build/pico/src/H4P_GymnopedieNo1.ino.cpp.o:H4P_GymnopedieNo1.ino.cpp:(.text.startup._GLOBAL__sub_I_h4punlocked+0x230): more undefined references to `_ZN9H4P_VoiceC1Ehh' follow
+collect2: error: ld returned 1 exit status
+*** [.pio/build/pico/firmware.elf] Error 1
+========================== [FAILED] Took 5.34 seconds ==========================
+Environment    Status    Duration
+-------------  --------  ------------
+pico           FAILED    00:00:05.335
+==================== 1 failed, 0 succeeded in 00:00:05.335 ====================
