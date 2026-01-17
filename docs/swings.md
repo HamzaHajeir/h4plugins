@@ -79,10 +79,10 @@ uint32_t auto; // auto-off timer (milliseconds) 0 = never
 H4P_BinaryThing(H4P_FN_VB thingFunction,bool initial=OFF,uint32_t timer=0);
 H4P_ConditionalThing(H4P_FN_VB thingFunction,H4_FN_CPRED predicate,bool initial=OFF,uint32_t timer=0): 
 /*
- parameters for switches
-  uint8_t pin; // GPIO pin number
-  H4GM_SENSE sense; // whether this GPIO is ON when ACTIVE_HIGH or ACTIVE_LOW
-  color = the color of the condition bool LED in the webUI
+  parameters for switches
+   uint8_t pin; // GPIO pin number
+   H4PM_SENSE sense; // whether this GPIO is ON when ACTIVE_HIGH or ACTIVE_LOW
+   color = the color of the condition bool LED in the webUI
 
 enum H4P_UILED_COLOR {
     H4P_UILED_RED,
@@ -94,7 +94,7 @@ enum H4P_UILED_COLOR {
 };
 */
 H4P_BinarySwitch(uint8_t pin,H4PM_SENSE sense,uint8_t color=H4P_UILED_BI,uint32_t initial=OFF,uint32_t timer=0);
-H4P_ConditionalSwitch(H4_FN_CPRED predicate,uint8_t pin,H4PM_SENSE sense,uint8_t color=H4P_UILED_BI,uint32_t initial=OFF,uint32_t timer=0):
+H4P_ConditionalSwitch(H4_FN_CPRED predicate,uint8_t pin,H4PM_SENSE sense,uint8_t color=H4P_UILED_BI,uint32_t initial=OFF,uint32_t timer=0);
 ```
 
 ---
@@ -153,7 +153,17 @@ Set internal state to ON and emit H4P__ON
 void turn(bool onoroff)
 ```
 
-Set internal state to ON or OFF and emit H4P__ON or H4P__OFF 
+Set internal state to ON or OFF and emit H4P__ON or H4P__OFF
+
+---
+
+## toggle
+
+```cpp
+void toggle()
+```
+
+Invert the current state
 
 ---
 
@@ -199,7 +209,8 @@ This should be called whenever the value returned by the predicate function chan
 
 ---
 
-(c) 2021 Phil Bowles h4plugins@gmail.com
+(c) 2021 Phil Bowles
+(c) 2025 Hamza Hajeir
 
 * [Youtube channel (instructional videos)](https://www.youtube.com/channel/UCYi-Ko76_3p9hBUtleZRY6g)
 * [Facebook H4  Support / Discussion](https://www.facebook.com/groups/444344099599131/)

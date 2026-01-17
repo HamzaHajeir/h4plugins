@@ -70,7 +70,7 @@ struct ArmadilloHTTPresponse {
 /*
 Constructor
 */
-H4P_AsyncHTTP();
+H4P_AsyncHTTP(const std::string& name="http",uint32_t filter=H4PE_NOOP);
 //
 // common parameters:
 // url remote server format "http://host:port/path/?a=b..." can start https://. port, path, query all optional
@@ -83,7 +83,7 @@ void    GET(const std::string& url,ARMA_FN_HTTP rx,const uint8_t* fingerprint=nu
 void    PATCH(const std::string& url,const H4AT_NVP_MAP& fields,ARMA_FN_HTTP rx,const uint8_t* fingerprint=nullptr,uint32_t phase=ARMA_PHASE_EXECUTE) override;
 void    POST(const std::string& url,const H4AT_NVP_MAP& fields,ARMA_FN_HTTP rx,const uint8_t* fingerprint=nullptr,uint32_t phase=ARMA_PHASE_EXECUTE) override;
 void    PUT(const std::string& url,const H4AT_NVP_MAP& fields,ARMA_FN_HTTP rx,const uint8_t* fingerprint=nullptr,uint32_t phase=ARMA_PHASE_EXECUTE) override;
-void    globalsFromSimpleJson(ARMA_HTTP_REPLY r); // creat h4p[] globals from simple json string. each is prefixed by "usr_" see webUI docs
+void    globalsFromSimpleJson(ARMA_HTTP_REPLY r); // create h4p[] globals from simple json string. each is prefixed by "usr_" see webUI docs
 //
 ```
 
@@ -95,7 +95,8 @@ void    globalsFromSimpleJson(ARMA_HTTP_REPLY r); // creat h4p[] globals from si
   
 ---
 
-(c) 2021 Phil Bowles h4plugins@gmail.com
+(c) 2021 Phil Bowles
+(c) 2025 Hamza Hajeir
 
 * [Youtube channel (instructional videos)](https://www.youtube.com/channel/UCYi-Ko76_3p9hBUtleZRY6g)
 * [Facebook H4  Support / Discussion](https://www.facebook.com/groups/444344099599131/)

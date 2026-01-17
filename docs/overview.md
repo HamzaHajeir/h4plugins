@@ -25,7 +25,7 @@ The Plugins are described in broadly functional areas:
 
 * [H4P_Signaller](docs/h4fc.md): One-line coding of multiple simultaneous LED flashing by Square Wave, PWM, abitrary pattern and Morse code
 
-* [H4P_PinMachine](docs/h4gm.md): One-line coding / mangement of a variety of different GPIO strategies, e.g. debouncing, decoding of rotary encoders, etc - there are over 20 covering pretty much any kind of hardware you might want attach to the GPIO pins.
+* [H4P_PinMachine](h4pm.md): One-line coding / mangement of a variety of different GPIO strategies, e.g. debouncing, decoding of rotary encoders, etc - there are over 20 covering pretty much any kind of hardware you might want attach to the GPIO pins.
 
 * [H4P_ToneController](docs/h4tc.md) Buzzer, tones, sirens and...yes, actual music! Can play simultaneous different "voices" (musical parts) and/or chords on multiple buzzers.
 
@@ -39,31 +39,28 @@ Many iot devices have one simple thing to do: switch something on/off on a singl
 
 Networking is not required but if you *are* connected, the webserver will automatically add the "big red switch" and various other options to control the plugin. 
 
-* [H4P_BinarySwitch](docs/things.md): Allows control by commands from multiple sources to on/off a single GPIO. 
-
-* [H4P_BinaryThing](docs/things.md): user-defined function that can be controlled by commands from multiple sources
-
-* [H4P_ConditionalSwitch](docs/things.md): H4P_BinarySwitch that only operates when user-define function returns true
-
-* [H4P_ConditionalThing](docs/things.md): H4P_BinaryThing that only operates when user-define function returns true
+* [H4P_BinarySwitch](swings.md): Allows control by commands from multiple sources to on/off a single GPIO.
+* [H4P_BinaryThing](swings.md): user-defined function that can be controlled by commands from multiple sources
+* [H4P_ConditionalSwitch](swings.md): H4P_BinarySwitch that only operates when user-define function returns true
+* [H4P_ConditionalThing](swings.md): H4P_BinaryThing that only operates when user-define function returns true
   
 ---
 
 # WiFi and networking
 
-* [H4P_WiFi](docs/h4wifi.md): Automatic Connection / reconnection manager, builtin webserver, AP configuration*, OTA programming. Also uses LED_BUILTIN to signal network state via various flashing patterns.
+* [H4P_WiFi](h4wifi.md): Automatic Connection / reconnection manager, builtin webserver, AP configuration*, OTA programming. Also uses LED_BUILTIN to signal network state via various flashing patterns.
 
-* [H4P_AsyncMQTT](docs/h4mqtt.md): Automatic Connection to MQTT server, with reconnection on failure (without reboot!) allows remote control of H4 as well as the more usual sensing og e.g. sensor data to "the cloud"
-  
-* [H4P_AsyncHTTP](h4phttp.md) Asynchronous remite acces of any http resource e.g. REST API to return any data of users' choice
+* [H4P_AsyncMQTT](h4mqtt.md): Automatic Connection to MQTT server, with reconnection on failure (without reboot!) allows remote control of H4 as well as the more usual sensing og e.g. sensor data to "the cloud"
 
-* [H4P_UPNPServer](docs/upnp.md): provides full UPNP/SSDP device with Alexa voice control, PC Desktop OS integration
+* [H4P_AsyncHTTP](h4http.md) Asynchronous remite acces of any http resource e.g. REST API to return any data of users' choice
 
-* [H4P_RemoteUpdate](docs/h4ru.md): OTA update from remote server
+* [H4P_UPNPServer](upnp.md): provides full UPNP/SSDP device with Alexa voice control, PC Desktop OS integration
 
-* [H4P_Heartbeat](docs/beat.md): Adds an "Up Time" to the web UI* 
-  
-* [H4P_LinkMaster](docs/link.md): Adds "slaving" of other H4 devices to create simple groups / scenarios. Swicth on/off the master and all slaves also switch on/off.
+* [H4P_RemoteUpdate](rupd.md): OTA update from remote server
+
+* [H4P_Heartbeat](beat.md): Adds an "Up Time" to the web UI*
+
+* [H4P_LinkMaster](h4plink.md): Adds "slaving" of other H4 devices to create simple groups / scenarios. Swicth on/off the master and all slaves also switch on/off.
 
 
 (* see :building_construction: [WiFi AP mode](ap.md) re configuration in AP mode )
@@ -120,7 +117,8 @@ Networking is not required but if you *are* connected, the webserver will automa
 
 ---
 
-(c) 2021 Phil Bowles h4plugins@gmail.com
+(c) 2021 Phil Bowles
+(c) 2025 Hamza Hajeir
 
 * [Youtube channel (instructional videos)](https://www.youtube.com/channel/UCYi-Ko76_3p9hBUtleZRY6g)
 * [Facebook H4  Support / Discussion](https://www.facebook.com/groups/444344099599131/)

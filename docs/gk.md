@@ -54,7 +54,7 @@ N/A
 Individual Roamers have different conctructors, but they all have a common API function:
 
 ```cpp
-string getIP(); // returns empty string if not in network
+std::string getIP(); // returns empty string if not in network
 ```
 
 ## Roamers
@@ -75,7 +75,7 @@ name = unique name to identify device to user
 service = MDNS service type e.g. tcp or udp etc
 protocol = MDNS protocol e.g. hrttp
 */
-h4pRoamingDotLocal(const string& name,const string& service,const string& protocol);
+h4pRoamingDotLocal(const std::string& name,const std::string& service,const std::string& protocol);
 ```
 [Example Sketch 1](../examples/PRESENCE/H4P_PresenceDotLocal/H4P_PresenceDotLocal.ino)
 
@@ -87,7 +87,7 @@ h4pRoamingDotLocal(const string& name,const string& service,const string& protoc
 /* Constructors
 name = unique name to identify device to user
 */
-h4pRoamingH4(const string& name);
+h4pRoamingH4(const std::string& name);
 ```
 
 [Example Sketch 1](../examples/PRESENCE/H4P_PresenceDetectH4/H4P_PresenceDetectH4.ino)
@@ -102,15 +102,15 @@ h4pRoamingH4(const string& name);
 name = unique name to identify device to user
 ip = the IP address that device will be recongised by
 */
-h4pRoamingIP(const string& name,const string& ip);
-h4pRoamingIP(const string& name,const IPAddress& ip);
+h4pRoamingIP(const std::string& name,const std::string& ip);
+h4pRoamingIP(const std::string& name,const IPAddress& ip);
 ```
 
 [Example Sketch 1](../examples/PRESENCE/H4P_PresenceDetectIP/H4P_PresenceDetectIP.ino)
 
 [Example Sketch 2](../examples/PRESENCE/H4P_CrowdedHouse/H4P_CrowdedHouse.ino)
 
-Two additional examples show how to link joining / leaving automatically to a default Switch / Thing object (see ["Things" and "Switches"](things.md)) 
+Two additional examples show how to link joining / leaving automatically to a default Switch / Thing object (see ["Things" and "Switches"](swings.md)) 
 
 While the [joining example](../examples/PRESENCE/H4P_PresenceDetectIP_ONOFF/H4P_PresenceDetectIP_ONOFF.ino)  and the [leaving example](../examples/PRESENCE/H4P_PresenceDetectIP_ONOFF_Inverted/H4P_PresenceDetectIP_ONOFF_Inverted.ino) are coded for `h4pRoamingIP`, the code applies equally to *any* of the Roamers.
 
@@ -122,7 +122,7 @@ name = unique name to identify device to user
 tag = UPNP/SSDP message tag, e.g. USN, MX, LOCATION etc
 id = value of the tag considered to be a "match" NB take care, many duplicates my occur with poor choices of tag/id!
 */
-h4pRoamingUPNP(const string& name,const string& tag,const string& id);
+h4pRoamingUPNP(const std::string& name,const std::string& tag,const std::string& id);
 ```
 
 [Example Sketch 1](../examples/PRESENCE/H4P_PresenceDetectUPNP/H4P_PresenceDetectUPNP.ino)
@@ -131,7 +131,8 @@ h4pRoamingUPNP(const string& name,const string& tag,const string& id);
 
 ---
 
-(c) 2021 Phil Bowles h4plugins@gmail.com
+(c) 2021 Phil Bowles
+(c) 2025 Hamza Hajeir
 
 * [Youtube channel (instructional videos)](https://www.youtube.com/channel/UCYi-Ko76_3p9hBUtleZRY6g)
 * [Facebook H4  Support / Discussion](https://www.facebook.com/groups/444344099599131/)

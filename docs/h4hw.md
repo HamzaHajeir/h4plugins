@@ -54,9 +54,8 @@ N/A
 
 ```cpp
 //  constructor:
-//  onHeapWarning callback function
-//  limit = "safe" percentage
-H4P_HeapWarn(H4P_FN_VB onHeapWarning,uint32_t _limit=50);
+//  pc = "safe" percentage
+H4P_HeapWarn(uint32_t pc=50);
 
 void        pcent(uint32_t pc); // Set new "safe" percentage
 ```
@@ -65,7 +64,8 @@ void        pcent(uint32_t pc); // Set new "safe" percentage
 
 ---
 
-(c) 2021 Phil Bowles h4plugins@gmail.com
+(c) 2021 Phil Bowles
+(c) 2025 Hamza Hajeir
 
 * [Youtube channel (instructional videos)](https://www.youtube.com/channel/UCYi-Ko76_3p9hBUtleZRY6g)
 * [Facebook H4  Support / Discussion](https://www.facebook.com/groups/444344099599131/)
