@@ -1,0 +1,134 @@
+Processing pico (platform: https://github.com/maxgerhardt/platform-raspberrypi.git#5b72058658ebaf98045755662bc8b28479bd288b; framework: arduino; board: rpipicow)
+--------------------------------------------------------------------------------
+Verbose mode can be enabled via `-v, --verbose` option
+CONFIGURATION: https://docs.platformio.org/page/boards/raspberrypi/rpipicow.html
+PLATFORM: Raspberry Pi RP2040 (1.14.0+sha.5b72058) > Pico W
+HARDWARE: RP2040 133MHz, 256KB RAM, 2MB Flash
+DEBUG: Current (blackmagic) External (blackmagic, cmsis-dap, jlink, picoprobe, raspberrypi-swd)
+PACKAGES: 
+ - framework-arduinopico @ 1.40101.0+sha.9d17f42 
+ - tool-picotool-rp2040-earlephilhower @ 5.140200.240929 (14.2.0) 
+ - toolchain-rp2040-earlephilhower @ 5.140200.240929 (14.2.0)
+Converting 03_EasyServiceHandling.ino
+Flash size: 2.00MB
+Sketch size: 1.50MB
+Filesystem size: 0.50MB
+PSRAM size: 0.00MB
+Maximium Sketch size: 1568768 EEPROM start: 0x101ff000 Filesystem start: 0x1017f000 Filesystem end: 0x101ff000
+LDF: Library Dependency Finder -> https://bit.ly/configure-pio-ldf
+LDF Modes: Finder ~ deep+, Compatibility ~ soft
+Found 72 compatible libraries
+Scanning dependencies...
+Dependency Graph
+|-- H4 @ 4.0.9+sha.6f2f510
+|-- H4Tools @ 0.0.16+sha.47ce091
+|-- H4AsyncTCP @ 0.0.25+sha.231be9d
+|-- H4AsyncMQTT @ 1.0.0-rc12+sha.9d2b784
+|-- ArmadilloHTTP @ 0.1.9+sha.ac5bf86
+|-- H4AsyncWebServer @ 0.0.13+sha.fcbce26
+|-- H4Plugins @ 3.5.7+sha.0ad6c2a
+|-- LittleFS @ 0.1.0
+|-- WiFi @ 1.0.0
+|-- lwIP_CYW43 @ 1
+|-- lwIP-Ethernet @ 1
+|-- SPI @ 1.0
+|-- Updater @ 1.0
+|-- MD5Builder @ 1.0.0
+|-- LEAmDNS @ 1.2
+|-- DNSServer @ 1.1.1
+|-- ArduinoOTA @ 1.0
+|-- HTTPUpdate @ 1.3
+|-- HTTPClient @ 1.2
+Building in release mode
+Compiling .pio/build/pico/src/03_EasyServiceHandling.ino.cpp.o
+In file included from /home/runner/work/h4plugins/h4plugins/build/pico/src/03_EasyServiceHandling.ino:1:
+.pio/libdeps/pico/H4Plugins/src/H4Plugins.h:6:76: note: '#pragma message: Using Wifi AP - Make sure you have made arrangements!'
+    6 |     #pragma message("Using Wifi AP - Make sure you have made arrangements!")
+      |                                                                            ^
+/home/runner/work/h4plugins/h4plugins/build/pico/src/03_EasyServiceHandling.ino:16:46: error: no matching function for call to 'H4P_WiFi::H4P_WiFi(const char [9], const char [9], const char [8])'
+   16 | H4P_WiFi wifi("XXXXXXXX","XXXXXXXX","easysvc");
+      |                                              ^
+In file included from .pio/libdeps/pico/H4Plugins/src/H4P_AsyncMQTT.h:34,
+                 from .pio/libdeps/pico/H4Plugins/src/H4Plugins.h:10:
+.pio/libdeps/pico/H4Plugins/src/H4P_WiFi.h:133:9: note: candidate: 'H4P_WiFi::H4P_WiFi(const std::string&)'
+  133 |         H4P_WiFi(const std::string& device=""):
+      |         ^~~~~~~~
+.pio/libdeps/pico/H4Plugins/src/H4P_WiFi.h:133:9: note:   candidate expects 1 argument, 3 provided
+.pio/libdeps/pico/H4Plugins/src/H4P_WiFi.h:63:7: note: candidate: 'H4P_WiFi::H4P_WiFi(const H4P_WiFi&)'
+   63 | class H4P_WiFi: public H4Service, public H4AsyncWebServer {
+      |       ^~~~~~~~
+.pio/libdeps/pico/H4Plugins/src/H4P_WiFi.h:63:7: note:   candidate expects 1 argument, 3 provided
+.pio/libdeps/pico/H4Plugins/src/H4P_WiFi.h:63:7: note: candidate: 'H4P_WiFi::H4P_WiFi(H4P_WiFi&&)'
+.pio/libdeps/pico/H4Plugins/src/H4P_WiFi.h:63:7: note:   candidate expects 1 argument, 3 provided
+/home/runner/work/h4plugins/h4plugins/build/pico/src/03_EasyServiceHandling.ino:17:45: error: no matching function for call to 'H4P_AsyncMQTT::H4P_AsyncMQTT(const char [24])'
+   17 | H4P_AsyncMQTT mqtt("http://192.168.1.4:1883");
+      |                                             ^
+.pio/libdeps/pico/H4Plugins/src/H4P_AsyncMQTT.h:71:9: note: candidate: 'H4P_AsyncMQTT::H4P_AsyncMQTT(H4P_LWT)'
+   71 |         H4P_AsyncMQTT(H4P_LWT lwt={"","",0,false}): _lwt(lwt), H4Service(mqttTag(),H4PE_GVCHANGE|H4PE_VIEWERS|H4PE_BLESINIT){
+      |         ^~~~~~~~~~~~~
+.pio/libdeps/pico/H4Plugins/src/H4P_AsyncMQTT.h:71:31: note:   no known conversion for argument 1 from 'const char [24]' to 'H4P_LWT'
+   71 |         H4P_AsyncMQTT(H4P_LWT lwt={"","",0,false}): _lwt(lwt), H4Service(mqttTag(),H4PE_GVCHANGE|H4PE_VIEWERS|H4PE_BLESINIT){
+      |                       ~~~~~~~~^~~~~~~~~~~~~~~~~~~
+.pio/libdeps/pico/H4Plugins/src/H4P_AsyncMQTT.h:46:7: note: candidate: 'H4P_AsyncMQTT::H4P_AsyncMQTT(const H4P_AsyncMQTT&)'
+   46 | class H4P_AsyncMQTT: public H4Service, public H4AsyncMQTT{
+      |       ^~~~~~~~~~~~~
+.pio/libdeps/pico/H4Plugins/src/H4P_AsyncMQTT.h:46:7: note:   no known conversion for argument 1 from 'const char [24]' to 'const H4P_AsyncMQTT&'
+.pio/libdeps/pico/H4Plugins/src/H4P_AsyncMQTT.h:46:7: note: candidate: 'H4P_AsyncMQTT::H4P_AsyncMQTT(H4P_AsyncMQTT&&)'
+.pio/libdeps/pico/H4Plugins/src/H4P_AsyncMQTT.h:46:7: note:   no known conversion for argument 1 from 'const char [24]' to 'H4P_AsyncMQTT&&'
+In file included from .pio/libdeps/pico/H4Plugins/src/H4P_AsyncHTTP.h:32,
+                 from .pio/libdeps/pico/H4Plugins/src/H4Plugins.h:9:
+/home/runner/work/h4plugins/h4plugins/build/pico/src/03_EasyServiceHandling.ino: In function 'void h4pGlobalEventHandler(const std::string&, H4PE_TYPE, const std::string&)':
+.pio/libdeps/pico/H4Plugins/src/H4Service.h:429:30: error: 'onWIFIConnect' was not declared in this scope
+  429 | #define H4PSVCUP(s) H4PGLUE3(on,s,Connect())
+      |                              ^~
+.pio/libdeps/pico/H4Plugins/src/H4Service.h:428:25: note: in definition of macro 'H4PGLUE3'
+  428 | #define H4PGLUE3(x,y,z) x##y##z
+      |                         ^
+.pio/libdeps/pico/H4Plugins/src/H4Service.h:466:19: note: in expansion of macro 'H4PSVCUP'
+  466 |     if(STOI(msg)) H4PSVCUP(s); \
+      |                   ^~~~~~~~
+/home/runner/work/h4plugins/h4plugins/build/pico/src/03_EasyServiceHandling.ino:24:7: note: in expansion of macro 'H4P_SERVICE_ADAPTER'
+   24 |       H4P_SERVICE_ADAPTER(WIFI);
+      |       ^~~~~~~~~~~~~~~~~~~
+.pio/libdeps/pico/H4Plugins/src/H4Service.h:430:32: error: 'onWIFIDisconnect' was not declared in this scope; did you mean 'raw_disconnect'?
+  430 | #define H4PSVCDOWN(s) H4PGLUE3(on,s,Disconnect())
+      |                                ^~
+.pio/libdeps/pico/H4Plugins/src/H4Service.h:428:25: note: in definition of macro 'H4PGLUE3'
+  428 | #define H4PGLUE3(x,y,z) x##y##z
+      |                         ^
+.pio/libdeps/pico/H4Plugins/src/H4Service.h:467:10: note: in expansion of macro 'H4PSVCDOWN'
+  467 |     else H4PSVCDOWN(s); \
+      |          ^~~~~~~~~~
+/home/runner/work/h4plugins/h4plugins/build/pico/src/03_EasyServiceHandling.ino:24:7: note: in expansion of macro 'H4P_SERVICE_ADAPTER'
+   24 |       H4P_SERVICE_ADAPTER(WIFI);
+      |       ^~~~~~~~~~~~~~~~~~~
+.pio/libdeps/pico/H4Plugins/src/H4Service.h:429:30: error: 'onMqttConnect' was not declared in this scope
+  429 | #define H4PSVCUP(s) H4PGLUE3(on,s,Connect())
+      |                              ^~
+.pio/libdeps/pico/H4Plugins/src/H4Service.h:428:25: note: in definition of macro 'H4PGLUE3'
+  428 | #define H4PGLUE3(x,y,z) x##y##z
+      |                         ^
+.pio/libdeps/pico/H4Plugins/src/H4Service.h:466:19: note: in expansion of macro 'H4PSVCUP'
+  466 |     if(STOI(msg)) H4PSVCUP(s); \
+      |                   ^~~~~~~~
+/home/runner/work/h4plugins/h4plugins/build/pico/src/03_EasyServiceHandling.ino:25:7: note: in expansion of macro 'H4P_SERVICE_ADAPTER'
+   25 |       H4P_SERVICE_ADAPTER(Mqtt);
+      |       ^~~~~~~~~~~~~~~~~~~
+.pio/libdeps/pico/H4Plugins/src/H4Service.h:430:32: error: 'onMqttDisconnect' was not declared in this scope
+  430 | #define H4PSVCDOWN(s) H4PGLUE3(on,s,Disconnect())
+      |                                ^~
+.pio/libdeps/pico/H4Plugins/src/H4Service.h:428:25: note: in definition of macro 'H4PGLUE3'
+  428 | #define H4PGLUE3(x,y,z) x##y##z
+      |                         ^
+.pio/libdeps/pico/H4Plugins/src/H4Service.h:467:10: note: in expansion of macro 'H4PSVCDOWN'
+  467 |     else H4PSVCDOWN(s); \
+      |          ^~~~~~~~~~
+/home/runner/work/h4plugins/h4plugins/build/pico/src/03_EasyServiceHandling.ino:25:7: note: in expansion of macro 'H4P_SERVICE_ADAPTER'
+   25 |       H4P_SERVICE_ADAPTER(Mqtt);
+      |       ^~~~~~~~~~~~~~~~~~~
+*** [.pio/build/pico/src/03_EasyServiceHandling.ino.cpp.o] Error 1
+========================== [FAILED] Took 5.05 seconds ==========================
+Environment    Status    Duration
+-------------  --------  ------------
+pico           FAILED    00:00:05.055
+==================== 1 failed, 0 succeeded in 00:00:05.055 ====================

@@ -1,0 +1,324 @@
+Processing esp32s3 (board: esp32-s3-devkitc-1; platform: https://github.com/pioarduino/platform-espressif32/releases/download/55.03.35/platform-espressif32.zip; framework: arduino)
+--------------------------------------------------------------------------------
+Platform Manager: Installing https://github.com/pioarduino/platform-espressif32/releases/download/55.03.35/platform-espressif32.zip
+Unpacking 0% 10% 20% 30% 40% 50% 60% 70% 80% 90% 100%
+Platform Manager: espressif32@55.3.35 has been installed!
+Tool Manager: Installing https://github.com/pioarduino/esp_install/releases/download/v5.3.4/esp_install-v5.3.4.zip
+Downloading 0% 10% 20% 30% 40% 50% 60% 70%
+Unpacking 0% 10% 20% 30% 40% 50% 60% 70% 80% 90% 100%
+Tool Manager: tool-esp_install@5.3.4 has been installed!
+Created pioarduino Python virtual environment: /home/runner/.platformio/penv
+Tool Manager: Installing https://github.com/HamzaHajeir/esp32-arduino-lib-builder/releases/download/v89/framework-arduinoespressif32--release_v5.5-366dadf354.zip
+Downloading 0% 10% 20% 30% 40% 50% 60% 70% 80% 90% 100%
+Unpacking 0% 10% 20% 30% 40% 50% 60% 70% 80% 90% 100%
+Tool Manager: framework-arduinoespressif32@3.3.5 has been installed!
+Tool Manager: Installing https://github.com/HamzaHajeir/esp32-arduino-lib-builder/releases/download/v89/esp32-arduino-libs.tar.gz
+Downloading 0% 10% 20% 30% 40% 50% 60% 70% 80% 90% 100%
+Unpacking 0% 10% 20% 30% 40% 50% 60% 70% 80% 90% 100%
+Tool Manager: framework-arduinoespressif32-libs@5.5.0+sha.366dadf354 has been installed!
+Tool Manager: Installing https://github.com/pioarduino/registry/releases/download/0.0.1/xtensa-esp-elf-14.2.0_20251107.zip
+Downloading 0% 10%
+Unpacking 0% 10% 20%
+Tool Manager: toolchain-xtensa-esp-elf@14.2.0+20251107 has been installed!
+Tool Manager: Installing https://github.com/pioarduino/registry/releases/download/0.0.1/esptoolpy-v5.1.0.zip
+Downloading 0% 10%
+Unpacking 0% 10% 20%
+Tool Manager: tool-esptoolpy@5.1.0 has been installed!
+Tool Manager: Installing https://github.com/pioarduino/registry/releases/download/0.0.1/contrib-piohome-3.4.4.tar.gz
+Downloading 0% 10% 20% 30% 40% 50% 60% 70% 80% 90% 100%
+Unpacking 0% 10% 20% 30% 40% 50% 60% 70% 80% 90% 100%
+Tool Manager: contrib-piohome@3.4.4 has been installed!
+Tool Manager: Installing https://github.com/pioarduino/registry/releases/download/0.0.1/mklittlefs-3.2.0-new.zip
+Downloading 0% 10%
+Unpacking 0% 10% 20%
+Tool Manager: tool-mklittlefs@3.2.0 has been installed!
+Tool Manager: Installing https://github.com/pioarduino/registry/releases/download/0.0.1/esp-rom-elfs-20241011.zip
+Downloading 0% 10% 20% 30% 40% 50% 60% 70% 80% 90% 100%
+Unpacking 0% 10% 20% 30% 40% 50% 60% 70% 80% 90% 100%
+Tool Manager: tool-esp-rom-elfs@2024.10.11 has been installed!
+Library Manager: Installing git+https://github.com/HamzaHajeir/H4#4.0.9
+git version 2.52.0
+Library Manager: H4@4.0.9+sha.6f2f510 has been installed!
+Library Manager: Installing git+https://github.com/HamzaHajeir/H4Tools#0.0.16
+git version 2.52.0
+Library Manager: H4Tools@0.0.16+sha.47ce091 has been installed!
+Library Manager: Installing git+https://github.com/HamzaHajeir/H4AsyncTCP#0.0.25
+git version 2.52.0
+Library Manager: H4AsyncTCP@0.0.25+sha.231be9d has been installed!
+Library Manager: Installing git+https://github.com/HamzaHajeir/H4AsyncMQTT#1.0.0-rc12
+git version 2.52.0
+Library Manager: H4AsyncMQTT@1.0.0-rc12+sha.9d2b784 has been installed!
+Library Manager: Resolving dependencies...
+Library Manager: Installing git+https://github.com/HamzaHajeir/ArmadilloHTTP#0.1.9
+git version 2.52.0
+Library Manager: ArmadilloHTTP@0.1.9+sha.ac5bf86 has been installed!
+Library Manager: Resolving dependencies...
+Library Manager: Installing git+https://github.com/HamzaHajeir/H4AsyncWebServer#0.0.13
+git version 2.52.0
+Library Manager: H4AsyncWebServer@0.0.13+sha.fcbce26 has been installed!
+Library Manager: Installing git+https://github.com/HamzaHajeir/h4plugins#3.5.7
+git version 2.52.0
+Library Manager: H4Plugins@3.5.7+sha.0ad6c2a has been installed!
+Library Manager: Resolving dependencies...
+Tool Manager: Installing file:///home/runner/.platformio/tools/tool-esptoolpy
+Tool Manager: tool-esptoolpy@5.1.0 has been installed!
+Tool Manager: Installing file:///home/runner/.platformio/tools/toolchain-xtensa-esp-elf
+Tool Manager: toolchain-xtensa-esp-elf@14.2.0+20251107 has been installed!
+Tool Manager: Installing file:///home/runner/.platformio/tools/tool-mklittlefs
+Tool Manager: tool-mklittlefs@3.2.0 has been installed!
+Tool Manager: Installing file:///home/runner/.platformio/tools/tool-esp-rom-elfs
+Tool Manager: tool-esp-rom-elfs@2024.10.11 has been installed!
+Verbose mode can be enabled via `-v, --verbose` option
+Installed esptool from tl-install path: /home/runner/.platformio/packages/tool-esptoolpy
+CONFIGURATION: https://docs.platformio.org/page/boards/espressif32/esp32-s3-devkitc-1.html
+PLATFORM: Espressif 32 (55.3.35) > Espressif ESP32-S3-DevKitC-1-N8 (8 MB QD, No PSRAM)
+HARDWARE: ESP32S3 240MHz, 320KB RAM, 8MB Flash
+DEBUG: Current (esp-builtin) On-board (esp-builtin) External (cmsis-dap, esp-bridge, esp-prog, iot-bus-jtag, jlink, minimodule, olimex-arm-usb-ocd, olimex-arm-usb-ocd-h, olimex-arm-usb-tiny-h, olimex-jtag-tiny, tumpa)
+PACKAGES: 
+ - contrib-piohome @ 3.4.4 
+ - framework-arduinoespressif32 @ 3.3.5 
+ - framework-arduinoespressif32-libs @ 5.5.0+sha.366dadf354 
+ - tool-esp-rom-elfs @ 2024.10.11 
+ - tool-esptoolpy @ 5.1.0 
+ - tool-mklittlefs @ 3.2.0 
+ - toolchain-xtensa-esp-elf @ 14.2.0+20251107
+Converting H4P_Simple_Tones.ino
+LDF: Library Dependency Finder -> https://bit.ly/configure-pio-ldf
+LDF Modes: Finder ~ chain, Compatibility ~ soft
+Found 50 compatible libraries
+Scanning dependencies...
+Dependency Graph
+|-- H4 @ 4.0.9+sha.6f2f510
+|-- H4Tools @ 0.0.16+sha.47ce091
+|-- H4AsyncTCP @ 0.0.25+sha.231be9d
+|-- H4AsyncMQTT @ 1.0.0-rc12+sha.9d2b784
+|-- ArmadilloHTTP @ 0.1.9+sha.ac5bf86
+|-- H4AsyncWebServer @ 0.0.13+sha.fcbce26
+|-- H4Plugins @ 3.5.7+sha.0ad6c2a
+Building in release mode
+Compiling .pio/build/esp32s3/libb92/H4/H4.cpp.o
+Compiling .pio/build/esp32s3/lib7aa/FS/FS.cpp.o
+Compiling .pio/build/esp32s3/lib7aa/FS/vfs_api.cpp.o
+Compiling .pio/build/esp32s3/lib620/LittleFS/LittleFS.cpp.o
+Compiling .pio/build/esp32s3/lib487/Network/NetworkClient.cpp.o
+Compiling .pio/build/esp32s3/lib487/Network/NetworkEvents.cpp.o
+Compiling .pio/build/esp32s3/lib487/Network/NetworkInterface.cpp.o
+Compiling .pio/build/esp32s3/lib487/Network/NetworkManager.cpp.o
+Compiling .pio/build/esp32s3/lib487/Network/NetworkServer.cpp.o
+Compiling .pio/build/esp32s3/lib487/Network/NetworkUdp.cpp.o
+Compiling .pio/build/esp32s3/lib989/WiFi/AP.cpp.o
+Compiling .pio/build/esp32s3/lib989/WiFi/STA.cpp.o
+Compiling .pio/build/esp32s3/lib989/WiFi/WiFi.cpp.o
+Compiling .pio/build/esp32s3/lib989/WiFi/WiFiAP.cpp.o
+Compiling .pio/build/esp32s3/lib989/WiFi/WiFiGeneric.cpp.o
+Compiling .pio/build/esp32s3/lib989/WiFi/WiFiMulti.cpp.o
+Compiling .pio/build/esp32s3/lib989/WiFi/WiFiSTA.cpp.o
+Compiling .pio/build/esp32s3/lib989/WiFi/WiFiScan.cpp.o
+Compiling .pio/build/esp32s3/lib769/H4Tools/H4Tools.cpp.o
+Compiling .pio/build/esp32s3/lib769/H4Tools/mbx.cpp.o
+Compiling .pio/build/esp32s3/lib3de/H4AsyncTCP/H4AsyncServer.cpp.o
+Compiling .pio/build/esp32s3/lib3de/H4AsyncTCP/H4AsyncTCP.cpp.o
+Compiling .pio/build/esp32s3/lib3de/H4AsyncTCP/LwIPCoreLocker.cpp.o
+Compiling .pio/build/esp32s3/lib3de/H4AsyncTCP/h4async_config.cpp.o
+Compiling .pio/build/esp32s3/libeee/H4AsyncMQTT/H4AsyncMQTT.cpp.o
+Compiling .pio/build/esp32s3/libeee/H4AsyncMQTT/Packet.cpp.o
+Compiling .pio/build/esp32s3/libeee/H4AsyncMQTT/Properties.cpp.o
+Compiling .pio/build/esp32s3/libeee/H4AsyncMQTT/mqTraits.cpp.o
+Compiling .pio/build/esp32s3/lib8b8/ArmadilloHTTP/ArmadilloHTTP.cpp.o
+Compiling .pio/build/esp32s3/lib117/H4AsyncWebServer/H4AT_HTTPHandlerWS.cpp.o
+Compiling .pio/build/esp32s3/lib117/H4AsyncWebServer/H4AW_HTTPHandlerSSE.cpp.o
+Compiling .pio/build/esp32s3/lib117/H4AsyncWebServer/H4AsyncAuthenticators.cpp.o
+Compiling .pio/build/esp32s3/lib117/H4AsyncWebServer/H4AsyncHandlers.cpp.o
+Compiling .pio/build/esp32s3/lib117/H4AsyncWebServer/H4AsyncWebServer.cpp.o
+Compiling .pio/build/esp32s3/libf74/BLE/BLE2901.cpp.o
+Compiling .pio/build/esp32s3/libf74/BLE/BLE2902.cpp.o
+Compiling .pio/build/esp32s3/libf74/BLE/BLE2904.cpp.o
+Compiling .pio/build/esp32s3/libf74/BLE/BLEAddress.cpp.o
+Compiling .pio/build/esp32s3/libf74/BLE/BLEAdvertisedDevice.cpp.o
+Compiling .pio/build/esp32s3/libf74/BLE/BLEAdvertising.cpp.o
+Compiling .pio/build/esp32s3/libf74/BLE/BLEBeacon.cpp.o
+Compiling .pio/build/esp32s3/libf74/BLE/BLECharacteristic.cpp.o
+Compiling .pio/build/esp32s3/libf74/BLE/BLECharacteristicMap.cpp.o
+Compiling .pio/build/esp32s3/libf74/BLE/BLEClient.cpp.o
+Compiling .pio/build/esp32s3/libf74/BLE/BLEDescriptor.cpp.o
+Compiling .pio/build/esp32s3/libf74/BLE/BLEDescriptorMap.cpp.o
+Compiling .pio/build/esp32s3/libf74/BLE/BLEDevice.cpp.o
+Compiling .pio/build/esp32s3/libf74/BLE/BLEEddystoneTLM.cpp.o
+Compiling .pio/build/esp32s3/libf74/BLE/BLEEddystoneURL.cpp.o
+Compiling .pio/build/esp32s3/libf74/BLE/BLEExceptions.cpp.o
+Compiling .pio/build/esp32s3/libf74/BLE/BLEHIDDevice.cpp.o
+Compiling .pio/build/esp32s3/libf74/BLE/BLERemoteCharacteristic.cpp.o
+Compiling .pio/build/esp32s3/libf74/BLE/BLERemoteDescriptor.cpp.o
+Compiling .pio/build/esp32s3/libf74/BLE/BLERemoteService.cpp.o
+Compiling .pio/build/esp32s3/libf74/BLE/BLEScan.cpp.o
+Compiling .pio/build/esp32s3/libf74/BLE/BLESecurity.cpp.o
+Compiling .pio/build/esp32s3/libf74/BLE/BLEServer.cpp.o
+Compiling .pio/build/esp32s3/libf74/BLE/BLEService.cpp.o
+Compiling .pio/build/esp32s3/libf74/BLE/BLEServiceMap.cpp.o
+Compiling .pio/build/esp32s3/libf74/BLE/BLEUUID.cpp.o
+Compiling .pio/build/esp32s3/libf74/BLE/BLEUtils.cpp.o
+Compiling .pio/build/esp32s3/libf74/BLE/BLEValue.cpp.o
+Compiling .pio/build/esp32s3/libf74/BLE/FreeRTOS.cpp.o
+Compiling .pio/build/esp32s3/libf74/BLE/GeneralUtils.cpp.o
+Compiling .pio/build/esp32s3/libf0e/NetworkClientSecure/NetworkClientSecure.cpp.o
+Compiling .pio/build/esp32s3/libf0e/NetworkClientSecure/ssl_client.cpp.o
+Compiling .pio/build/esp32s3/lib67b/HTTPClient/HTTPClient.cpp.o
+Compiling .pio/build/esp32s3/lib92c/Hash/PBKDF2_HMACBuilder.cpp.o
+Compiling .pio/build/esp32s3/lib92c/Hash/SHA1Builder.cpp.o
+Compiling .pio/build/esp32s3/lib92c/Hash/SHA2Builder.cpp.o
+Compiling .pio/build/esp32s3/lib92c/Hash/SHA3Builder.cpp.o
+Compiling .pio/build/esp32s3/lib4b6/Update/HttpsOTAUpdate.cpp.o
+Compiling .pio/build/esp32s3/lib4b6/Update/Updater.cpp.o
+Compiling .pio/build/esp32s3/lib4b6/Update/Updater_Signing.cpp.o
+Compiling .pio/build/esp32s3/lib1d4/HTTPUpdate/HTTPUpdate.cpp.o
+Compiling .pio/build/esp32s3/lib4b6/ESPmDNS/ESPmDNS.cpp.o
+Compiling .pio/build/esp32s3/lib134/ArduinoOTA/ArduinoOTA.cpp.o
+Compiling .pio/build/esp32s3/lib59e/AsyncUDP/AsyncUDP.cpp.o
+Compiling .pio/build/esp32s3/lib147/DNSServer/DNSServer.cpp.o
+Compiling .pio/build/esp32s3/libfae/H4Plugins/H4PStatic.cpp.o
+Compiling .pio/build/esp32s3/libfae/H4Plugins/H4P_AsyncHTTP.cpp.o
+Compiling .pio/build/esp32s3/libfae/H4Plugins/H4P_AsyncMQTT.cpp.o
+Compiling .pio/build/esp32s3/libfae/H4Plugins/H4P_BLEClient.cpp.o
+Compiling .pio/build/esp32s3/libfae/H4Plugins/H4P_BLEServer.cpp.o
+Compiling .pio/build/esp32s3/libfae/H4Plugins/H4P_BinarySwitch.cpp.o
+Compiling .pio/build/esp32s3/libfae/H4Plugins/H4P_BinaryThing.cpp.o
+Compiling .pio/build/esp32s3/libfae/H4Plugins/H4P_GateKeeper.cpp.o
+Compiling .pio/build/esp32s3/libfae/H4Plugins/H4P_HeapWarn.cpp.o
+Compiling .pio/build/esp32s3/libfae/H4Plugins/H4P_Heartbeat.cpp.o
+Compiling .pio/build/esp32s3/libfae/H4Plugins/H4P_LinkMaster.cpp.o
+Compiling .pio/build/esp32s3/libfae/H4Plugins/H4P_LocalLogger.cpp.o
+Compiling .pio/build/esp32s3/libfae/H4Plugins/H4P_PinMachine.cpp.o
+Compiling .pio/build/esp32s3/libfae/H4Plugins/H4P_QueueWarn.cpp.o
+Compiling .pio/build/esp32s3/libfae/H4Plugins/H4P_RemoteLogger.cpp.o
+Compiling .pio/build/esp32s3/libfae/H4Plugins/H4P_SerialCmd.cpp.o
+Compiling .pio/build/esp32s3/libfae/H4Plugins/H4P_Signaller.cpp.o
+Compiling .pio/build/esp32s3/libfae/H4Plugins/H4P_TaskSniffer.cpp.o
+Compiling .pio/build/esp32s3/libfae/H4Plugins/H4P_Timekeeper.cpp.o
+Compiling .pio/build/esp32s3/libfae/H4Plugins/H4P_ToneController.cpp.o
+Compiling .pio/build/esp32s3/libfae/H4Plugins/H4P_UPNPServer.cpp.o
+Compiling .pio/build/esp32s3/libfae/H4Plugins/H4P_WiFi.cpp.o
+Compiling .pio/build/esp32s3/libfae/H4Plugins/H4P_WiFiAP.cpp.o
+Compiling .pio/build/esp32s3/libfae/H4Plugins/H4Service.cpp.o
+Compiling .pio/build/esp32s3/libfae/H4Plugins/NODE-PINK-FLOWS.cpp.o
+Compiling .pio/build/esp32s3/libfae/H4Plugins/NODE-PINK-NODES.cpp.o
+Compiling .pio/build/esp32s3/src/H4P_Simple_Tones.ino.cpp.o
+Building .pio/build/esp32s3/bootloader.bin
+esptool v5.1.0
+Creating ESP32S3 image...
+Merged 2 ELF sections.
+Successfully created ESP32S3 image.
+Generating partitions .pio/build/esp32s3/partitions.bin
+Compiling .pio/build/esp32s3/FrameworkArduino/ColorFormat.c.o
+Compiling .pio/build/esp32s3/FrameworkArduino/Esp.cpp.o
+Compiling .pio/build/esp32s3/FrameworkArduino/FirmwareMSC.cpp.o
+Compiling .pio/build/esp32s3/FrameworkArduino/FunctionalInterrupt.cpp.o
+Compiling .pio/build/esp32s3/FrameworkArduino/HEXBuilder.cpp.o
+Compiling .pio/build/esp32s3/FrameworkArduino/HWCDC.cpp.o
+Compiling .pio/build/esp32s3/FrameworkArduino/HardwareSerial.cpp.o
+Cloning into '/home/runner/.platformio/.cache/tmp/pkg-installing-dvvdmb1o'...
+warning: refs/tags/4.0.9 cf8b6f15d2ae6574248609ad9a42dd919b8bc1c7 is not a commit!
+Note: switching to '6f2f5105138d74b820570c454306a2f77b6d2277'.
+You are in 'detached HEAD' state. You can look around, make experimental
+changes and commit them, and you can discard any commits you make in this
+state without impacting any branches by switching back to a branch.
+If you want to create a new branch to retain commits you create, you may
+do so (now or later) by using -c with the switch command. Example:
+  git switch -c <new-branch-name>
+Or undo this operation with:
+  git switch -
+Turn off this advice by setting config variable advice.detachedHead to false
+Cloning into '/home/runner/.platformio/.cache/tmp/pkg-installing-2q763m4k'...
+warning: refs/tags/0.0.16 13872a03a59a05b0462818899db5b374ad9db3b2 is not a commit!
+Note: switching to '47ce091ad47ea79a838c34a7abaee46278f5cb4d'.
+You are in 'detached HEAD' state. You can look around, make experimental
+changes and commit them, and you can discard any commits you make in this
+state without impacting any branches by switching back to a branch.
+If you want to create a new branch to retain commits you create, you may
+do so (now or later) by using -c with the switch command. Example:
+  git switch -c <new-branch-name>
+Or undo this operation with:
+  git switch -
+Turn off this advice by setting config variable advice.detachedHead to false
+Cloning into '/home/runner/.platformio/.cache/tmp/pkg-installing-1unpvs_p'...
+warning: refs/tags/0.0.25 e48ef7888ffda0c55cd81d135320844940def4b2 is not a commit!
+Note: switching to '231be9deaf91e506941ea3fa9f33089813869ddf'.
+You are in 'detached HEAD' state. You can look around, make experimental
+changes and commit them, and you can discard any commits you make in this
+state without impacting any branches by switching back to a branch.
+If you want to create a new branch to retain commits you create, you may
+do so (now or later) by using -c with the switch command. Example:
+  git switch -c <new-branch-name>
+Or undo this operation with:
+  git switch -
+Turn off this advice by setting config variable advice.detachedHead to false
+Cloning into '/home/runner/.platformio/.cache/tmp/pkg-installing-ohbxifje'...
+warning: refs/tags/1.0.0-rc12 4903eed4b73117310b85c81d3e43aac430242301 is not a commit!
+Note: switching to '9d2b7846cef22bb097fde379984f7d5dda6c282e'.
+You are in 'detached HEAD' state. You can look around, make experimental
+changes and commit them, and you can discard any commits you make in this
+state without impacting any branches by switching back to a branch.
+If you want to create a new branch to retain commits you create, you may
+do so (now or later) by using -c with the switch command. Example:
+  git switch -c <new-branch-name>
+Or undo this operation with:
+  git switch -
+Turn off this advice by setting config variable advice.detachedHead to false
+Cloning into '/home/runner/.platformio/.cache/tmp/pkg-installing-nc5ahmbr'...
+warning: refs/tags/0.1.9 de0d5f3ddcd5e52b63d11f8805a078bd9aad188a is not a commit!
+Note: switching to 'ac5bf862a0ee829aa20ccf2b5c23c42d53092fcf'.
+You are in 'detached HEAD' state. You can look around, make experimental
+changes and commit them, and you can discard any commits you make in this
+state without impacting any branches by switching back to a branch.
+If you want to create a new branch to retain commits you create, you may
+do so (now or later) by using -c with the switch command. Example:
+  git switch -c <new-branch-name>
+Or undo this operation with:
+  git switch -
+Turn off this advice by setting config variable advice.detachedHead to false
+Cloning into '/home/runner/.platformio/.cache/tmp/pkg-installing-8aaxnxrh'...
+warning: refs/tags/0.0.13 9acc83478fc9d3c2e074d8f977215ac0d841a85b is not a commit!
+Note: switching to 'fcbce268eb16a1ede1cd303b5d63bb4136281501'.
+You are in 'detached HEAD' state. You can look around, make experimental
+changes and commit them, and you can discard any commits you make in this
+state without impacting any branches by switching back to a branch.
+If you want to create a new branch to retain commits you create, you may
+do so (now or later) by using -c with the switch command. Example:
+  git switch -c <new-branch-name>
+Or undo this operation with:
+  git switch -
+Turn off this advice by setting config variable advice.detachedHead to false
+Cloning into '/home/runner/.platformio/.cache/tmp/pkg-installing-ye57qwso'...
+warning: refs/tags/3.5.7 6229dcc2ee73817f04f835056d627d7dee73050b is not a commit!
+Note: switching to '0ad6c2a4abb69389bd90c5f0c61791284c531d26'.
+You are in 'detached HEAD' state. You can look around, make experimental
+changes and commit them, and you can discard any commits you make in this
+state without impacting any branches by switching back to a branch.
+If you want to create a new branch to retain commits you create, you may
+do so (now or later) by using -c with the switch command. Example:
+  git switch -c <new-branch-name>
+Or undo this operation with:
+  git switch -
+Turn off this advice by setting config variable advice.detachedHead to false
+In file included from /home/runner/work/h4plugins/h4plugins/build/esp32s3/src/H4P_Simple_Tones.ino:1:
+.pio/libdeps/esp32s3/H4Plugins/src/H4Plugins.h:6:76: note: '#pragma message: Using Wifi AP - Make sure you have made arrangements!'
+    6 |     #pragma message("Using Wifi AP - Make sure you have made arrangements!")
+      |                                                                            ^
+/home/runner/work/h4plugins/h4plugins/build/esp32s3/src/H4P_Simple_Tones.ino:6:15: error: 'D8' was not declared in this scope; did you mean 'T8'?
+    6 | H4P_Voice vox(D8);
+      |               ^~
+      |               T8
+/home/runner/work/h4plugins/h4plugins/build/esp32s3/src/H4P_Simple_Tones.ino: In function 'void h4setup()':
+/home/runner/work/h4plugins/h4plugins/build/esp32s3/src/H4P_Simple_Tones.ino:15:13: error: 'D8' was not declared in this scope; did you mean 'T8'?
+   15 |   h4tc.tone(D8,440,5000,4); // 440Hz = Concert 'A', 5sec vol 4
+      |             ^~
+      |             T8
+/home/runner/work/h4plugins/h4plugins/build/esp32s3/src/H4P_Simple_Tones.ino: In lambda function:
+/home/runner/work/h4plugins/h4plugins/build/esp32s3/src/H4P_Simple_Tones.ino:32:15: error: 'class H4P_Voice' has no member named 'chromaticRun'
+   32 |           vox.chromaticRun("GN2","BN7",'d'); // whole range
+      |               ^~~~~~~~~~~~
+*** [.pio/build/esp32s3/src/H4P_Simple_Tones.ino.cpp.o] Error 1
+========================= [FAILED] Took 146.56 seconds =========================
+Environment    Status    Duration
+-------------  --------  ------------
+esp32s3        FAILED    00:02:26.559
+==================== 1 failed, 0 succeeded in 00:02:26.559 ====================

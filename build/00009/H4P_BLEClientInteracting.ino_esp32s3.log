@@ -1,0 +1,162 @@
+Processing esp32s3 (board: esp32-s3-devkitc-1; platform: https://github.com/pioarduino/platform-espressif32/releases/download/55.03.35/platform-espressif32.zip; framework: arduino)
+--------------------------------------------------------------------------------
+Verbose mode can be enabled via `-v, --verbose` option
+CONFIGURATION: https://docs.platformio.org/page/boards/espressif32/esp32-s3-devkitc-1.html
+PLATFORM: Espressif 32 (55.3.35) > Espressif ESP32-S3-DevKitC-1-N8 (8 MB QD, No PSRAM)
+HARDWARE: ESP32S3 240MHz, 320KB RAM, 8MB Flash
+DEBUG: Current (esp-builtin) On-board (esp-builtin) External (cmsis-dap, esp-bridge, esp-prog, iot-bus-jtag, jlink, minimodule, olimex-arm-usb-ocd, olimex-arm-usb-ocd-h, olimex-arm-usb-tiny-h, olimex-jtag-tiny, tumpa)
+PACKAGES: 
+ - contrib-piohome @ 3.4.4 
+ - framework-arduinoespressif32 @ 3.3.5 
+ - framework-arduinoespressif32-libs @ 5.5.0+sha.366dadf354 
+ - tool-esp-rom-elfs @ 2024.10.11 
+ - tool-esptoolpy @ 5.1.0 
+ - tool-mklittlefs @ 3.2.0 
+ - toolchain-xtensa-esp-elf @ 14.2.0+20251107
+Converting H4P_BLEClientInteracting.ino
+LDF: Library Dependency Finder -> https://bit.ly/configure-pio-ldf
+LDF Modes: Finder ~ chain, Compatibility ~ soft
+Found 50 compatible libraries
+Scanning dependencies...
+Dependency Graph
+|-- H4 @ 4.0.9+sha.6f2f510
+|-- H4Tools @ 0.0.16+sha.47ce091
+|-- H4AsyncTCP @ 0.0.25+sha.231be9d
+|-- H4AsyncMQTT @ 1.0.0-rc12+sha.9d2b784
+|-- ArmadilloHTTP @ 0.1.9+sha.ac5bf86
+|-- H4AsyncWebServer @ 0.0.13+sha.fcbce26
+|-- H4Plugins @ 3.5.7+sha.0ad6c2a
+Building in release mode
+Compiling .pio/build/esp32s3/src/H4P_BLEClientInteracting.ino.cpp.o
+In file included from /home/runner/work/h4plugins/h4plugins/build/esp32s3/src/H4P_BLEClientInteracting.ino:2:
+.pio/libdeps/esp32s3/H4Plugins/src/H4Plugins.h:6:76: note: '#pragma message: Using Wifi AP - Make sure you have made arrangements!'
+    6 |     #pragma message("Using Wifi AP - Make sure you have made arrangements!")
+      |                                                                            ^
+/home/runner/work/h4plugins/h4plugins/build/esp32s3/src/H4P_BLEClientInteracting.ino:5:1: error: 'H4P_BLEClient' does not name a type
+    5 | H4P_BLEClient h4bleclient;
+      | ^~~~~~~~~~~~~
+/home/runner/work/h4plugins/h4plugins/build/esp32s3/src/H4P_BLEClientInteracting.ino:16:1: error: 'BLERemoteCharacteristic' does not name a type
+   16 | BLERemoteCharacteristic* cmdCharacteristic = nullptr;
+      | ^~~~~~~~~~~~~~~~~~~~~~~
+/home/runner/work/h4plugins/h4plugins/build/esp32s3/src/H4P_BLEClientInteracting.ino:17:1: error: 'BLERemoteCharacteristic' does not name a type
+   17 | BLERemoteCharacteristic* replyCharacteristic = nullptr;
+      | ^~~~~~~~~~~~~~~~~~~~~~~
+/home/runner/work/h4plugins/h4plugins/build/esp32s3/src/H4P_BLEClientInteracting.ino:19:6: error: variable or field 'onNotify' declared void
+   19 | void onNotify(BLERemoteCharacteristic *pBLERemoteCharacteristic, uint8_t *pData, size_t length, bool isNotify) {
+      |      ^~~~~~~~
+/home/runner/work/h4plugins/h4plugins/build/esp32s3/src/H4P_BLEClientInteracting.ino:19:15: error: 'BLERemoteCharacteristic' was not declared in this scope
+   19 | void onNotify(BLERemoteCharacteristic *pBLERemoteCharacteristic, uint8_t *pData, size_t length, bool isNotify) {
+      |               ^~~~~~~~~~~~~~~~~~~~~~~
+/home/runner/work/h4plugins/h4plugins/build/esp32s3/src/H4P_BLEClientInteracting.ino:19:40: error: 'pBLERemoteCharacteristic' was not declared in this scope
+   19 | void onNotify(BLERemoteCharacteristic *pBLERemoteCharacteristic, uint8_t *pData, size_t length, bool isNotify) {
+      |                                        ^~~~~~~~~~~~~~~~~~~~~~~~
+/home/runner/work/h4plugins/h4plugins/build/esp32s3/src/H4P_BLEClientInteracting.ino:19:74: error: expected primary-expression before '*' token
+   19 | void onNotify(BLERemoteCharacteristic *pBLERemoteCharacteristic, uint8_t *pData, size_t length, bool isNotify) {
+      |                                                                          ^
+/home/runner/work/h4plugins/h4plugins/build/esp32s3/src/H4P_BLEClientInteracting.ino:19:75: error: 'pData' was not declared in this scope
+   19 | void onNotify(BLERemoteCharacteristic *pBLERemoteCharacteristic, uint8_t *pData, size_t length, bool isNotify) {
+      |                                                                           ^~~~~
+/home/runner/work/h4plugins/h4plugins/build/esp32s3/src/H4P_BLEClientInteracting.ino:19:89: error: expected primary-expression before 'length'
+   19 | void onNotify(BLERemoteCharacteristic *pBLERemoteCharacteristic, uint8_t *pData, size_t length, bool isNotify) {
+      |                                                                                         ^~~~~~
+/home/runner/work/h4plugins/h4plugins/build/esp32s3/src/H4P_BLEClientInteracting.ino:19:97: error: expected primary-expression before 'bool'
+   19 | void onNotify(BLERemoteCharacteristic *pBLERemoteCharacteristic, uint8_t *pData, size_t length, bool isNotify) {
+      |                                                                                                 ^~~~
+/home/runner/work/h4plugins/h4plugins/build/esp32s3/src/H4P_BLEClientInteracting.ino:19:6: error: variable or field 'onNotify' declared void
+   19 | void onNotify(BLERemoteCharacteristic *pBLERemoteCharacteristic, uint8_t *pData, size_t length, bool isNotify) {
+      |      ^~~~~~~~
+/home/runner/work/h4plugins/h4plugins/build/esp32s3/src/H4P_BLEClientInteracting.ino:19:15: error: 'BLERemoteCharacteristic' was not declared in this scope
+   19 | void onNotify(BLERemoteCharacteristic *pBLERemoteCharacteristic, uint8_t *pData, size_t length, bool isNotify) {
+      |               ^~~~~~~~~~~~~~~~~~~~~~~
+/home/runner/work/h4plugins/h4plugins/build/esp32s3/src/H4P_BLEClientInteracting.ino:19:40: error: 'pBLERemoteCharacteristic' was not declared in this scope
+   19 | void onNotify(BLERemoteCharacteristic *pBLERemoteCharacteristic, uint8_t *pData, size_t length, bool isNotify) {
+      |                                        ^~~~~~~~~~~~~~~~~~~~~~~~
+/home/runner/work/h4plugins/h4plugins/build/esp32s3/src/H4P_BLEClientInteracting.ino:19:74: error: expected primary-expression before '*' token
+   19 | void onNotify(BLERemoteCharacteristic *pBLERemoteCharacteristic, uint8_t *pData, size_t length, bool isNotify) {
+      |                                                                          ^
+/home/runner/work/h4plugins/h4plugins/build/esp32s3/src/H4P_BLEClientInteracting.ino:19:75: error: 'pData' was not declared in this scope
+   19 | void onNotify(BLERemoteCharacteristic *pBLERemoteCharacteristic, uint8_t *pData, size_t length, bool isNotify) {
+      |                                                                           ^~~~~
+/home/runner/work/h4plugins/h4plugins/build/esp32s3/src/H4P_BLEClientInteracting.ino:19:89: error: expected primary-expression before 'length'
+   19 | void onNotify(BLERemoteCharacteristic *pBLERemoteCharacteristic, uint8_t *pData, size_t length, bool isNotify) {
+      |                                                                                         ^~~~~~
+/home/runner/work/h4plugins/h4plugins/build/esp32s3/src/H4P_BLEClientInteracting.ino:19:97: error: expected primary-expression before 'bool'
+   19 | void onNotify(BLERemoteCharacteristic *pBLERemoteCharacteristic, uint8_t *pData, size_t length, bool isNotify) {
+      |                                                                                                 ^~~~
+/home/runner/work/h4plugins/h4plugins/build/esp32s3/src/H4P_BLEClientInteracting.ino: In function 'void onConnect()':
+/home/runner/work/h4plugins/h4plugins/build/esp32s3/src/H4P_BLEClientInteracting.ino:25:9: error: 'cmdCharacteristic' was not declared in this scope
+   25 |         cmdCharacteristic = h4bleclient.getRemoteCharacteristic(BLEUUID("9652c3ca-1231-4607-9d40-6afd67609443"), BLEUUID("3c1eb836-4223-4f3e-9c9d-10c5dae1d9b1"));
+      |         ^~~~~~~~~~~~~~~~~
+/home/runner/work/h4plugins/h4plugins/build/esp32s3/src/H4P_BLEClientInteracting.ino:25:29: error: 'h4bleclient' was not declared in this scope
+   25 |         cmdCharacteristic = h4bleclient.getRemoteCharacteristic(BLEUUID("9652c3ca-1231-4607-9d40-6afd67609443"), BLEUUID("3c1eb836-4223-4f3e-9c9d-10c5dae1d9b1"));
+      |                             ^~~~~~~~~~~
+/home/runner/work/h4plugins/h4plugins/build/esp32s3/src/H4P_BLEClientInteracting.ino:25:65: error: 'BLEUUID' was not declared in this scope
+   25 |         cmdCharacteristic = h4bleclient.getRemoteCharacteristic(BLEUUID("9652c3ca-1231-4607-9d40-6afd67609443"), BLEUUID("3c1eb836-4223-4f3e-9c9d-10c5dae1d9b1"));
+      |                                                                 ^~~~~~~
+/home/runner/work/h4plugins/h4plugins/build/esp32s3/src/H4P_BLEClientInteracting.ino:26:9: error: 'replyCharacteristic' was not declared in this scope
+   26 |         replyCharacteristic = h4bleclient.getRemoteCharacteristic(BLEUUID("9652c3ca-1231-4607-9d40-6afd67609443"), BLEUUID("5f1c2e8d-f531-488e-8198-0132ec230a6f"));
+      |         ^~~~~~~~~~~~~~~~~~~
+/home/runner/work/h4plugins/h4plugins/build/esp32s3/src/H4P_BLEClientInteracting.ino: In lambda function:
+/home/runner/work/h4plugins/h4plugins/build/esp32s3/src/H4P_BLEClientInteracting.ino:36:20: error: 'cmdCharacteristic' is not captured
+   36 |                 if(cmdCharacteristic->canWrite()){
+      |                    ^~~~~~~~~~~~~~~~~
+/home/runner/work/h4plugins/h4plugins/build/esp32s3/src/H4P_BLEClientInteracting.ino:34:37: note: the lambda has no capture-default
+   34 |         requestor = h4.every(5000, []{
+      |                                     ^
+/home/runner/work/h4plugins/h4plugins/build/esp32s3/src/H4P_BLEClientInteracting.ino:25:9: note: '<typeprefixerror>cmdCharacteristic' declared here
+   25 |         cmdCharacteristic = h4bleclient.getRemoteCharacteristic(BLEUUID("9652c3ca-1231-4607-9d40-6afd67609443"), BLEUUID("3c1eb836-4223-4f3e-9c9d-10c5dae1d9b1"));
+      |         ^~~~~~~~~~~~~~~~~
+/home/runner/work/h4plugins/h4plugins/build/esp32s3/src/H4P_BLEClientInteracting.ino:38:25: error: 'cmdCharacteristic' is not captured
+   38 |                         cmdCharacteristic->writeValue("h4/toggle");
+      |                         ^~~~~~~~~~~~~~~~~
+/home/runner/work/h4plugins/h4plugins/build/esp32s3/src/H4P_BLEClientInteracting.ino:34:37: note: the lambda has no capture-default
+   34 |         requestor = h4.every(5000, []{
+      |                                     ^
+/home/runner/work/h4plugins/h4plugins/build/esp32s3/src/H4P_BLEClientInteracting.ino:25:9: note: '<typeprefixerror>cmdCharacteristic' declared here
+   25 |         cmdCharacteristic = h4bleclient.getRemoteCharacteristic(BLEUUID("9652c3ca-1231-4607-9d40-6afd67609443"), BLEUUID("3c1eb836-4223-4f3e-9c9d-10c5dae1d9b1"));
+      |         ^~~~~~~~~~~~~~~~~
+/home/runner/work/h4plugins/h4plugins/build/esp32s3/src/H4P_BLEClientInteracting.ino:39:25: error: 'cmdCharacteristic' is not captured
+   39 |                         cmdCharacteristic->writeValue("help");
+      |                         ^~~~~~~~~~~~~~~~~
+/home/runner/work/h4plugins/h4plugins/build/esp32s3/src/H4P_BLEClientInteracting.ino:34:37: note: the lambda has no capture-default
+   34 |         requestor = h4.every(5000, []{
+      |                                     ^
+/home/runner/work/h4plugins/h4plugins/build/esp32s3/src/H4P_BLEClientInteracting.ino:25:9: note: '<typeprefixerror>cmdCharacteristic' declared here
+   25 |         cmdCharacteristic = h4bleclient.getRemoteCharacteristic(BLEUUID("9652c3ca-1231-4607-9d40-6afd67609443"), BLEUUID("3c1eb836-4223-4f3e-9c9d-10c5dae1d9b1"));
+      |         ^~~~~~~~~~~~~~~~~
+/home/runner/work/h4plugins/h4plugins/build/esp32s3/src/H4P_BLEClientInteracting.ino:41:62: error: 'cmdCharacteristic' is not captured
+   41 |                         Serial.printf("Can not write! %d
+", cmdCharacteristic->canWrite());
+      |                                                              ^~~~~~~~~~~~~~~~~
+/home/runner/work/h4plugins/h4plugins/build/esp32s3/src/H4P_BLEClientInteracting.ino:34:37: note: the lambda has no capture-default
+   34 |         requestor = h4.every(5000, []{
+      |                                     ^
+/home/runner/work/h4plugins/h4plugins/build/esp32s3/src/H4P_BLEClientInteracting.ino:25:9: note: '<typeprefixerror>cmdCharacteristic' declared here
+   25 |         cmdCharacteristic = h4bleclient.getRemoteCharacteristic(BLEUUID("9652c3ca-1231-4607-9d40-6afd67609443"), BLEUUID("3c1eb836-4223-4f3e-9c9d-10c5dae1d9b1"));
+      |         ^~~~~~~~~~~~~~~~~
+/home/runner/work/h4plugins/h4plugins/build/esp32s3/src/H4P_BLEClientInteracting.ino: In function 'void h4setup()':
+/home/runner/work/h4plugins/h4plugins/build/esp32s3/src/H4P_BLEClientInteracting.ino:56:9: error: 'h4bleclient' was not declared in this scope
+   56 |         h4bleclient.add({BLEUUID("9652c3ca-1231-4607-9d40-6afd67609443"), true},          // H4_SERVICE_UUID    , mandatory=true
+      |         ^~~~~~~~~~~
+/home/runner/work/h4plugins/h4plugins/build/esp32s3/src/H4P_BLEClientInteracting.ino:56:26: error: 'BLEUUID' was not declared in this scope
+   56 |         h4bleclient.add({BLEUUID("9652c3ca-1231-4607-9d40-6afd67609443"), true},          // H4_SERVICE_UUID    , mandatory=true
+      |                          ^~~~~~~
+/home/runner/work/h4plugins/h4plugins/build/esp32s3/src/H4P_BLEClientInteracting.ino:63:42: error: 'onNotify' was not declared in this scope
+   63 |                                          onNotify);
+      |                                          ^~~~~~~~
+/home/runner/work/h4plugins/h4plugins/build/esp32s3/src/H4P_BLEClientInteracting.ino: In lambda function:
+/home/runner/work/h4plugins/h4plugins/build/esp32s3/src/H4P_BLEClientInteracting.ino:65:29: error: 'h4bleclient' is not captured
+   65 |         h4.queueFunction([]{h4bleclient.start();});
+      |                             ^~~~~~~~~~~
+/home/runner/work/h4plugins/h4plugins/build/esp32s3/src/H4P_BLEClientInteracting.ino:65:27: note: the lambda has no capture-default
+   65 |         h4.queueFunction([]{h4bleclient.start();});
+      |                           ^
+/home/runner/work/h4plugins/h4plugins/build/esp32s3/src/H4P_BLEClientInteracting.ino:56:9: note: '<typeprefixerror>h4bleclient' declared here
+   56 |         h4bleclient.add({BLEUUID("9652c3ca-1231-4607-9d40-6afd67609443"), true},          // H4_SERVICE_UUID    , mandatory=true
+      |         ^~~~~~~~~~~
+*** [.pio/build/esp32s3/src/H4P_BLEClientInteracting.ino.cpp.o] Error 1
+========================== [FAILED] Took 9.98 seconds ==========================
+Environment    Status    Duration
+-------------  --------  ------------
+esp32s3        FAILED    00:00:09.976
+==================== 1 failed, 0 succeeded in 00:00:09.976 ====================
