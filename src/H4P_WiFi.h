@@ -1,31 +1,15 @@
-/*
- MIT License
+/* 
+MIT License
 
-Copyright (c) 2020 Phil Bowles <H48266@gmail.com>
-   github     https://github.com/philbowles/H4
-   blog       https://8266iot.blogspot.com
-   groups     https://www.facebook.com/groups/esp8266questions/
-              https://www.facebook.com/H4-Esp8266-Firmware-Support-2338535503093896/
+Copyright (c) 2026 H4Group
 
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-
+Contact Email: TBD
 */
 #pragma once
 
@@ -99,7 +83,7 @@ class H4P_WiFi: public H4Service, public H4AsyncWebServer {
                 std::string     submitpass;
                 bool            _cannotConnectSTA(){ return h4p[ssidTag()] == h4Tag() /*  || std::stoi(h4p[GoTag()]) == 0 */; }
 #else
-                bool            _cannotConnectSTA(){ return (WiFi.SSID()==h4Tag() || WiFi.psk()==h4Tag())/*  || std::stoi(h4p[GoTag()]) == 0 */; }
+                bool            _cannotConnectSTA(){ return (h4p[ssidTag()]==h4Tag() || WiFi.SSID()==h4Tag() || WiFi.psk()==h4Tag())/*  || std::stoi(h4p[GoTag()]) == 0 */; }
 #endif
                 void            _commonStartup();
                 void            _coreStart();

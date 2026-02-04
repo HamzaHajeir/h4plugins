@@ -1,4 +1,3 @@
-/*
 MIT License
 
 Copyright (c) 2026 H4Group
@@ -10,26 +9,3 @@ The above copyright notice and this permission notice shall be included in all c
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 Contact Email: TBD
-*/
-#include<H4P_BinarySwitch.h>
-
-void H4P_BinarySwitch::_init() {
-    _pp=new h4pOutput(_pin,_sense,_initial, _color);
-    H4P_BinaryThing::_init();
-}
-
-void H4P_ConditionalSwitch::_handleEvent(const std::string& svc,H4PE_TYPE t,const std::string& msg){
-    if(t==H4PE_VIEWERS){
-        if(STOI(msg)) {
-        #if H4P_USE_WIFI_AP
-            uint32_t mode=WiFi.getMode();
-            if((mode==WIFI_AP || mode==WIFI_AP_STA) && h4p.gvExists(GoTag()))
-                return;
-        #endif
-            h4puiAdd(conditionTag(),H4P_UI_BOOL,"o",stringFromInt(_predicate()),H4P_UILED_BI);
-        }
-    }
-    H4P_BinarySwitch::_handleEvent(svc,t,msg);
-}
-
-void H4P_ConditionalSwitch::syncCondition(){ h4puiSync(conditionTag(),stringFromInt(h4punlocked=_predicate())); }

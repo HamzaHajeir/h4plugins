@@ -1,1 +1,4 @@
 .vscode/settings.json
+**/.pio
+**/build/*/src/*
+**/build/*/platformio.ini

@@ -11,6 +11,8 @@
 
 **In Memoriam:** Phil Bowles, the original creator of H4Plugins, passed away. The community is deeply grateful for his innovative contributions to the ESP8266 and ESP32 ecosystem. Maintenance has been taken over by Hamza Hajeir.
 
+## Keep Philbowles remembered by viewing and sharing his [Youtube channel (instructional videos)](https://www.youtube.com/channel/UCYi-Ko76_3p9hBUtleZRY6g)
+
 ---
 
 ## Watch the videos
@@ -280,7 +282,6 @@ Simply download the zip of this repository and install as an Arduino library: `S
 
 ---
 
-(c) 2021 Phil Bowles
 (c) 2025 Hamza Hajeir
 
 * [Support me on Patreon](https://patreon.com/esparto)
@@ -289,3 +290,6 @@ Simply download the zip of this repository and install as an Arduino library: `S
 * [Facebook General ESP8266 / ESP32](https://www.facebook.com/groups/2125820374390340/)
 * [Facebook ESP8266 Programming Questions](https://www.facebook.com/groups/esp8266questions/)
 * [Facebook ESP Developers (moderator)](https://www.facebook.com/groups/ESP8266/)
+
+## Licence: MIT License
+For more information, read out the [License change statement](Statement.md), which covers our awared and responsible decision.

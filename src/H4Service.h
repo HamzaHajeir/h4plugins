@@ -1,31 +1,15 @@
-/*
- MIT License
+/* 
+MIT License
 
-Copyright (c) 2020 Phil Bowles <H48266@gmail.com>
-   github     https://github.com/philbowles/H4
-   blog       https://8266iot.blogspot.com
-   groups     https://www.facebook.com/groups/esp8266questions/
-              https://www.facebook.com/H4-Esp8266-Firmware-Support-2338535503093896/
+Copyright (c) 2026 H4Group
 
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-
+Contact Email: TBD
 */
 #pragma once
 
@@ -134,6 +118,7 @@ enum H4PE_TYPE:uint32_t {
     H4PE_BLESYNC   = 1 << 29,
     H4PE_HEARTBEAT = 0x80000000,
     H4PE_ALL       = 0xffffffff,
+    H4PE_SYSTEM    = H4PE_SYSINFO | H4PE_SYSFATAL | H4PE_SYSWARN | H4PE_BOOT | H4PE_REBOOT | H4PE_SERVICE | H4PE_MSG | H4PE_GVCHANGE, 
     H4PE_ALMOST_ALL= H4PE_ALL &~ H4PE_HEARTBEAT
 };
 

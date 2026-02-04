@@ -1,0 +1,61 @@
+name: Test Building Examples CI
+
+on:
+  push:
+    branches:
+      - '*'  # Trigger on all branches
+    paths:
+      - 'examples/*'  # Trigger on changes in the examples directory
+      - 'src/*'       # Trigger on changes in the src directory
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  run-gh-command:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout the repository
+        uses: actions/checkout@v4
+
+      - uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cache/pip
+            ~/.platformio/.cache
+          key: ${{ runner.os }}-pio
+
+      - name: Configure Git
+        run: |
+          git config --global user.name "Hamzah Hajeir"
+          git config --global user.email "HamzaHajeir@users.noreply.github.com"
+          
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'  # Specify the Python version you want to use
+
+      - name: Install required packages
+        run: |
+          pip install pandas numpy tabulate
+
+      - name: Install PlatformIO Core
+        run: pip install --upgrade platformio
+
+      - name: Set up GitHub CLI
+        run: |
+          sudo apt-get install gh
+
+        
+      - name: Set up GitHub CLI
+        run: |
+          sudo apt-get install gh
+        
+      - name: Authenticate to GitHub CLI
+        run: echo ${{ secrets.GITHUB_TOKEN }} | gh auth login --with-token
+
+      - name: Run Examples test build script
+        run: |
+          python ./tools/testbuild.py
