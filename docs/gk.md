@@ -110,7 +110,7 @@ h4pRoamingIP(const std::string& name,const IPAddress& ip);
 
 [Example Sketch 2](../examples/PRESENCE/H4P_CrowdedHouse/H4P_CrowdedHouse.ino)
 
-Two additional examples show how to link joining / leaving automatically to a default Switch / Thing object (see ["Things" and "Switches"](swings.md)) 
+Two additional examples show how to link joining / leaving automatically to a default Switch / Thing object (see ["Things" and "Switches"](things.md)) 
 
 While the [joining example](../examples/PRESENCE/H4P_PresenceDetectIP_ONOFF/H4P_PresenceDetectIP_ONOFF.ino)  and the [leaving example](../examples/PRESENCE/H4P_PresenceDetectIP_ONOFF_Inverted/H4P_PresenceDetectIP_ONOFF_Inverted.ino) are coded for `h4pRoamingIP`, the code applies equally to *any* of the Roamers.
 
