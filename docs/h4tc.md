@@ -37,9 +37,12 @@ N/A
 
 # Service Commands
 
+N/A
+<!-- 
 `stop` will disconnect from ToneController and initiate closedown of all Plugins the depend on ToneController
 `start` will connect to ToneController and initialise tone system
 
+* 'stop' and 'start' APIs were not verified or tested. -->
 ---
 
 ## API
