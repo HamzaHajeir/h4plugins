@@ -5,8 +5,11 @@
 ### Most of the above is achieved with only a few lines of code, with many features requiring on the inclusion of only a single line
 
 28/06/2021 [Release Notes v3.2.0](docs/rn300.md)
+21/11/2025 Updated documentation to attempt to reflect current v3.5.6
 
 ---
+
+**In Memoriam:** Phil Bowles, the original creator of H4Plugins, passed away. The community is deeply grateful for his innovative contributions to the ESP8266 and ESP32 ecosystem. Maintenance has been taken over by Hamza Hajeir.
 
 ## Keep Philbowles remembered by viewing and sharing his [Youtube channel (instructional videos)](https://www.youtube.com/channel/UCYi-Ko76_3p9hBUtleZRY6g)
 
@@ -25,9 +28,9 @@
 
 # Documentation caveat
 
- This a *major* release with many changes "under the hood". There are 85 example sketches which demonstrate the all the features of library. They have all been tested, so until this message is removed, they are the one definitive source for the API, as there is SO much documentation to check and fix... [ TL;DR 6000+ lines of documenation in 40 files] with quite a bit more to come.
+ This is a major release with many changes under the hood. There are 85 example sketches which demonstrate all the features of the library. They have all been tested, so until this message is removed, they are the definitive source for the API, as there is a substantial amount of documentation to check and fix—approximately 6000 lines of documentation in 40 files—with more to come.
 
- I would rather get the library "out there" with bad / missing / incorrect documentation than continue to delay the release. I am working hard to bring the documentation up to date, so until It's finished, please be patient. *This* document itself is accurate and up-to-date as at 16/05/2021
+  The library is released with incomplete documentation to avoid further delays. Documentation is being updated progressively. This document is accurate and up-to-date as of 16/05/2021.
 
 Key 
 
@@ -37,9 +40,9 @@ Key
 * :cherry_blossom: = Interesting but not 100% essential: a "sidebar article"
 * :door: = "external" - takes the reader away from the current page, perhaps even offsite
 
- If in doubt, or you can't find something, refer first to :door: [Documentation Master Index](docs/index.md). If the file doesn't have a :heavy_check_mark:, it hasnt yet been reviewed. It *may* function as a pointer to get you started, but don't trust it 100%
+  If in doubt, or you can't find something, refer first to the :door: [Documentation Master Index](docs/index.md). If the file does not have a check mark [:heavy_check_mark:], it has not yet been reviewed. It may function as a pointer to get you started, but do not trust it completely.
 
- For a bit of fun, :cherry_blossom: :door: here is the [size of the task](.VSCodeCounter/2021-05-16_12-06-30/results.md)
+  For reference, here is the [size of the task](.VSCodeCounter/2021-05-16_12-06-30/results.md)
 
 ---
 
@@ -60,13 +63,13 @@ Key
 
 # Introduction
 
-It is a simple (and unavoidable) fact of life that *successful* IOT Apps that are more than just a "blinky" require special programming techniques to do many things at once. It is also true that those techniques are complex and take a long time to learn, even for experienced programmers. H4Plugins is a method of getting you started in sophisticated IOT apps on ESP8266 / ESP32 / RP2040 without that steep learning curve. All the hard work has been done for you and you are left with a very simple event-driven framework into which you just drop the simple few lines of code that you want your app to do when "x" happens.
+ Successful IoT applications that perform multiple simultaneous functions require specialized programming techniques. These techniques are complex and time-consuming to learn, even for experienced programmers. H4Plugins provides a way to develop sophisticated IoT applications on ESP8266, ESP32, and RP2040 without the steep learning curve. The framework handles the complexity, allowing developers to focus on implementing the specific behaviors they want when events occur.
 
-More information on *why* this is the case and why event-driven programming is the solution can be found in the pre-requisite [H4](https://github.com/philbowles/H4) library.
+More information on *why* this is the case and why event-driven programming is the solution can be found in the pre-requisite [H4](https://github.com/HamzaHajeir/H4) library.
 
-Think of [H4](https://github.com/philbowles/H4) and its plugins as "IOT Lego" or an "IOT Swiss Army Knife" (or both) to get your IOT app up and running in minutes rather than weeks. If you have some basic C / C++ experience then [H4](https://github.com/philbowles/H4) and its H4Plugins are for you! Most get included with only a single line of code.
+ H4 and its plugins provide a modular framework to rapidly develop IoT applications. With basic C/C++ experience, developers can use H4 and H4Plugins effectively. Most plugins can be included with a single line of code.
 
-You will modules (and over **80** example sketches) for WiFi + OTA, Webserver, MQTT, numerous common types of GPIO handling (e.g. debouncing, rotary encoders), Amazon Alexa voice control, NTP synchronisation, device presence detection, logging to remote MySQL server and extensive diagnostics. By "plugging " together only the required modules, you can rapidly build your own custom firmware or IOT app. Everything you build will be stable and responsive, with a built-in control panel: the plugins work together to allow multiple simultaneous processes to run, so ***no more WDT resets***! As your experience grows you can extend your app / firmware with H4Plugins' well-documented* API and runtime command system.
+ The framework includes modules for WiFi, OTA updates, web server, MQTT, GPIO handling (such as debouncing and rotary encoders), Amazon Alexa voice control, NTP synchronization, device presence detection, remote logging, and diagnostics. By combining the necessary modules, developers can quickly build custom IoT firmware. The resulting applications are stable and responsive, with built-in control interfaces. The plugins enable multiple simultaneous processes without watchdog timer resets. As experience grows, applications can be extended using the well-documented API and runtime command system.
 
 (* It *will* be when it's finished :) )
 
@@ -80,9 +83,9 @@ You will modules (and over **80** example sketches) for WiFi + OTA, Webserver, M
 
 ---
 
-[H4](https://github.com/philbowles/H4) and its plugin system represent a *very* different way of getting started on ESP8266 from the "standard" examples found all over the web.
+[H4](https://github.com/HamzaHajeir/H4) and its plugin system represent a *very* different way of getting started on ESP8266 from the "standard" examples found all over the web.
 
-There are many good reasons for that but it means that there are a few things you need to know about [H4](https://github.com/philbowles/H4) and how it works before "diving in" to the H4Plugins system. Spending a few minutes reading [the basics of H4](https://github.com/philbowles/H4#why-do-i-need-it) will save you days and even weeks of effort, so please digest it all before trying some of the 80+ examples in this repo - it will be time well spent!
+There are many good reasons for that but it means that there are a few things you need to know about [H4](https://github.com/HamzaHajeir/H4) and how it works before "diving in" to the H4Plugins system. Spending a few minutes reading [the basics of H4](https://github.com/HamzaHajeir/H4#why-do-i-need-it) will save you days and even weeks of effort, so please digest it all before trying some of the 80+ examples in this repo - it will be time well spent!
 
 Once you "get" how H4 and the plugin system work, you will be able to churn out fully working, multi-functional **stable** IOT apps on ESP8266 in only a few lines of code, compared with literally *hundreds* of lines in the "standard" way of doing things. That's if you can even find anything close to what you need...
 
@@ -127,7 +130,7 @@ You can also switch the device using MQTT, HTTP, serial monitor, Alexa voice com
 
 If you hold down the uswr button for longer than 5 seconds, the device will "factory reset" and clear any saved values, such as the Auto-off timer if you have ever changed it from zero.
 
-You also get a "web console" that allows yout to control the device in the same way as if you were connected via a Serial link. On Windows, it is also visible to your PC's Network Explorer and you can control the device with the right-click menu:
+You also get a "web console" that allows you to control the device in the same way as if you were connected via a Serial link. On Windows, it is also visible to your PC's Network Explorer and you can control the device with the right-click menu:
 
 ![sonoffbasic](assets/upnp2.jpg)
 
@@ -139,11 +142,11 @@ Not bad for 7 lines of code, I think you'll agree :smile: - If you know of anyth
 
 ## Designed for programmers
 
-The modular design of H4's plugin architecture minimises scarce resources in low-memory MCU targets: You only compile in what you need by choosing the relevant bulding blocks. Detailed logging and/or diagnostics can be easily included (or completely compiled-out) and controlled at runtime via the serial console, web console, HTTP REST or MQTT depending on which options you choose. It is built on top of the very stable [H4](https://github.com/philbowles/H4) timer/scheduler which traces its ancestry back to "Esparto" - of which one user recently said: *"and now have Esparto modules with months of uptime without any issues"*.
+The modular design of H4's plugin architecture minimises scarce resources in low-memory MCU targets: You only compile in what you need by choosing the relevant bulding blocks. Detailed logging and/or diagnostics can be easily included (or completely compiled-out) and controlled at runtime via the serial console, web console, HTTP REST or MQTT depending on which options you choose. It is built on top of the very stable [H4](https://github.com/HamzaHajeir/H4) timer/scheduler which traces its ancestry back to "Esparto" - of which one user recently said: *"and now have Esparto modules with months of uptime without any issues"*.
 
 There are over 80 example sketches demonstrating all the features and the APIs of all of the plugins. They should be used both as a template for your own sketches and as a learning resource.
 
-Each plugin is also throroughly documented in the links below. *Please make sure you have read and fully understood the documentation for the [H4 library](https://github.com/philbowles/H4) and the relevant Plugin(s) before raising an issue.*
+Each plugin is also thoroughly documented in the links below. *Please make sure you have read and fully understood the documentation for the [H4 library](https://github.com/HamzaHajeir/H4) and the relevant Plugin(s) before raising an issue.*
 
 Also please prefer the [Facebook H4  Support / Discussion](https://www.facebook.com/groups/444344099599131/) group over the github issues mechanism, as I don't look at github that often, nor open my email until it backs up, but I'm on FB pretty much every day and you will get a much quicker response.
 
@@ -161,7 +164,7 @@ Also please prefer the [Facebook H4  Support / Discussion](https://www.facebook.
 
 # Installation and the "menagerie" roadmap
 
-H4Plugins sits at the top of a structure of underlying libraries with strange names, whihc we like to call "the menagerie". Each of them can be used in its own right without needing H4Plugins, but they all work best when H4Plugins pulls them all together and manages them.
+H4Plugins sits at the top of a structure of underlying libraries with strange names, which we like to call "the menagerie". Each of them can be used in its own right without needing H4Plugins, but they all work best when H4Plugins pulls them all together and manages them.
 
 SEE [Installation](#installation)
 
@@ -171,15 +174,15 @@ SEE [Installation](#installation)
 
 || Name | Provides | Notes |
 | :---: | :----------  | :--- | :--- |
-||[Forked AsyncTCP](https://github.com/philbowles/AsyncTCP)|"Glue" to LwIP (ESP32)| Important bugfixes |
-||[Forked ESPAsyncTCP](https://github.com/philbowles/ESPAsyncTCP)|"Glue" to LwIP(ESP8266)| Missing features added |
-||[Forked ESPAsyncWebserver](https://github.com/philbowles/ESPAsyncWebServer)| Basis of webUI in H4Plugins| Several major bugfixes |
-|![roadmap](assets/common/tools_icon.jpg)|[PMB Tools](https://github.com/philbowles/pmbtools)|'32/'8266 HAL and utility functions| |
-|![roadmap](assets/common/aardvark_icon.jpg)|[AardvarkTCP](https://github.com/philbowles/AardvarkTCP)|Simple Large-payload Async TCP| API-compatible with ESPAsyncTCP, seamless TLS/SSL |
-|![roadmap](assets/common/pangolin_icon.jpg)|[PangolinMQTT](https://github.com/philbowles/PangolinMQTT)|Async MQTT Client|QoS 0/1/2 Fully 3.1.1 compliant. Large payloads |
-|![roadmap](assets/common/armadillo_icon.jpg)|[ArmadilloHTTP](https://github.com/philbowles/ArmadilloHTTP)|Async HTTP/S Client| Simple send/callback of large payloads |
-|![roadmap](assets/common/h4_icon.jpg)|[H4](https://github.com/philbowles/H4)|Scheduler/Async Timers| |
-|![roadmap](assets/common/h4p_icon.jpg)|[H4/Plugins](https://github.com/philbowles/h4plugins)|Full Async IOT Firmware| Webserver, MQTT, OTA, NTP, HTTP etc etc |
+||[Forked AsyncTCP](https://github.com/HamzaHajeir/AsyncTCP)|"Glue" to LwIP (ESP32)| Important bugfixes |
+||[Forked ESPAsyncTCP](https://github.com/HamzaHajeir/ESPAsyncTCP)|"Glue" to LwIP(ESP8266)| Missing features added |
+||[Forked ESPAsyncWebserver](https://github.com/HamzaHajeir/ESPAsyncWebServer)| Basis of webUI in H4Plugins| Several major bugfixes |
+|![roadmap](assets/common/tools_icon.jpg)|[PMB Tools](https://github.com/HamzaHajeir/pmbtools)|'32/'8266 HAL and utility functions| |
+|![roadmap](assets/common/aardvark_icon.jpg)|[AardvarkTCP](https://github.com/HamzaHajeir/AardvarkTCP)|Simple Large-payload Async TCP| API-compatible with ESPAsyncTCP, seamless TLS/SSL |
+|![roadmap](assets/common/pangolin_icon.jpg)|[PangolinMQTT](https://github.com/HamzaHajeir/PangolinMQTT)|Async MQTT Client|QoS 0/1/2 Fully 3.1.1 compliant. Large payloads |
+|![roadmap](assets/common/armadillo_icon.jpg)|[ArmadilloHTTP](https://github.com/HamzaHajeir/ArmadilloHTTP)|Async HTTP/S Client| Simple send/callback of large payloads |
+|![roadmap](assets/common/h4_icon.jpg)|[H4](https://github.com/HamzaHajeir/H4)|Scheduler/Async Timers| |
+|![roadmap](assets/common/h4p_icon.jpg)|[H4/Plugins](https://github.com/HamzaHajeir/h4plugins)|Full Async IOT Firmware| Webserver, MQTT, OTA, NTP, HTTP etc etc |
 
 ![h4p install](assets/roadmaph4p.jpg)
 
@@ -216,16 +219,16 @@ See [Advanced Topics](docs/advanced.md) for how to simply add H4 optimised board
 ---
 # What next? 
 
-There is *a lot* in this library, its pre-requisite: the [H4](https://github.com/philbowles/H4) library and the rest of "the mangerie". For a start, there are over 30 individual plugins, as well as several new concepts to learn, although you will probably only use 6 or 7 of the more common / important ones for most of your apps.
+There is *a lot* in this library, its pre-requisite: the [H4](https://github.com/HamzaHajeir/H4) library and the rest of "the mangerie". For a start, there are over 30 individual plugins, as well as several new concepts to learn, although you will probably only use 6 or 7 of the more common / important ones for most of your apps.
 
 Then there are over 80 example sketches in the two libraries. That's not a typo: it's "over eighty". Every plugin and every possible API call is demonstrated at least once somewhere in that collection. Its designed to help you get up to speed quickly - use it! 90% of the time you will find the start (if not *all*) of the app you want to write.
 
 After you have finished reading this file, the recommended path you should follow for mastery of these libraries is:
 ## Step-by-step guide to mastery
 
-1. Download, install and play with [H4](https://github.com/philbowles/H4). Pick one or two of the examples and run it. There is no better way to learn that actually *doing it*
+1. Download, install and play with [H4](https://github.com/HamzaHajeir/H4). Pick one or two of the examples and run it. There is no better way to learn that actually *doing it*
 
-2. Read the [H4](https://github.com/philbowles/H4) documentation *fully*. Everything H4 does is based on using the features of [H4](https://github.com/philbowles/H4). All of the examples here use the [H4](https://github.com/philbowles/H4) API extensively. If you don't "get" [H4](https://github.com/philbowles/H4) you will certainly not be able to use H4Plugins to its best. Next, make some small changes to one or two of the examples, or be brave and write your own
+2. Read the [H4](https://github.com/HamzaHajeir/H4) documentation *fully*. Everything H4 does is based on using the features of [H4](https://github.com/HamzaHajeir/H4). All of the examples here use the [H4](https://github.com/HamzaHajeir/H4) API extensively. If you don't "get" [H4](https://github.com/HamzaHajeir/H4) you will certainly not be able to use H4Plugins to its best. Next, make some small changes to one or two of the examples, or be brave and write your own
 
 3. By this point you will have got "the feel" of event-driven programming and how *everything* is done in H4Plugins.
 
@@ -252,7 +255,7 @@ After you have finished reading this file, the recommended path you should follo
     
 11. Read the [Advanced Topics](docs/advanced.md) document for how to set up and deploy an entire self-updating cloud-free framework controlled by NODE-RED
 
-12.  At each stage above, check out the dedicated [H4Plugins Youtube channel](https://www.youtube.com/channel/UCYi-Ko76_3p9hBUtleZRY6g) to see if the relevant video has been produced yet - I'm workin as fast as I can to get a whole video library out there for you.
+12.  At each stage above, check out the dedicated [H4Plugins Youtube channel](https://www.youtube.com/channel/UCYi-Ko76_3p9hBUtleZRY6g) to see if the relevant video has been produced yet - working as fast as possible to get a whole video library out there for you.
 
 ---
 
@@ -264,8 +267,6 @@ One can get a homogeneous H4 Stack versions from the [PlatformIO H4Plugins Envir
 ## Arduino IDE
 
 Simply download the zip of this repository and install as an Arduino library: `Sketch/Include Library/Add .ZIP Library...`
-
-Soon* all H4 libraries will use the [H4 Installer](https://github.com/philbowles/h4installer). This ensures that all versions match and that other additional special functions are included e.g. Addition of optimised board definitions in H4Plugins...
 
 # Issues
 
@@ -281,7 +282,7 @@ Soon* all H4 libraries will use the [H4 Installer](https://github.com/philbowles
 
 ---
 
-(c) 2021 Phil Bowles h4plugins@gmail.com
+(c) 2025 Hamza Hajeir
 
 * [Support me on Patreon](https://patreon.com/esparto)
 * [Youtube channel (instructional videos)](https://www.youtube.com/channel/UCYi-Ko76_3p9hBUtleZRY6g)

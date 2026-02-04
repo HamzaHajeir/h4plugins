@@ -79,10 +79,10 @@ Constructor
 optional Last Will and Testament structure:
 */
 struct H4P_LWT {
-    const char*     topic;
-    const char*     payload;
-    int      QOS;
-    bool     retain;
+    std::string     topic;
+    std::string     payload;
+    int             QOS;
+    bool            retain;
 };
 //
 // user / pass optional if server requires authentication
@@ -91,17 +91,18 @@ struct H4P_LWT {
 // e.g. "http://myserver.local:1883"
 // lwt = optional Last Will and Testament for custom LWT message
 //
-H4P_AsyncMQTT(string url, string user="",string pass="",H4P_LWT lwt={"","",0,false});
+H4P_AsyncMQTT(std::string url, std::string user="",std::string pass="",H4P_LWT lwt={"","",0,false});
 //
-void addReportingItem(const string& ri); // adds global config item ri to the list of values oncluded on `report`
-void change(const string& url,const string& user,const string& passwd);
-void publishDevice(const string& topic,const string& payload,uint8_t qos=0, bool retain=false); // publish <device>/topic with string payload
-void publishDevice(const string& topic,uint32_t payload,uint8_t qos=0, bool retain=false); // publish <device>/topic with numeric payload
+void addReportingItem(const std::string& ri); // adds global config item ri to the list of values oncluded on `report`
+void change(const std::string& url,const std::string& user,const std::string& passwd);
+void publishDevice(const std::string& topic,const std::string& payload,uint8_t qos=0, H4AMC_PublishOptions opts_retain={}); // publish <device>/topic with string payload
+void publishDevice(const std::string& topic,uint32_t payload,uint8_t qos=0, H4AMC_PublishOptions opts_retain={}); // publish <device>/topic with numeric payload
 void report(); // publishes golbal config item values as JSON
-void subscribeDevice(string topic,H4_FN_MSG f,H4PC_CMD_ID root=H4PC_ROOT); // call f when <device>/topic message received
-void subscribeDevice(initializer_list<string> topic,H4_FN_MSG f,H4PC_CMD_ID root=H4PC_ROOT); // multiple topics in one call
-void unsubscribeDevice(string topic);
-void unsubscribeDevice(initializer_list<string> topic)
+void restart(); // Restart the MQTT connection
+void subscribeDevice(std::string topic,H4_FN_MSG f,H4PC_CMD_ID root=H4PC_ROOT); // call f when <device>/topic message received
+void subscribeDevice(std::initializer_list<std::string> topic,H4_FN_MSG f,H4PC_CMD_ID root=H4PC_ROOT); // multiple topics in one call
+void unsubscribeDevice(std::string topic);
+void unsubscribeDevice(std::initializer_list<std::string> topic)
 ```
 
 ## Example sketches
@@ -112,7 +113,8 @@ void unsubscribeDevice(initializer_list<string> topic)
   
 ---
 
-(c) 2021 Phil Bowles h4plugins@gmail.com
+(c) 2021 Phil Bowles
+(c) 2025 Hamza Hajeir
 
 * [Youtube channel (instructional videos)](https://www.youtube.com/channel/UCYi-Ko76_3p9hBUtleZRY6g)
 * [Facebook H4  Support / Discussion](https://www.facebook.com/groups/444344099599131/)

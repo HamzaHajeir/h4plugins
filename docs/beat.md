@@ -54,15 +54,16 @@ N/A
 H4P_Heartbeat();
 H4P_Heartbeat(size_t period); // ms at which LED_BUILTIN will be pulsed to show "online" NB ONLY ON MCU with LED_BUILTIN defined
 
-static string secsToTime(uint32_t secs; // returns human readable D HH:MM:SS of arbitray seconds value
-static string upTime(); // returns human readable D HH:MM:SS of time since boot
+static std::string secsToTime(uint32_t secs); // returns human readable D HH:MM:SS of arbitray seconds value
+static std::string upTime(); // returns human readable D HH:MM:SS of time since boot
 ```
 
 [Example code](../examples/06_WEB_UI/WebUI_InputFields/WebUI_InputFields.ino)
 
 ---
 
-(c) 2021 Phil Bowles h4plugins@gmail.com
+(c) 2021 Phil Bowles
+(c) 2025 Hamza Hajeir
 
 * [Youtube channel (instructional videos)](https://www.youtube.com/channel/UCYi-Ko76_3p9hBUtleZRY6g)
 * [Facebook H4  Support / Discussion](https://www.facebook.com/groups/444344099599131/)

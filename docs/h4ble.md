@@ -145,6 +145,7 @@ Here's the UUIDs of the main service and different UUIDs:
 Constructor
 */
 H4P_BLEServer();
+void manualInit(); // Manually initialize the BLE server if automatic initialization is disabled
 void 			elemAdd(const std::string& name,H4P_UI_TYPE t,const std::string& h,H4P_FN_UIGET f,uint8_t color); // Adds custom element with callback value, name: its id, type: H4P_UI_TYPE, h: default value, f: callback that returns std::string and takes no params std::function<std::string(void)>, color: applicable for H4P_UI_BOOL that defines a LED in UI application.
 void 			elemRemove(const std::string& name); // remove such element.
 void 			clearElems(); // Clears the elements list.

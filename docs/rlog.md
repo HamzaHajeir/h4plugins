@@ -64,16 +64,17 @@ N/A
 // e.g. "http://myserver.local:1883"
 filter; // Name of the event (or combination of events) to be written to the log
 */
-H4P_RemoteLogger(const string& url,uint32_t filter=H4PE_ALL);
+H4P_RemoteLogger(const std::string& url,uint32_t filter=H4PE_ALL);
 ```
 
 [Example Code](../examples/02_LOGGING/H4P_RemoteLogger/H4P_RemoteLogger.ino)
 
-See also [MySQL event logger](https://github.com/philbowles/mysqlrest) github repo for a NodeJS / Express demo webserver which will process the events sent by `H4P_RemoteLogger` and store them in a MySQL database
+See also [MySQL event logger](https://github.com/HamzaHajeir/mysqlrest) github repo for a NodeJS / Express demo webserver which will process the events sent by `H4P_RemoteLogger` and store them in a MySQL database
 
 ---
 
-(c) 2021 Phil Bowles h4plugins@gmail.com
+(c) 2021 Phil Bowles
+(c) 2025 Hamza Hajeir
 
 * [Youtube channel (instructional videos)](https://www.youtube.com/channel/UCYi-Ko76_3p9hBUtleZRY6g)
 * [Facebook H4  Support / Discussion](https://www.facebook.com/groups/444344099599131/)
