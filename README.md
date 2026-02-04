@@ -38,7 +38,7 @@ Key
 * :cherry_blossom: = Interesting but not 100% essential: a "sidebar article"
 * :door: = "external" - takes the reader away from the current page, perhaps even offsite
 
-  If in doubt, or you can't find something, refer first to the [Documentation Master Index](docs/index.md). If the file does not have a check mark, it has not yet been reviewed. It may function as a pointer to get you started, but do not trust it completely.
+  If in doubt, or you can't find something, refer first to the :door: [Documentation Master Index](docs/index.md). If the file does not have a check mark [:heavy_check_mark:], it has not yet been reviewed. It may function as a pointer to get you started, but do not trust it completely.
 
   For reference, here is the [size of the task](.VSCodeCounter/2021-05-16_12-06-30/results.md)
 
