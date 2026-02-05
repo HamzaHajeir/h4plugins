@@ -1,0 +1,59 @@
+Processing esp32s3 (board: esp32-s3-devkitc-1; platform: https://github.com/pioarduino/platform-espressif32/releases/download/55.03.35/platform-espressif32.zip; framework: arduino)
+--------------------------------------------------------------------------------
+Tool Manager: Installing https://github.com/pioarduino/registry/releases/download/0.0.1/esptoolpy-v5.1.0.zip
+Unpacking 0% 10% 20%
+Tool Manager: tool-esptoolpy@5.1.0 has been installed!
+Tool Manager: Installing file:///home/runner/.platformio/tools/tool-esptoolpy
+Tool Manager: tool-esptoolpy@5.1.0 has been installed!
+Verbose mode can be enabled via `-v, --verbose` option
+CONFIGURATION: https://docs.platformio.org/page/boards/espressif32/esp32-s3-devkitc-1.html
+PLATFORM: Espressif 32 (55.3.35) > Espressif ESP32-S3-DevKitC-1-N8 (8 MB QD, No PSRAM)
+HARDWARE: ESP32S3 240MHz, 320KB RAM, 8MB Flash
+DEBUG: Current (esp-builtin) On-board (esp-builtin) External (cmsis-dap, esp-bridge, esp-prog, iot-bus-jtag, jlink, minimodule, olimex-arm-usb-ocd, olimex-arm-usb-ocd-h, olimex-arm-usb-tiny-h, olimex-jtag-tiny, tumpa)
+PACKAGES: 
+ - contrib-piohome @ 3.4.4 
+ - framework-arduinoespressif32 @ 3.3.5 
+ - framework-arduinoespressif32-libs @ 5.5.0+sha.366dadf354 
+ - tool-esp-rom-elfs @ 2024.10.11 
+ - tool-esptoolpy @ 5.1.0 
+ - tool-mklittlefs @ 3.2.0 
+ - toolchain-xtensa-esp-elf @ 14.2.0+20251107
+Converting PM_13A_EncoderToCount.ino
+LDF: Library Dependency Finder -> https://bit.ly/configure-pio-ldf
+LDF Modes: Finder ~ chain, Compatibility ~ soft
+Found 50 compatible libraries
+Scanning dependencies...
+Dependency Graph
+|-- H4 @ 4.0.9+sha.6f2f510
+|-- H4Tools @ 0.0.16+sha.47ce091
+|-- H4AsyncTCP @ 0.0.25+sha.231be9d
+|-- H4AsyncMQTT @ 1.0.0-rc12+sha.9d2b784
+|-- ArmadilloHTTP @ 0.1.9+sha.ac5bf86
+|-- H4AsyncWebServer @ 0.0.13+sha.fcbce26
+|-- H4Plugins @ 3.5.7+sha.0ad6c2a
+Building in release mode
+Compiling .pio/build/esp32s3/src/PM_13A_EncoderToCount.ino.cpp.o
+In file included from /home/runner/work/h4plugins/h4plugins/build/esp32s3/src/PM_13A_EncoderToCount.ino:1:
+.pio/libdeps/esp32s3/H4Plugins/src/H4Plugins.h:6:76: note: '#pragma message: Using Wifi AP - Make sure you have made arrangements!'
+    6 |     #pragma message("Using Wifi AP - Make sure you have made arrangements!")
+      |                                                                            ^
+/home/runner/work/h4plugins/h4plugins/build/esp32s3/src/PM_13A_EncoderToCount.ino: In lambda function:
+/home/runner/work/h4plugins/h4plugins/build/esp32s3/src/PM_13A_EncoderToCount.ino:8:12: error: 'D1' was not declared in this scope; did you mean 'y1'?
+    8 |       case D1:
+      |            ^~
+      |            y1
+/home/runner/work/h4plugins/h4plugins/build/esp32s3/src/PM_13A_EncoderToCount.ino: At global scope:
+/home/runner/work/h4plugins/h4plugins/build/esp32s3/src/PM_13A_EncoderToCount.ino:27:19: error: 'D1' was not declared in this scope; did you mean 'y1'?
+   27 | h4pEncoder rotary(D1,D2,INPUT,ACTIVE_HIGH,true, new npINCREMENT{position});
+      |                   ^~
+      |                   y1
+/home/runner/work/h4plugins/h4plugins/build/esp32s3/src/PM_13A_EncoderToCount.ino:27:22: error: 'D2' was not declared in this scope; did you mean 'T2'?
+   27 | h4pEncoder rotary(D1,D2,INPUT,ACTIVE_HIGH,true, new npINCREMENT{position});
+      |                      ^~
+      |                      T2
+*** [.pio/build/esp32s3/src/PM_13A_EncoderToCount.ino.cpp.o] Error 1
+========================= [FAILED] Took 10.27 seconds =========================
+Environment    Status    Duration
+-------------  --------  ------------
+esp32s3        FAILED    00:00:10.274
+==================== 1 failed, 0 succeeded in 00:00:10.274 ====================

@@ -1,0 +1,295 @@
+Processing pico (platform: https://github.com/maxgerhardt/platform-raspberrypi.git#5b72058658ebaf98045755662bc8b28479bd288b; framework: arduino; board: rpipicow)
+--------------------------------------------------------------------------------
+Platform Manager: Installing git+https://github.com/maxgerhardt/platform-raspberrypi.git#5b72058658ebaf98045755662bc8b28479bd288b
+git version 2.52.0
+Submodule path 'builder/frameworks/arduino/mbed-core': checked out '66ff9c5ecf64e0ce6360cbf2d8769228bb1294b4'
+HEAD is now at 5b72058 Fix type issue with psram length num 2
+Submodule path 'builder/frameworks/arduino/mbed-core': checked out '66ff9c5ecf64e0ce6360cbf2d8769228bb1294b4'
+Platform Manager: raspberrypi@1.14.0+sha.5b72058 has been installed!
+Tool Manager: Installing https://github.com/earlephilhower/pico-quick-toolchain/releases/download/4.0.1/x86_64-linux-gnu.arm-none-eabi-8ec9d6f.240929.tar.gz
+Unpacking 0% 10% 20% 30% 40% 50% 60% 70% 80% 90% 100%
+Tool Manager: toolchain-rp2040-earlephilhower@5.140200.240929 has been installed!
+Tool Manager: Installing git+https://github.com/earlephilhower/arduino-pico.git#4.1.1
+git version 2.52.0
+Submodule path 'ArduinoCore-API': checked out 'ece6e68f29c6f406a4434659bcbcfe558baaa3a9'
+Submodule path 'lib/tlsf': checked out '8653cec85de043454d0e9ddb0957711f6bd14fa1'
+Submodule path 'libraries/Adafruit_TinyUSB_Arduino': checked out '446e0af7a90f5b8eefac626767607436522610e5'
+Submodule path 'libraries/AsyncUDP': checked out '9a718fb3dccb36991d8e840b9722a2371c5bb92d'
+Submodule path 'libraries/ESP8266SdFat': checked out '9e1457101ca47b9ace198086dbd8854efc573ccf'
+Submodule path 'libraries/ESPHost': checked out 'a3184ba0f97ea6cc5054804f789f0f9c6243d584'
+Submodule path 'libraries/FatFS/lib/SPIFTL': checked out 'bf7742310b422977d245833815fd46275cefdebe'
+Submodule path 'libraries/FatFS/lib/SPIFTL/nbdkit': checked out '45b72f5bd8fc1b475fa130d06c86cd877bf595d5'
+Submodule path 'libraries/FreeRTOS/lib/FreeRTOS-Kernel': checked out '2e588af95bad29aef577373512883370c9408c1c'
+Submodule path 'libraries/FreeRTOS/lib/FreeRTOS-Kernel/portable/ThirdParty/Community-Supported-Ports': checked out '9c5bad7b2f42b4e8420f12290b9bc085d3309e8b'
+Submodule path 'libraries/FreeRTOS/lib/FreeRTOS-Kernel/portable/ThirdParty/Partner-Supported-Ports': checked out 'dc3afc6e837426b4bda81bbb6cf45bfb6f34c7e9'
+Submodule path 'libraries/HID_Joystick': checked out 'be266c0252662bc74d54cc0fea9487a63aaa1806'
+Submodule path 'libraries/HID_Keyboard': checked out 'c0f474695f83d63209fe4ad73ec5d90f27cd9e64'
+Submodule path 'libraries/HID_Mouse': checked out '8bd9d96bd9aa20df2923b9db69fda7744843a143'
+Submodule path 'libraries/LittleFS/lib/littlefs': checked out 'd01280e64934a09ba16cac60cf9d3a37e228bb66'
+Submodule path 'libraries/http-parser/lib/http-parser': checked out 'ec8b5ee63f0e51191ea43bb0c6eac7bfbff3141d'
+Submodule path 'ota/uzlib': checked out '6d60d651a4499a64f2e5b21b4cc08d98cb84b5c1'
+Submodule path 'pico-sdk': checked out 'efe2103f9b28458a1615ff096054479743ade236'
+Submodule path 'pico-sdk/lib/btstack': checked out '2b49e57bd1fae85ac32ac1f41cdb7c794de335f6'
+Submodule path 'pico-sdk/lib/cyw43-driver': checked out 'faf36381bad1f668a30172b6336c9a970966ef4c'
+Submodule path 'pico-sdk/lib/lwip': checked out '0a0452b2c39bdd91e252aef045c115f88f6ca773'
+Submodule path 'pico-sdk/lib/mbedtls': checked out '5a764e5555c64337ed17444410269ff21cb617b1'
+Submodule path 'pico-sdk/lib/tinyusb': checked out '4232642899362fa5e9cf0dc59bad6f1f6d32c563'
+Submodule path 'tools/libbearssl/bearssl': checked out 'c2c9d9d08f1de656fd3f07ab950285e63d30073f'
+Submodule path 'tools/pyserial': checked out '0e7634747568547b8a7f9fd0c48ed74f16af4b23'
+Tool Manager: framework-arduinopico@1.40101.0+sha.9d17f42 has been installed!
+Tool Manager: Installing https://github.com/earlephilhower/pico-quick-toolchain/releases/download/4.0.1/x86_64-linux-gnu.picotool-8a9af99.240929.tar.gz
+Unpacking 0% 10% 20% 30% 40% 50%
+Tool Manager: tool-picotool-rp2040-earlephilhower@5.140200.240929 has been installed!
+Tool Manager: Installing platformio/tool-scons @ ~4.40801.0
+Unpacking 0% 10% 20% 30% 40% 50% 60% 70% 80% 90% 100%
+Tool Manager: tool-scons@4.40801.0 has been installed!
+Library Manager: Installing git+https://github.com/HamzaHajeir/H4#4.0.9
+git version 2.52.0
+Library Manager: H4@4.0.9+sha.6f2f510 has been installed!
+Library Manager: Installing git+https://github.com/HamzaHajeir/H4Tools#0.0.16
+git version 2.52.0
+Library Manager: H4Tools@0.0.16+sha.47ce091 has been installed!
+Library Manager: Installing git+https://github.com/HamzaHajeir/H4AsyncTCP#0.0.25
+git version 2.52.0
+Library Manager: H4AsyncTCP@0.0.25+sha.231be9d has been installed!
+Library Manager: Installing git+https://github.com/HamzaHajeir/H4AsyncMQTT#1.0.0-rc12
+git version 2.52.0
+Library Manager: H4AsyncMQTT@1.0.0-rc12+sha.9d2b784 has been installed!
+Library Manager: Resolving dependencies...
+Library Manager: Installing git+https://github.com/HamzaHajeir/ArmadilloHTTP#0.1.9
+git version 2.52.0
+Library Manager: ArmadilloHTTP@0.1.9+sha.ac5bf86 has been installed!
+Library Manager: Resolving dependencies...
+Library Manager: Installing git+https://github.com/HamzaHajeir/H4AsyncWebServer#0.0.13
+git version 2.52.0
+Library Manager: H4AsyncWebServer@0.0.13+sha.fcbce26 has been installed!
+Library Manager: Installing git+https://github.com/HamzaHajeir/h4plugins#3.5.7
+git version 2.52.0
+Library Manager: H4Plugins@3.5.7+sha.0ad6c2a has been installed!
+Library Manager: Resolving dependencies...
+Verbose mode can be enabled via `-v, --verbose` option
+CONFIGURATION: https://docs.platformio.org/page/boards/raspberrypi/rpipicow.html
+PLATFORM: Raspberry Pi RP2040 (1.14.0+sha.5b72058) > Pico W
+HARDWARE: RP2040 133MHz, 256KB RAM, 2MB Flash
+DEBUG: Current (blackmagic) External (blackmagic, cmsis-dap, jlink, picoprobe, raspberrypi-swd)
+PACKAGES: 
+ - framework-arduinopico @ 1.40101.0+sha.9d17f42 
+ - tool-picotool-rp2040-earlephilhower @ 5.140200.240929 (14.2.0) 
+ - toolchain-rp2040-earlephilhower @ 5.140200.240929 (14.2.0)
+Converting H4P_Simple_Tones.ino
+Flash size: 2.00MB
+Sketch size: 1.50MB
+Filesystem size: 0.50MB
+PSRAM size: 0.00MB
+Maximium Sketch size: 1568768 EEPROM start: 0x101ff000 Filesystem start: 0x1017f000 Filesystem end: 0x101ff000
+LDF: Library Dependency Finder -> https://bit.ly/configure-pio-ldf
+LDF Modes: Finder ~ deep+, Compatibility ~ soft
+Found 72 compatible libraries
+Scanning dependencies...
+Dependency Graph
+|-- H4 @ 4.0.9+sha.6f2f510
+|-- H4Tools @ 0.0.16+sha.47ce091
+|-- H4AsyncTCP @ 0.0.25+sha.231be9d
+|-- H4AsyncMQTT @ 1.0.0-rc12+sha.9d2b784
+|-- ArmadilloHTTP @ 0.1.9+sha.ac5bf86
+|-- H4AsyncWebServer @ 0.0.13+sha.fcbce26
+|-- H4Plugins @ 3.5.7+sha.0ad6c2a
+|-- LittleFS @ 0.1.0
+|-- WiFi @ 1.0.0
+|-- lwIP_CYW43 @ 1
+|-- lwIP-Ethernet @ 1
+|-- SPI @ 1.0
+|-- Updater @ 1.0
+|-- MD5Builder @ 1.0.0
+|-- LEAmDNS @ 1.2
+|-- DNSServer @ 1.1.1
+|-- ArduinoOTA @ 1.0
+|-- HTTPUpdate @ 1.3
+|-- HTTPClient @ 1.2
+Building in release mode
+Compiling .pio/build/pico/FrameworkArduinoVariant/picow_digital.cpp.o
+Compiling .pio/build/pico/FrameworkArduinoVariant/picow_init.cpp.o
+Compiling .pio/build/pico/FrameworkArduinoBootloader/boot2_w25q080_2_padded_checksum.S.o
+Compiling .pio/build/pico/src/H4P_Simple_Tones.ino.cpp.o
+Generating linkerscript /home/runner/work/h4plugins/h4plugins/build/pico/.pio/build/pico/memmap_default.ld
+Compiling .pio/build/pico/libf18/H4/H4.cpp.o
+Compiling .pio/build/pico/lib349/LittleFS/LittleFS.cpp.o
+Compiling .pio/build/pico/lib349/LittleFS/lfs.c.o
+Compiling .pio/build/pico/lib349/LittleFS/lfs_util.c.o
+Compiling .pio/build/pico/libbc7/MD5Builder/MD5Builder.cpp.o
+Archiving .pio/build/pico/libf18/libH4.a
+Indexing .pio/build/pico/libf18/libH4.a
+Archiving .pio/build/pico/lib349/libLittleFS.a
+Indexing .pio/build/pico/lib349/libLittleFS.a
+Compiling .pio/build/pico/lib897/PicoOTA/PicoOTA.cpp.o
+Compiling .pio/build/pico/lib5f5/Updater/Updater.cpp.o
+Cloning into '/home/runner/.platformio/.cache/tmp/pkg-installing-o07286uj'...
+Submodule 'builder/frameworks/arduino/mbed-core' (https://github.com/platformio/builder-framework-arduino-core-mbed.git) registered for path 'builder/frameworks/arduino/mbed-core'
+Cloning into '/home/runner/.platformio/.cache/tmp/pkg-installing-o07286uj/builder/frameworks/arduino/mbed-core'...
+Cloning into '/home/runner/.platformio/.cache/tmp/pkg-installing-3jgmz5om'...
+Note: switching to '9d17f42a35d2f670968c1636059b3e343e7e334c'.
+You are in 'detached HEAD' state. You can look around, make experimental
+changes and commit them, and you can discard any commits you make in this
+state without impacting any branches by switching back to a branch.
+If you want to create a new branch to retain commits you create, you may
+do so (now or later) by using -c with the switch command. Example:
+  git switch -c <new-branch-name>
+Or undo this operation with:
+  git switch -
+Turn off this advice by setting config variable advice.detachedHead to false
+Submodule 'ArduinoCore-API' (https://github.com/earlephilhower/ArduinoCore-API.git) registered for path 'ArduinoCore-API'
+Submodule 'cores/rp2040/tlsf' (https://github.com/earlephilhower/tlsf.git) registered for path 'lib/tlsf'
+Submodule 'libraries/Adafruit_TinyUSB_Arduino' (https://github.com/adafruit/Adafruit_TinyUSB_Arduino.git) registered for path 'libraries/Adafruit_TinyUSB_Arduino'
+Submodule 'libraries/AsyncUDP' (https://github.com/earlephilhower/AsyncUDP.git) registered for path 'libraries/AsyncUDP'
+Submodule 'libraries/SdFat' (https://github.com/earlephilhower/ESP8266SdFat.git) registered for path 'libraries/ESP8266SdFat'
+Submodule 'libraries/ESPHost' (https://github.com/Networking-for-Arduino/ESPHost.git) registered for path 'libraries/ESPHost'
+Submodule 'libraries/FatFS/lib/SPIFTL' (https://github.com/earlephilhower/SPIFTL.git) registered for path 'libraries/FatFS/lib/SPIFTL'
+Submodule 'libraries/FreeRTOS/lib/FreeRTOS-Kernel' (https://github.com/earlephilhower/FreeRTOS-Kernel.git) registered for path 'libraries/FreeRTOS/lib/FreeRTOS-Kernel'
+Submodule 'libraries/Joystick' (https://github.com/earlephilhower/Joystick.git) registered for path 'libraries/HID_Joystick'
+Submodule 'libraries/Keyboard' (https://github.com/earlephilhower/Keyboard.git) registered for path 'libraries/HID_Keyboard'
+Submodule 'libraries/Mouse' (https://github.com/earlephilhower/Mouse.git) registered for path 'libraries/HID_Mouse'
+Submodule 'libraries/LittleFS/lib/littlefs' (https://github.com/littlefs-project/littlefs.git) registered for path 'libraries/LittleFS/lib/littlefs'
+Submodule 'libraries/http_parser/lib/http-parser' (https://github.com/nodejs/http-parser.git) registered for path 'libraries/http-parser/lib/http-parser'
+Submodule 'ota/uzlib' (https://github.com/pfalcon/uzlib.git) registered for path 'ota/uzlib'
+Submodule 'pico-sdk' (https://github.com/raspberrypi/pico-sdk.git) registered for path 'pico-sdk'
+Submodule 'tools/libbearssl/bearssl' (https://github.com/earlephilhower/bearssl-esp8266.git) registered for path 'tools/libbearssl/bearssl'
+Submodule 'system/pyserial' (https://github.com/pyserial/pyserial.git) registered for path 'tools/pyserial'
+Cloning into '/home/runner/.platformio/.cache/tmp/pkg-installing-3jgmz5om/ArduinoCore-API'...
+Cloning into '/home/runner/.platformio/.cache/tmp/pkg-installing-3jgmz5om/lib/tlsf'...
+Cloning into '/home/runner/.platformio/.cache/tmp/pkg-installing-3jgmz5om/libraries/Adafruit_TinyUSB_Arduino'...
+Cloning into '/home/runner/.platformio/.cache/tmp/pkg-installing-3jgmz5om/libraries/AsyncUDP'...
+Cloning into '/home/runner/.platformio/.cache/tmp/pkg-installing-3jgmz5om/libraries/ESP8266SdFat'...
+Cloning into '/home/runner/.platformio/.cache/tmp/pkg-installing-3jgmz5om/libraries/ESPHost'...
+Cloning into '/home/runner/.platformio/.cache/tmp/pkg-installing-3jgmz5om/libraries/FatFS/lib/SPIFTL'...
+Cloning into '/home/runner/.platformio/.cache/tmp/pkg-installing-3jgmz5om/libraries/FreeRTOS/lib/FreeRTOS-Kernel'...
+Cloning into '/home/runner/.platformio/.cache/tmp/pkg-installing-3jgmz5om/libraries/HID_Joystick'...
+Cloning into '/home/runner/.platformio/.cache/tmp/pkg-installing-3jgmz5om/libraries/HID_Keyboard'...
+Cloning into '/home/runner/.platformio/.cache/tmp/pkg-installing-3jgmz5om/libraries/HID_Mouse'...
+Cloning into '/home/runner/.platformio/.cache/tmp/pkg-installing-3jgmz5om/libraries/LittleFS/lib/littlefs'...
+Cloning into '/home/runner/.platformio/.cache/tmp/pkg-installing-3jgmz5om/libraries/http-parser/lib/http-parser'...
+Cloning into '/home/runner/.platformio/.cache/tmp/pkg-installing-3jgmz5om/ota/uzlib'...
+Cloning into '/home/runner/.platformio/.cache/tmp/pkg-installing-3jgmz5om/pico-sdk'...
+Cloning into '/home/runner/.platformio/.cache/tmp/pkg-installing-3jgmz5om/tools/libbearssl/bearssl'...
+Cloning into '/home/runner/.platformio/.cache/tmp/pkg-installing-3jgmz5om/tools/pyserial'...
+From https://github.com/earlephilhower/ArduinoCore-API
+ * branch            ece6e68f29c6f406a4434659bcbcfe558baaa3a9 -> FETCH_HEAD
+Submodule 'nbdkit' (https://github.com/libguestfs/nbdkit.git) registered for path 'libraries/FatFS/lib/SPIFTL/nbdkit'
+Cloning into '/home/runner/.platformio/.cache/tmp/pkg-installing-3jgmz5om/libraries/FatFS/lib/SPIFTL/nbdkit'...
+From https://github.com/earlephilhower/FreeRTOS-Kernel
+ * branch                2e588af95bad29aef577373512883370c9408c1c -> FETCH_HEAD
+Submodule 'ThirdParty/FreeRTOS-Kernel-Community-Supported-Ports' (https://github.com/FreeRTOS/FreeRTOS-Kernel-Community-Supported-Ports) registered for path 'libraries/FreeRTOS/lib/FreeRTOS-Kernel/portable/ThirdParty/Community-Supported-Ports'
+Submodule 'ThirdParty/FreeRTOS-Kernel-Partner-Supported-Ports' (https://github.com/FreeRTOS/FreeRTOS-Kernel-Partner-Supported-Ports) registered for path 'libraries/FreeRTOS/lib/FreeRTOS-Kernel/portable/ThirdParty/Partner-Supported-Ports'
+Cloning into '/home/runner/.platformio/.cache/tmp/pkg-installing-3jgmz5om/libraries/FreeRTOS/lib/FreeRTOS-Kernel/portable/ThirdParty/Community-Supported-Ports'...
+Cloning into '/home/runner/.platformio/.cache/tmp/pkg-installing-3jgmz5om/libraries/FreeRTOS/lib/FreeRTOS-Kernel/portable/ThirdParty/Partner-Supported-Ports'...
+From https://github.com/earlephilhower/Joystick
+ * branch            be266c0252662bc74d54cc0fea9487a63aaa1806 -> FETCH_HEAD
+Submodule 'lib/btstack' (https://github.com/bluekitchen/btstack.git) registered for path 'pico-sdk/lib/btstack'
+Submodule 'lib/cyw43-driver' (https://github.com/georgerobotics/cyw43-driver.git) registered for path 'pico-sdk/lib/cyw43-driver'
+Submodule 'lib/lwip' (https://github.com/lwip-tcpip/lwip.git) registered for path 'pico-sdk/lib/lwip'
+Submodule 'lib/mbedtls' (https://github.com/Mbed-TLS/mbedtls.git) registered for path 'pico-sdk/lib/mbedtls'
+Submodule 'tinyusb' (https://github.com/hathach/tinyusb.git) registered for path 'pico-sdk/lib/tinyusb'
+Cloning into '/home/runner/.platformio/.cache/tmp/pkg-installing-3jgmz5om/pico-sdk/lib/btstack'...
+Cloning into '/home/runner/.platformio/.cache/tmp/pkg-installing-3jgmz5om/pico-sdk/lib/cyw43-driver'...
+Cloning into '/home/runner/.platformio/.cache/tmp/pkg-installing-3jgmz5om/pico-sdk/lib/lwip'...
+Cloning into '/home/runner/.platformio/.cache/tmp/pkg-installing-3jgmz5om/pico-sdk/lib/mbedtls'...
+Cloning into '/home/runner/.platformio/.cache/tmp/pkg-installing-3jgmz5om/pico-sdk/lib/tinyusb'...
+From https://github.com/Mbed-TLS/mbedtls
+ * branch                5a764e5555c64337ed17444410269ff21cb617b1 -> FETCH_HEAD
+Cloning into '/home/runner/.platformio/.cache/tmp/pkg-installing-ob9agm6l'...
+warning: refs/tags/4.0.9 cf8b6f15d2ae6574248609ad9a42dd919b8bc1c7 is not a commit!
+Note: switching to '6f2f5105138d74b820570c454306a2f77b6d2277'.
+You are in 'detached HEAD' state. You can look around, make experimental
+changes and commit them, and you can discard any commits you make in this
+state without impacting any branches by switching back to a branch.
+If you want to create a new branch to retain commits you create, you may
+do so (now or later) by using -c with the switch command. Example:
+  git switch -c <new-branch-name>
+Or undo this operation with:
+  git switch -
+Turn off this advice by setting config variable advice.detachedHead to false
+Cloning into '/home/runner/.platformio/.cache/tmp/pkg-installing-31rvw46v'...
+warning: refs/tags/0.0.16 13872a03a59a05b0462818899db5b374ad9db3b2 is not a commit!
+Note: switching to '47ce091ad47ea79a838c34a7abaee46278f5cb4d'.
+You are in 'detached HEAD' state. You can look around, make experimental
+changes and commit them, and you can discard any commits you make in this
+state without impacting any branches by switching back to a branch.
+If you want to create a new branch to retain commits you create, you may
+do so (now or later) by using -c with the switch command. Example:
+  git switch -c <new-branch-name>
+Or undo this operation with:
+  git switch -
+Turn off this advice by setting config variable advice.detachedHead to false
+Cloning into '/home/runner/.platformio/.cache/tmp/pkg-installing-p55n4yzj'...
+warning: refs/tags/0.0.25 e48ef7888ffda0c55cd81d135320844940def4b2 is not a commit!
+Note: switching to '231be9deaf91e506941ea3fa9f33089813869ddf'.
+You are in 'detached HEAD' state. You can look around, make experimental
+changes and commit them, and you can discard any commits you make in this
+state without impacting any branches by switching back to a branch.
+If you want to create a new branch to retain commits you create, you may
+do so (now or later) by using -c with the switch command. Example:
+  git switch -c <new-branch-name>
+Or undo this operation with:
+  git switch -
+Turn off this advice by setting config variable advice.detachedHead to false
+Cloning into '/home/runner/.platformio/.cache/tmp/pkg-installing-5tosivqc'...
+warning: refs/tags/1.0.0-rc12 4903eed4b73117310b85c81d3e43aac430242301 is not a commit!
+Note: switching to '9d2b7846cef22bb097fde379984f7d5dda6c282e'.
+You are in 'detached HEAD' state. You can look around, make experimental
+changes and commit them, and you can discard any commits you make in this
+state without impacting any branches by switching back to a branch.
+If you want to create a new branch to retain commits you create, you may
+do so (now or later) by using -c with the switch command. Example:
+  git switch -c <new-branch-name>
+Or undo this operation with:
+  git switch -
+Turn off this advice by setting config variable advice.detachedHead to false
+Cloning into '/home/runner/.platformio/.cache/tmp/pkg-installing-w964nnkl'...
+warning: refs/tags/0.1.9 de0d5f3ddcd5e52b63d11f8805a078bd9aad188a is not a commit!
+Note: switching to 'ac5bf862a0ee829aa20ccf2b5c23c42d53092fcf'.
+You are in 'detached HEAD' state. You can look around, make experimental
+changes and commit them, and you can discard any commits you make in this
+state without impacting any branches by switching back to a branch.
+If you want to create a new branch to retain commits you create, you may
+do so (now or later) by using -c with the switch command. Example:
+  git switch -c <new-branch-name>
+Or undo this operation with:
+  git switch -
+Turn off this advice by setting config variable advice.detachedHead to false
+Cloning into '/home/runner/.platformio/.cache/tmp/pkg-installing-lv5gdxgk'...
+warning: refs/tags/0.0.13 9acc83478fc9d3c2e074d8f977215ac0d841a85b is not a commit!
+Note: switching to 'fcbce268eb16a1ede1cd303b5d63bb4136281501'.
+You are in 'detached HEAD' state. You can look around, make experimental
+changes and commit them, and you can discard any commits you make in this
+state without impacting any branches by switching back to a branch.
+If you want to create a new branch to retain commits you create, you may
+do so (now or later) by using -c with the switch command. Example:
+  git switch -c <new-branch-name>
+Or undo this operation with:
+  git switch -
+Turn off this advice by setting config variable advice.detachedHead to false
+Cloning into '/home/runner/.platformio/.cache/tmp/pkg-installing-9uvfo1bz'...
+warning: refs/tags/3.5.7 6229dcc2ee73817f04f835056d627d7dee73050b is not a commit!
+Note: switching to '0ad6c2a4abb69389bd90c5f0c61791284c531d26'.
+You are in 'detached HEAD' state. You can look around, make experimental
+changes and commit them, and you can discard any commits you make in this
+state without impacting any branches by switching back to a branch.
+If you want to create a new branch to retain commits you create, you may
+do so (now or later) by using -c with the switch command. Example:
+  git switch -c <new-branch-name>
+Or undo this operation with:
+  git switch -
+Turn off this advice by setting config variable advice.detachedHead to false
+In file included from /home/runner/work/h4plugins/h4plugins/build/pico/src/H4P_Simple_Tones.ino:1:
+.pio/libdeps/pico/H4Plugins/src/H4Plugins.h:6:76: note: '#pragma message: Using Wifi AP - Make sure you have made arrangements!'
+    6 |     #pragma message("Using Wifi AP - Make sure you have made arrangements!")
+      |                                                                            ^
+/home/runner/work/h4plugins/h4plugins/build/pico/src/H4P_Simple_Tones.ino: In lambda function:
+/home/runner/work/h4plugins/h4plugins/build/pico/src/H4P_Simple_Tones.ino:32:15: error: 'class H4P_Voice' has no member named 'chromaticRun'
+   32 |           vox.chromaticRun("GN2","BN7",'d'); // whole range
+      |               ^~~~~~~~~~~~
+*** [.pio/build/pico/src/H4P_Simple_Tones.ino.cpp.o] Error 1
+========================= [FAILED] Took 66.79 seconds =========================
+Environment    Status    Duration
+-------------  --------  ------------
+pico           FAILED    00:01:06.791
+==================== 1 failed, 0 succeeded in 00:01:06.791 ====================
