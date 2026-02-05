@@ -24,7 +24,7 @@ When in AP mode:
 
 - The device creates a WiFi access point named after the device (default: `"H4"`)
 - IP address: `192.168.4.1`
-- A DNS server redirects all requests to the device's web interface
+- A DNS server redirects all requests to the device's web interface <!-- [ ] Does it really do that? -->
 - The web UI provides configuration fields for:
   - WiFi SSID selection (scanned networks)
   - WiFi password
@@ -53,7 +53,7 @@ You can force AP mode programmatically:
 h4p.gvSetString(ssidTag(), "H4");
 
 // Or use the factory reset command
-h4.once(0, [](){ h4psysevent("factory"); });
+h4.queueFunction([](){ h4psysevent("factory"); });
 ```
 
 ## Security Notes
@@ -80,12 +80,7 @@ void h4setup() {
 
 ---
 
-(c) 2021 Phil Bowles
-(c) 2025 Hamza Hajeir
+(c) 2026 H4Group
 
 * [Youtube channel (instructional videos)](https://www.youtube.com/channel/UCYi-Ko76_3p9hBUtleZRY6g)
-* [Facebook H4  Support / Discussion](https://www.facebook.com/groups/444344099599131/)
 * [Facebook General ESP8266 / ESP32](https://www.facebook.com/groups/2125820374390340/)
-* [Facebook ESP8266 Programming Questions](https://www.facebook.com/groups/esp8266questions/)
-* [Facebook ESP Developers (moderator)](https://www.facebook.com/groups/ESP8266/)
-* [Support me on Patreon](https://patreon.com/esparto)
