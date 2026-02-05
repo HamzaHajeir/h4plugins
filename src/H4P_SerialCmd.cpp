@@ -34,7 +34,7 @@ H4P_SerialCmd::H4P_SerialCmd(bool autoStop): H4Service(cmdTag(),H4PE_FACTORY | H
     h4p.gvSetstring(h4pTag(),H4P_VERSION);
 
     _addLocals({
-#if SANITY
+#if H4P_SANITY
         {"sanity",     { 0,         0, CMD(h4pInventory) }},
 #endif
         {h4Tag(),      { 0,         H4PC_H4, nullptr}},

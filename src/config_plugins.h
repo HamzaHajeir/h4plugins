@@ -71,11 +71,25 @@ Contact Email: TBD
 
         H4P_UI_HEALTH = 1 adds Heap,Q,nLoops to UI when using heartbeat
 */
-#define SANITY                  1
+#ifndef H4P_SANITY
+#define H4P_SANITY                  1
+#endif
+
+#ifndef H4P_LOG_MESSAGES
 #define H4P_LOG_MESSAGES        0
+#endif
+
+#ifndef H4P_SYS_LEVEL
 #define H4P_SYS_LEVEL           0
+#endif
+
+#ifndef H4P_UI_HEALTH
 #define H4P_UI_HEALTH           0
+#endif
+
+#ifndef H4P_DEBUG
 #define H4P_DEBUG               0
+#endif
 
 /*
         HARDWARE ASSUMPTIONS

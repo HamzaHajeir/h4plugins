@@ -223,7 +223,7 @@ def push_report(run_count):
     subprocess.run(f"git add {TESTS_DIR}", shell=True, check=True)
     subprocess.run(f"git add {os.path.join(BUILD_DIR, '**', '*.log')}", shell=True, check=True)
     
-    commit_message = f"Add build report #{run_count}"
+    commit_message = f"Add build report # {run_count}"
     subprocess.run(f"git commit -m \"{commit_message}\"", shell=True, check=True)
     
     try:
@@ -243,6 +243,7 @@ def create_pull_request(body_path, run_id):
 
 def create_result_entry(example_path, env, build_result, log_file):
     """Create a result entry based on the build outcome, using environment as the column name."""
+    print(f"Example path [{example_path}]\t After Trimming [{trim_outer_directory(example_path)}]")
     base_entry = {
         'Example': trim_outer_directory(example_path)
     }

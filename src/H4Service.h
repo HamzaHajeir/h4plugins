@@ -160,7 +160,7 @@ void h4punregisterhandler(const std::string& svc,uint32_t t);
 void h4pevent(const std::string& svc,H4PE_TYPE t,const std::string& msg="");
 void h4pOnEvent(H4PE_TYPE t,H4P_FN_USEREVENT f);
 
-#if SANITY
+#if H4P_SANITY
 void h4pInventory();
 #endif
 

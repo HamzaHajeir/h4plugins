@@ -67,7 +67,7 @@ std::string getTerminalName(const std::string& s) {
 }
 #endif
 
-#if SANITY
+#if H4P_SANITY
 #include<H4P_PinMachine.h>
 #include<H4P_GateKeeper.h>
 
@@ -114,7 +114,7 @@ void h4StartPlugins(){
     reverse(h4pevt[H4PE_REBOOT].begin(),h4pevt[H4PE_REBOOT].end());
     reverse(h4pevt[H4PE_FACTORY].begin(),h4pevt[H4PE_FACTORY].end());
 //
-#if SANITY
+#if H4P_SANITY
     for(auto const& s:h4pmap){
         auto ps=s.second;
         if(!ps->_running){
@@ -163,7 +163,7 @@ void h4pbleSync(const std::string& n,const std::string& v){ h4psysevent(n,H4PE_B
 /*
 TESTERS / DIAG
 */
-#if SANITY
+#if H4P_SANITY
 void h4pInventory(){
     for(auto et:h4pevt){
         _H4P_PRINTF("%s [0x%08x] Listeners:\n",CSTR(h4pGetEventName(static_cast<H4PE_TYPE>(et.first))),et.first);
