@@ -1,3 +1,6 @@
+/* To run this example:
+    In config_plugins.h: Define H4P_USE_WIFI_AP=0
+ */
 #include<H4Plugins.h>
 H4_USE_PLUGINS(115200,H4_Q_CAPACITY,false) // Serial baud rate, Q size, SerialCmd autostop
 //
@@ -41,7 +44,7 @@ uint32_t myCallback(std::vector<std::string> vs){
     Serial.printf("Wildcard handler suit is %s, card is %s\n",(CSTR(suit)),CSTR(vs.back()));
     if(suit=="hearts" || suit=="clubs" || suit=="diamonds" || suit=="spades"){
       Serial.printf("You chose the %s of %s\n",CSTR(vs.back()),CSTR(suit));
-      h4mqtt.publishDevice("dealt",CSTR(string(vs.back()+" of "+suit)));
+      h4mqtt.publishDevice("dealt",CSTR(std::string(vs.back()+" of "+suit)));
       return H4_CMD_OK;
     } 
     else {

@@ -1,6 +1,7 @@
 #include <Arduino.h>
 #include <H4Plugins.h>
 H4_USE_PLUGINS(115200, H4_Q_CAPACITY, false) // Serial baud rate, Q size, SerialCmd autostop
+#ifdef ESP32
 
 H4P_BLEClient h4bleclient;
 
@@ -64,3 +65,5 @@ void h4setup()
 	h4bleclient.setCallbacks(onConnect, onDisconnect);
 	h4.queueFunction([]{h4bleclient.start();});
 }
+
+#endif

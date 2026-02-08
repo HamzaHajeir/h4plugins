@@ -1,7 +1,5 @@
 #include<H4Plugins.h>
 H4_USE_PLUGINS(115200,H4_Q_CAPACITY,false) // Serial baud rate, larger Q size for scheduling, SerialCmd autostop
-#define TREBLE  D8
-#define BASS    D7
 #ifdef ARDUINO_ARCH_ESP32
   #define TREBLE    27
   #define BASS      26

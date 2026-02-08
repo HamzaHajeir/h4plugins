@@ -13,8 +13,6 @@ Contact Email: TBD
 */
 #pragma once
 
-#ifdef ARDUINO_ARCH_ESP8266
-
 #include<H4Service.h>
 #include<H4P_WiFi.h>
 
@@ -119,5 +117,3 @@ class h4pRoamingH4: public h4pRoamingUPNP{
         virtual std::string  _describe(){ return std::string(_name)+" "+_type()+" "+_ip.data(); } 
         virtual std::string _type() override { return uppercase(h4Tag()); }
 };
-
-#endif

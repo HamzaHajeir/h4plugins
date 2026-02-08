@@ -1,6 +1,12 @@
 #include<H4Plugins.h>
 H4_USE_PLUGINS(115200,H4_Q_CAPACITY,false);
 
+#ifdef ESP32
+#define D6 16
+#define D7 17
+#define D8 18
+#endif
+
 H4P_PinMachine pm;
 // INPUT
 h4pTactless stab(0,INPUT_PULLUP,ACTIVE_LOW,20);

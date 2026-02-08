@@ -2,7 +2,7 @@
 #include <H4Plugins.h>
 H4_USE_PLUGINS(115200, H4_Q_CAPACITY, false) // Serial baud rate, Q size, SerialCmd autostop
 //
-
+#ifdef ESP32
 H4P_SerialLogger h4sl;
 H4P_PinMachine h4gm;
 H4P_BLEServer h4ble;
@@ -44,3 +44,5 @@ void h4pGlobalEventHandler(const std::string& svc,H4PE_TYPE t,const std::string&
 void h4setup()
 {
 }
+
+#endif

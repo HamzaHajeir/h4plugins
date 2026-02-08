@@ -1,3 +1,6 @@
+/* To run this example:
+    In config_plugins.h: Define H4P_USE_WIFI_AP=0
+ */
 #include<H4Plugins.h>
 H4_USE_PLUGINS(115200,H4_Q_CAPACITY,false) // Serial baud rate, Q size, SerialCmd autostop
 
@@ -26,10 +29,16 @@ H4_USE_PLUGINS(115200,H4_Q_CAPACITY,false) // Serial baud rate, Q size, SerialCm
  *    and define active HIGH
  */
 #define BUTTON_BUILTIN  0
- 
+
+#ifdef ESP32
+#define RED_LIGHT    4
+#define AMBER_LIGHT  15
+#define GREEN_LIGHT  16
+#else
 #define RED_LIGHT    D6
 #define AMBER_LIGHT  D7
 #define GREEN_LIGHT  D8
+#endif
 
 H4P_PinMachine pm;
 

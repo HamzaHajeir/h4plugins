@@ -1,5 +1,16 @@
+/* To run this example:
+    In config_plugins.h: Define H4P_USE_WIFI_AP=0
+ */
 #include<H4Plugins.h>
 H4_USE_PLUGINS(115200,H4_Q_CAPACITY,false);
+
+#ifdef ESP32
+#define D1 4
+#define D2 16
+#define D6 16
+#define D7 17
+#define D8 18
+#endif
 
 H4_TIMER pulsar=nullptr;
 H4P_PinMachine pm;

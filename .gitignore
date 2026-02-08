@@ -2,3 +2,5 @@
 **/.pio
 **/build/*/src/*
 **/build/*/platformio.ini
+temp
+tools/__pycache__

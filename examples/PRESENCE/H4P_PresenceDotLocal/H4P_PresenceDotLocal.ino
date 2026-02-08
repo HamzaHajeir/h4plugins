@@ -1,6 +1,13 @@
+/* To run this example:
+    In config_plugins.h: Define H4P_USE_WIFI_AP=0
+ */
 #define H4P_VERBOSE 1
 #include<H4Plugins.h>
 H4_USE_PLUGINS(115200,H4_Q_CAPACITY,false) // Serial baud rate, Q size, SerialCmd autostop
+
+#ifdef ESP32
+#define D6 16
+#endif
 
 h4pRoamingDotLocal dot("H3","smb","tcp"); // my satellite TV receiver
 h4pRoamingDotLocal box("box","http","tcp"); // my main pc

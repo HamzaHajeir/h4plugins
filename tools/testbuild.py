@@ -1,3 +1,4 @@
+import sys
 import os
 import subprocess
 import pandas as pd
@@ -6,7 +7,10 @@ import shutil
 import numpy as np
 
 # Constants
-DEFAULT_CONFIG = 'platformio.ini'
+CONFIG_FILENAME = 'platformio.ini'
+DEFAULT_CONFIG = CONFIG_FILENAME
+OVERLAY_FILENAME = 'overlay.ini'
+TEMP_DIR = 'temp'
 BUILD_DIR = 'build'
 ASSISTANT_BUILD_DIR = 'extra-build-dir'
 EXAMPLES_DIR = './examples'
@@ -21,6 +25,16 @@ os.makedirs(BUILD_DIR, exist_ok=True)
 DEFAULT_ENVIRONMENTS = []
 
 from urllib.parse import quote
+
+# Add merger to path
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+
+try:
+    from platformio_merger import merge_files
+except ImportError:
+    print("Error: Please ensure platformio_merger.py is in the same directory")
+    sys.exit(1)
+    
 
 def convert_os_path_to_url(os_path):
     # Replace backslashes with forward slashes
@@ -66,7 +80,7 @@ def create_environment_directories():
     os.makedirs(src_dir, exist_ok=True)
     print(f"Created PIO environment for extra builders in {assistant_build_dir}")
     
-def copy_example_to_env(example_path,env):
+def copy_example_to_env(example_path,env,config_file):
     # Define the src directory based on the environment
     build_dir = os.path.join(BUILD_DIR, env)
     src_dir = os.path.join(BUILD_DIR, env, 'src')
@@ -81,10 +95,12 @@ def copy_example_to_env(example_path,env):
     # Copy the example files to the src directory
     shutil.copytree(example_path, src_dir, dirs_exist_ok=True)  # Use dirs_exist_ok=True for Python 3.8+
 
+    shutil.copy2(config_file, os.path.join(build_dir, CONFIG_FILENAME))
+
     print(f"Copied example source files to {src_dir}")
     return build_dir
 
-def copy_example_to_extra_build(example_path):
+def copy_example_to_extra_build(example_path,config_file):
     # Define the src directory based on the environment
     build_dir = os.path.join(BUILD_DIR, ASSISTANT_BUILD_DIR)
     src_dir = os.path.join(BUILD_DIR, ASSISTANT_BUILD_DIR, 'src')
@@ -99,10 +115,10 @@ def copy_example_to_extra_build(example_path):
     # Copy the example files to the src directory
     shutil.copytree(example_path, src_dir, dirs_exist_ok=True)  # Use dirs_exist_ok=True for Python 3.8+
 
-    config_path = os.path.join(build_dir, 'platformio.ini')
+    config_path = os.path.join(build_dir, CONFIG_FILENAME)
     if os.path.exists(config_path):
         os.remove(config_path)
-    shutil.copy(os.path.join(example_path,"platformio.ini"), config_path)
+    shutil.copy(config_file, config_path)
 
     print(f"Copied example files to {build_dir}")
     return build_dir
@@ -137,9 +153,25 @@ def trim_outer_directory(example_path):
 
 def get_configuration_file(example_path):
     """Identify the appropriate configuration file for a given example path."""
-    config_file = os.path.join(example_path, DEFAULT_CONFIG)
+    config_file = os.path.join(example_path, CONFIG_FILENAME)
+    overlay_file = os.path.join(example_path, OVERLAY_FILENAME)
     if os.path.isfile(config_file):
         return config_file
+    
+    if os.path.isfile(overlay_file):
+        os.makedirs(TEMP_DIR, exist_ok=True)
+        merged_file = os.path.join(TEMP_DIR,CONFIG_FILENAME)
+        try:
+            success = merge_files(DEFAULT_CONFIG, overlay_file, merged_file, verbose=True)
+            if success:
+                print("Configuration merged successfully!")
+                return merged_file
+            else:
+                print("Merge failed - check input files")
+        except Exception as e:
+            print(f"Error during merge: {e}")
+        print(f"Will use the default config file")
+
     return DEFAULT_CONFIG
 
 def get_environments(config_file):
@@ -310,9 +342,9 @@ def main():
             build_dir = ""
             tweaked_example_path = example_path
             if (config_file == DEFAULT_CONFIG or env in DEFAULT_ENVIRONMENTS):
-                build_dir = copy_example_to_env(example_path,env)
+                build_dir = copy_example_to_env(example_path, env, config_file)
             else:
-                build_dir = copy_example_to_extra_build(example_path)
+                build_dir = copy_example_to_extra_build(example_path, config_file)
                 # tweaked_example_path = f"{example_path}-({env})"
 
             build_result = build_example(example_path, build_dir, env)

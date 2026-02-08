@@ -1,4 +1,7 @@
-  #include<H4Plugins.h>
+/* To run this example:
+    In config_plugins.h: Define H4P_LOG_MESSAGES=1
+ */
+#include<H4Plugins.h>
 H4_USE_PLUGINS(115200,H4_Q_CAPACITY,false) // Serial baud rate, Q size, SerialCmd autostop
 
 /* Uncomment this to see what's happening "under the hood"

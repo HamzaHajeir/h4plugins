@@ -1,3 +1,6 @@
+/* To run this example:
+    In config_plugins.h: Define H4P_USE_WIFI_AP=0
+ */
 /*
 The code is specifically designed for the popular Itead SONOFF Basic device.
 

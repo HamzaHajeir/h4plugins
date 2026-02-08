@@ -1,3 +1,6 @@
+/* To run this example:
+    In config_plugins.h: Define H4P_LOG_MESSAGES=1
+ */
 #include<H4Plugins.h>
 H4_USE_PLUGINS(115200,H4_Q_CAPACITY,false) // Serial baud rate, Q size, SerialCmd autostop
 
@@ -12,7 +15,7 @@ instead of going OFF
 #define ULED_ACTIVE ACTIVE_LOW
 
 void h4setup() { // H4 constructor starts Serial
-    Serial.println("H4P_Signaller PWM Example v"H4P_VERSION);
+    Serial.println("H4P_Signaller PWM Example v" H4P_VERSION);
     h4fc.flashPWM(1024,80,LED_BUILTIN,ULED_ACTIVE); // LED depends on platform
 
     h4.once(10000,[](){ 

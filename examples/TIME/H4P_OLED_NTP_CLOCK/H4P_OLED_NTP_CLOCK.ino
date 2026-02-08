@@ -1,3 +1,6 @@
+/* To run this example:
+    In config_plugins.h: Define H4P_USE_WIFI_AP=0
+ */
 //https://github.com/mcauser/Adafruit_SSD1306
 #define H4P_VERBOSE 1
 #include<H4Plugins.h>

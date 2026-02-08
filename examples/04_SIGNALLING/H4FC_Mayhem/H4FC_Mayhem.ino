@@ -17,7 +17,7 @@ H4P_Signaller h4fc;
 
 void h4setup() {
   h4fc.flashPin(1000,LED_BUILTIN,ULED_ACTIVE);
-  h4.everyRandom(FLASH_LO,FLASH_HI,[](){ h4fc.pulseLED(random(PULSE_LO,PULSE_HI),LED_RED,ACTIVE_HIGH); });  
-  h4.everyRandom(FLASH_LO,FLASH_HI,[](){ h4fc.pulseLED(random(PULSE_LO,PULSE_HI),LED_AMBER,ACTIVE_HIGH); });  
-  h4.everyRandom(FLASH_LO,FLASH_HI,[](){ h4fc.pulseLED(random(PULSE_LO,PULSE_HI),LED_GREEN,ACTIVE_HIGH); });
+  h4.everyRandom(FLASH_LO,FLASH_HI,[](){ h4fc.pulsePin(random(PULSE_LO,PULSE_HI),LED_RED,ACTIVE_HIGH); });  
+  h4.everyRandom(FLASH_LO,FLASH_HI,[](){ h4fc.pulsePin(random(PULSE_LO,PULSE_HI),LED_AMBER,ACTIVE_HIGH); });  
+  h4.everyRandom(FLASH_LO,FLASH_HI,[](){ h4fc.pulsePin(random(PULSE_LO,PULSE_HI),LED_GREEN,ACTIVE_HIGH); });
 }

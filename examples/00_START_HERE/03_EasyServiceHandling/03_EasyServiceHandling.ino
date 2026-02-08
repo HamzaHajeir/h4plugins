@@ -1,3 +1,7 @@
+/* To run this example:
+    In config_plugins.h: Define H4P_USE_WIFI_AP=0
+ */
+
 #include<H4Plugins.h>
 H4_USE_PLUGINS(115200,H4_Q_CAPACITY,false) // Serial baud rate, Q size, SerialCmd autostop
 //
@@ -15,6 +19,10 @@ H4_USE_PLUGINS(115200,H4_Q_CAPACITY,false) // Serial baud rate, Q size, SerialCm
 H4P_Signaller blinky;
 H4P_WiFi wifi("XXXXXXXX","XXXXXXXX","easysvc");
 H4P_AsyncMQTT mqtt("http://192.168.1.4:1883");
+void onWIFIConnect();
+void onWIFIDisconnect();
+void onMqttConnect();
+void onMqttDisconnect();
 
 void h4pGlobalEventHandler(const std::string& svc,H4PE_TYPE t,const std::string& msg){
   //Serial.printf("Big Brother sees EVERYTHING %s %s %s\n",CSTR(svc),CSTR(h4pGetEventName(t)),CSTR(msg));

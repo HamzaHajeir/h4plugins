@@ -6,6 +6,8 @@ H4_USE_PLUGINS(115200,H4_Q_CAPACITY,false)
 
 h4pOutput builtinLED(LED_BUILTIN, H4P_ASSUMED_SENSE,OFF);
 
+void onGPIO(int,int);
+
 void h4pGlobalEventHandler(const std::string& svc,H4PE_TYPE t,const std::string& msg){
   switch(t){
     H4P_FUNCTION_ADAPTER_GPIO;

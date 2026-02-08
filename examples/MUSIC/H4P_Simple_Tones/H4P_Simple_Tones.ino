@@ -2,7 +2,9 @@
 H4_USE_PLUGINS(115200,H4_Q_CAPACITY,false) // Serial baud rate, larger Q size for scheduling, SerialCmd autostop
 
 H4P_ToneController h4tc;
-
+#ifdef ESP32
+#define D8 16
+#endif
 H4P_Voice vox(D8);
 
 uint32_t  T;

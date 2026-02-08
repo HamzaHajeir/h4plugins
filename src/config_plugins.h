@@ -13,7 +13,7 @@ Contact Email: TBD
 */
 #pragma once
 
-#define H4P_VERSION "3.5.7"
+#define H4P_VERSION "3.5.8"
 
 // Make sure you read the documentation and have arrangements in place for using AP mode :)
 // If you don't have the H4P_WiFiAP.cpp file, the linker will fail.

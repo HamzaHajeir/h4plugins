@@ -1,3 +1,6 @@
+/* To run this example:
+    In config_plugins.h: Define H4P_USE_WIFI_AP=0
+ */
 //#define H4P_VERBOSE 1
 #include<H4Plugins.h>
 H4_USE_PLUGINS(115200,30,false) // Serial baud rate, larger Q size for scheduling, SerialCmd autostop

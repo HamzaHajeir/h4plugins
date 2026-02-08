@@ -1,7 +1,13 @@
+/* To run this example:
+    In config_plugins.h: Define H4P_USE_WIFI_AP=0
+ */
 #define H4P_VERBOSE 1
 #include<H4Plugins.h>
 H4_USE_PLUGINS(115200,H4_Q_CAPACITY,false) // Serial baud rate, Q size, SerialCmd autostop
 
+#ifdef ESP32
+#define D6 4
+#endif
 boolean condition=false;
 boolean boolData(){ return random(0,50) > 25; } // randomly return true / false
 

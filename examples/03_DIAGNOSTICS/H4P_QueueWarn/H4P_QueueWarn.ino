@@ -1,6 +1,7 @@
 /*
- *     YOU MUST SET #define H4P_SYS_LEVEL 2
- *     IN config_plugins.h!!!
+ *     SET #define H4P_SYS_LEVEL 2
+ *     AND #define H4P_LOG_MESSAGES 1
+ *     IN config_plugins.h
  */
 #define H4P_VERBOSE 1
 

@@ -1,6 +1,10 @@
 #include<H4Plugins.h>
 H4_USE_PLUGINS(115200,H4_Q_CAPACITY,false) 
 
+#ifdef ESP32
+#define D6 16
+#endif
+
 H4P_Signaller sig;
 
 h4pOutput* redLED=new h4pOutput(D6, ACTIVE_HIGH);

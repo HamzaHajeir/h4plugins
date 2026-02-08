@@ -5,7 +5,7 @@ H4_USE_PLUGINS(115200,H4_Q_CAPACITY,false)
 
 class DIYpulseWidth: public h4pGPIO {
     public:
-        DIYpulseWidth(uint8_t p,uint8_t m,H4GM_SENSE s):
+        DIYpulseWidth(uint8_t p,uint8_t m,H4PM_SENSE s):
             h4pGPIO(p,m,s,{
               new npPASSDELTA,
               npPublishValue

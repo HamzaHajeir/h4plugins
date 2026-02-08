@@ -9,4 +9,4 @@ runs forever making LED pulsae randomly
 */
 #define ULED_ACTIVE ACTIVE_LOW
 
-void h4setup() { h4.everyRandom(50,150,[](){ h4fc.pulseLED(random(20,120),LED_BUILTIN,ULED_ACTIVE); }); }
+void h4setup() { h4.everyRandom(50,150,[](){ h4fc.pulsePin(random(20,120),LED_BUILTIN,ULED_ACTIVE); }); }

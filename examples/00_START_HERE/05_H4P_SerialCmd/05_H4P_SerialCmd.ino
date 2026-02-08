@@ -1,3 +1,8 @@
+/* To run this example:
+    In H4.h: Define H4_HOOK_TASKS=1  
+    In config_plugins.h: Define H4P_LOG_MESSAGES=1
+ */
+
 #include<H4Plugins.h>
 H4_USE_PLUGINS(115200,H4_Q_CAPACITY,false)
 /*
@@ -23,7 +28,7 @@ help
 */
 
 void h4setup() {
-    Serial.println("H4P_SerialCmd Example v"H4P_VERSION);
+    Serial.println("H4P_SerialCmd Example v" H4P_VERSION);
     h4.every(1000,[]{ Serial.printf("T=%u ping\n",millis()); }); // ensure something in Q to see
     h4p.invokeCmd("help"); // Automatically show help at startup
     Serial.println("Show Q caused by invokeCmd");
