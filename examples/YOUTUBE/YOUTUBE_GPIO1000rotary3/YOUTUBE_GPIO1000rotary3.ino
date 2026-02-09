@@ -2,11 +2,12 @@
 H4_USE_PLUGINS(115200,H4_Q_CAPACITY,false) 
 
 #ifdef ESP32
+#define D0 5
 #define D1 4
 #define D2 16
-#define D6 16
-#define D7 17
-#define D8 18
+#define D6 17
+#define D7 18
+#define D8 19
 #endif
 
 H4P_PinMachine pm;

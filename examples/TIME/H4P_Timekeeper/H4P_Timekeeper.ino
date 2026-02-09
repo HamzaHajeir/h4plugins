@@ -5,6 +5,10 @@
 #include<H4Plugins.h>
 H4_USE_PLUGINS(115200,30,false) // Serial baud rate, larger Q size for scheduling, SerialCmd autostop
 
+#ifdef ESP32
+#define D6 4 // Map pin name
+#endif
+
 H4P_SCHEDULE mySchedule={
   {"07:00","09:00"}, // ON @ 0700, OFF @ 0900
   {"16:50","16:52"}, // ON @ 1300, OFF @ 1400

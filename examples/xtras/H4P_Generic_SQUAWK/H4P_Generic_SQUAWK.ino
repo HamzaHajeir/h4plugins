@@ -11,9 +11,16 @@ H4_USE_PLUGINS(115200,20,false) // Serial baud rate, Q size, SerialCmd autostop
 //  Hardware pins:
 //      D1 Light Sensor, D2 "Armed" flashing LED, D3 Siren
 //
+
+#ifdef ESP32
+#define LIGHT 4
+#define ARMED 15
+#define SQUAWK 16
+#else
 #define LIGHT D1
 #define ARMED D2
 #define SQUAWK D6
+#endif
 //
 //    Configuration
 //
@@ -38,6 +45,8 @@ H4P_RemoteUpdate h4ru;
 
 h4pPolled ark(LIGHT,INPUT,ACTIVE_HIGH,5000);
 h4pOutput alert(ARMED,ACTIVE_HIGH,H4P_UILED_RED);
+
+void armingStateChange(bool);
 
 uint32_t arm(std::vector<std::string> vs){
     if(vs.size()){

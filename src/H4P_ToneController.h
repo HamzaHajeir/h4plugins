@@ -65,7 +65,11 @@ class H4P_Voice {
                 void        _play(const std::string& tune,int transpose,H4_FN_VOID chain);
                 void        _tone(uint32_t f,uint8_t effect,uint32_t d,H4_FN_VOID chain);
     public:
-        H4P_Voice(uint8_t pin,uint8_t col=H4P_UILED_BI);
+        H4P_Voice(uint8_t pin,uint8_t col=H4P_UILED_BI) : _pin(pin) {} /* 
+                                                                            Color is needed for UI, but Phil didn't manage to push his last works regarding this. 
+                                                                            This typically needs to be passed to ToneController class, in which to listen to Web visitors to call h4puiAdd() with appropriate parameters,
+                                                                            While updating corresponding UI LED (If needed) with either automatically if added as global, or by manual h4puiSync() calls 
+                                                                            */
         void         play(const std::string& tune,int transpose=0);
         void         rest(const char duration){ play(std::string("R  ").append(1,duration).append(1,' ')); }
 };

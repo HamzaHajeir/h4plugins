@@ -1,5 +1,6 @@
 /* To run this example:
     In config_plugins.h: Define H4P_USE_WIFI_AP=0
+    and H4P_LOG_MESSAGES=1
  */
 #define H4P_VERBOSE 1
 #include<H4Plugins.h>

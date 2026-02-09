@@ -5,9 +5,15 @@ H4P_Signaller h4fc;
 
 #define ULED_ACTIVE ACTIVE_LOW
 
+#ifdef ESP32
+#define LED_RED 4
+#define LED_AMBER 15
+#define LED_GREEN 16
+#else
 #define LED_RED D6
 #define LED_AMBER D7
 #define LED_GREEN D8
+#endif
 
 #define FLASH_LO  50
 #define FLASH_HI  150

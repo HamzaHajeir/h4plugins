@@ -27,6 +27,8 @@ std::vector<h4pOutput*> LEDS={
   new h4pOutput(LED_BUILTIN,ACTIVE_LOW,OFF,H4P_UILED_BLUE)
 };
 
+void onGPIO(uint8_t pin,int value);
+
 void h4pGlobalEventHandler(const std::string& svc,H4PE_TYPE t,const std::string& msg){
   switch(t){
     H4P_FUNCTION_ADAPTER_GPIO;

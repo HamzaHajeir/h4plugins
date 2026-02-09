@@ -1,6 +1,9 @@
 /* To run this example:
     In config_plugins.h: Define H4P_USE_WIFI_AP=0
+
+    Only runnable by an ESP8266 for now.
  */
+#ifdef ARDUINO_ARCH_ESP8266
 #include<H4Plugins.h>
 H4_USE_PLUGINS(115200,H4_Q_CAPACITY,false) // Serial baud rate, Q size, SerialCmd autostop
 
@@ -34,3 +37,4 @@ H4P_EventListener chchchanges(H4PE_PRESENCE,[](const std::string& svc,H4PE_TYPE 
     H4P_FUNCTION_ADAPTER_PRESENCE
   }
 });
+#endif

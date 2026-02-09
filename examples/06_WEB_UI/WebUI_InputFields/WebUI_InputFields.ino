@@ -19,7 +19,7 @@ H4P_PinMachine h4gm;
 H4P_WiFi h4wifi(WIFI_SSID,WIFI_PASS,"uiinputs");
 H4P_AsyncMQTT h4mqtt(MQTT_SERVER);
 H4P_Heartbeat h4hb;
-H4P_ConditionalSwitch sw1([](){ return condition; },BUILTIN_LED,H4P_ASSUMED_SENSE,H4P_UILED_GREEN);
+H4P_ConditionalSwitch sw1([](){ return condition; },LED_BUILTIN,H4P_ASSUMED_SENSE,H4P_UILED_GREEN);
 H4P_UPNPServer h4upnp("UI Input Tester");
 
 void onViewersConnect(){

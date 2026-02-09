@@ -31,7 +31,7 @@ void h4setup(){
         vox.play(fsharp_c);
         h4.once(T+1000,[]{
           Serial.println("Here's the whole range from GN2 to BN7");
-          vox.chromaticRun("GN2","BN7",'d'); // whole range
+          // vox.chromaticRun("GN2","BN7",'d'); // whole range /* Phil didn't manage to push his works regarding this API. (It might be a simple function but I don't have base knowledge) */
           Serial.println("After BN7, only dogs can hear it :)");
         });
       });

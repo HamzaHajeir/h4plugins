@@ -3,7 +3,7 @@ H4_USE_PLUGINS(115200,H4_Q_CAPACITY,false)
 
 #ifdef ESP32
 #define D1 4
-#define D2 16
+#define D2 15
 #endif
 
 h4pEncoder rotary(D1,D2);

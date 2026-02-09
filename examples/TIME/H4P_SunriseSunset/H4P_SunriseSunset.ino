@@ -1,6 +1,11 @@
 /* To run this example:
     In config_plugins.h: Define H4P_USE_WIFI_AP=0
+    
+    This example is not runnable as H4P_Sunrise was not published to the repository.
  */
+
+#ifdef SUNRISE /* Mark of support :) */
+
 #include<H4Plugins.h>
 H4_USE_PLUGINS(115200,H4_Q_CAPACITY,false) // Serial baud rate, larger Q size for scheduling, SerialCmd autostop
 
@@ -15,3 +20,5 @@ H4P_Timekeeper h4tk("time.google.com","time1.google.com",2); // 2 cos France is 
 H4P_Sunrise h4ss("48.4738943","-0.6029038"); // My French heaven
 H4P_AsyncMQTT h4mqtt("http://192.168.1.4:1883");
 H4P_BinarySwitch h4onof(RELAY_BUILTIN,ACTIVE_HIGH,OFF);
+
+#endif

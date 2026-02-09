@@ -42,8 +42,8 @@ H4_USE_PLUGINS(115200,H4_Q_CAPACITY,false) // Serial baud rate, Q size, SerialCm
 
 H4P_PinMachine pm;
 
-int T1=5000; // see the phasing.xls spreadsheet for choosing these numbers
-int T2=1250;
+int T1_=5000; // see the phasing.xls spreadsheet for choosing these numbers
+int T2_=1250;
 //
 // A utility function to switch on led, t mSec later switch it off, then execute f
 //
@@ -55,14 +55,14 @@ void switchOn(uint8_t led,uint32_t t,H4_FN_VOID f=[](){}){
 void trafficLights(bool onoff){ // this is  the actual "thing" function
   static H4_TIMER running=nullptr;
   if(onoff){
-    switchOn(RED_LIGHT,T1+T2);
-    h4.once(T1,[](){
-      switchOn(AMBER_LIGHT,T2,[](){ // AMBER stays on for T2, and when it goes off...
-        switchOn(GREEN_LIGHT,T1,[](){ // light GREEN for T1, and when it goes off...
-          switchOn(AMBER_LIGHT,T2); }); // light AMBER for T2 when done,rinse and repeat
+    switchOn(RED_LIGHT,T1_+T2_);
+    h4.once(T1_,[](){
+      switchOn(AMBER_LIGHT,T2_,[](){ // AMBER stays on for T2_, and when it goes off...
+        switchOn(GREEN_LIGHT,T1_,[](){ // light GREEN for T1_, and when it goes off...
+          switchOn(AMBER_LIGHT,T2_); }); // light AMBER for T2_ when done,rinse and repeat
           });
       }); 
-    if(!running) running=h4.every(2*(T1+T2),[](){ trafficLights(true); }); // rerun yourself
+    if(!running) running=h4.every(2*(T1_+T2_),[](){ trafficLights(true); }); // rerun yourself
   }
   else { // stop everything
     h4.cancelAll();
