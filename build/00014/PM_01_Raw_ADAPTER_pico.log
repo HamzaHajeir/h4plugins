@@ -1,0 +1,67 @@
+Processing pico (platform: https://github.com/maxgerhardt/platform-raspberrypi.git#5b72058658ebaf98045755662bc8b28479bd288b; framework: arduino; board: rpipicow)
+--------------------------------------------------------------------------------
+Verbose mode can be enabled via `-v, --verbose` option
+CONFIGURATION: https://docs.platformio.org/page/boards/raspberrypi/rpipicow.html
+PLATFORM: Raspberry Pi RP2040 (1.14.0+sha.5b72058) > Pico W
+HARDWARE: RP2040 133MHz, 256KB RAM, 2MB Flash
+DEBUG: Current (blackmagic) External (blackmagic, cmsis-dap, jlink, picoprobe, raspberrypi-swd)
+PACKAGES: 
+ - framework-arduinopico @ 1.40101.0+sha.9d17f42 
+ - tool-picotool-rp2040-earlephilhower @ 5.140200.240929 (14.2.0) 
+ - toolchain-rp2040-earlephilhower @ 5.140200.240929 (14.2.0)
+Converting PM_01_Raw_ADAPTER.ino
+Flash size: 2.00MB
+Sketch size: 1.50MB
+Filesystem size: 0.50MB
+PSRAM size: 0.00MB
+Maximium Sketch size: 1568768 EEPROM start: 0x101ff000 Filesystem start: 0x1017f000 Filesystem end: 0x101ff000
+LDF: Library Dependency Finder -> https://bit.ly/configure-pio-ldf
+LDF Modes: Finder ~ deep+, Compatibility ~ soft
+Found 72 compatible libraries
+Scanning dependencies...
+Dependency Graph
+|-- H4 @ 4.0.10+sha.9125640
+|-- H4Tools @ 0.0.16+sha.47ce091
+|-- H4AsyncTCP @ 0.0.25+sha.231be9d
+|-- H4AsyncMQTT @ 1.0.0-rc12+sha.9d2b784
+|-- ArmadilloHTTP @ 0.1.9+sha.ac5bf86
+|-- H4AsyncWebServer @ 0.0.13+sha.fcbce26
+|-- H4Plugins @ 3.5.8+sha.5fb93ae
+|-- LittleFS @ 0.1.0
+|-- WiFi @ 1.0.0
+|-- lwIP_CYW43 @ 1
+|-- lwIP-Ethernet @ 1
+|-- SPI @ 1.0
+|-- Updater @ 1.0
+|-- MD5Builder @ 1.0.0
+|-- LEAmDNS @ 1.2
+|-- DNSServer @ 1.1.1
+|-- ArduinoOTA @ 1.0
+|-- HTTPUpdate @ 1.3
+|-- HTTPClient @ 1.2
+Building in release mode
+Compiling .pio/build/pico/src/PM_01_Raw_ADAPTER.ino.cpp.o
+Linking .pio/build/pico/firmware.elf
+Generating UF2 image
+picotool uf2 convert -t elf ".pio/build/pico/firmware.elf" ".pio/build/pico/firmware.uf2"
+Retrieving maximum program size .pio/build/pico/firmware.elf
+Flash size: 2.00MB
+Sketch size: 1.50MB
+Filesystem size: 0.50MB
+PSRAM size: 0.00MB
+Maximium Sketch size: 1568768 EEPROM start: 0x101ff000 Filesystem start: 0x1017f000 Filesystem end: 0x101ff000
+Checking size .pio/build/pico/firmware.elf
+Advanced Memory Usage is available via "PlatformIO Home > Project Inspect"
+RAM:   [===       ]  27.4% (used 71828 bytes from 262144 bytes)
+Flash: [===       ]  25.0% (used 392964 bytes from 1568768 bytes)
+Building .pio/build/pico/firmware.bin
+Building .pio/build/pico/firmware.bin.signed
+========================= [SUCCESS] Took 5.19 seconds =========================
+Environment    Status    Duration
+-------------  --------  ------------
+pico           SUCCESS   00:00:05.194
+========================= 1 succeeded in 00:00:05.194 =========================
+In file included from /home/runner/work/h4plugins/h4plugins/build/pico/src/PM_01_Raw_ADAPTER.ino:1:
+.pio/libdeps/pico/H4Plugins/src/H4Plugins.h:6:76: note: '#pragma message: Using Wifi AP - Make sure you have made arrangements!'
+    6 |     #pragma message("Using Wifi AP - Make sure you have made arrangements!")
+      |                                                                            ^

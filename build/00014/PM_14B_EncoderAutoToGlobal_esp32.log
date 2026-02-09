@@ -1,0 +1,85 @@
+Processing esp32 (board: esp32doit-devkit-v1; platform: https://github.com/pioarduino/platform-espressif32/releases/download/55.03.35/platform-espressif32.zip; framework: arduino)
+--------------------------------------------------------------------------------
+Tool Manager: Installing https://github.com/pioarduino/registry/releases/download/0.0.1/esptoolpy-v5.1.0.zip
+Unpacking 0% 10% 20%
+Tool Manager: tool-esptoolpy@5.1.0 has been installed!
+Tool Manager: Installing file:///home/runner/.platformio/tools/tool-esptoolpy
+Tool Manager: tool-esptoolpy@5.1.0 has been installed!
+Verbose mode can be enabled via `-v, --verbose` option
+CONFIGURATION: https://docs.platformio.org/page/boards/espressif32/esp32doit-devkit-v1.html
+PLATFORM: Espressif 32 (55.3.35) > DOIT ESP32 DEVKIT V1
+HARDWARE: ESP32 240MHz, 320KB RAM, 4MB Flash
+DEBUG: Current (cmsis-dap) External (cmsis-dap, esp-bridge, esp-prog, iot-bus-jtag, jlink, minimodule, olimex-arm-usb-ocd, olimex-arm-usb-ocd-h, olimex-arm-usb-tiny-h, olimex-jtag-tiny, tumpa)
+PACKAGES: 
+ - contrib-piohome @ 3.4.4 
+ - framework-arduinoespressif32 @ 3.3.5 
+ - framework-arduinoespressif32-libs @ 5.5.0+sha.366dadf354 
+ - tool-esp-rom-elfs @ 2024.10.11 
+ - tool-esptoolpy @ 5.1.0 
+ - tool-mklittlefs @ 3.2.0 
+ - toolchain-xtensa-esp-elf @ 14.2.0+20251107
+Converting PM_14B_EncoderAutoToGlobal.ino
+LDF: Library Dependency Finder -> https://bit.ly/configure-pio-ldf
+LDF Modes: Finder ~ chain, Compatibility ~ soft
+Found 50 compatible libraries
+Scanning dependencies...
+Dependency Graph
+|-- H4 @ 4.0.10+sha.9125640
+|-- H4Tools @ 0.0.16+sha.47ce091
+|-- H4AsyncTCP @ 0.0.25+sha.231be9d
+|-- H4AsyncMQTT @ 1.0.0-rc12+sha.9d2b784
+|-- ArmadilloHTTP @ 0.1.9+sha.ac5bf86
+|-- H4AsyncWebServer @ 0.0.13+sha.fcbce26
+|-- H4Plugins @ 3.5.8+sha.5fb93ae
+Building in release mode
+Compiling .pio/build/esp32/src/PM_14B_EncoderAutoToGlobal.ino.cpp.o
+Linking .pio/build/esp32/firmware.elf
+                            Memory Type Usage Summary                             
+âââââââââââââââââââââââ³âââââââââââââââ³âââââââââââ³âââââââââââââââââ³ââââââââââââââââ
+â Memory Type/Section â Used [bytes] â Used [%] â Remain [bytes] â Total [bytes] â
+â¡âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ©
+â Flash Code          â       756192 â          â                â               â
+â    .text            â       756192 â          â                â               â
+â Flash Data          â       225188 â          â                â               â
+â    .rodata          â       224932 â          â                â               â
+â    .appdesc         â          256 â          â                â               â
+â IRAM                â        84307 â    64.32 â          46765 â        131072 â
+â    .text            â        83279 â    63.54 â                â               â
+â    .vectors         â         1028 â     0.78 â                â               â
+â DRAM                â        49956 â     40.1 â          74624 â        124580 â
+â    .bss             â        26968 â    21.65 â                â               â
+â    .data            â        22988 â    18.45 â                â               â
+âââââââââââââââââââââââ´âââââââââââââââ´âââââââââââ´âââââââââââââââââ´ââââââââââââââââ
+Retrieving maximum program size .pio/build/esp32/firmware.elf
+Checking size .pio/build/esp32/firmware.elf
+Advanced Memory Usage is available via "PlatformIO Home > Project Inspect"
+RAM:   [==        ]  15.2% (used 49956 bytes from 327680 bytes)
+Flash: [=====     ]  51.9% (used 1088419 bytes from 2097152 bytes)
+Building .pio/build/esp32/firmware.bin
+esptool v5.1.0
+Creating ESP32 image...
+Merged 2 ELF sections.
+Successfully created ESP32 image.
+========================= [SUCCESS] Took 17.37 seconds =========================
+Environment    Status    Duration
+-------------  --------  ------------
+esp32          SUCCESS   00:00:17.370
+========================= 1 succeeded in 00:00:17.370 =========================
+/home/runner/work/h4plugins/h4plugins/build/esp32/src/PM_14B_EncoderAutoToGlobal.ino:12:9: warning: "D1_PIN" redefined
+   12 | #define D1_PIN D1
+      |         ^~~~~~
+/home/runner/work/h4plugins/h4plugins/build/esp32/src/PM_14B_EncoderAutoToGlobal.ino:9:9: note: this is the location of the previous definition
+    9 | #define D1_PIN 4
+      |         ^~~~~~
+/home/runner/work/h4plugins/h4plugins/build/esp32/src/PM_14B_EncoderAutoToGlobal.ino:13:9: warning: "D2_PIN" redefined
+   13 | #define D2_PIN D2
+      |         ^~~~~~
+/home/runner/work/h4plugins/h4plugins/build/esp32/src/PM_14B_EncoderAutoToGlobal.ino:10:9: note: this is the location of the previous definition
+   10 | #define D2_PIN 16
+      |         ^~~~~~
+In file included from /home/runner/work/h4plugins/h4plugins/build/esp32/src/PM_14B_EncoderAutoToGlobal.ino:1:
+.pio/libdeps/esp32/H4Plugins/src/H4Plugins.h:6:76: note: '#pragma message: Using Wifi AP - Make sure you have made arrangements!'
+    6 |     #pragma message("Using Wifi AP - Make sure you have made arrangements!")
+      |                                                                            ^
+Total image size: 1088675 bytes (.bin may be padded larger)
+Note: The reported total sizes may be smaller than those in the technical reference manual due to reserved memory and application configuration. The total flash size available for the application is not included by default, as it cannot be reliably determined due to the presence of other data like the bootloader, partition table, and application partition size.

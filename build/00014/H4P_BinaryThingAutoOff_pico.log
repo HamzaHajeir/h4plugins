@@ -1,0 +1,242 @@
+Processing pico (platform: https://github.com/maxgerhardt/platform-raspberrypi.git#5b72058658ebaf98045755662bc8b28479bd288b; framework: arduino; board: rpipicow)
+--------------------------------------------------------------------------------
+Verbose mode can be enabled via `-v, --verbose` option
+CONFIGURATION: https://docs.platformio.org/page/boards/raspberrypi/rpipicow.html
+PLATFORM: Raspberry Pi RP2040 (1.14.0+sha.5b72058) > Pico W
+HARDWARE: RP2040 133MHz, 256KB RAM, 2MB Flash
+DEBUG: Current (blackmagic) External (blackmagic, cmsis-dap, jlink, picoprobe, raspberrypi-swd)
+PACKAGES: 
+ - framework-arduinopico @ 1.40101.0+sha.9d17f42 
+ - tool-picotool-rp2040-earlephilhower @ 5.140200.240929 (14.2.0) 
+ - toolchain-rp2040-earlephilhower @ 5.140200.240929 (14.2.0)
+Converting H4P_BinaryThingAutoOff.ino
+Flash size: 2.00MB
+Sketch size: 1.50MB
+Filesystem size: 0.50MB
+PSRAM size: 0.00MB
+Maximium Sketch size: 1568768 EEPROM start: 0x101ff000 Filesystem start: 0x1017f000 Filesystem end: 0x101ff000
+LDF: Library Dependency Finder -> https://bit.ly/configure-pio-ldf
+LDF Modes: Finder ~ deep+, Compatibility ~ soft
+Found 72 compatible libraries
+Scanning dependencies...
+Dependency Graph
+|-- H4 @ 4.0.10+sha.9125640
+|-- H4Tools @ 0.0.16+sha.47ce091
+|-- H4AsyncTCP @ 0.0.25+sha.231be9d
+|-- H4AsyncMQTT @ 1.0.0-rc12+sha.9d2b784
+|-- ArmadilloHTTP @ 0.1.9+sha.ac5bf86
+|-- H4AsyncWebServer @ 0.0.13+sha.fcbce26
+|-- H4Plugins @ 3.5.8+sha.5fb93ae
+|-- LittleFS @ 0.1.0
+|-- WiFi @ 1.0.0
+|-- lwIP_CYW43 @ 1
+|-- lwIP-Ethernet @ 1
+|-- SPI @ 1.0
+|-- Updater @ 1.0
+|-- MD5Builder @ 1.0.0
+|-- LEAmDNS @ 1.2
+|-- DNSServer @ 1.1.1
+|-- ArduinoOTA @ 1.0
+|-- HTTPUpdate @ 1.3
+|-- HTTPClient @ 1.2
+Building in release mode
+Compiling .pio/build/pico/FrameworkArduinoVariant/picow_digital.cpp.o
+Compiling .pio/build/pico/FrameworkArduinoVariant/picow_init.cpp.o
+Compiling .pio/build/pico/FrameworkArduinoBootloader/boot2_w25q080_2_padded_checksum.S.o
+Compiling .pio/build/pico/src/H4P_BinaryThingAutoOff.ino.cpp.o
+Generating linkerscript /home/runner/work/h4plugins/h4plugins/build/pico/.pio/build/pico/memmap_default.ld
+Compiling .pio/build/pico/libf18/H4/H4.cpp.o
+Compiling .pio/build/pico/lib349/LittleFS/LittleFS.cpp.o
+Compiling .pio/build/pico/lib349/LittleFS/lfs.c.o
+Compiling .pio/build/pico/lib349/LittleFS/lfs_util.c.o
+Compiling .pio/build/pico/libbc7/MD5Builder/MD5Builder.cpp.o
+Archiving .pio/build/pico/lib349/libLittleFS.a
+Archiving .pio/build/pico/libf18/libH4.a
+Indexing .pio/build/pico/lib349/libLittleFS.a
+Indexing .pio/build/pico/libf18/libH4.a
+Compiling .pio/build/pico/lib897/PicoOTA/PicoOTA.cpp.o
+Compiling .pio/build/pico/lib5f5/Updater/Updater.cpp.o
+Archiving .pio/build/pico/libbc7/libMD5Builder.a
+Indexing .pio/build/pico/libbc7/libMD5Builder.a
+Compiling .pio/build/pico/lib53c/lwIP_Ethernet/LwipEthernet.cpp.o
+Archiving .pio/build/pico/lib897/libPicoOTA.a
+Indexing .pio/build/pico/lib897/libPicoOTA.a
+Compiling .pio/build/pico/lib53c/lwIP_Ethernet/LwipIntf.cpp.o
+Archiving .pio/build/pico/lib5f5/libUpdater.a
+Indexing .pio/build/pico/lib5f5/libUpdater.a
+Compiling .pio/build/pico/lib53c/lwIP_Ethernet/LwipIntfCB.cpp.o
+Compiling .pio/build/pico/lib57c/SPI/SPI.cpp.o
+Compiling .pio/build/pico/libbe5/lwIP_CYW43/lwIP_CYW43.cpp.o
+Compiling .pio/build/pico/libbe5/lwIP_CYW43/utility/CYW43shim.cpp.o
+Archiving .pio/build/pico/lib53c/liblwIP_Ethernet.a
+Indexing .pio/build/pico/lib53c/liblwIP_Ethernet.a
+Compiling .pio/build/pico/lib4b8/WiFi/BearSSLHelpers.cpp.o
+Compiling .pio/build/pico/lib4b8/WiFi/CertStoreBearSSL.cpp.o
+Archiving .pio/build/pico/lib57c/libSPI.a
+Indexing .pio/build/pico/lib57c/libSPI.a
+Compiling .pio/build/pico/lib4b8/WiFi/WiFiClass.cpp.o
+Archiving .pio/build/pico/libbe5/liblwIP_CYW43.a
+Indexing .pio/build/pico/libbe5/liblwIP_CYW43.a
+Compiling .pio/build/pico/lib4b8/WiFi/WiFiClient.cpp.o
+Compiling .pio/build/pico/lib4b8/WiFi/WiFiClientSecureBearSSL.cpp.o
+Compiling .pio/build/pico/lib4b8/WiFi/WiFiMulti.cpp.o
+Compiling .pio/build/pico/lib4b8/WiFi/WiFiNTP.cpp.o
+Compiling .pio/build/pico/lib4b8/WiFi/WiFiServer.cpp.o
+Compiling .pio/build/pico/lib4b8/WiFi/WiFiServerSecureBearSSL.cpp.o
+Compiling .pio/build/pico/lib4b8/WiFi/WiFiUdp.cpp.o
+Compiling .pio/build/pico/lib4b8/WiFi/dhcpserver/dhcpserver.c.o
+Compiling .pio/build/pico/lib538/H4Tools/H4Tools.cpp.o
+Compiling .pio/build/pico/lib538/H4Tools/mbx.cpp.o
+Compiling .pio/build/pico/libd3b/H4AsyncTCP/H4AsyncServer.cpp.o
+Archiving .pio/build/pico/lib4b8/libWiFi.a
+Indexing .pio/build/pico/lib4b8/libWiFi.a
+Compiling .pio/build/pico/libd3b/H4AsyncTCP/H4AsyncTCP.cpp.o
+Compiling .pio/build/pico/libd3b/H4AsyncTCP/LwIPCoreLocker.cpp.o
+Archiving .pio/build/pico/lib538/libH4Tools.a
+Indexing .pio/build/pico/lib538/libH4Tools.a
+Compiling .pio/build/pico/libd3b/H4AsyncTCP/h4async_config.cpp.o
+Compiling .pio/build/pico/lib5f5/H4AsyncMQTT/H4AsyncMQTT.cpp.o
+Compiling .pio/build/pico/lib5f5/H4AsyncMQTT/Packet.cpp.o
+Compiling .pio/build/pico/lib5f5/H4AsyncMQTT/Properties.cpp.o
+Archiving .pio/build/pico/libd3b/libH4AsyncTCP.a
+Indexing .pio/build/pico/libd3b/libH4AsyncTCP.a
+Compiling .pio/build/pico/lib5f5/H4AsyncMQTT/mqTraits.cpp.o
+Compiling .pio/build/pico/lib426/ArmadilloHTTP/ArmadilloHTTP.cpp.o
+Compiling .pio/build/pico/libe1f/HTTPClient/HTTPClient.cpp.o
+Compiling .pio/build/pico/libe1f/HTTPClient/base64.cpp.o
+Compiling .pio/build/pico/lib18f/Hash/Hash.cpp.o
+Archiving .pio/build/pico/lib5f5/libH4AsyncMQTT.a
+Indexing .pio/build/pico/lib5f5/libH4AsyncMQTT.a
+Compiling .pio/build/pico/libe2d/H4AsyncWebServer/H4AT_HTTPHandlerWS.cpp.o
+Archiving .pio/build/pico/lib18f/libHash.a
+Indexing .pio/build/pico/lib18f/libHash.a
+Compiling .pio/build/pico/libe2d/H4AsyncWebServer/H4AW_HTTPHandlerSSE.cpp.o
+Archiving .pio/build/pico/libe1f/libHTTPClient.a
+Indexing .pio/build/pico/libe1f/libHTTPClient.a
+Compiling .pio/build/pico/libe2d/H4AsyncWebServer/H4AsyncAuthenticators.cpp.o
+Archiving .pio/build/pico/lib426/libArmadilloHTTP.a
+Indexing .pio/build/pico/lib426/libArmadilloHTTP.a
+Compiling .pio/build/pico/libe2d/H4AsyncWebServer/H4AsyncHandlers.cpp.o
+Compiling .pio/build/pico/libe2d/H4AsyncWebServer/H4AsyncWebServer.cpp.o
+Compiling .pio/build/pico/lib091/LEAmDNS/ESP8266mDNS.cpp.o
+Compiling .pio/build/pico/lib091/LEAmDNS/LEAmDNS.cpp.o
+Compiling .pio/build/pico/lib091/LEAmDNS/LEAmDNS_Control.cpp.o
+Archiving .pio/build/pico/libe2d/libH4AsyncWebServer.a
+Indexing .pio/build/pico/libe2d/libH4AsyncWebServer.a
+Compiling .pio/build/pico/lib091/LEAmDNS/LEAmDNS_Helpers.cpp.o
+Compiling .pio/build/pico/lib091/LEAmDNS/LEAmDNS_Structs.cpp.o
+Compiling .pio/build/pico/lib091/LEAmDNS/LEAmDNS_Transfer.cpp.o
+Compiling .pio/build/pico/lib751/DNSServer/DNSServer.cpp.o
+Compiling .pio/build/pico/lib63d/ArduinoOTA/ArduinoOTA.cpp.o
+Compiling .pio/build/pico/libc41/H4Plugins/H4PStatic.cpp.o
+Archiving .pio/build/pico/lib091/libLEAmDNS.a
+Indexing .pio/build/pico/lib091/libLEAmDNS.a
+Compiling .pio/build/pico/libc41/H4Plugins/H4P_AsyncHTTP.cpp.o
+Archiving .pio/build/pico/lib751/libDNSServer.a
+Indexing .pio/build/pico/lib751/libDNSServer.a
+Compiling .pio/build/pico/libc41/H4Plugins/H4P_AsyncMQTT.cpp.o
+Archiving .pio/build/pico/lib63d/libArduinoOTA.a
+Indexing .pio/build/pico/lib63d/libArduinoOTA.a
+Compiling .pio/build/pico/libc41/H4Plugins/H4P_BLEClient.cpp.o
+Compiling .pio/build/pico/libc41/H4Plugins/H4P_BLEServer.cpp.o
+Compiling .pio/build/pico/libc41/H4Plugins/H4P_BinarySwitch.cpp.o
+Compiling .pio/build/pico/libc41/H4Plugins/H4P_BinaryThing.cpp.o
+Compiling .pio/build/pico/libc41/H4Plugins/H4P_GateKeeper.cpp.o
+Compiling .pio/build/pico/libc41/H4Plugins/H4P_HeapWarn.cpp.o
+Compiling .pio/build/pico/libc41/H4Plugins/H4P_Heartbeat.cpp.o
+Compiling .pio/build/pico/libc41/H4Plugins/H4P_LinkMaster.cpp.o
+Compiling .pio/build/pico/libc41/H4Plugins/H4P_LocalLogger.cpp.o
+Compiling .pio/build/pico/libc41/H4Plugins/H4P_PinMachine.cpp.o
+Compiling .pio/build/pico/libc41/H4Plugins/H4P_QueueWarn.cpp.o
+Compiling .pio/build/pico/libc41/H4Plugins/H4P_RemoteLogger.cpp.o
+Compiling .pio/build/pico/libc41/H4Plugins/H4P_SerialCmd.cpp.o
+Compiling .pio/build/pico/libc41/H4Plugins/H4P_Signaller.cpp.o
+Compiling .pio/build/pico/libc41/H4Plugins/H4P_TaskSniffer.cpp.o
+Compiling .pio/build/pico/libc41/H4Plugins/H4P_Timekeeper.cpp.o
+Compiling .pio/build/pico/libc41/H4Plugins/H4P_ToneController.cpp.o
+Compiling .pio/build/pico/libc41/H4Plugins/H4P_UPNPServer.cpp.o
+Compiling .pio/build/pico/libc41/H4Plugins/H4P_WiFi.cpp.o
+Compiling .pio/build/pico/libc41/H4Plugins/H4P_WiFiAP.cpp.o
+Compiling .pio/build/pico/libc41/H4Plugins/H4Service.cpp.o
+Compiling .pio/build/pico/libc41/H4Plugins/NODE-PINK-FLOWS.cpp.o
+Compiling .pio/build/pico/libc41/H4Plugins/NODE-PINK-NODES.cpp.o
+Compiling .pio/build/pico/lib7c1/HTTPUpdate/HTTPUpdate.cpp.o
+Compiling .pio/build/pico/FrameworkArduino/BluetoothDebug.cpp.o
+Compiling .pio/build/pico/FrameworkArduino/Bootsel.cpp.o
+Compiling .pio/build/pico/FrameworkArduino/CoreMutex.cpp.o
+Compiling .pio/build/pico/FrameworkArduino/FS.cpp.o
+Compiling .pio/build/pico/FrameworkArduino/PIOProgram.cpp.o
+Archiving .pio/build/pico/lib7c1/libHTTPUpdate.a
+Indexing .pio/build/pico/lib7c1/libHTTPUpdate.a
+Compiling .pio/build/pico/FrameworkArduino/RP2040Support.cpp.o
+Archiving .pio/build/pico/libc41/libH4Plugins.a
+Indexing .pio/build/pico/libc41/libH4Plugins.a
+Compiling .pio/build/pico/FrameworkArduino/RP2040USB.cpp.o
+Compiling .pio/build/pico/FrameworkArduino/SerialPIO.cpp.o
+Compiling .pio/build/pico/FrameworkArduino/SerialUART.cpp.o
+Compiling .pio/build/pico/FrameworkArduino/SerialUSB.cpp.o
+Compiling .pio/build/pico/FrameworkArduino/StackThunk.cpp.o
+Compiling .pio/build/pico/FrameworkArduino/Tone.cpp.o
+Compiling .pio/build/pico/FrameworkArduino/WMath.cpp.o
+Compiling .pio/build/pico/FrameworkArduino/_freertos.cpp.o
+Compiling .pio/build/pico/FrameworkArduino/api/Common.cpp.o
+Compiling .pio/build/pico/FrameworkArduino/api/IPAddress.cpp.o
+Compiling .pio/build/pico/FrameworkArduino/api/PluggableUSB.cpp.o
+Compiling .pio/build/pico/FrameworkArduino/api/Print.cpp.o
+Compiling .pio/build/pico/FrameworkArduino/api/Stream.cpp.o
+Compiling .pio/build/pico/FrameworkArduino/api/String.cpp.o
+Compiling .pio/build/pico/FrameworkArduino/cyw43_wrappers.cpp.o
+Compiling .pio/build/pico/FrameworkArduino/delay.cpp.o
+Compiling .pio/build/pico/FrameworkArduino/libb64/cdecode.cpp.o
+Compiling .pio/build/pico/FrameworkArduino/libb64/cencode.cpp.o
+Compiling .pio/build/pico/FrameworkArduino/lock.cpp.o
+Compiling .pio/build/pico/FrameworkArduino/lwip_wrap.cpp.o
+Compiling .pio/build/pico/FrameworkArduino/main.cpp.o
+Compiling .pio/build/pico/FrameworkArduino/malloc-lock.cpp.o
+Compiling .pio/build/pico/FrameworkArduino/posix.cpp.o
+Compiling .pio/build/pico/FrameworkArduino/psram.cpp.o
+Compiling .pio/build/pico/FrameworkArduino/sdkoverride/att_db.c.o
+Compiling .pio/build/pico/FrameworkArduino/sdkoverride/btstack_flash_bank.cpp.o
+Compiling .pio/build/pico/FrameworkArduino/sdkoverride/hids_device.c.o
+Compiling .pio/build/pico/FrameworkArduino/sdkoverride/inet_chksum.cpp.o
+Compiling .pio/build/pico/FrameworkArduino/sdkoverride/newlib_interface.c.o
+Compiling .pio/build/pico/FrameworkArduino/sdkoverride/pico_bootsel_via_double_reset.c.o
+Compiling .pio/build/pico/FrameworkArduino/stdlib_noniso.cpp.o
+Compiling .pio/build/pico/FrameworkArduino/wiring_analog.cpp.o
+Compiling .pio/build/pico/FrameworkArduino/wiring_digital.cpp.o
+Compiling .pio/build/pico/FrameworkArduino/wiring_private.cpp.o
+Compiling .pio/build/pico/FrameworkArduino/wiring_pulse.cpp.o
+Compiling .pio/build/pico/FrameworkArduino/wiring_shift.cpp.o
+Archiving .pio/build/pico/libFrameworkArduino.a
+Indexing .pio/build/pico/libFrameworkArduino.a
+Linking .pio/build/pico/firmware.elf
+Generating UF2 image
+picotool uf2 convert -t elf ".pio/build/pico/firmware.elf" ".pio/build/pico/firmware.uf2"
+Retrieving maximum program size .pio/build/pico/firmware.elf
+Flash size: 2.00MB
+Sketch size: 1.50MB
+Filesystem size: 0.50MB
+PSRAM size: 0.00MB
+Maximium Sketch size: 1568768 EEPROM start: 0x101ff000 Filesystem start: 0x1017f000 Filesystem end: 0x101ff000
+Checking size .pio/build/pico/firmware.elf
+Advanced Memory Usage is available via "PlatformIO Home > Project Inspect"
+RAM:   [===       ]  27.4% (used 71912 bytes from 262144 bytes)
+Flash: [===       ]  25.2% (used 395872 bytes from 1568768 bytes)
+Building .pio/build/pico/firmware.bin
+Building .pio/build/pico/firmware.bin.signed
+========================= [SUCCESS] Took 51.09 seconds =========================
+Environment    Status    Duration
+-------------  --------  ------------
+pico           SUCCESS   00:00:51.089
+========================= 1 succeeded in 00:00:51.089 =========================
+In file included from /home/runner/work/h4plugins/h4plugins/build/pico/src/H4P_BinaryThingAutoOff.ino:2:
+.pio/libdeps/pico/H4Plugins/src/H4Plugins.h:6:76: note: '#pragma message: Using Wifi AP - Make sure you have made arrangements!'
+    6 |     #pragma message("Using Wifi AP - Make sure you have made arrangements!")
+      |                                                                            ^
+.pio/libdeps/pico/H4AsyncTCP/src/h4async_config.cpp:9:17: note: '#pragma message: TLS is Disabled. Ensure you're using the correct Arduino Core build that supports LwIP ALTCP TLS MBEDTLS'
+    9 | #pragma message "TLS is Disabled. Ensure you're using the correct Arduino Core build that supports LwIP ALTCP TLS MBEDTLS"
+      |                 ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/runner/.platformio/packages/framework-arduinopico/cores/rp2040/Bootsel.cpp: In function 'bool get_bootsel_button()':
+/home/runner/.platformio/packages/framework-arduinopico/cores/rp2040/Bootsel.cpp:40:42: warning: '++' expression of 'volatile'-qualified type is deprecated [-Wvolatile]
+   40 |     for (volatile int i = 0; i < 1000; ++i);
+      |                                          ^

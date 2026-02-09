@@ -1,0 +1,69 @@
+Processing esp32s3 (board: esp32-s3-devkitc-1; platform: https://github.com/pioarduino/platform-espressif32/releases/download/55.03.35/platform-espressif32.zip; framework: arduino)
+--------------------------------------------------------------------------------
+Verbose mode can be enabled via `-v, --verbose` option
+CONFIGURATION: https://docs.platformio.org/page/boards/espressif32/esp32-s3-devkitc-1.html
+PLATFORM: Espressif 32 (55.3.35) > Espressif ESP32-S3-DevKitC-1-N8 (8 MB QD, No PSRAM)
+HARDWARE: ESP32S3 240MHz, 320KB RAM, 8MB Flash
+DEBUG: Current (esp-builtin) On-board (esp-builtin) External (cmsis-dap, esp-bridge, esp-prog, iot-bus-jtag, jlink, minimodule, olimex-arm-usb-ocd, olimex-arm-usb-ocd-h, olimex-arm-usb-tiny-h, olimex-jtag-tiny, tumpa)
+PACKAGES: 
+ - contrib-piohome @ 3.4.4 
+ - framework-arduinoespressif32 @ 3.3.5 
+ - framework-arduinoespressif32-libs @ 5.5.0+sha.366dadf354 
+ - tool-esp-rom-elfs @ 2024.10.11 
+ - tool-esptoolpy @ 5.1.0 
+ - tool-mklittlefs @ 3.2.0 
+ - toolchain-xtensa-esp-elf @ 14.2.0+20251107
+Converting PM_05_Counting.ino
+LDF: Library Dependency Finder -> https://bit.ly/configure-pio-ldf
+LDF Modes: Finder ~ chain, Compatibility ~ soft
+Found 50 compatible libraries
+Scanning dependencies...
+Dependency Graph
+|-- H4 @ 4.0.10+sha.9125640
+|-- H4Tools @ 0.0.16+sha.47ce091
+|-- H4AsyncTCP @ 0.0.25+sha.231be9d
+|-- H4AsyncMQTT @ 1.0.0-rc12+sha.9d2b784
+|-- ArmadilloHTTP @ 0.1.9+sha.ac5bf86
+|-- H4AsyncWebServer @ 0.0.13+sha.fcbce26
+|-- H4Plugins @ 3.5.8+sha.5fb93ae
+Building in release mode
+Compiling .pio/build/esp32s3/src/PM_05_Counting.ino.cpp.o
+Linking .pio/build/esp32s3/firmware.elf
+                            Memory Type Usage Summary                             
+âââââââââââââââââââââââ³âââââââââââââââ³âââââââââââ³âââââââââââââââââ³ââââââââââââââââ
+â Memory Type/Section â Used [bytes] â Used [%] â Remain [bytes] â Total [bytes] â
+â¡âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ©
+â Flash Code          â       734812 â          â                â               â
+â    .text            â       734812 â          â                â               â
+â Flash Data          â       223556 â          â                â               â
+â    .rodata          â       223300 â          â                â               â
+â    .appdesc         â          256 â          â                â               â
+â DIRAM               â       107567 â    31.47 â         234193 â        341760 â
+â    .text            â        58379 â    17.08 â                â               â
+â    .bss             â        27632 â     8.09 â                â               â
+â    .data            â        21556 â     6.31 â                â               â
+â IRAM                â        16384 â    100.0 â              0 â         16384 â
+â    .text            â        15356 â    93.73 â                â               â
+â    .vectors         â         1028 â     6.27 â                â               â
+âââââââââââââââââââââââ´âââââââââââââââ´âââââââââââ´âââââââââââââââââ´ââââââââââââââââ
+Retrieving maximum program size .pio/build/esp32s3/firmware.elf
+Checking size .pio/build/esp32s3/firmware.elf
+Advanced Memory Usage is available via "PlatformIO Home > Project Inspect"
+RAM:   [==        ]  15.0% (used 49188 bytes from 327680 bytes)
+Flash: [===       ]  31.5% (used 1054431 bytes from 3342336 bytes)
+Building .pio/build/esp32s3/firmware.bin
+esptool v5.1.0
+Creating ESP32S3 image...
+Merged 2 ELF sections.
+Successfully created ESP32S3 image.
+========================= [SUCCESS] Took 16.60 seconds =========================
+Environment    Status    Duration
+-------------  --------  ------------
+esp32s3        SUCCESS   00:00:16.597
+========================= 1 succeeded in 00:00:16.597 =========================
+In file included from /home/runner/work/h4plugins/h4plugins/build/esp32s3/src/PM_05_Counting.ino:1:
+.pio/libdeps/esp32s3/H4Plugins/src/H4Plugins.h:6:76: note: '#pragma message: Using Wifi AP - Make sure you have made arrangements!'
+    6 |     #pragma message("Using Wifi AP - Make sure you have made arrangements!")
+      |                                                                            ^
+Total image size: 1054687 bytes (.bin may be padded larger)
+Note: The reported total sizes may be smaller than those in the technical reference manual due to reserved memory and application configuration. The total flash size available for the application is not included by default, as it cannot be reliably determined due to the presence of other data like the bootloader, partition table, and application partition size.
