@@ -1,0 +1,195 @@
+Processing nodemcuv2 (platform: espressif8266@4.2.0; board: nodemcuv2; framework: arduino)
+--------------------------------------------------------------------------------
+Platform Manager: Installing espressif8266 @ 4.2.0
+Downloading 0% 10% 20% 30% 40%
+Unpacking 0% 10% 20% 30% 40% 50% 60% 70% 80% 90% 100%
+Platform Manager: espressif8266@4.2.0 has been installed!
+Tool Manager: Installing platformio/toolchain-xtensa @ ~2.100300.0
+Downloading 0% 10% 20% 30% 40% 50% 60% 70% 80% 90% 100%
+Unpacking 0% 10% 20% 30% 40% 50% 60% 70% 80% 90% 100%
+Tool Manager: toolchain-xtensa@2.100300.220621 has been installed!
+Tool Manager: Installing platformio/framework-arduinoespressif8266 @ ~3.30102.0
+Downloading 0% 10% 20% 30% 40% 50% 60% 70% 80% 90% 100%
+Unpacking 0% 10% 20% 30% 40% 50% 60% 70% 80% 90% 100%
+Tool Manager: framework-arduinoespressif8266@3.30102.0 has been installed!
+Tool Manager: Installing platformio/tool-esptool @ <2
+Downloading 0% 10% 20%
+Unpacking 0% 10% 20%
+Tool Manager: tool-esptool@1.413.0 has been installed!
+Tool Manager: Installing platformio/tool-esptoolpy @ ~1.30000.0
+Downloading 0% 10% 20% 30% 40% 50% 60% 70% 80% 90% 100%
+Unpacking 0% 10% 20% 30% 40% 50% 60% 70% 80% 90% 100%
+Tool Manager: tool-esptoolpy@1.30000.201119 has been installed!
+Tool Manager: Installing platformio/tool-scons @ ~4.40801.0
+Unpacking 0% 10% 20% 30% 40% 50% 60% 70% 80% 90% 100%
+Tool Manager: tool-scons@4.40801.0 has been installed!
+Library Manager: Installing git+https://github.com/HamzaHajeir/H4#4.0.10
+git version 2.52.0
+Library Manager: H4@4.0.10+sha.9125640 has been installed!
+Library Manager: Installing git+https://github.com/HamzaHajeir/H4Tools#0.0.16
+git version 2.52.0
+Library Manager: H4Tools@0.0.16+sha.47ce091 has been installed!
+Library Manager: Installing git+https://github.com/HamzaHajeir/H4AsyncTCP#0.0.25
+git version 2.52.0
+Library Manager: H4AsyncTCP@0.0.25+sha.231be9d has been installed!
+Library Manager: Installing git+https://github.com/HamzaHajeir/H4AsyncMQTT#1.0.0-rc12
+git version 2.52.0
+Library Manager: H4AsyncMQTT@1.0.0-rc12+sha.9d2b784 has been installed!
+Library Manager: Resolving dependencies...
+Library Manager: Installing git+https://github.com/HamzaHajeir/ArmadilloHTTP#0.1.9
+git version 2.52.0
+Library Manager: ArmadilloHTTP@0.1.9+sha.ac5bf86 has been installed!
+Library Manager: Resolving dependencies...
+Library Manager: Installing git+https://github.com/HamzaHajeir/H4AsyncWebServer#0.0.13
+git version 2.52.0
+Library Manager: H4AsyncWebServer@0.0.13+sha.fcbce26 has been installed!
+Library Manager: Installing git+https://github.com/HamzaHajeir/h4plugins#3.5.8
+git version 2.52.0
+Library Manager: H4Plugins@3.5.8+sha.b12de62 has been installed!
+Library Manager: Resolving dependencies...
+Verbose mode can be enabled via `-v, --verbose` option
+CONFIGURATION: https://docs.platformio.org/page/boards/espressif8266/nodemcuv2.html
+PLATFORM: Espressif 8266 (4.2.0) > NodeMCU 1.0 (ESP-12E Module)
+HARDWARE: ESP8266 80MHz, 80KB RAM, 4MB Flash
+PACKAGES: 
+ - framework-arduinoespressif8266 @ 3.30102.0 (3.1.2) 
+ - tool-esptool @ 1.413.0 (4.13) 
+ - tool-esptoolpy @ 1.30000.201119 (3.0.0) 
+ - toolchain-xtensa @ 2.100300.220621 (10.3.0)
+Converting H4P_Simple_Tones.ino
+LDF: Library Dependency Finder -> https://bit.ly/configure-pio-ldf
+LDF Modes: Finder ~ deep+, Compatibility ~ soft
+Library Manager: Installing ESPAsyncUDP
+Downloading 0% 10% 20%
+Unpacking 0% 10% 20% 30% 40% 50% 60% 70% 80% 90% 100%
+Library Manager: ESPAsyncUDP@0.0.0-alpha+sha.697c75a025 has been installed!
+Found 45 compatible libraries
+Scanning dependencies...
+Dependency Graph
+|-- H4 @ 4.0.10+sha.9125640
+|-- H4Tools @ 0.0.16+sha.47ce091
+|-- H4AsyncTCP @ 0.0.25+sha.231be9d
+|-- H4AsyncMQTT @ 1.0.0-rc12+sha.9d2b784
+|-- ArmadilloHTTP @ 0.1.9+sha.ac5bf86
+|-- H4AsyncWebServer @ 0.0.13+sha.fcbce26
+|-- H4Plugins @ 3.5.8+sha.b12de62
+|-- ESPAsyncUDP @ 0.0.0-alpha+sha.697c75a025
+|-- LittleFS @ 0.1.0
+|-- ESP8266WiFi @ 1.0
+|-- ESP8266mDNS @ 1.2
+|-- DNSServer @ 1.1.1
+|-- ArduinoOTA @ 1.0
+|-- ESP8266httpUpdate @ 1.3
+|-- ESP8266HTTPClient @ 1.2
+Building in release mode
+Compiling .pio/build/nodemcuv2/src/H4P_Simple_Tones.ino.cpp.o
+Generating LD script .pio/build/nodemcuv2/ld/local.eagle.app.v6.common.ld
+Compiling .pio/build/nodemcuv2/libf51/H4/H4.cpp.o
+Compiling .pio/build/nodemcuv2/libbc1/LittleFS/LittleFS.cpp.o
+Compiling .pio/build/nodemcuv2/libbc1/LittleFS/lfs.c.o
+Compiling .pio/build/nodemcuv2/libbc1/LittleFS/lfs_util.c.o
+Compiling .pio/build/nodemcuv2/lib623/H4Tools/H4Tools.cpp.o
+Archiving .pio/build/nodemcuv2/libbc1/libLittleFS.a
+Indexing .pio/build/nodemcuv2/libbc1/libLittleFS.a
+Compiling .pio/build/nodemcuv2/lib623/H4Tools/mbx.cpp.o
+Archiving .pio/build/nodemcuv2/libf51/libH4.a
+Indexing .pio/build/nodemcuv2/libf51/libH4.a
+Compiling .pio/build/nodemcuv2/libb8e/H4AsyncTCP/H4AsyncServer.cpp.o
+Cloning into '/home/runner/.platformio/.cache/tmp/pkg-installing-wibk3i8c'...
+warning: refs/tags/4.0.10 7620e54c16f442e370a1e0799a8f44f9bebc002a is not a commit!
+Note: switching to '91256400fe7e4819b00c9d39071036be3632475d'.
+You are in 'detached HEAD' state. You can look around, make experimental
+changes and commit them, and you can discard any commits you make in this
+state without impacting any branches by switching back to a branch.
+If you want to create a new branch to retain commits you create, you may
+do so (now or later) by using -c with the switch command. Example:
+  git switch -c <new-branch-name>
+Or undo this operation with:
+  git switch -
+Turn off this advice by setting config variable advice.detachedHead to false
+Cloning into '/home/runner/.platformio/.cache/tmp/pkg-installing-j4cx0dqd'...
+warning: refs/tags/0.0.16 13872a03a59a05b0462818899db5b374ad9db3b2 is not a commit!
+Note: switching to '47ce091ad47ea79a838c34a7abaee46278f5cb4d'.
+You are in 'detached HEAD' state. You can look around, make experimental
+changes and commit them, and you can discard any commits you make in this
+state without impacting any branches by switching back to a branch.
+If you want to create a new branch to retain commits you create, you may
+do so (now or later) by using -c with the switch command. Example:
+  git switch -c <new-branch-name>
+Or undo this operation with:
+  git switch -
+Turn off this advice by setting config variable advice.detachedHead to false
+Cloning into '/home/runner/.platformio/.cache/tmp/pkg-installing-nofsmrto'...
+warning: refs/tags/0.0.25 e48ef7888ffda0c55cd81d135320844940def4b2 is not a commit!
+Note: switching to '231be9deaf91e506941ea3fa9f33089813869ddf'.
+You are in 'detached HEAD' state. You can look around, make experimental
+changes and commit them, and you can discard any commits you make in this
+state without impacting any branches by switching back to a branch.
+If you want to create a new branch to retain commits you create, you may
+do so (now or later) by using -c with the switch command. Example:
+  git switch -c <new-branch-name>
+Or undo this operation with:
+  git switch -
+Turn off this advice by setting config variable advice.detachedHead to false
+Cloning into '/home/runner/.platformio/.cache/tmp/pkg-installing-1cb4c_2o'...
+warning: refs/tags/1.0.0-rc12 4903eed4b73117310b85c81d3e43aac430242301 is not a commit!
+Note: switching to '9d2b7846cef22bb097fde379984f7d5dda6c282e'.
+You are in 'detached HEAD' state. You can look around, make experimental
+changes and commit them, and you can discard any commits you make in this
+state without impacting any branches by switching back to a branch.
+If you want to create a new branch to retain commits you create, you may
+do so (now or later) by using -c with the switch command. Example:
+  git switch -c <new-branch-name>
+Or undo this operation with:
+  git switch -
+Turn off this advice by setting config variable advice.detachedHead to false
+Cloning into '/home/runner/.platformio/.cache/tmp/pkg-installing-rryndm56'...
+warning: refs/tags/0.1.9 de0d5f3ddcd5e52b63d11f8805a078bd9aad188a is not a commit!
+Note: switching to 'ac5bf862a0ee829aa20ccf2b5c23c42d53092fcf'.
+You are in 'detached HEAD' state. You can look around, make experimental
+changes and commit them, and you can discard any commits you make in this
+state without impacting any branches by switching back to a branch.
+If you want to create a new branch to retain commits you create, you may
+do so (now or later) by using -c with the switch command. Example:
+  git switch -c <new-branch-name>
+Or undo this operation with:
+  git switch -
+Turn off this advice by setting config variable advice.detachedHead to false
+Cloning into '/home/runner/.platformio/.cache/tmp/pkg-installing-_w78jbqi'...
+warning: refs/tags/0.0.13 9acc83478fc9d3c2e074d8f977215ac0d841a85b is not a commit!
+Note: switching to 'fcbce268eb16a1ede1cd303b5d63bb4136281501'.
+You are in 'detached HEAD' state. You can look around, make experimental
+changes and commit them, and you can discard any commits you make in this
+state without impacting any branches by switching back to a branch.
+If you want to create a new branch to retain commits you create, you may
+do so (now or later) by using -c with the switch command. Example:
+  git switch -c <new-branch-name>
+Or undo this operation with:
+  git switch -
+Turn off this advice by setting config variable advice.detachedHead to false
+Cloning into '/home/runner/.platformio/.cache/tmp/pkg-installing-6ryavzi4'...
+warning: refs/tags/3.5.8 93c9ecabf8c154ee5386046bd1c038238c47b39f is not a commit!
+Note: switching to 'b12de622bb5f2261603613aaa337b703d3075792'.
+You are in 'detached HEAD' state. You can look around, make experimental
+changes and commit them, and you can discard any commits you make in this
+state without impacting any branches by switching back to a branch.
+If you want to create a new branch to retain commits you create, you may
+do so (now or later) by using -c with the switch command. Example:
+  git switch -c <new-branch-name>
+Or undo this operation with:
+  git switch -
+Turn off this advice by setting config variable advice.detachedHead to false
+In file included from /home/runner/work/h4plugins/h4plugins/build/nodemcuv2/src/H4P_Simple_Tones.ino:1:
+.pio/libdeps/nodemcuv2/H4Plugins/src/H4Plugins.h:6:76: note: '#pragma message: Using Wifi AP - Make sure you have made arrangements!'
+    6 |     #pragma message("Using Wifi AP - Make sure you have made arrangements!")
+      |                                                                            ^
+/home/runner/work/h4plugins/h4plugins/build/nodemcuv2/src/H4P_Simple_Tones.ino: In lambda function:
+/home/runner/work/h4plugins/h4plugins/build/nodemcuv2/src/H4P_Simple_Tones.ino:34:15: error: 'class H4P_Voice' has no member named 'chromaticRun'
+   34 |           vox.chromaticRun("GN2","BN7",'d'); // whole range
+      |               ^~~~~~~~~~~~
+*** [.pio/build/nodemcuv2/src/H4P_Simple_Tones.ino.cpp.o] Error 1
+========================= [FAILED] Took 32.05 seconds =========================
+Environment    Status    Duration
+-------------  --------  ------------
+nodemcuv2      FAILED    00:00:32.053
+==================== 1 failed, 0 succeeded in 00:00:32.053 ====================
