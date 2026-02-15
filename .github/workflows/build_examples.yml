@@ -5,8 +5,8 @@ on:
     branches:
       - '*'  # Trigger on all branches
     paths:
-      - 'examples/*'  # Trigger on changes in the examples directory
-      - 'src/*'       # Trigger on changes in the src directory
+      - 'examples/**'  # Trigger on changes in the examples directory
+      - 'src/**'       # Trigger on changes in the src directory
   workflow_dispatch:
 
 permissions:
