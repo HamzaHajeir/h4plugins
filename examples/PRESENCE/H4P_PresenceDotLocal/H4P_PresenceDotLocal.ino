@@ -3,7 +3,6 @@
 
     Only runnable by an ESP8266 for now.
  */
-#ifdef ARDUINO_ARCH_ESP8266
 #define H4P_VERBOSE 1
 #include<H4Plugins.h>
 H4_USE_PLUGINS(115200,H4_Q_CAPACITY,false) // Serial baud rate, Q size, SerialCmd autostop
@@ -11,6 +10,8 @@ H4_USE_PLUGINS(115200,H4_Q_CAPACITY,false) // Serial baud rate, Q size, SerialCm
 #ifdef ESP32
 #define D6 16
 #endif
+
+#ifdef ARDUINO_ARCH_ESP8266
 
 h4pRoamingDotLocal dot("H3","smb","tcp"); // my satellite TV receiver
 h4pRoamingDotLocal box("box","http","tcp"); // my main pc
@@ -35,4 +36,6 @@ H4P_EventListener chchchanges(H4PE_PRESENCE,[](const std::string& svc,H4PE_TYPE 
   }
 });
 
+#else
+#error The sketch is not supported outside ESP8266 currently
 #endif

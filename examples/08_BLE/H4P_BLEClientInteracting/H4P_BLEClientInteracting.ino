@@ -2,7 +2,7 @@
 #include <H4Plugins.h>
 H4_USE_PLUGINS(115200, H4_Q_CAPACITY, false) // Serial baud rate, Q size, SerialCmd autostop
 
-#ifdef ESP32 && H4P_BLE_AVAILABLE // Currently unavailable for ESP32S3 as BlueDroid got replaced with NimBLE
+#if defined(ESP32) && defined(H4P_BLE_AVAILABLE) // Currently unavailable for ESP32S3 as BlueDroid got replaced with NimBLE
 
 H4P_BLEClient h4bleclient;
 

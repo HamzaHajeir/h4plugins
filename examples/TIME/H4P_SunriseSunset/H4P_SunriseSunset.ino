@@ -21,4 +21,6 @@ H4P_Sunrise h4ss("48.4738943","-0.6029038"); // My French heaven
 H4P_AsyncMQTT h4mqtt("http://192.168.1.4:1883");
 H4P_BinarySwitch h4onof(RELAY_BUILTIN,ACTIVE_HIGH,OFF);
 
+#else
+#error The sketch is not supported currently as SUNRISE is not a published feature.
 #endif
