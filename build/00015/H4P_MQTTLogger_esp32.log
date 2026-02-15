@@ -1,0 +1,232 @@
+Processing esp32 (board: esp32doit-devkit-v1; platform: https://github.com/pioarduino/platform-espressif32/releases/download/55.03.35/platform-espressif32.zip; framework: arduino)
+--------------------------------------------------------------------------------
+Verbose mode can be enabled via `-v, --verbose` option
+CONFIGURATION: https://docs.platformio.org/page/boards/espressif32/esp32doit-devkit-v1.html
+PLATFORM: Espressif 32 (55.3.35) > DOIT ESP32 DEVKIT V1
+HARDWARE: ESP32 240MHz, 320KB RAM, 4MB Flash
+DEBUG: Current (cmsis-dap) External (cmsis-dap, esp-bridge, esp-prog, iot-bus-jtag, jlink, minimodule, olimex-arm-usb-ocd, olimex-arm-usb-ocd-h, olimex-arm-usb-tiny-h, olimex-jtag-tiny, tumpa)
+PACKAGES: 
+ - contrib-piohome @ 3.4.4 
+ - framework-arduinoespressif32 @ 3.3.5 
+ - framework-arduinoespressif32-libs @ 5.5.0+sha.366dadf354 
+ - tool-esp-rom-elfs @ 2024.10.11 
+ - tool-esptoolpy @ 5.1.0 
+ - tool-mklittlefs @ 3.2.0 
+ - toolchain-xtensa-esp-elf @ 14.2.0+20251107
+Converting H4P_MQTTLogger.ino
+LDF: Library Dependency Finder -> https://bit.ly/configure-pio-ldf
+LDF Modes: Finder ~ chain, Compatibility ~ soft
+Found 50 compatible libraries
+Scanning dependencies...
+Dependency Graph
+|-- H4 @ 4.0.10+sha.9125640
+|-- H4Tools @ 0.0.16+sha.47ce091
+|-- H4AsyncTCP @ 0.0.25+sha.231be9d
+|-- H4AsyncMQTT @ 1.0.0-rc12+sha.9d2b784
+|-- ArmadilloHTTP @ 0.1.9+sha.ac5bf86
+|-- H4AsyncWebServer @ 0.0.13+sha.fcbce26
+|-- H4Plugins @ 3.5.8+sha.306b05f
+Building in release mode
+Compiling .pio/build/esp32/lib3ca/H4/H4.cpp.o
+Compiling .pio/build/esp32/lib7aa/FS/FS.cpp.o
+Compiling .pio/build/esp32/lib7aa/FS/vfs_api.cpp.o
+Compiling .pio/build/esp32/lib620/LittleFS/LittleFS.cpp.o
+Compiling .pio/build/esp32/lib487/Network/NetworkClient.cpp.o
+Compiling .pio/build/esp32/lib487/Network/NetworkEvents.cpp.o
+Compiling .pio/build/esp32/lib487/Network/NetworkInterface.cpp.o
+Compiling .pio/build/esp32/lib487/Network/NetworkManager.cpp.o
+Compiling .pio/build/esp32/lib487/Network/NetworkServer.cpp.o
+Compiling .pio/build/esp32/lib487/Network/NetworkUdp.cpp.o
+Compiling .pio/build/esp32/lib989/WiFi/AP.cpp.o
+Compiling .pio/build/esp32/lib989/WiFi/STA.cpp.o
+Compiling .pio/build/esp32/lib989/WiFi/WiFi.cpp.o
+Compiling .pio/build/esp32/lib989/WiFi/WiFiAP.cpp.o
+Compiling .pio/build/esp32/lib989/WiFi/WiFiGeneric.cpp.o
+Compiling .pio/build/esp32/lib989/WiFi/WiFiMulti.cpp.o
+Compiling .pio/build/esp32/lib989/WiFi/WiFiSTA.cpp.o
+Compiling .pio/build/esp32/lib989/WiFi/WiFiScan.cpp.o
+Compiling .pio/build/esp32/libf32/H4Tools/H4Tools.cpp.o
+Compiling .pio/build/esp32/libf32/H4Tools/mbx.cpp.o
+Compiling .pio/build/esp32/lib8f9/H4AsyncTCP/H4AsyncServer.cpp.o
+Compiling .pio/build/esp32/lib8f9/H4AsyncTCP/H4AsyncTCP.cpp.o
+Compiling .pio/build/esp32/lib8f9/H4AsyncTCP/LwIPCoreLocker.cpp.o
+Compiling .pio/build/esp32/lib8f9/H4AsyncTCP/h4async_config.cpp.o
+Compiling .pio/build/esp32/lib0ef/H4AsyncMQTT/H4AsyncMQTT.cpp.o
+Compiling .pio/build/esp32/lib0ef/H4AsyncMQTT/Packet.cpp.o
+Compiling .pio/build/esp32/lib0ef/H4AsyncMQTT/Properties.cpp.o
+Compiling .pio/build/esp32/lib0ef/H4AsyncMQTT/mqTraits.cpp.o
+Compiling .pio/build/esp32/lib9b0/ArmadilloHTTP/ArmadilloHTTP.cpp.o
+Compiling .pio/build/esp32/lib0e1/H4AsyncWebServer/H4AT_HTTPHandlerWS.cpp.o
+Compiling .pio/build/esp32/lib0e1/H4AsyncWebServer/H4AW_HTTPHandlerSSE.cpp.o
+Compiling .pio/build/esp32/lib0e1/H4AsyncWebServer/H4AsyncAuthenticators.cpp.o
+Compiling .pio/build/esp32/lib0e1/H4AsyncWebServer/H4AsyncHandlers.cpp.o
+Compiling .pio/build/esp32/lib0e1/H4AsyncWebServer/H4AsyncWebServer.cpp.o
+Compiling .pio/build/esp32/libf74/BLE/BLE2901.cpp.o
+Compiling .pio/build/esp32/libf74/BLE/BLE2902.cpp.o
+Compiling .pio/build/esp32/libf74/BLE/BLE2904.cpp.o
+Compiling .pio/build/esp32/libf74/BLE/BLEAddress.cpp.o
+Compiling .pio/build/esp32/libf74/BLE/BLEAdvertisedDevice.cpp.o
+Compiling .pio/build/esp32/libf74/BLE/BLEAdvertising.cpp.o
+Compiling .pio/build/esp32/libf74/BLE/BLEBeacon.cpp.o
+Compiling .pio/build/esp32/libf74/BLE/BLECharacteristic.cpp.o
+Compiling .pio/build/esp32/libf74/BLE/BLECharacteristicMap.cpp.o
+Compiling .pio/build/esp32/libf74/BLE/BLEClient.cpp.o
+Compiling .pio/build/esp32/libf74/BLE/BLEDescriptor.cpp.o
+Compiling .pio/build/esp32/libf74/BLE/BLEDescriptorMap.cpp.o
+Compiling .pio/build/esp32/libf74/BLE/BLEDevice.cpp.o
+Compiling .pio/build/esp32/libf74/BLE/BLEEddystoneTLM.cpp.o
+Compiling .pio/build/esp32/libf74/BLE/BLEEddystoneURL.cpp.o
+Compiling .pio/build/esp32/libf74/BLE/BLEExceptions.cpp.o
+Compiling .pio/build/esp32/libf74/BLE/BLEHIDDevice.cpp.o
+Compiling .pio/build/esp32/libf74/BLE/BLERemoteCharacteristic.cpp.o
+Compiling .pio/build/esp32/libf74/BLE/BLERemoteDescriptor.cpp.o
+Compiling .pio/build/esp32/libf74/BLE/BLERemoteService.cpp.o
+Compiling .pio/build/esp32/libf74/BLE/BLEScan.cpp.o
+Compiling .pio/build/esp32/libf74/BLE/BLESecurity.cpp.o
+Compiling .pio/build/esp32/libf74/BLE/BLEServer.cpp.o
+Compiling .pio/build/esp32/libf74/BLE/BLEService.cpp.o
+Compiling .pio/build/esp32/libf74/BLE/BLEServiceMap.cpp.o
+Compiling .pio/build/esp32/libf74/BLE/BLEUUID.cpp.o
+Compiling .pio/build/esp32/libf74/BLE/BLEUtils.cpp.o
+Compiling .pio/build/esp32/libf74/BLE/BLEValue.cpp.o
+Compiling .pio/build/esp32/libf74/BLE/FreeRTOS.cpp.o
+Compiling .pio/build/esp32/libf74/BLE/GeneralUtils.cpp.o
+Compiling .pio/build/esp32/libf0e/NetworkClientSecure/NetworkClientSecure.cpp.o
+Compiling .pio/build/esp32/libf0e/NetworkClientSecure/ssl_client.cpp.o
+Compiling .pio/build/esp32/lib67b/HTTPClient/HTTPClient.cpp.o
+Compiling .pio/build/esp32/lib92c/Hash/PBKDF2_HMACBuilder.cpp.o
+Compiling .pio/build/esp32/lib92c/Hash/SHA1Builder.cpp.o
+Compiling .pio/build/esp32/lib92c/Hash/SHA2Builder.cpp.o
+Compiling .pio/build/esp32/lib92c/Hash/SHA3Builder.cpp.o
+Compiling .pio/build/esp32/lib4b6/Update/HttpsOTAUpdate.cpp.o
+Compiling .pio/build/esp32/lib4b6/Update/Updater.cpp.o
+Compiling .pio/build/esp32/lib4b6/Update/Updater_Signing.cpp.o
+Compiling .pio/build/esp32/lib1d4/HTTPUpdate/HTTPUpdate.cpp.o
+Compiling .pio/build/esp32/lib4b6/ESPmDNS/ESPmDNS.cpp.o
+Compiling .pio/build/esp32/lib134/ArduinoOTA/ArduinoOTA.cpp.o
+Compiling .pio/build/esp32/lib59e/AsyncUDP/AsyncUDP.cpp.o
+Compiling .pio/build/esp32/lib147/DNSServer/DNSServer.cpp.o
+Compiling .pio/build/esp32/lib6b8/H4Plugins/H4PStatic.cpp.o
+Compiling .pio/build/esp32/lib6b8/H4Plugins/H4P_AsyncHTTP.cpp.o
+Compiling .pio/build/esp32/lib6b8/H4Plugins/H4P_AsyncMQTT.cpp.o
+Compiling .pio/build/esp32/lib6b8/H4Plugins/H4P_BLEClient.cpp.o
+Compiling .pio/build/esp32/lib6b8/H4Plugins/H4P_BLEServer.cpp.o
+Compiling .pio/build/esp32/lib6b8/H4Plugins/H4P_BinarySwitch.cpp.o
+Compiling .pio/build/esp32/lib6b8/H4Plugins/H4P_BinaryThing.cpp.o
+Compiling .pio/build/esp32/lib6b8/H4Plugins/H4P_GateKeeper.cpp.o
+Compiling .pio/build/esp32/lib6b8/H4Plugins/H4P_HeapWarn.cpp.o
+Compiling .pio/build/esp32/lib6b8/H4Plugins/H4P_Heartbeat.cpp.o
+Compiling .pio/build/esp32/lib6b8/H4Plugins/H4P_LinkMaster.cpp.o
+Compiling .pio/build/esp32/lib6b8/H4Plugins/H4P_LocalLogger.cpp.o
+Compiling .pio/build/esp32/lib6b8/H4Plugins/H4P_PinMachine.cpp.o
+Compiling .pio/build/esp32/lib6b8/H4Plugins/H4P_QueueWarn.cpp.o
+Compiling .pio/build/esp32/lib6b8/H4Plugins/H4P_RemoteLogger.cpp.o
+Compiling .pio/build/esp32/lib6b8/H4Plugins/H4P_SerialCmd.cpp.o
+Compiling .pio/build/esp32/lib6b8/H4Plugins/H4P_Signaller.cpp.o
+Compiling .pio/build/esp32/lib6b8/H4Plugins/H4P_TaskSniffer.cpp.o
+Compiling .pio/build/esp32/lib6b8/H4Plugins/H4P_Timekeeper.cpp.o
+Compiling .pio/build/esp32/lib6b8/H4Plugins/H4P_ToneController.cpp.o
+Compiling .pio/build/esp32/lib6b8/H4Plugins/H4P_UPNPServer.cpp.o
+Compiling .pio/build/esp32/lib6b8/H4Plugins/H4P_WiFi.cpp.o
+Compiling .pio/build/esp32/lib6b8/H4Plugins/H4P_WiFiAP.cpp.o
+Compiling .pio/build/esp32/lib6b8/H4Plugins/H4Service.cpp.o
+Compiling .pio/build/esp32/lib6b8/H4Plugins/NODE-PINK-FLOWS.cpp.o
+Compiling .pio/build/esp32/lib6b8/H4Plugins/NODE-PINK-NODES.cpp.o
+Compiling .pio/build/esp32/src/H4P_MQTTLogger.ino.cpp.o
+Building .pio/build/esp32/bootloader.bin
+esptool v5.1.0
+Creating ESP32 image...
+Merged 2 ELF sections.
+Successfully created ESP32 image.
+Generating partitions .pio/build/esp32/partitions.bin
+Compiling .pio/build/esp32/FrameworkArduino/ColorFormat.c.o
+Compiling .pio/build/esp32/FrameworkArduino/Esp.cpp.o
+Compiling .pio/build/esp32/FrameworkArduino/FirmwareMSC.cpp.o
+Compiling .pio/build/esp32/FrameworkArduino/FunctionalInterrupt.cpp.o
+Compiling .pio/build/esp32/FrameworkArduino/HEXBuilder.cpp.o
+Compiling .pio/build/esp32/FrameworkArduino/HWCDC.cpp.o
+Compiling .pio/build/esp32/FrameworkArduino/HardwareSerial.cpp.o
+Compiling .pio/build/esp32/FrameworkArduino/HashBuilder.cpp.o
+Compiling .pio/build/esp32/FrameworkArduino/IPAddress.cpp.o
+Compiling .pio/build/esp32/FrameworkArduino/MD5Builder.cpp.o
+Compiling .pio/build/esp32/FrameworkArduino/MacAddress.cpp.o
+Compiling .pio/build/esp32/FrameworkArduino/Print.cpp.o
+Compiling .pio/build/esp32/FrameworkArduino/Stream.cpp.o
+Compiling .pio/build/esp32/FrameworkArduino/StreamString.cpp.o
+Compiling .pio/build/esp32/FrameworkArduino/Tone.cpp.o
+Compiling .pio/build/esp32/FrameworkArduino/USB.cpp.o
+Compiling .pio/build/esp32/FrameworkArduino/USBCDC.cpp.o
+Compiling .pio/build/esp32/FrameworkArduino/USBMSC.cpp.o
+Compiling .pio/build/esp32/FrameworkArduino/WMath.cpp.o
+Compiling .pio/build/esp32/FrameworkArduino/WString.cpp.o
+Compiling .pio/build/esp32/FrameworkArduino/base64.cpp.o
+Compiling .pio/build/esp32/FrameworkArduino/cbuf.cpp.o
+Compiling .pio/build/esp32/FrameworkArduino/chip-debug-report.cpp.o
+Compiling .pio/build/esp32/FrameworkArduino/esp32-hal-adc.c.o
+Compiling .pio/build/esp32/FrameworkArduino/esp32-hal-bt.c.o
+Compiling .pio/build/esp32/FrameworkArduino/esp32-hal-cpu.c.o
+Compiling .pio/build/esp32/FrameworkArduino/esp32-hal-dac.c.o
+Compiling .pio/build/esp32/FrameworkArduino/esp32-hal-gpio.c.o
+Compiling .pio/build/esp32/FrameworkArduino/esp32-hal-hosted.c.o
+Compiling .pio/build/esp32/FrameworkArduino/esp32-hal-i2c-ng.c.o
+Compiling .pio/build/esp32/FrameworkArduino/esp32-hal-i2c-slave.c.o
+Compiling .pio/build/esp32/FrameworkArduino/esp32-hal-i2c.c.o
+Compiling .pio/build/esp32/FrameworkArduino/esp32-hal-ledc.c.o
+Compiling .pio/build/esp32/FrameworkArduino/esp32-hal-matrix.c.o
+Compiling .pio/build/esp32/FrameworkArduino/esp32-hal-misc.c.o
+Compiling .pio/build/esp32/FrameworkArduino/esp32-hal-periman.c.o
+Compiling .pio/build/esp32/FrameworkArduino/esp32-hal-psram.c.o
+Compiling .pio/build/esp32/FrameworkArduino/esp32-hal-rgb-led.c.o
+Compiling .pio/build/esp32/FrameworkArduino/esp32-hal-rmt.c.o
+Compiling .pio/build/esp32/FrameworkArduino/esp32-hal-sigmadelta.c.o
+Compiling .pio/build/esp32/FrameworkArduino/esp32-hal-spi.c.o
+Compiling .pio/build/esp32/FrameworkArduino/esp32-hal-time.c.o
+Compiling .pio/build/esp32/FrameworkArduino/esp32-hal-timer.c.o
+Compiling .pio/build/esp32/FrameworkArduino/esp32-hal-tinyusb.c.o
+Compiling .pio/build/esp32/FrameworkArduino/esp32-hal-touch-ng.c.o
+Compiling .pio/build/esp32/FrameworkArduino/esp32-hal-touch.c.o
+Compiling .pio/build/esp32/FrameworkArduino/esp32-hal-uart.c.o
+Compiling .pio/build/esp32/FrameworkArduino/firmware_msc_fat.c.o
+Compiling .pio/build/esp32/FrameworkArduino/freertos_stats.cpp.o
+Compiling .pio/build/esp32/FrameworkArduino/libb64/cdecode.c.o
+Compiling .pio/build/esp32/FrameworkArduino/libb64/cencode.c.o
+Compiling .pio/build/esp32/FrameworkArduino/main.cpp.o
+Compiling .pio/build/esp32/FrameworkArduino/stdlib_noniso.c.o
+Compiling .pio/build/esp32/FrameworkArduino/wiring_pulse.c.o
+Compiling .pio/build/esp32/FrameworkArduino/wiring_shift.c.o
+Archiving .pio/build/esp32/libFrameworkArduino.a
+Indexing .pio/build/esp32/libFrameworkArduino.a
+Linking .pio/build/esp32/firmware.elf
+                            Memory Type Usage Summary                             
+âââââââââââââââââââââââ³âââââââââââââââ³âââââââââââ³âââââââââââââââââ³ââââââââââââââââ
+â Memory Type/Section â Used [bytes] â Used [%] â Remain [bytes] â Total [bytes] â
+â¡âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ©
+â Flash Code          â      1487588 â          â                â               â
+â    .text            â      1487588 â          â                â               â
+â Flash Data          â       303208 â          â                â               â
+â    .rodata          â       302952 â          â                â               â
+â    .appdesc         â          256 â          â                â               â
+â IRAM                â        85531 â    65.25 â          45541 â        131072 â
+â    .text            â        84503 â    64.47 â                â               â
+â    .vectors         â         1028 â     0.78 â                â               â
+â DRAM                â        64928 â    52.12 â          59652 â        124580 â
+â    .bss             â        40688 â    32.66 â                â               â
+â    .data            â        24240 â    19.46 â                â               â
+âââââââââââââââââââââââ´âââââââââââââââ´âââââââââââ´âââââââââââââââââ´ââââââââââââââââ
+Retrieving maximum program size .pio/build/esp32/firmware.elf
+Checking size .pio/build/esp32/firmware.elf
+Advanced Memory Usage is available via "PlatformIO Home > Project Inspect"
+RAM:   [==        ]  19.8% (used 64928 bytes from 327680 bytes)
+Flash: [========= ]  90.6% (used 1900311 bytes from 2097152 bytes)
+Building .pio/build/esp32/firmware.bin
+esptool v5.1.0
+Creating ESP32 image...
+Merged 2 ELF sections.
+Successfully created ESP32 image.
+========================= [SUCCESS] Took 89.86 seconds =========================
+Environment    Status    Duration
+-------------  --------  ------------
+esp32          SUCCESS   00:01:29.863
+========================= 1 succeeded in 00:01:29.863 =========================
+Total image size: 1900567 bytes (.bin may be padded larger)
+Note: The reported total sizes may be smaller than those in the technical reference manual due to reserved memory and application configuration. The total flash size available for the application is not included by default, as it cannot be reliably determined due to the presence of other data like the bootloader, partition table, and application partition size.
