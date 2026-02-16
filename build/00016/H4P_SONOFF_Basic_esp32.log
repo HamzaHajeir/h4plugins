@@ -1,0 +1,64 @@
+Processing esp32 (board: esp32doit-devkit-v1; platform: https://github.com/pioarduino/platform-espressif32/releases/download/55.03.35/platform-espressif32.zip; framework: arduino)
+--------------------------------------------------------------------------------
+Verbose mode can be enabled via `-v, --verbose` option
+CONFIGURATION: https://docs.platformio.org/page/boards/espressif32/esp32doit-devkit-v1.html
+PLATFORM: Espressif 32 (55.3.35) > DOIT ESP32 DEVKIT V1
+HARDWARE: ESP32 240MHz, 320KB RAM, 4MB Flash
+DEBUG: Current (cmsis-dap) External (cmsis-dap, esp-bridge, esp-prog, iot-bus-jtag, jlink, minimodule, olimex-arm-usb-ocd, olimex-arm-usb-ocd-h, olimex-arm-usb-tiny-h, olimex-jtag-tiny, tumpa)
+PACKAGES: 
+ - contrib-piohome @ 3.4.4 
+ - framework-arduinoespressif32 @ 3.3.5 
+ - framework-arduinoespressif32-libs @ 5.5.0+sha.366dadf354 
+ - tool-esp-rom-elfs @ 2024.10.11 
+ - tool-esptoolpy @ 5.1.0 
+ - tool-mklittlefs @ 3.2.0 
+ - toolchain-xtensa-esp-elf @ 14.2.0+20251107
+Converting H4P_SONOFF_Basic.ino
+LDF: Library Dependency Finder -> https://bit.ly/configure-pio-ldf
+LDF Modes: Finder ~ chain, Compatibility ~ soft
+Found 50 compatible libraries
+Scanning dependencies...
+Dependency Graph
+|-- H4 @ 4.0.10+sha.9125640
+|-- H4Tools @ 0.0.16+sha.47ce091
+|-- H4AsyncTCP @ 0.0.25+sha.231be9d
+|-- H4AsyncMQTT @ 1.0.0-rc12+sha.9d2b784
+|-- ArmadilloHTTP @ 0.1.9+sha.ac5bf86
+|-- H4AsyncWebServer @ 0.0.13+sha.fcbce26
+|-- H4Plugins @ 3.5.8+sha.8ab2fed
+Building in release mode
+Compiling .pio/build/esp32/src/H4P_SONOFF_Basic.ino.cpp.o
+Linking .pio/build/esp32/firmware.elf
+                            Memory Type Usage Summary                             
+âââââââââââââââââââââââ³âââââââââââââââ³âââââââââââ³âââââââââââââââââ³ââââââââââââââââ
+â Memory Type/Section â Used [bytes] â Used [%] â Remain [bytes] â Total [bytes] â
+â¡âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ©
+â Flash Code          â      1511532 â          â                â               â
+â    .text            â      1511532 â          â                â               â
+â Flash Data          â       306668 â          â                â               â
+â    .rodata          â       306412 â          â                â               â
+â    .appdesc         â          256 â          â                â               â
+â IRAM                â        85531 â    65.25 â          45541 â        131072 â
+â    .text            â        84503 â    64.47 â                â               â
+â    .vectors         â         1028 â     0.78 â                â               â
+â DRAM                â        65248 â    52.37 â          59332 â        124580 â
+â    .bss             â        41008 â    32.92 â                â               â
+â    .data            â        24240 â    19.46 â                â               â
+âââââââââââââââââââââââ´âââââââââââââââ´âââââââââââ´âââââââââââââââââ´ââââââââââââââââ
+Retrieving maximum program size .pio/build/esp32/firmware.elf
+Checking size .pio/build/esp32/firmware.elf
+Advanced Memory Usage is available via "PlatformIO Home > Project Inspect"
+RAM:   [==        ]  19.9% (used 65248 bytes from 327680 bytes)
+Flash: [========= ]  91.9% (used 1927715 bytes from 2097152 bytes)
+Building .pio/build/esp32/firmware.bin
+esptool v5.1.0
+Creating ESP32 image...
+Merged 2 ELF sections.
+Successfully created ESP32 image.
+========================= [SUCCESS] Took 28.14 seconds =========================
+Environment    Status    Duration
+-------------  --------  ------------
+esp32          SUCCESS   00:00:28.143
+========================= 1 succeeded in 00:00:28.143 =========================
+Total image size: 1927971 bytes (.bin may be padded larger)
+Note: The reported total sizes may be smaller than those in the technical reference manual due to reserved memory and application configuration. The total flash size available for the application is not included by default, as it cannot be reliably determined due to the presence of other data like the bootloader, partition table, and application partition size.
