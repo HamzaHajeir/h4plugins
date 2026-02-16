@@ -2,6 +2,7 @@
 H4_USE_PLUGINS(115200,H4_Q_CAPACITY,false) 
 
 #ifdef ESP32
+#define D0 5
 #define D1 4
 #define D2 15
 #define D6 16
